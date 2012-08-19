@@ -1,0 +1,1 @@
+<?phpclass Vacancy_Model_Test{	public function demo()	{		echo "This is module vacancy";		return;	}}?>

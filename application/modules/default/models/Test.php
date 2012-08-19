@@ -1,0 +1,1 @@
+<?phpclass Default_Model_Test{	public function demo()	{		echo "demo";		return;	}}?>
