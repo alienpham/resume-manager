@@ -15,6 +15,10 @@ class IndexController extends Zend_Controller_Action
 		echo 2223343;
     }
 
+	public function testAction()
+    {
+		echo 2223343;exit;
+    }
 
 }
 
