@@ -12,7 +12,6 @@ class Vacancy_IndexController extends Zend_Controller_Action
     {
 		$test = new Vacancy_Model_Test();
 		$test->demo();
-		echo 2223343;exit;
     }
 
 
