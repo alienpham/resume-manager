@@ -12,11 +12,20 @@ class ResumeController extends Zend_Controller_Action
     {
 		$test = new Default_Model_Test();
 		$test->demo();
+		
+		$this->view->number = 123456;
+		$this->view->name = 'phan duy canh';		
     }
+    
 	
-	public function testAction()
+	public function personalInfoAction()
     {
-		echo 2223343;exit;
+		$this->_redirect('resume/experience');
+    }
+    
+	public function experienceAction()
+    {
+		
     }
 }
 
