@@ -1,3 +1,5 @@
+<?php echo $this->name;?>
+<?php echo $this->number;?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	  <td><form id="form" action="../..." method="post">
@@ -10,8 +12,6 @@
 			<td width="13%"><input name="text" id="textbox" type="text"/></td>
 			<td width="5%"><input id="button1" type="submit" value="Search" /></td>
 			<td width="8%"><input id="button8" type="submit" value="Advanced Search" /></td>
-			<td width="8%" align="left"><input id="button11" type="submit" value="Refine Search" /></td>
-			<td width="7%" align="left"><input id="button12" type="submit" value="My Shortlists" /></td>
 			<td width="48%" align="right">&nbsp;</td>
 		  </tr>
 		</table>
@@ -21,7 +21,7 @@
 	<tr>
 	  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
-		  <td width="7%"><input id="button4" type="submit" value="Add Resume" class="link_button" /></td>
+		  <td width="7%"><a href="/resume/personal-info"><input id="button4" type="button" value="Add Resume" class="link_button" /></a></td>
 		  <td width="5%"><input id="button5" type="submit" value="Add Short List" class="link_button" /></td>
 		  <td width="35%"><em>Showing 30 of 50 records</em></td>
 		  <td width="15%" align="right"><strong>View:</strong> <a href="view_detail.html">Detail</a> | <a href="brief_view.html">Brief</a></td>

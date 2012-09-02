@@ -1,0 +1,51 @@
+<?php echo $this->partial('resume/menu-add-resume.phtml')?>
+<form name="frm" method="post" action="">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="15%">Full Name:<span class="require">*</span></td>
+		<td> <input type="text" name="textfield2"  style="width: 225px" /></td>
+	</tr>
+	<tr>
+		<td>Birthday:</td>
+		<td><input type="text" name="textfield"  style="width: 225px" /></td>
+		</tr>		
+		<tr>
+			<td>Gender:<span class="require">*</span></td>
+			<td>
+				<input type="radio"	name="radio" id="radio3" value="radio" /> Male &nbsp;&nbsp;&nbsp; 
+				<input type="radio" name="radio" id="radio4" value="radio" /> Female
+			</td>
+		</tr>
+		<tr>
+			<td>Marital Status:</td>
+			<td>
+				<input type="radio"	name="radio" value="radio" /> Single &nbsp;&nbsp;&nbsp;
+				<input type="radio" name="radio" value="radio" /> Married &nbsp;&nbsp;&nbsp; 
+				<input type="radio" name="radio" value="radio" /> Divorced
+			</td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+            <td><input type="text" name="textfield2"  style="width:225px" /></td>
+	</tr>
+	<tr>
+		<td>Mobile:</td>
+		<td><input type="text" name="textfield"  style="width:225px" /></td>
+	</tr>
+	<tr>
+		<td>Telephone:</td>
+		<td><input type="text" name="textfield3" id="textfield3" style="width:225px" /></td>
+	</tr>
+	<tr>
+		<td>Address:</td>
+		<td><textarea name="textfield4" rows="5" cols="27"></textarea></td>
+	</tr>
+	<tr>	
+		<td>&nbsp;</td>
+		<td>
+			<input type="button" name="cancel" value="Cancel" /> &nbsp;&nbsp; 
+			<input type="submit" name="next" value="Next &gt;&gt;" />
+		</td>
+	</tr>
+</table>
+</form>
