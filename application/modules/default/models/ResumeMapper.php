@@ -15,7 +15,7 @@ class Default_Model_ResumeMapper {
     public function getDbTable ()
     {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Application_Model_DbTable_Pages');
+            $this->setDbTable('Default_Model_DbTable_Resume');
         }
         return $this->_dbTable;
     }
@@ -27,13 +27,12 @@ class Default_Model_ResumeMapper {
 	public function save (Default_Model_Resume $resume)
     {
         $data = array(
-			'resume_id' => $resume->getResumeId(), 
 			'resume_code' => $resume->getResumeCode(), 
 			'full_name' => $resume->getFullName(), 
 			'birthday' => $resume->getBirthday(), 
 			'gender' => $resume->getGender()
 		);
-        
+     
         $this->getDbTable()->insert($data);
     }
 	
