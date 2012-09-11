@@ -45,8 +45,12 @@ class Default_Model_ResumeMapper {
 			'created_date' 	=> $resume->getCreatedDate(),
 			'updated_date' 	=> $resume->getUpdatedDate()
 		);
-     
-        $this->getDbTable()->insert($data);
+//print_r($data); exit;    
+
+			
+		return $this->getDbTable()->insert($data);
+
+		
     }
 	
 	public function find ($id, Default_Model_Resume $resume)
@@ -89,7 +93,8 @@ class Default_Model_ResumeMapper {
 					->setResumeCode($row->resume_code)
 					->setFullName($row->full_name)
 					->setBirthday($row->birthday)
-					->setGender($row->gender)->setMaritalStatus($row->marital_status)
+					->setGender($row->gender)
+					->setMaritalStatus($row->marital_status)
 					->setStatus($row->status)
 					->setEmail1($row->email_1)
 					->setEmail2($row->email_2)
