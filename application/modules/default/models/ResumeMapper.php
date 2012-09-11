@@ -61,9 +61,23 @@ class Default_Model_ResumeMapper {
 				->setResumeCode($row->resume_code)
 				->setFullName($row->full_name)
 				->setBirthday($row->birthday)
-				->setGender($row->gender);
+				->setGender($row->gender)
+				->setMaritalStatus($row->marital_status)
+				->setStatus($row->status)
+				->setEmail1($row->email_1)
+				->setEmail2($row->email_2)
+				->setMobile1($row->mobile_1)
+				->setMobile2($row->mobile_2)
+				->setTel($row->tel)
+				->setAddress($row->address)
+				->setPrivinceId($row->province_id)
+				->setNationalityId($row->nationality_id)
+				->setViewCount($row->view_count)
+				->setCreatedDate($row->created_date)
+				->setUpdatedDate($row->updated_date);
     }
-	
+
+
 	public function fetchAll ($where = null, $orderby = null)
     {
         $resultSet = $this->getDbTable()->fetchAll($where, $orderby);
@@ -75,7 +89,19 @@ class Default_Model_ResumeMapper {
 					->setResumeCode($row->resume_code)
 					->setFullName($row->full_name)
 					->setBirthday($row->birthday)
-					->setGender($row->gender);
+					->setGender($row->gender)->setMaritalStatus($row->marital_status)
+					->setStatus($row->status)
+					->setEmail1($row->email_1)
+					->setEmail2($row->email_2)
+					->setMobile1($row->mobile_1)
+					->setMobile2($row->mobile_2)
+					->setTel($row->tel)
+					->setAddress($row->address)
+					->setPrivinceId($row->province_id)
+					->setNationalityId($row->nationality_id)
+					->setViewCount($row->view_count)
+					->setCreatedDate($row->created_date)
+					->setUpdatedDate($row->updated_date);
             $entries[] = $entry;
         }
         return $entries;
