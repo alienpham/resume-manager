@@ -60,7 +60,6 @@ class Default_Model_Resume
 	public function getResumeId() {
 		return $this->_resume_id;
 	}
-
 	public function setResumeId($id) {
 		$this->_resume_id = $id;
 	}
@@ -68,7 +67,6 @@ class Default_Model_Resume
     public function getResumeCode() {
 		return $this->_resume_code;
 	}
-
 	public function setResumeCode($code) {
 		$this->_resume_code = $code;
 	}
@@ -76,7 +74,6 @@ class Default_Model_Resume
 	public function getFullName() {
 		return $this->_full_name;
 	}
-
 	public function setFullName($fullname) {
 		$this->_full_name = $fullname;
 	}
@@ -84,7 +81,6 @@ class Default_Model_Resume
 	public function getBirthday() {
 		return $this->_birthday;
 	}
-
 	public function setBirthday($birthday) {
 		$this->_birthday = $birthday;
 	}
@@ -92,8 +88,98 @@ class Default_Model_Resume
 	public function getGender() {
 		return $this->_gender;
 	}
-
 	public function setGender($gender) {
 		$this->_gender = $gender;
+	}
+	
+	public function getMaritaStatus() {
+		return $this->_marital_status;
+	}
+	public function setMaritaStatus($marital_status) {
+		$this->_marital_status = $marital_status;
+	}
+	
+	public function getStatus() {
+		return $this->_marital_status;
+	}
+	public function setStatus($status) {
+		$this->_status = $status;
+	}
+	
+	public function getEmail1() {
+		return $this->_email_1;
+	}
+	public function setEmail1($email1) {
+		$this->_email_1 = $email1;
+	}
+	
+	public function getEmail2() {
+		return $this->_email_2;
+	}
+	public function setEmail2($email2) {
+		$this->_email_2 = $email2;
+	}
+	
+	public function getMobile1() {
+		return $this->_mobile_1;
+	}
+	public function setMobile1($mobile1) {
+		$this->_mobile_1 = $mobile1;
+	}
+	
+	public function getMobile2() {
+		return $this->_mobile_2;
+	}
+	public function setMobile2($mobile2) {
+		$this->_mobile_2 = $mobile2;
+	}
+	
+	public function getTel() {
+		return $this->_tel;
+	}
+	public function setTel($tel) {
+		$this->_tel = $tel;
+	}
+	
+	public function getAddress() {
+		return $this->_address;
+	}
+	public function setAddress($address) {
+		$this->_address = $address;
+	}
+	
+	public function getProvinceId() {
+		return $this->_province_id;
+	}
+	public function setProvinceId($provinceId) {
+		$this->_province_id = $provinceId;
+	}
+	
+	public function getNationalityId() {
+		return $this->_nationality_id;
+	}
+	public function setNationalityId($nationalityId) {
+		$this->_nationality_id = $nationalityId;
+	}
+	
+	public function getViewCount() {
+		return $this->_view_count;
+	}
+	public function setViewCount($viewCount) {
+		$this->_view_count = $viewCount;
+	}
+	
+	public function getCreatedDate() {
+		return $this->_created_date;
+	}
+	public function setCreatedDate($createdDate) {
+		$this->_created_date = $createdDate;
+	}
+	
+	public function getUpdatedDate() {
+		return $this->_updated_date;
+	}
+	public function setUpdatedDate($updatedDate) {
+		$this->_updated_date = $updatedDate;
 	}
 }
