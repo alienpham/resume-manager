@@ -27,10 +27,23 @@ class Default_Model_ResumeMapper {
 	public function save (Default_Model_Resume $resume)
     {
         $data = array(
-			'resume_code' => $resume->getResumeCode(), 
-			'full_name' => $resume->getFullName(), 
-			'birthday' => $resume->getBirthday(), 
-			'gender' => $resume->getGender()
+			'resume_code' 	=> $resume->getResumeCode(), 
+			'full_name' 	=> $resume->getFullName(), 
+			'birthday' 		=> $resume->getBirthday(), 
+			'gender' 		=> $resume->getGender(),
+         	'marital_status'=> $resume->getMaritaStatus(),
+         	'status' 		=> $resume->getStatus(),
+			'email_1' 		=> $resume->getEmail1(),
+			'email_2' 		=> $resume->getEmail2(),
+			'mobile_1' 		=> $resume->getMobile1(),
+			'mobile_2' 		=> $resume->getMobile2(),
+			'tel' 			=> $resume->getTel(),
+			'address' 		=> $resume->getAddress(),
+			'province_id' 	=> $resume->getProvinceId(),
+			'nationality_id'=> $resume->getNationalityId(),
+			'view_count' 	=> $resume->getViewCount(),
+			'created_date' 	=> $resume->getCreatedDate(),
+			'updated_date' 	=> $resume->getUpdatedDate()
 		);
      
         $this->getDbTable()->insert($data);
