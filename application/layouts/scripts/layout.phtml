@@ -1,32 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Resume Manager</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/css/theme.css" />
-<link rel="stylesheet" type="text/css" href="/css/style.css" />
-</head>
-<body>
-<div id="container">
-	<div id="header">
-		<h2>MANAGE DOCUMENT</h2>
-		<div id="topmenu">
-			<ul>
-				<li class="current"><a href="/resume">Resume</a></li>
-				<li><a href="/company">Company</a></li>
-				<li><a href="/vacancy">Vacancy</a></li>
-			</ul>
-		</div>
-	</div>
-	<div id="top-panel"> </div>
-	<div id="wrapper">
-		<div id="content">
-			<?php echo $this->layout()->content ?>
-		</div>
-	</div>
-	<div id="footer">
-		<div id="credits"> Copyright 2012</div>
-	</div>
-</div>
-</body>
-</html>
+<?php echo $this->partial('partials/header.phtml')?>
+<?php echo $this->layout()->content?>
+<?php echo $this->partial('partials/footer.phtml')?>

@@ -1,0 +1,101 @@
+a,a:visited {
+	color: #a43708;
+}
+
+input.link_button {
+	background: #666666;
+	color: #FFFFFF;
+	border: 1px solid #e8e7e1;
+	font-size: 12px;
+}
+
+table.popup {
+	border-collapse: collapse;
+	table-layout: automatic;
+	width: 80%;
+	margin: 10px;
+}
+
+table.popup_01 {
+	border-collapse: collapse;
+	table-layout: automatic;
+	width: 98%;
+	margin: 10px;
+}
+
+.title_popup {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+.subtitle_popup {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000;
+	font-weight: bold;
+	text-align: right;
+}
+
+.subtitle_left {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000;
+	font-weight: bold;
+	text-align: left;
+	padding-left: 20px;
+}
+
+.note_popup {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000;
+}
+
+.text_green {
+	color: #009900;
+}
+
+.text_blue {
+	color: #3300FF;
+}
+
+.text_red {
+	color: #F00;
+}
+
+.require {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FF3300;
+}
+
+table.datagrid {
+	background: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: none;
+}
+
+/*********************
+	Dinh dang Table
+*********************/
+table.datagrid tr th,table.datagrid tr td {
+	border-bottom: 1px solid #000000;
+}
+
+/*********************
+	Dinh dang Header
+*********************/
+table.datagrid thead tr th {
+	background: #999999;
+	color: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+/*********************
+	Icons
+*********************/
