@@ -10,8 +10,8 @@ class ResumeController extends Zend_Controller_Action
 
     public function indexAction()
     {
-		$test = new Default_Model_Test();
-		$test->demo();
+		//$test = new Default_Model_Test();
+		//$test->demo();
 		
 		$this->view->number = 123456;
 		$this->view->name = 'phan duy canh';	
