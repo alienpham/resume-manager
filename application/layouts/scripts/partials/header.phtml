@@ -3,12 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Grey Finders - Resume Management System (RMS)</title>
-<link rel="stylesheet" type="text/css" href="css/theme.css" />
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<script>
-var StyleFile = "theme3.css";
-document.writeln('<link rel="stylesheet" type="text/css" href="css/' + StyleFile + '">');
-</script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/theme.css')?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/style.css')?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/theme3.css')?>" />
 </head>
 <body>
 <div id="container">
@@ -16,7 +13,7 @@ document.writeln('<link rel="stylesheet" type="text/css" href="css/' + StyleFile
 		<h2>MANAGE DOCUMENT</h2>
 		<div id="topmenu">
 			<ul>
-				<li class="current"><a href="index.html">Home</a></li>
+				<li class="current"><a href="<?php echo $this->baseUrl('/')?>">Home</a></li>
 				<li><a href="<?php echo $this->baseUrl('company')?>">Company</a></li>
 				<li><a href="<?php echo $this->baseUrl('vacancy')?>">Vacancy</a></li>
 				<li><a href="<?php echo $this->baseUrl('resume')?>">Resume</a></li>
