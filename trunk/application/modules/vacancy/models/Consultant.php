@@ -16,6 +16,119 @@ class Vacancy_Model_Consultant {
 
 	/**
 	 *
+	 * Setter - setConsultantId
+	 * @param int $consultantId
+	 */
+	public function setConsultantId($consultantId) {
+		$this->_consultant_id = $consultantId;
+	}
+
+	/**
+	 * Getter - getConsultantId
+	 * @return int
+	 */
+	public function getConsultantId() {
+		return $this->_consultant_id;
+	}
+
+	public function setTitle($title) {
+		$this->_title = $title;
+	}
+
+	public function getTitle() {
+		return $this->_title;
+	}
+
+	public function setFullName($fullName) {
+		$this->_full_name = $fullName;
+	}
+
+	public function getFullName() {
+		return $this->_full_name;
+	}
+
+	public function setAbbreviatedName($abbreviatedName) {
+		$this->_abbreviated_name = $abbreviatedName;
+	}
+
+	public function getAbbreviatedName() {
+		return $this->_abbreviated_name;
+	}
+
+	public function setJobTitle($jobTitle) {
+		$this->_job_title = $jobTitle;
+	}
+
+	public function getJobTitle() {
+		return $this->_job_title;
+	}
+
+	public function setOfficePhone($officePhone) {
+		$this->_office_phone = $officePhone;
+	}
+
+	public function getOfficePhone() {
+		return $this->_office_phone;
+	}
+
+	public function setEmail($email) {
+		$this->_email = $email;
+	}
+
+	public function getEmail() {
+		return $this->_email;
+	}
+
+	public function setPassword($password) {
+		$this->_password = $password;
+	}
+
+	public function getPassword() {
+		return $this->_password;
+	}
+
+	public function setJoinDate($joinDate) {
+		$this->_join_date = $joinDate;
+	}
+
+	public function getJoinDate() {
+		return $this->_join_date;
+	}
+
+	public function setResignDate($resignDate) {
+		$this->_resign_date = $resignDate;
+	}
+
+	public function getResignDate() {
+		return $this->_resign_date;
+	}
+
+	public function setStatus($status) {
+		$this->_status = $status;
+	}
+
+	public function getStatus() {
+		return $this->_status;
+	}
+
+	public function setCreateDate($createDate) {
+		$this->_created_date = $createDate;
+	}
+
+	public function getCreateDate() {
+		return $this->_created_date;
+	}
+
+	public function setUpdateDate($updateDate) {
+		$this->_updated_date = $updateDate;
+	}
+
+	public function getUpdateDate() {
+		return $this->_updated_date;
+	}
+
+	/**
+	 *
 	 * Default constructor of class model
 	 * @param $options
 	 */
