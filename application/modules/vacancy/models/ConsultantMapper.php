@@ -60,9 +60,9 @@ class Vacancy_Model_ConsultantMapper {
 	 *
 	 * Find by ID
 	 * @param int $id
-	 * @param Default_Model_Resume $resume
+	 * @param Vacancy_Model_Consultant $consultant
 	 */
-	public function find($id, Default_Model_Resume $resume)
+	public function find($id, Vacancy_Model_Consultant $consultant)
 	{
 		$result = $this->getDbTable()->find($id);
 
@@ -71,7 +71,7 @@ class Vacancy_Model_ConsultantMapper {
 		}
 		$row = $result->current();
 
-		$resume->setResumeId($row->resume_id)
+		$consultant->setResumeId($row->resume_id)
 		->setResumeCode($row->resume_code)
 		->setFullName($row->full_name)
 		->setBirthday($row->birthday)
@@ -105,7 +105,7 @@ class Vacancy_Model_ConsultantMapper {
 		$entries = array();
 
 		foreach ($resultSet as $row) {
-			$entry = new Default_Model_Resume();
+			$entry = new Vacancy_Model_Consultant();
 			$entry->setResumeId($row->resume_id)
 			->setResumeCode($row->resume_code)
 			->setFullName($row->full_name)
