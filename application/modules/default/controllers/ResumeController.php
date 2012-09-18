@@ -10,12 +10,8 @@ class ResumeController extends Zend_Controller_Action
 
     public function indexAction()
     {
-		//$test = new Default_Model_Test();
-		//$test->demo();
-		
 		$this->view->number = 123456;
 		$this->view->name = 'phan duy canh';	
-	
     }
     
 	
@@ -53,9 +49,27 @@ class ResumeController extends Zend_Controller_Action
 		$this->_redirect('resume/experience');
     }
     
-	public function experienceAction()
+    public function experienceAction()
     {
-		
+    	
+    }
+    
+	public function saveExperienceAction()
+    {
+		$post = $this->getRequest()->getPost();
+///print_r($post);exit;		
+		$experienceRowset = new Default_Model_Experience();
+        $experienceRowset->setResumeId(1);
+		$experienceRowset->setStartDate('2010-10-11');
+		$experienceRowset->setEndDate('2011-10-12');
+		$experienceRowset->setJobTitle('Manage IT');
+		$experienceRowset->setCompanyName('PFT');
+		$experienceRowset->setInfo('tettttttttttt');  
+		$experienceRowset->setSortOrder(1);   
+
+		$experienceMapper = new Default_Model_ExperienceMapper();
+		$experienceMapper->save($experienceRowset);
+		$this->_redirect('resume/experience');
     }
 }
 
