@@ -10,7 +10,8 @@ class IndexController extends Zend_Controller_Action
 
 	public function indexAction()
 	{
-		// To do
+		$aNamespace = new Zend_Session_Namespace ( 'zs_User' );
+		if (! isset ( $aNamespace->islogin )) $this->_redirect ( '/user' );
 	}
 }
 
