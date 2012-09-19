@@ -22,4 +22,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$front = Zend_Controller_Front::getInstance();
 		$front->setRouter($router);
 	}
+	
+	/**
+     * Start session
+     */
+    public function _initCoreSession()
+    {
+    	$this->bootstrap('db');
+    	$this->bootstrap('session');
+    	Zend_Session::start();
+    }
 }
