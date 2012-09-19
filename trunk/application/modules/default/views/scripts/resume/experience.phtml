@@ -1,79 +1,117 @@
-<?php echo $this->partial('resume/menu-add-resume.phtml')?>
+<?php echo $this->headScript()->appendFile ( '/js/jquery-1.7.1.js' );?>
+<?php echo $this->headLink()->appendStylesheet ( '/js/themes/base/jquery.ui.all.css' );?>
+<?php echo $this->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );?>
+<?php echo $this->headScript()->appendFile ( '/js/jquery.ui.core.js' );?>
+<?php
+echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
 <form name="frm" method="post" action="/resume/save-experience">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td width="50%" valign="top">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="50%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td width="17%" align="right"></td>
-                  <td width="4%"></td>
-                  <td colspan="3" bgcolor="#FFECEC"></td>
-                </tr>
-                <tr>
-                  <td class="subtitle_popup">Period:</td>
-                  <td>&nbsp;</td>
-                  <td width="5%" bgcolor="#FFECEC">&nbsp;</td>
-                  <td colspan="2" bgcolor="#FFECEC"><input name="textfield2" type="text" id="textfield2" style="width:60px" value="MM" />
-                    &nbsp;&nbsp;<input name="textfield5" type="text" id="textfield5" style="width:60px" value="YY" /> 
-                    &nbsp;&nbsp;- &nbsp;&nbsp;
-                    <input name="textfield6" type="text" id="textfield6" style="width:60px" value="MM" />
-                    &nbsp;&nbsp;
-                    <input name="textfield7" type="text" id="textfield7" style="width:60px" value="YY" /></td>
-                </tr>
-                <tr>
-                  <td class="subtitle_popup">Job Title:</td>
-                  <td>&nbsp;</td>
-                  <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td colspan="2" bgcolor="#FFECEC"><input type="text" name="textfield" id="textfield" style="width:415px" /></td>
-                </tr>
-                <tr>
-                  <td class="subtitle_popup">Company:</td>
-                  <td>&nbsp;</td>
-                  <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td height="30" colspan="2" bgcolor="#FFECEC"><input type="text" name="textfield3" id="textfield3" style="width:415px" /></td>
-                </tr>
-                <tr>
-                  <td valign="top" class="subtitle_popup">Info:</td>
-                  <td>&nbsp;</td>
-                  <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td height="30" colspan="2" bgcolor="#FFECEC"><textarea name="textfield4" id="textfield4" cols=10 rows="20" style="height:80px"></textarea></td>
-                </tr>
-          
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="3" align="center"><input type="submit" name="button" id="button" value="SAVE" /></td>
-                </tr>
-            </table></td>
-            <td>&nbsp;</td>
-            <td width="48%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
+            <tr>
+                <td width="17%" align="right"></td>
+                <td width="4%"></td>
+                <td colspan="3" bgcolor="#FFECEC"></td>
+            </tr>
+            <tr>
+                <td class="subtitle_popup">Start date:</td>
+                <td>&nbsp;</td>
+                <td bgcolor="#FFECEC">&nbsp;</td>
+                <td bgcolor="#FFECEC">
+                    <input type="text" id="startdate">
+                    <span class="subtitle_popup">End date:</span> <input type="text" id="enddate">
+                </td>
+            </tr>
+            <tr>
+                <td class="subtitle_popup">Job Title:</td>
+                <td>&nbsp;</td>
+                <td bgcolor="#FFECEC">&nbsp;</td>
+                <td colspan="2" bgcolor="#FFECEC"><input type="text"
+                    name="textfield" id="textfield" style="width: 415px" /></td>
+            </tr>
+            <tr>
+                <td class="subtitle_popup">Company:</td>
+                <td>&nbsp;</td>
+                <td bgcolor="#FFECEC">&nbsp;</td>
+                <td height="30" colspan="2" bgcolor="#FFECEC"><input
+                    type="text" name="textfield3" id="textfield3"
+                    style="width: 415px" /></td>
+            </tr>
+            <tr>
+                <td valign="top" class="subtitle_popup">Info:</td>
+                <td>&nbsp;</td>
+                <td bgcolor="#FFECEC">&nbsp;</td>
+                <td height="30" colspan="2" bgcolor="#FFECEC"><textarea
+                    name="textfield4" id="textfield4" cols=10 rows="20"
+                    style="height: 80px"></textarea></td>
+            </tr>
+
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td colspan="3" align="center"><input type="submit"
+                    name="button" id="button" value="SAVE" /></td>
+            </tr>
+        </table>
+        </td>
+        <td>&nbsp;</td>
+        <td width="48%" valign="top">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
                 <td colspan="2"><strong>Resume Preview</strong></td>
-              </tr>
-              <tr>
+            </tr>
+            <tr>
                 <td colspan="2">&nbsp;</td>
-              </tr>
-              <tr>
-                <td colspan="2" bgcolor="#999999" style="font-size:15px; padding:5px 5px; color:#FFFFFF"><strong>CAREER SUMMARY</strong></td>
-              </tr>
-              <tr>
+            </tr>
+            <tr>
+                <td colspan="2" bgcolor="#999999"
+                    style="font-size: 15px; padding: 5px 5px; color: #FFFFFF"><strong>CAREER
+                SUMMARY</strong></td>
+            </tr>
+            <tr>
                 <td height="15" colspan="2"></td>
-              </tr>
-              <tr>
-                <td width="26%" valign="top" >Oct 2010 - Present<br />
-                  <span class="a-left"><img src="../img/icons/user_edit.png" width="16" height="16" /><img src="../img/icons/user.png" width="16" height="16" /><img src="../img/icons/user_add.png" width="16" height="16" /> <img src="../img/icons/user_delete.png" width="16" height="16" /></span></td>
-                <td width="74%" ><strong>CHEVRON LUBRICANTS VIETNAM LTD (CLVL)</strong><br />
-                  Contact Center Director</td>
-              </tr>
-              <tr>
-                <td valign="top" >Nov 2006 - Oct 2010<br />
-                  <span class="a-left"><img src="../img/icons/user_edit.png" width="16" height="16" /><img src="../img/icons/user.png" width="16" height="16" /><img src="../img/icons/user_add.png" width="16" height="16" /> <img src="../img/icons/user_delete.png" width="16" height="16" /></span></td>
-                <td ><strong>AUSTRALIAN &amp; VIETNAMESE JOINT VENTURE INTERIORS COMPANY</strong><br />
-                  Call Center Manager</td>
-              </tr>
-              <tr>
+            </tr>
+            <tr>
+                <td width="26%" valign="top">Oct 2010 - Present<br />
+                <span class="a-left"><img
+                    src="../img/icons/user_edit.png" width="16"
+                    height="16" /><img src="../img/icons/user.png"
+                    width="16" height="16" /><img
+                    src="../img/icons/user_add.png" width="16"
+                    height="16" /> <img
+                    src="../img/icons/user_delete.png" width="16"
+                    height="16" /></span></td>
+                <td width="74%"><strong>CHEVRON LUBRICANTS VIETNAM LTD
+                (CLVL)</strong><br />
+                Contact Center Director</td>
+            </tr>
+            <tr>
+                <td valign="top">Nov 2006 - Oct 2010<br />
+                <span class="a-left"><img
+                    src="../img/icons/user_edit.png" width="16"
+                    height="16" /><img src="../img/icons/user.png"
+                    width="16" height="16" /><img
+                    src="../img/icons/user_add.png" width="16"
+                    height="16" /> <img
+                    src="../img/icons/user_delete.png" width="16"
+                    height="16" /></span></td>
+                <td><strong>AUSTRALIAN &amp; VIETNAMESE JOINT VENTURE
+                INTERIORS COMPANY</strong><br />
+                Call Center Manager</td>
+            </tr>
+            <tr>
                 <td height="15" colspan="2"></td>
-              </tr>
-              
-            </table></td>
-          </tr>
-        </table> </form>
+            </tr>
+
+        </table>
+        </td>
+    </tr>
+</table>
+</form>
+<script>
+$(function() {
+    $( "#startdate" ).datepicker();
+    $( "#enddate" ).datepicker();
+});
+</script>
