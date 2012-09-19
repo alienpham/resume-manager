@@ -15,10 +15,11 @@ class Default_Model_Resume
 	protected $_tel;
 	protected $_address;
 	protected $_province_id;
-	protected $_nationality_id;
 	protected $_view_count;
 	protected $_created_date;
 	protected $_updated_date;
+	protected $_created_consultant_id;
+	protected $_updated_consultant_id;
     
 	public function __construct(array $options = null)
     {
@@ -155,13 +156,6 @@ class Default_Model_Resume
 		$this->_province_id = $provinceId;
 	}
 	
-	public function getNationalityId() {
-		return $this->_nationality_id;
-	}
-	public function setNationalityId($nationalityId) {
-		$this->_nationality_id = $nationalityId;
-	}
-	
 	public function getViewCount() {
 		return $this->_view_count;
 	}
@@ -181,5 +175,19 @@ class Default_Model_Resume
 	}
 	public function setUpdatedDate($updatedDate) {
 		$this->_updated_date = $updatedDate;
+	}
+	
+	public function getCreatedConsultantId() {
+		return $this->_created_consultant_id;
+	}
+	public function setCreatedConsultantId($createdConsultantId) {
+		$this->_created_consultant_id = $createdConsultantId;
+	}
+	
+	public function getUpdatedConsultantId() {
+		return $this->_updated_consultant_id;
+	}
+	public function setUpdatedConsultantId($updatedConsultantId) {
+		$this->_updated_consultant_id = $updatedConsultantId;
 	}
 }

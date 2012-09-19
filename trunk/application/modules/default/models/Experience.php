@@ -54,10 +54,10 @@ class Default_Model_Experience
 		$this->_resume_id = $id;
 	}
 	
-	public function getExperienceId() {
+	public function getId() {
 		return $this->_experience_id;
 	}
-	public function setExperienceId($id) {
+	public function setId($id) {
 		$this->_experience_id = $id;
 	}
 	

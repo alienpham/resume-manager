@@ -47,7 +47,7 @@ class Default_Model_ExperienceMapper {
         }
         $row = $result->current();
         
-        $experience->setExperienceId($row->experience_id)
+        $experience->setExperienceId($row->id)
         		->setResumeId($row->resume_id)
 				->setResumeId($row->start_date)
 				->setStartDate($row->end_date)
@@ -65,7 +65,7 @@ class Default_Model_ExperienceMapper {
         $entries = array();
         foreach ($resultSet as $row) {
             $entry = new Default_Model_Resume();
-            $entry->setExperienceId($row->experience_id)
+            $entry->setExperienceId($row->id)
 	        		->setResumeId($row->resume_id)
 					->setResumeId($row->start_date)
 					->setStartDate($row->end_date)

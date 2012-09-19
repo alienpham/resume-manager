@@ -5,6 +5,6 @@ class Default_Model_DbTable_Resume extends Zend_Db_Table_Abstract
     /**
      * The default table name 
      */
-    protected $_name = 'resume1';
+    protected $_name = 'resume';
 	protected $_primary  = 'resume_id';
 }

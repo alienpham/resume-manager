@@ -39,32 +39,36 @@ class ResumeController extends Zend_Controller_Action
 		$resumeRowset->setTel('09876543');
 		$resumeRowset->setAddress('Lac Long Quan');
 		$resumeRowset->setProvinceId(1);
-		$resumeRowset->setNationalityId(1);
 		$resumeRowset->setViewCount(4);
 		$resumeRowset->setCreatedDate('2012-08-08');
 		$resumeRowset->setUpdatedDate('2012-08-08');
-	
+		$resumeRowset->setCreatedConsultantId(1);
+		$resumeRowset->setUpdatedConsultantId(1);
+		
 		$resume = new Default_Model_ResumeMapper();
-		$resume->save($resumeRowset);
-		$this->_redirect('resume/experience');
+		$resumeId = $resume->save($resumeRowset);
+
+		$this->_redirect('resume/experience/id/' . $resumeId);
     }
     
     public function experienceAction()
     {
-
+		$resumeId = $this->getRequest()->getParam(id);
+		$this->view->resumeId = $resumeId;
     }    
     
 	public function saveExperienceAction()
     {
 		$post = $this->getRequest()->getPost();
-///print_r($post);exit;		
+///print_r($post);exit;	
+	
 		$experienceRowset = new Default_Model_Experience();
-        $experienceRowset->setResumeId(1);
+        $experienceRowset->setResumeId($post['resume_id']);
 		$experienceRowset->setStartDate('2010-10-11');
 		$experienceRowset->setEndDate('2011-10-12');
-		$experienceRowset->setJobTitle('Manage IT');
-		$experienceRowset->setCompanyName('PFT');
-		$experienceRowset->setInfo('tettttttttttt');  
+		$experienceRowset->setJobTitle($post['job_title']);
+		$experienceRowset->setCompanyName($post['company_name']);
+		$experienceRowset->setInfo($post['info']);  
 		$experienceRowset->setSortOrder(1);   
 
 		$experienceMapper = new Default_Model_ExperienceMapper();
