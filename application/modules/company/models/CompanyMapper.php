@@ -1,5 +1,5 @@
 <?php
-class Default_Model_CompanyMapper {
+class Company_Model_CompanyMapper {
 	protected $_dbTable;
     public function setDbTable ($dbTable)
     {
