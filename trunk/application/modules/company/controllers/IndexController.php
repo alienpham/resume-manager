@@ -11,7 +11,10 @@ class Company_IndexController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		// To do
-		$rsComapny = new Default_Model_CompanyMapper();
+		//$rsComapny = new Default_Model_CompanyMapper();
+		
+	    //module company thi tiep dau ngu cua class phai la Company nha anh
+		$rsComapny = new Company_Model_CompanyMapper();
 	}
 
 

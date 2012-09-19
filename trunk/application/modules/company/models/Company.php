@@ -1,5 +1,5 @@
 <?php
-class Default_Model_Company
+class Company_Model_Company
 {
 	protected $_company_id;
 	protected $_company_code;
