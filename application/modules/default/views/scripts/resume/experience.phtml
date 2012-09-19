@@ -27,31 +27,32 @@ echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
                 <td class="subtitle_popup">Job Title:</td>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
-                <td colspan="2" bgcolor="#FFECEC"><input type="text"
-                    name="textfield" id="textfield" style="width: 415px" /></td>
+                <td colspan="2" bgcolor="#FFECEC">
+                	<input type="text" name="job_title" style="width: 415px" />
+                </td>
             </tr>
             <tr>
                 <td class="subtitle_popup">Company:</td>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
-                <td height="30" colspan="2" bgcolor="#FFECEC"><input
-                    type="text" name="textfield3" id="textfield3"
-                    style="width: 415px" /></td>
+                <td height="30" colspan="2" bgcolor="#FFECEC">
+                	<input type="text" name="conmpany_name" style="width: 415px" />
+                </td>
             </tr>
             <tr>
                 <td valign="top" class="subtitle_popup">Info:</td>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
-                <td height="30" colspan="2" bgcolor="#FFECEC"><textarea
-                    name="textfield4" id="textfield4" cols=10 rows="20"
-                    style="height: 80px"></textarea></td>
+                <td height="30" colspan="2" bgcolor="#FFECEC">
+                	<textarea name="info" style="height:200px; width:500px"></textarea></td>
             </tr>
-
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td colspan="3" align="center"><input type="submit"
-                    name="button" id="button" value="SAVE" /></td>
+                <td colspan="3" align="center">
+                	<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
+                	<input type="submit" name="button" value="SAVE" />
+                </td>
             </tr>
         </table>
         </td>

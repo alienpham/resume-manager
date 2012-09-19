@@ -40,10 +40,11 @@ class Default_Model_ResumeMapper {
 			'tel' 			=> $resume->getTel(),
 			'address' 		=> $resume->getAddress(),
 			'province_id' 	=> $resume->getProvinceId(),
-			'nationality_id'=> $resume->getNationalityId(),
 			'view_count' 	=> $resume->getViewCount(),
 			'created_date' 	=> $resume->getCreatedDate(),
-			'updated_date' 	=> $resume->getUpdatedDate()
+			'updated_date' 	=> $resume->getUpdatedDate(),
+        	'created_consultant_id' 	=> $resume->getCreatedConsultantId(),
+			'updated_consultant_id' 	=> $resume->getUpdatedConsultantId()
 		);
 //print_r($data); exit;    
 
@@ -75,10 +76,11 @@ class Default_Model_ResumeMapper {
 				->setTel($row->tel)
 				->setAddress($row->address)
 				->setPrivinceId($row->province_id)
-				->setNationalityId($row->nationality_id)
 				->setViewCount($row->view_count)
 				->setCreatedDate($row->created_date)
-				->setUpdatedDate($row->updated_date);
+				->setUpdatedDate($row->updated_date)
+				->setCreatedConsultantId($row->created_consultant_id)
+				->setUpdatedConsultantId($row->updated_consultant_id);
     }
 
 
@@ -103,10 +105,11 @@ class Default_Model_ResumeMapper {
 					->setTel($row->tel)
 					->setAddress($row->address)
 					->setPrivinceId($row->province_id)
-					->setNationalityId($row->nationality_id)
 					->setViewCount($row->view_count)
 					->setCreatedDate($row->created_date)
-					->setUpdatedDate($row->updated_date);
+					->setUpdatedDate($row->updated_date)
+					->setCreatedConsultantId($row->created_consultant_id)
+					->setUpdatedConsultantId($row->updated_consultant_id);
             $entries[] = $entry;
         }
         return $entries;
