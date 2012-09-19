@@ -136,4 +136,5 @@ class Default_Model_CompanyMapper {
         }
         return $entries;
     }
+    //
 }
