@@ -620,3 +620,8 @@ form#form #button1:hover,form#form #button2:hover,form#form #button3:hover
 .modules_manage {
 	background: transparent url(../images/icons/bricks_gear.png) no-repeat left;
 }
+
+.error {
+	color:red;	
+}
+}

@@ -87,7 +87,7 @@ class Default_Model_ResumeMapper {
 	public function fetchAll ($where = null, $orderby = null)
     {
         $resultSet = $this->getDbTable()->fetchAll($where, $orderby);
-        
+
         $entries = array();
         foreach ($resultSet as $row) {
             $entry = new Default_Model_Resume();

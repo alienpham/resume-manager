@@ -1,19 +1,25 @@
+<?php echo $this->headScript();?>
+<?php echo $this->headLink();?>
 <?php echo $this->partial('resume/menu-add-resume.phtml')?>
-<form name="frm" method="post" action="save-resume">
+<form name="frm" method="post" action="save-resume" onsubmit="return checkValid()">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td width="15%">Full Name:<span class="require">*</span></td>
-		<td> <input type="text" name="full_name"  style="width: 225px" /></td>
+        <td width="15%"></td>
+        <td id="error" class="error"></td>
+    </tr>
+    <tr>
+		<td width="15%">Full Name:<span class=error>*</span></td>
+		<td> <input type="text" name="full_name" id="full_name" style="width: 225px" /></td>
 	</tr>
 	<tr>
-		<td>Birthday:</td>
-		<td><input type="text" name="birthday"  style="width: 225px" /></td>
+		<td>Birthday:<span class=error>*</span></td>
+		<td><input type="text" name="birthday" id="birthday" style="width: 225px" /></td>
 	</tr>		
 	<tr>
-		<td>Gender:<span class="require">*</span></td>
+		<td>Gender:<span class="error">*</span></td>
 		<td>
-			<input type="radio"	name="gender" id="radio3" value="Male" /> Male &nbsp;&nbsp;&nbsp; 
-			<input type="radio" name="gender" id="radio4" value="Female" /> Female
+			<input type="radio"	name="gender" value="Male" /> Male &nbsp;&nbsp;&nbsp; 
+			<input type="radio" name="gender" value="Female" /> Female
 		</td>
 	</tr>
 	<tr>
@@ -25,16 +31,16 @@
 		</td>
 	</tr>
 	<tr>
-		<td>Email1:</td>
-		<td><input type="text" name="email_1"  style="width:225px" /></td>
+		<td>Email1:<span class="error">*</span></td>
+		<td><input type="text" name="email_1" id="email_1"  style="width:225px" /></td>
 	</tr>
 	<tr>
 		<td>Email2:</td>
 		<td><input type="text" name="email_2"  style="width:225px" /></td>
 	</tr>
 	<tr>
-		<td>Mobile1:</td>
-		<td><input type="text" name="mobile_1"  style="width:225px" /></td>
+		<td>Mobile1:<span class="error">*</span></td>
+		<td><input type="text" name="mobile_1" id="mobile_1" style="width:225px" /></td>
 	</tr>
 	<tr>
 		<td>Mobile2:</td>
@@ -42,11 +48,11 @@
 	</tr>
 	<tr>
 		<td>Telephone:</td>
-		<td><input type="text" name="tel" id="textfield3" style="width:225px" /></td>
+		<td><input type="text" name="tel" style="width:225px" /></td>
 	</tr>
 	<tr>
-		<td>Address:</td>
-		<td><textarea name="address" rows="5" cols="27"></textarea></td>
+		<td>Address:<span class="error">*</span></td>
+		<td><input type="text" name="address" id="address" style="width:225px" /></td>
 	</tr>
 	<tr>	
 		<td>&nbsp;</td>
@@ -57,3 +63,23 @@
 	</tr>
 </table>
 </form>
+<script>
+$(function() {
+    $( "#birthday" ).datepicker();
+});
+
+function checkValid()
+{
+    var fullname = $("#full_name").val();
+    var birthday = $("#birthday").val();
+    var email1 = $("#email_1").val();
+    var mobile1 = $("#mobile_1").val();
+    var address = $("#address").val();
+    
+    if(fullname == '' || birthday == '' || email1 == '' || mobile1 == '' || address == '') {
+        $('#error').html('Please input into field required (*)');
+        return false;
+    }
+    return true;
+}   
+</script>

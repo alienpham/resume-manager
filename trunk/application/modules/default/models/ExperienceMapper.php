@@ -47,32 +47,31 @@ class Default_Model_ExperienceMapper {
         }
         $row = $result->current();
         
-        $experience->setExperienceId($row->id)
-        		->setResumeId($row->resume_id)
-				->setResumeId($row->start_date)
-				->setStartDate($row->end_date)
-				->setEndDate($row->job_title)
-				->setJobTitle($row->company_name)
-				->setCompanyName($row->info)
-				->setInfo($row->sort_order);      
+        $experience->setId($row->id);
+		$experience->setResumeId($row->resume_id);
+		$experience->setStartDate($row->start_date);
+		$experience->setEndDate($row->end_date);
+		$experience->setJobTitle($row->job_title);
+		$experience->setCompanyName($row->company_name);
+		$experience->setInfo($row->info);
+		$experience->setSortOrder($row->sort_order);      
     }
 
 
 	public function fetchAll ($where = null, $orderby = null)
     {
         $resultSet = $this->getDbTable()->fetchAll($where, $orderby);
-        
         $entries = array();
         foreach ($resultSet as $row) {
-            $entry = new Default_Model_Resume();
-            $entry->setExperienceId($row->id)
-	        		->setResumeId($row->resume_id)
-					->setResumeId($row->start_date)
-					->setStartDate($row->end_date)
-					->setEndDate($row->job_title)
-					->setJobTitle($row->company_name)
-					->setCompanyName($row->info)
-					->setInfo($row->sort_order);
+            $entry = new Default_Model_Experience();
+            $entry->setId($row->id);
+            $entry->setResumeId($row->resume_id);
+			$entry->setStartDate($row->start_date);
+			$entry->setEndDate($row->end_date);
+			$entry->setJobTitle($row->job_title);
+			$entry->setCompanyName($row->company_name);
+			$entry->setInfo($row->info);
+			$entry->setSortOrder($row->sort_order);  
             $entries[] = $entry;
         }
         return $entries;
