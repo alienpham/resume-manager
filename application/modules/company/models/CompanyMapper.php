@@ -15,7 +15,7 @@ class Company_Model_CompanyMapper {
     public function getDbTable ()
     {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Default_Model_DbTable_Company');
+            $this->setDbTable('Company_Model_DbTable_Company');
         }
         return $this->_dbTable;
     }
@@ -24,7 +24,7 @@ class Company_Model_CompanyMapper {
 		$this->getDbTable ()->update ( $data, $where );
 	}
 	
-	public function save (Default_Model_Company $company)
+	public function save (Company_Model_Company $company)
     {
         $data = array(
 			'company_code' 		=> $company->getCompanyCode(), 
@@ -51,14 +51,14 @@ class Company_Model_CompanyMapper {
 		
     }
 	
-	public function find ($id, Default_Model_Company $company)
+	public function find ($id, Company_Model_Company $company)
     {
         $result = $this->getDbTable()->find($id);        
         if (0 == count($result)) {
             return;
         }
         $row = $result->current();
-        $company ->setCompanyId($row->resume_id)
+        $company ->setCompanyId($row->company_id)
 				 ->setCompanyCode($row->company_code)
 				 ->setFullNameEn($row->full_name_en)
 				 ->setShortNameEn($row->short_name_en)
@@ -82,9 +82,10 @@ class Company_Model_CompanyMapper {
         $resultSet = $this->getDbTable()->fetchAll($where, $orderby);
         
         $entries = array();
-        $entry = new Default_Model_Company();
+        
         foreach ($resultSet as $row) {
-            $entry   ->setCompanyId($row->resume_id)
+        	$entry = new Company_Model_Company();
+            $entry   ->setCompanyId($row->company_id)
 					 ->setCompanyCode($row->company_code)
 					 ->setFullNameEn($row->full_name_en)
 					 ->setShortNameEn($row->short_name_en)
@@ -107,16 +108,12 @@ class Company_Model_CompanyMapper {
     
 	public function fetchCompany ($where = null, $orderby = null, $limit=1, $offset=null)
     {
-        if ($limit>1)
-    		$resultSet = $this->getDbTable()->fetchAll($where, $orderby, $limit, $offset);
-    	else 
-    		$resultSet = $this->getDbTable()->fetchAll($where, $orderby);
-        
+    	$resultSet = $this->getDbTable()->fetchAll($where, $orderby, $limit, $offset);
         $entries = array();
-        $entry = new Default_Model_Company();
+        
         foreach ($resultSet as $row) {
-           
-            $entry   ->setCompanyId($row->resume_id)
+            $entry = new Default_Model_Company();
+            $entry   ->setCompanyId($row->company_id)
 					 ->setCompanyCode($row->company_code)
 					 ->setFullNameEn($row->full_name_en)
 					 ->setShortNameEn($row->short_name_en)
@@ -136,5 +133,8 @@ class Company_Model_CompanyMapper {
         }
         return $entries;
     }
-    
+    public function test()
+    {
+    	echo "54656546";
+    }
 }
