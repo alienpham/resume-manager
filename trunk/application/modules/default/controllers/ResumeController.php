@@ -18,6 +18,10 @@ class ResumeController extends Zend_Controller_Action
 		$this->view->number = 123456;
 		$this->view->name = 'phan duy canh';
 		
+		$resume = new Default_Model_ResumeMapper();
+		$rows = $resume->fetchAll();
+//print_r($rows);
+        $this->view->rows = $rows;
     }
     
 	
