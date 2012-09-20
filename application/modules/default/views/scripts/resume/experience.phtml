@@ -1,10 +1,8 @@
-<?php echo $this->headScript()->appendFile ( '/js/jquery-1.7.1.js' );?>
-<?php echo $this->headLink()->appendStylesheet ( '/js/themes/base/jquery.ui.all.css' );?>
-<?php echo $this->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );?>
-<?php echo $this->headScript()->appendFile ( '/js/jquery.ui.core.js' );?>
+<?php echo $this->headScript();?>
+<?php echo $this->headLink();?>
 <?php
 echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
-<form name="frm" method="post" action="/resume/save-experience">
+<form name="frm" method="post" action="/resume/save-experience" onsubmit="return checkValid()">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td width="50%" valign="top">
@@ -12,31 +10,33 @@ echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
             <tr>
                 <td width="17%" align="right"></td>
                 <td width="4%"></td>
-                <td colspan="3" bgcolor="#FFECEC"></td>
+                <td bgcolor="#FFECEC">&nbsp;</td>
+                <td bgcolor="#FFECEC" id="error" class="error"></td>
             </tr>
             <tr>
-                <td class="subtitle_popup">Start date:</td>
+                <td class="subtitle_popup">Start date:<span class="error">*</span></td>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
                 <td bgcolor="#FFECEC">
-                    <input type="text" id="startdate">
-                    <span class="subtitle_popup">End date:</span> <input type="text" id="enddate">
+                    <input type="text" name="startdate" id="startdate" style="width: 164px">
+                    <span class="subtitle_popup" style="padding-left:20px">End date:<span class="error">*</span></span> 
+                    <input type="text" name="enddate" id="enddate" style="width: 163px">
                 </td>
             </tr>
             <tr>
-                <td class="subtitle_popup">Job Title:</td>
+                <td class="subtitle_popup">Job Title:<span class="error">*</span></td>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
                 <td colspan="2" bgcolor="#FFECEC">
-                	<input type="text" name="job_title" style="width: 415px" />
+                	<input type="text" name="job_title" id="job_title" style="width: 415px" />
                 </td>
             </tr>
             <tr>
-                <td class="subtitle_popup">Company:</td>
+                <td class="subtitle_popup">Company:<span class="error">*</span></td>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
                 <td height="30" colspan="2" bgcolor="#FFECEC">
-                	<input type="text" name="conmpany_name" style="width: 415px" />
+                	<input type="text" name="company_name" id="company_name" style="width: 415px" />
                 </td>
             </tr>
             <tr>
@@ -44,14 +44,14 @@ echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
                 <td height="30" colspan="2" bgcolor="#FFECEC">
-                	<textarea name="info" style="height:200px; width:500px"></textarea></td>
+                	<textarea name="info" id="info" style="height:200px; width:500px"></textarea></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td colspan="3" align="center">
                 	<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
-                	<input type="submit" name="button" value="SAVE" />
+                	<input type="submit" name="button" value="SAVE"/>
                 </td>
             </tr>
         </table>
@@ -66,45 +66,52 @@ echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
                 <td colspan="2">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2" bgcolor="#999999"
-                    style="font-size: 15px; padding: 5px 5px; color: #FFFFFF"><strong>CAREER
-                SUMMARY</strong></td>
+                <td colspan="2" bgcolor="#999999" style="font-size: 15px; padding: 5px 5px; color: #FFFFFF">
+                    <strong>CAREER SUMMARY</strong>
+                </td>
             </tr>
             <tr>
                 <td height="15" colspan="2"></td>
             </tr>
+            <?php foreach($this->rows as $row) : 
+                $date = date_create($row->getStartDate());
+                $startDate = date_format($date, 'M Y');
+                
+                $date = date_create($row->getEndDate());
+                $endDate = date_format($date, 'M Y');
+            ?>
             <tr>
-                <td width="26%" valign="top">Oct 2010 - Present<br />
-                <span class="a-left"><img
-                    src="../img/icons/user_edit.png" width="16"
-                    height="16" /><img src="../img/icons/user.png"
-                    width="16" height="16" /><img
-                    src="../img/icons/user_add.png" width="16"
-                    height="16" /> <img
-                    src="../img/icons/user_delete.png" width="16"
-                    height="16" /></span></td>
-                <td width="74%"><strong>CHEVRON LUBRICANTS VIETNAM LTD
-                (CLVL)</strong><br />
-                Contact Center Director</td>
+                <td valign="top"><?php echo $startDate;?> - <?php echo $endDate; ?><br />
+                    <span class="a-left">
+                        <img src="/images/icons/user_edit.png" width="16" height="16" />
+                        <img src="/images/icons/user.png" width="16" height="16" />
+                        <img src="/images/icons/user_add.png" width="16" height="16" /> 
+                        <img src="/images/icons/user_delete.png" width="16" height="16" />
+                    </span>
+                </td>
+                <td>
+                    <strong><?php echo $row->getCompanyName();?></strong><br />
+                    <?php echo $row->getJobTitle();?>
+                </td>
             </tr>
+            <?php endforeach;?>
             <tr>
                 <td valign="top">Nov 2006 - Oct 2010<br />
-                <span class="a-left"><img
-                    src="../img/icons/user_edit.png" width="16"
-                    height="16" /><img src="../img/icons/user.png"
-                    width="16" height="16" /><img
-                    src="../img/icons/user_add.png" width="16"
-                    height="16" /> <img
-                    src="../img/icons/user_delete.png" width="16"
-                    height="16" /></span></td>
-                <td><strong>AUSTRALIAN &amp; VIETNAMESE JOINT VENTURE
-                INTERIORS COMPANY</strong><br />
-                Call Center Manager</td>
+                    <span class="a-left">
+                        <img src="/images/icons/user_edit.png" width="16" height="16" />
+                        <img src="/images/icons/user.png" width="16" height="16" />
+                        <img src="/images/icons/user_add.png" width="16" height="16" /> 
+                        <img src="/images/icons/user_delete.png" width="16" height="16" />
+                    </span>
+                </td>
+                <td>
+                    <strong>AUSTRALIAN &amp; VIETNAMESE JOINT VENTURE INTERIORS COMPANY</strong><br />
+                    Call Center Manager
+                </td>
             </tr>
             <tr>
                 <td height="15" colspan="2"></td>
             </tr>
-
         </table>
         </td>
     </tr>
@@ -115,4 +122,18 @@ $(function() {
     $( "#startdate" ).datepicker();
     $( "#enddate" ).datepicker();
 });
+
+function checkValid()
+{
+	var startdate = $("#startdate").val();
+	var enddate = $("#enddate").val();
+	var job_title = $("#job_title").val();
+	var company_name = $("#company_name").val();
+    
+    if(startdate == '' || enddate == '' || job_title == '' || company_name == '') {
+        $('#error').html('Please input into field required (*)');
+        return false;
+    }
+    return true;
+}   
 </script>
