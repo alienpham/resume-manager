@@ -114,14 +114,5 @@ class Default_Model_ResumeMapper {
         }
         return $entries;
     }
-    
-    public function getListResume() 
-    {
-        $sql  = "SELECT * FROM resume as r ";
-        $sql .= "INNER JOIN res_experience as ex ON r.resume_id = ex.resume_id ";
-        
-        $db = $this->getDbTable()->getAdapter();
-        return $db->query($sql)->fetchAll(); 
-    }
 }
 ?>
