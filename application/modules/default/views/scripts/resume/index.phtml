@@ -79,18 +79,18 @@
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder01">
                         <?php foreach ( $experienceList as $experience ) :
                              $date = new DateTime($experience->getStartDate());
-                            $startDate = $date->format('Y-m-d');
+                            $startDate = $date->format('M Y');
                 
                 	        $date = new DateTime($experience->getEndDate());
-                            $endDate = $date->format('Y-m-d');
+                            $endDate = $date->format('M Y');
                         ?>
                         <tr>
                             <td width="83" valign="top">
                                 <?php echo $startDate;?> - <?php echo $endDate;?> 
                             </td>
                             <td width="381" valign="top">
-                                <strong class="text_green"><?php echo $row->getCompanyName();?></strong>
-                                <br /> <?php echo $row->getJobTitle();?>
+                                <strong class="text_green"><?php echo $experience->getCompanyName();?></strong>
+                                <br /> <?php echo $experience->getJobTitle();?>
                             </td>
                         </tr>
                         <?php endforeach;?>

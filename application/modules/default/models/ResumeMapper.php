@@ -62,25 +62,25 @@ class Default_Model_ResumeMapper {
         }
         $row = $result->current();
         
-        $resume->setResumeId($row->resume_id)
-				->setResumeCode($row->resume_code)
-				->setFullName($row->full_name)
-				->setBirthday($row->birthday)
-				->setGender($row->gender)
-				->setMaritalStatus($row->marital_status)
-				->setStatus($row->status)
-				->setEmail1($row->email_1)
-				->setEmail2($row->email_2)
-				->setMobile1($row->mobile_1)
-				->setMobile2($row->mobile_2)
-				->setTel($row->tel)
-				->setAddress($row->address)
-				->setPrivinceId($row->province_id)
-				->setViewCount($row->view_count)
-				->setCreatedDate($row->created_date)
-				->setUpdatedDate($row->updated_date)
-				->setCreatedConsultantId($row->created_consultant_id)
-				->setUpdatedConsultantId($row->updated_consultant_id);
+        $resume->setResumeId($row->resume_id);
+		$resume->setResumeCode($row->resume_code);
+		$resume->setFullName($row->full_name);
+		$resume->setBirthday($row->birthday);
+		$resume->setGender($row->gender);
+		$resume->setMaritalStatus($row->marital_status);
+		$resume->setStatus($row->status);
+		$resume->setEmail1($row->email_1);
+		$resume->setEmail2($row->email_2);
+		$resume->setMobile1($row->mobile_1);
+		$resume->setMobile2($row->mobile_2);
+		$resume->setTel($row->tel);
+		$resume->setAddress($row->address);
+		$resume->setPrivinceId($row->province_id);
+		$resume->setViewCount($row->view_count);
+		$resume->setCreatedDate($row->created_date);
+		$resume->setUpdatedDate($row->updated_date);
+		$resume->setCreatedConsultantId($row->created_consultant_id);
+		$resume->setUpdatedConsultantId($row->updated_consultant_id);
     }
 
 
@@ -91,25 +91,25 @@ class Default_Model_ResumeMapper {
         $entries = array();
         foreach ($resultSet as $row) {
             $entry = new Default_Model_Resume();
-            $entry->setResumeId($row->resume_id)
-					->setResumeCode($row->resume_code)
-					->setFullName($row->full_name)
-					->setBirthday($row->birthday)
-					->setGender($row->gender)
-					->setMaritalStatus($row->marital_status)
-					->setStatus($row->status)
-					->setEmail1($row->email_1)
-					->setEmail2($row->email_2)
-					->setMobile1($row->mobile_1)
-					->setMobile2($row->mobile_2)
-					->setTel($row->tel)
-					->setAddress($row->address)
-					->setPrivinceId($row->province_id)
-					->setViewCount($row->view_count)
-					->setCreatedDate($row->created_date)
-					->setUpdatedDate($row->updated_date)
-					->setCreatedConsultantId($row->created_consultant_id)
-					->setUpdatedConsultantId($row->updated_consultant_id);
+            $entry->setResumeId($row->resume_id);
+            $entry->setResumeCode($row->resume_code);
+            $entry->setFullName($row->full_name);
+            $entry->setBirthday($row->birthday);
+            $entry->setGender($row->gender);
+            $entry->setMaritalStatus($row->marital_status);
+            $entry->setStatus($row->status);
+            $entry->setEmail1($row->email_1);
+            $entry->setEmail2($row->email_2);
+            $entry->setMobile1($row->mobile_1);
+            $entry->setMobile2($row->mobile_2);
+            $entry->setTel($row->tel);
+            $entry->setAddress($row->address);
+            $entry->setProvinceId($row->province_id);
+            $entry->setViewCount($row->view_count);
+            $entry->setCreatedDate($row->created_date);
+            $entry->setUpdatedDate($row->updated_date);
+            $entry->setCreatedConsultantId($row->created_consultant_id);
+            $entry->setUpdatedConsultantId($row->updated_consultant_id);
             $entries[] = $entry;
         }
         return $entries;

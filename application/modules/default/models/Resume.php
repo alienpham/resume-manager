@@ -96,7 +96,7 @@ class Default_Model_Resume
 	public function getMaritaStatus() {
 		return $this->_marital_status;
 	}
-	public function setMaritaStatus($marital_status) {
+	public function setMaritalStatus($marital_status) {
 		$this->_marital_status = $marital_status;
 	}
 	
