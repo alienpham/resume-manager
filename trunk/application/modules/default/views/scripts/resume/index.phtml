@@ -1,15 +1,17 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td>
-        <form id="form" action="../..." method="post">
+        <form id="form" action="/resume" method="post">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td width="5%"><label for="choice">Search : </label></td>
                 <td width="6%">
-                    <select name="choice"> <option>Name</option></select>
+                    <select name="choice"> 
+                        <option value="full_name">Name</option>
+                    </select>
                 </td>
                 <td width="13%">
-                    <input name="text" id="textbox" type="text" />
+                    <input name="search" id="textbox" type="text" />
                 </td>
                 <td width="5%">
                     <input id="button1" type="submit" value="Search" />
@@ -62,7 +64,7 @@
         <?php 
         $experienceMapper = new Default_Model_ExperienceMapper();
         foreach ( $this->rows as $row ) :
-            $experienceList = $experienceMapper->fetchAll('resume_id = ' . $row->getResumeId(), 'end_date DESC');
+            $experienceList = $experienceMapper->fetchAll('resume_id = ' . $row['resume_id'], 'end_date DESC');
         ?>
         <tr>
             <td valign="top" class="a-center">
@@ -72,8 +74,8 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder">
                 <tr>
                     <td width="154" valign="top">
-                        <a href="#"><strong><?php echo $row->getFullName();?></strong></a>
-                        <br /> <?php echo $row->getResumeCode();?>
+                        <a href="#"><strong><?php echo $row['full_name'];?></strong></a>
+                        <br /> <?php echo $row['resume_code'];?>
                     </td>
                     <td width="470" valign="top">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder01">
@@ -107,10 +109,10 @@
                     <p>&nbsp;</p>
                     Upd: 14-Apr-11 Views: 124 Sent: 7 Email:</td>
                     <td width="286" valign="top" class="color_bg">
-                        <img src="../img/icons/add.png" width="16" height="16" />
-                        <img src="../img/icons/application_add.png" width="16" height="16" />
-                        <img src="../img/icons/add.png" width="16" height="16" />
-                        <img src="../img/icons/application_add.png" width="16" height="16" />
+                        <img src="/images/icons/add.png" width="16" height="16" />
+                        <img src="/images/icons/application_add.png" width="16" height="16" />
+                        <img src="/images/icons/add.png" width="16" height="16" />
+                        <img src="/images/icons/application_add.png" width="16" height="16" />
                         <p>&nbsp;</p>
                         <strong class="text_green">Sent Feb-11</strong> 
                         <strong>by HoanN</strong>: <br />
@@ -372,7 +374,9 @@
         </td>
     </tr>
 
+    <?php if(count($this->paginator)) :?>
     <tr>
-        <td align="center">Back&nbsp;&nbsp;|&nbsp;&nbsp;1&nbsp;&nbsp;|&nbsp;&nbsp;2&nbsp;&nbsp;|&nbsp;&nbsp;3&nbsp;&nbsp;|&nbsp;&nbsp;4&nbsp;&nbsp;|&nbsp;&nbsp;5&nbsp;&nbsp;|&nbsp;&nbsp;Next</td>
+        <td align="center"><?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?></td>
     </tr>
+    <?php endif;?>
 </table>
