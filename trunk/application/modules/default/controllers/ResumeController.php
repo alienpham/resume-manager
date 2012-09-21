@@ -15,12 +15,27 @@ class ResumeController extends Zend_Controller_Action
 
     public function indexAction()
     {
-		$this->view->number = 123456;
-		$this->view->name = 'phan duy canh';
-		
-		$resume = new Default_Model_ResumeMapper();
-		$rows = $resume->fetchAll();
-//print_r($rows);
+        $this->view->number = 123456;
+        $this->view->name = 'phan duy canh';
+        
+        $resume = new Default_Model_ResumeMapper();
+
+        $currentPage = 1;
+        $page = $this->_getParam('page',1);
+        if(!empty($i)) {
+            $currentPage = $page;
+        }
+        
+        $choice = $this->_getParam('choice',1);
+        $search = $this->_getParam('search',1);
+        
+        //http://zendgeek.blogspot.com
+        $rows = $resume->getListResume();
+        $paginator = Zend_Paginator::factory($rows);
+        $paginator->setItemCountPerPage(10);
+        $paginator->setCurrentPageNumber($currentPage);
+    
+        $this->view->paginator = $paginator;
         $this->view->rows = $rows;
     }
     
