@@ -114,5 +114,14 @@ class Default_Model_ResumeMapper {
         }
         return $entries;
     }
+    
+    public function getListResume($where = null, $orderby = null) 
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'SELECT * FROM resume';
+        $result = $db->fetchAll($sql);
+        
+        return $db->fetchAll($sql);
+    }
 }
 ?>
