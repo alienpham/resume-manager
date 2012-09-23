@@ -110,6 +110,12 @@ class ResumeController extends Zend_Controller_Action
 		$this->_redirect('resume/experience/id/' . $post['resume_id']);
     }
 	
+	public function expectationAction()
+	{
+		//echo 111;exit;
+	
+	}
+	
 	function exportToWordAction()
 	{
 		$filename = "report".date('dmY-his').".doc";
