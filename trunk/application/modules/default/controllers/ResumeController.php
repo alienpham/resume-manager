@@ -1,5 +1,4 @@
 <?php
-
 class ResumeController extends Zend_Controller_Action
 {
 
@@ -57,7 +56,7 @@ class ResumeController extends Zend_Controller_Action
 		$resumeRowset->setFullName($post['full_name']);
 		$resumeRowset->setBirthday($birthday);
 		$resumeRowset->setGender($post['gender']);
-		$resumeRowset->setMaritaStatus($post['marital_status']);
+		$resumeRowset->setMaritalStatus($post['marital_status']);
 		$resumeRowset->setStatus('Active');
 		$resumeRowset->setEmail1($post['email1']);
 		$resumeRowset->setEmail2($post['email2']);
@@ -110,5 +109,20 @@ class ResumeController extends Zend_Controller_Action
 		
 		$this->_redirect('resume/experience/id/' . $post['resume_id']);
     }
+	
+	function exportToWordAction()
+	{
+		$filename = "report".date('dmY-his').".doc";
+		header("Content-Type: application/xml; charset=UTF-8");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("content-disposition: attachment;filename=$filename");
+		$html = "<h1>this is test<h1>";
+		$html .="<div> this is testing111";
+		$html .="<div> this is testing2222";
+		
+		echo $html;
+		exit;
+	}
 }
 
