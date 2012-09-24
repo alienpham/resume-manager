@@ -118,7 +118,8 @@ class Default_Model_ResumeMapper {
     public function getListResume($where = null, $orderby = null) 
     {
         $db = $this->getDbTable()->getAdapter();
-        $sql = 'SELECT * FROM resume';
+        if($where) $where = 'WHERE ' .$where;
+        $sql = 'SELECT * FROM resume ' . $where;
         $result = $db->fetchAll($sql);
         
         return $db->fetchAll($sql);

@@ -1,68 +1,111 @@
-<?php echo $this->partial('resume/menu-add-resume.phtml')?>
+<?php echo $this->headScript ();?>
+<?php
+echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
+
 <form id="form" action="../..." method="post">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td width="52%" valign="top">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="52%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td width="19%" align="right"></td>
-                  <td width="4%"></td>
-                  <td colspan="3" bgcolor="#FFECEC"></td>
-                  </tr>
-                <tr>
-                  <td valign="top" class="subtitle_popup">Current Salary:</td>
-                  <td>&nbsp;</td>
-                  <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td colspan="2" bgcolor="#FFECEC"><input type="text" name="textfield2" id="textfield2" />
-                    USD</td>
-                </tr>
-                <tr>
-                  <td valign="top" class="subtitle_popup">Expected Salary:</td>
-                  <td>&nbsp;</td>
-                  <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td colspan="2" bgcolor="#FFECEC"><input type="text" name="textfield4" id="textfield4" /> <input type="text" name="textfield5" id="textfield5" /> 
-                    USD</td>
-                </tr>
-                <tr>
-                  <td valign="top" class="subtitle_popup">Expected Location:</td>
-                  <td>&nbsp;</td>
-                  <td width="4%" bgcolor="#FFECEC">&nbsp;</td>
-                  <td width="25%" valign="top" bgcolor="#FFECEC"><input type="checkbox" name="checkbox" id="checkbox" />
-                    Top 5 Cites<br />
-                    <input type="checkbox" name="checkbox2" id="checkbox2" />
-                    Top 5 Cites<br />
-                    <input type="checkbox" name="checkbox3" id="checkbox3" />
-                    Top 5 Cites</td>
-                  <td width="48%" valign="top" bgcolor="#FFECEC"><input type="checkbox" name="checkbox4" id="checkbox4" />
-Top 5 Cites<br />
-<input type="checkbox" name="checkbox4" id="checkbox5" />
-Top 5 Cites<br />
-<input type="checkbox" name="checkbox4" id="checkbox6" /> 
-Other 
-<select name="choice2" style="width:80px">
-  <option></option>
-</select></td>
-                </tr>
-                
-               
-                
-                
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td colspan="3" bgcolor="#FFECEC"></td>
-                </tr>
-                <tr>
-                  <td colspan="5"></td>
-                  </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                  <td colspan="3" align="center"><input type="submit" name="button" id="button" value="&lt;&lt; Back" /> 
-                    &nbsp;&nbsp;
-                    <input type="submit" name="button3" id="button14" value="Complete" /></td>
-                </tr>
-            </table></td>
-            <td>&nbsp;</td>
-            <td width="46%" valign="top">&nbsp;</td>
-          </tr>
-        </table> </form>
+            <tr>
+                <td width="19%" align="right"></td>
+                <td width="4%"></td>
+                <td colspan="3" bgcolor="#FFECEC"></td>
+            </tr>
+            <tr>
+                <td valign="top" class="subtitle_popup">Current Salary:</td>
+                <td>&nbsp;</td>
+                <td bgcolor="#FFECEC">&nbsp;</td>
+                <td colspan="2" bgcolor="#FFECEC"><input type="text"
+                    name="textfield2" id="textfield2" /> USD</td>
+            </tr>
+            <tr>
+                <td valign="top" class="subtitle_popup">Expected Salary:</td>
+                <td>&nbsp;</td>
+                <td bgcolor="#FFECEC">&nbsp;</td>
+                <td colspan="2" bgcolor="#FFECEC"><input type="text"
+                    name="textfield4" id="textfield4" /> <input
+                    type="text" name="textfield5" id="textfield5" /> USD</td>
+            </tr>
+            <tr>
+                <td valign="top" class="subtitle_popup">Expected
+                Location:</td>
+                <td>&nbsp;</td>
+                <td width="4%" bgcolor="#FFECEC">&nbsp;</td>
+                <td width="25%" valign="top" bgcolor="#FFECEC">
+                    <input class="province" type="button" name="province" value="Province" />
+                    <div class="multiselect" style="display:none;z-index:999; position:fixed">
+                        <div style="width:100px; float:left">
+                            <label><input type="checkbox" name="option[]" value="1" />Green</label> 
+                            <label><input type="checkbox" name="option[]" value="2" />Red</label> 
+                            <label><input type="checkbox" name="option[]" value="3" />Blue</label> 
+                            <label><input type="checkbox" name="option[]" value="4" />Orange</label> 
+                            <label><input type="checkbox" name="option[]" value="5" />Purple</label> 
+                            <label><input type="checkbox" name="option[]" value="6" />Black</label> 
+                            <label><input type="checkbox" name="option[]" value="7" />White</label>
+                        </div>
+                        <div style="width:100px; float:left">
+                            <label><input type="checkbox" name="option[]" value="1" />Green</label> 
+                            <label><input type="checkbox" name="option[]" value="2" />Red</label> 
+                            <label><input type="checkbox" name="option[]" value="3" />Blue</label> 
+                            <label><input type="checkbox" name="option[]" value="4" />Orange</label> 
+                            <label><input type="checkbox" name="option[]" value="5" />Purple</label> 
+                            <label><input type="checkbox" name="option[]" value="6" />Black</label> 
+                            <label><input type="checkbox" name="option[]" value="7" />White</label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td colspan="3" bgcolor="#FFECEC"></td>
+            </tr>
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td colspan="3" align="center"><input type="submit"
+                    name="button" id="button" value="&lt;&lt; Back" />
+                &nbsp;&nbsp; <input type="submit" name="button3"
+                    id="button14" value="Complete" /></td>
+            </tr>
+        </table>
+        </td>
+        <td>&nbsp;</td>
+        <td width="46%" valign="top">&nbsp;</td>
+    </tr>
+</table>
+</form>
+<script>
+$(document).ready(function(){
+    $(".province").click(function(){
+        if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');
+        else $(".multiselect").hide('slow');
+    });
+});
+
+jQuery.fn.multiselect = function() {
+    $(this).each(function() {
+        var checkboxes = $(this).find("input:checkbox");
+        checkboxes.each(function() {
+            var checkbox = $(this);
+            // Highlight pre-selected checkboxes
+            if (checkbox.attr("checked"))
+                checkbox.parent().addClass("multiselect-on");
+ 
+            // Highlight checkboxes that the user selects
+            checkbox.click(function() {
+                if (checkbox.attr("checked"))
+                    checkbox.parent().addClass("multiselect-on");
+                else
+                    checkbox.parent().removeClass("multiselect-on");
+            });
+        });
+    });
+};
+
+$(".multiselect").multiselect();
+</script>

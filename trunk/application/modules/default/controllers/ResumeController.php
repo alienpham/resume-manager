@@ -14,9 +14,6 @@ class ResumeController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->number = 123456;
-        $this->view->name = 'phan duy canh';
-        
         $resume = new Default_Model_ResumeMapper();
 
         $currentPage = 1;
@@ -25,11 +22,13 @@ class ResumeController extends Zend_Controller_Action
             $currentPage = $page;
         }
         
-        $choice = $this->_getParam('choice',1);
-        $search = $this->_getParam('search',1);
+        $where = '';
+        $choice = $this->_getParam('choice', 'name');
+        $search = $this->_getParam('search', '');
+        if($choice == 'name') $where = 'full_name like "%' . $search . '%"';
         
         //http://zendgeek.blogspot.com
-        $rows = $resume->getListResume();
+        $rows = $resume->getListResume($where);
         $paginator = Zend_Paginator::factory($rows);
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber($currentPage);
@@ -111,6 +110,12 @@ class ResumeController extends Zend_Controller_Action
     }
 	
 	public function expectationAction()
+	{
+		//echo 111;exit;
+	
+	}
+	
+    public function saveExpectationAction()
 	{
 		//echo 111;exit;
 	
