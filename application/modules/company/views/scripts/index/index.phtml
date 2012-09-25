@@ -4,23 +4,26 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		  <tr>
 			<td width="5%"><label for="choice">Search : </label></td>
-			<td width="6%"><select name="choice" style="width:80px">
-				<option>CCode</option>
+			<td width="6%"><select name="ccode_id" id="ccode_id" style="width:80px">
+				<option value="1">Company Code</option>
+                <option value="2">Company Name</option>
 			</select></td>
-			<td width="12%"><input name="text" id="textbox" type="text"/></td>
-			<td width="7%"><select name="choice2" style="width:100px">
+			<td width="12%"><input name="txtSearch" id="txtSearch" type="text"/></td>
+			<td width="7%"><select name="industry_id" style="width:100px">
 			  <option>Industry</option>
 			</select></td>
-			<td width="6%"><input id="button2" type="submit" value="Ok" /></td>
+			<td width="6%"><input id="btSearch" name="btSearch" type="button" value="Ok" /></td>
 			<td width="7%">&nbsp;</td>
 			<td width="9%">&nbsp;</td>
 			<td width="24%">&nbsp;</td>
 			<td width="4%"><label for="choice">Sort : </label></td>
-			<td width="5%"><select name="choice5" style="width:80px">
-			  <option>Name</option>
+			<td width="5%"><select name="sort_name_id" id="sort_name_id" style="width:80px">
+			  <option value="full_name_en">Name</option>
+              <option value="created_date">Created Date</option>
 			</select></td>
-			<td width="5%"><select name="choice4" style="width:60px">
-			  <option>ASC</option>
+			<td width="5%"><select name="sort_type_id" id="sort_type_id" style="width:60px">
+			  <option value="ASC">ASC</option>
+              <option value="DESC">DESC</option>
 			</select></td>
 			<td width="3%"><input id="button3" type="submit" value="Ok" /></td>
 		  </tr>
@@ -30,8 +33,8 @@
 	<tr>
 	  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
-		  <td width="6%"><input id="button4" type="submit" value="Add Company" class="add_button" /></td>
-		  <td width="6%"><input id="button6" type="submit" value="Delete" class="del_button" /></td>
+		  <td width="6%"><input id="btAddCompany" name="btAddCompany" type="button" value="Add Company" class="add_button" /></td>
+		  <td width="6%"><input id="btDeleteCompany" name="btDeleteCompany" type="button" value="Delete" class="del_button" /></td>
 		  <td width="42%"><em>Showing 30 of 50 records</em></td>
 		  <td width="41%" align="right">Month: Apr-2011 <a href="#">(Change)</a> | Open Vacancies: 18 | Candidates in Process: 20</td>
 		</tr>
@@ -68,186 +71,7 @@
 		</tr>
 	  </thead>
 	  <tbody>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox2" id="checkbox2" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td>Active</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox3" id="checkbox3" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td>Active</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox4" id="checkbox4" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td>Deleted</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox5" id="checkbox5" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td>&nbsp;</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox6" id="checkbox6" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td>&nbsp;</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox7" id="checkbox7" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td>&nbsp;</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox8" id="checkbox8" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td>&nbsp;</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox9" id="checkbox9" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td>&nbsp;</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox10" id="checkbox10" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td class="a-center color_bg">&nbsp;</td>
-		  <td>&nbsp;</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
-		<tr>
-		  <td class="a-center"><input type="checkbox" name="checkbox11" id="checkbox11" /></td>
-		  <td class="a-left">C1234</td>
-		  <td class="a-left"><a href="#">DHL Viet Nam</a></td>
-		  <td class="a-left">FNC</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td class="a-center color_bg">23</td>
-		  <td>&nbsp;</td>
-		  <td>Thao Nguyen</td>
-		  <td><a href="#"><img src="../img/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="../img/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-		</tr>
+		<?php echo $this->data; ?>
 	  </tbody>
 	</table>
   </div>

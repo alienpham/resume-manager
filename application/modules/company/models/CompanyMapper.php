@@ -82,59 +82,54 @@ class Company_Model_CompanyMapper {
         $resultSet = $this->getDbTable()->fetchAll($where, $orderby);
         
         $entries = array();
-        
+        $entry = new Company_Model_Company();
         foreach ($resultSet as $row) {
-        	$entry = new Company_Model_Company();
-            $entry   ->setCompanyId($row->company_id)
-					 ->setCompanyCode($row->company_code)
-					 ->setFullNameEn($row->full_name_en)
-					 ->setShortNameEn($row->short_name_en)
-					 ->setFullNameVn($row->full_name_vn)
-					 ->setShortNameVn($row->short_name_vn)
-					 ->setBusinesTypeId($row->busines_type_id)
-					 ->setIndustryId($row->industry_id)
-					 ->setTel($row->tel)
-					 ->setFax($row->fax)
-					 ->setEmail($row->email)
-					 ->setAddress($row->address)
-					 ->setWebsite($row->website)
-					 ->setStatus($row->status)
-					 ->setCreatedDate($row->created_date)
-					 ->setUpdatedDate($row->updated_date);
+            $entry->setCompanyId($row->company_id);
+			$entry->setCompanyCode($row->company_code);
+			$entry->setFullNameEn($row->full_name_en);
+			$entry->setShortNameEn($row->short_name_en);
+			$entry->setFullNameVn($row->full_name_vn);
+			$entry->setShortNameVn($row->short_name_vn);
+			$entry->setBusinesTypeId($row->busines_type_id);
+			$entry->setIndustryId($row->industry_id);
+			$entry->setTel($row->tel);
+			$entry->setFax($row->fax);
+			$entry->setEmail($row->email);
+			$entry->setAddress($row->address);
+			$entry->setWebsite($row->website);
+			$entry->setStatus($row->status);
+			$entry->setCreatedDate($row->created_date);
+			$entry->setUpdatedDate($row->updated_date);
             $entries[] = $entry;
         }
         return $entries;
     }
     
-	public function fetchCompany ($where = null, $orderby = null, $limit=1, $offset=null)
+	public function getListCompany ($where = null, $orderby = null)
     {
-    	$resultSet = $this->getDbTable()->fetchAll($where, $orderby, $limit, $offset);
-        $entries = array();
+    	$db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT * FROM company WHERE $where ORDER BY $orderby";
+        $result = $db->fetchAll($sql);
         
-        foreach ($resultSet as $row) {
-            $entry = new Default_Model_Company();
-            $entry   ->setCompanyId($row->company_id)
-					 ->setCompanyCode($row->company_code)
-					 ->setFullNameEn($row->full_name_en)
-					 ->setShortNameEn($row->short_name_en)
-					 ->setFullNameVn($row->full_name_vn)
-					 ->setShortNameVn($row->short_name_vn)
-					 ->setBusinesTypeId($row->busines_type_id)
-					 ->setIndustryId($row->industry_id)
-					 ->setTel($row->tel)
-					 ->setFax($row->fax)
-					 ->setEmail($row->email)
-					 ->setAddress($row->address)
-					 ->setWebsite($row->website)
-					 ->setStatus($row->status)
-					 ->setCreatedDate($row->created_date)
-					 ->setUpdatedDate($row->updated_date);
-            $entries[] = $entry;
-        }
-        return $entries;
+        return $result;
     }
-    public function test()
+    
+	public function getIndustryName ($industry_id)
     {
-    	echo "54656546";
+    	$db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT * FROM industry_lookup WHERE industry_id IN($industry_id)";
+        $result = $db->fetchAll($sql);
+        $num=0;
+        $str="";
+        
+        foreach ($result as $rs)
+        {
+        	if ($num==0)
+        		$str=$rs['abbreviation'];
+        	else 
+        		$str=" | ".$rs['abbreviation'];
+        	$num++;
+        }
+        return $str;
     }
 }
