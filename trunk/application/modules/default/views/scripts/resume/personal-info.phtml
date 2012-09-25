@@ -1,7 +1,7 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<?php echo $this->partial('resume/menu-add-resume.phtml')?>
-<form name="frm" method="post" action="save-resume" onsubmit="return checkValid()">
+<?php echo $this->partial('/resume/menu-add-resume.phtml')?>
+<form name="frm" method="post" action="/resume/save-resume" onsubmit="return checkValid()">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
         <td width="15%"></td>
@@ -9,55 +9,71 @@
     </tr>
     <tr>
 		<td width="15%">Full Name:<span class=error>*</span></td>
-		<td> <input type="text" name="full_name" id="full_name" style="width: 225px" /></td>
+		<td> 
+            <input type="text" name="full_name" id="full_name" style="width: 225px" value="<?php echo $this->resumeRowset->getFullName();?>"/>
+        </td>
 	</tr>
 	<tr>
 		<td>Birthday:<span class=error>*</span></td>
-		<td><input type="text" name="birthday" id="birthday" style="width: 225px" /></td>
+		<td>
+            <input type="text" name="birthday" id="birthday" style="width: 225px" value="<?php echo $this->resumeRowset->getBirthDay();?>" />
+        </td>
 	</tr>		
 	<tr>
 		<td>Gender:<span class="error">*</span></td>
 		<td>
-			<input type="radio"	name="gender" value="Male" /> Male &nbsp;&nbsp;&nbsp; 
-			<input type="radio" name="gender" value="Female" /> Female
+			<input type="radio"	name="gender" value="Male" <?php echo ($this->resumeRowset->getGender() == 'Male')? "checked" : "" ?>/> Male &nbsp;&nbsp;&nbsp; 
+			<input type="radio" name="gender" value="Female" <?php echo ($this->resumeRowset->getGender() == 'Female')? "checked" : "" ?>/> Female
 		</td>
 	</tr>
 	<tr>
 		<td>Marital Status:</td>
 		<td>
-			<input type="radio"	name="marital_status" value="Single" /> Single &nbsp;&nbsp;&nbsp;
-			<input type="radio" name="marital_status" value="Married" /> Married &nbsp;&nbsp;&nbsp; 
-			<input type="radio" name="marital_status" value="Divorced" /> Divorced
+			<input type="radio"	name="marital_status" value="Single" <?php echo ($this->resumeRowset->getMaritalStatus() == 'Single')? "checked" : "" ?>/> Single &nbsp;&nbsp;&nbsp;
+			<input type="radio" name="marital_status" value="Married" <?php echo ($this->resumeRowset->getMaritalStatus() == 'Married')? "checked" : "" ?>/> Married &nbsp;&nbsp;&nbsp; 
+			<input type="radio" name="marital_status" value="Divorced" <?php echo ($this->resumeRowset->getMaritalStatus() == 'Divorced')? "checked" : "" ?>/> Divorced
 		</td>
 	</tr>
 	<tr>
 		<td>Email1:<span class="error">*</span></td>
-		<td><input type="text" name="email1" id="email1"  style="width:225px" /></td>
+		<td>
+            <input type="text" name="email1" id="email1"  value="<?php echo $this->resumeRowset->getEmail1();?>" style="width:225px" />
+        </td>
 	</tr>
 	<tr>
 		<td>Email2:</td>
-		<td><input type="text" name="email2"  style="width:225px" /></td>
+		<td>
+            <input type="text" name="email2" value="<?php echo $this->resumeRowset->getEmail2();?>" style="width:225px" />
+        </td>
 	</tr>
 	<tr>
 		<td>Mobile1:<span class="error">*</span></td>
-		<td><input type="text" name="mobile1" id="mobile1" style="width:225px" /></td>
+		<td>
+            <input type="text" name="mobile1" id="mobile1" value="<?php echo $this->resumeRowset->getMobile1();?>" style="width:225px" />
+        </td>
 	</tr>
 	<tr>
 		<td>Mobile2:</td>
-		<td><input type="text" name="mobile2"  style="width:225px" /></td>
+		<td>
+            <input type="text" name="mobile2"  value="<?php echo $this->resumeRowset->getMobile2();?>" style="width:225px" />
+        </td>
 	</tr>
 	<tr>
 		<td>Telephone:</td>
-		<td><input type="text" name="tel" style="width:225px" /></td>
+		<td>
+            <input type="text" name="tel" value="<?php echo $this->resumeRowset->getTel();?>" style="width:225px" />
+        </td>
 	</tr>
 	<tr>
 		<td>Address:<span class="error">*</span></td>
-		<td><input type="text" name="address" id="address" style="width:225px" /></td>
+		<td>
+            <input type="text" name="address" id="address" value="<?php echo $this->resumeRowset->getAddress();?>" style="width:225px" />
+        </td>
 	</tr>
 	<tr>	
 		<td>&nbsp;</td>
 		<td>
-			<input type="button" name="cancel" value="Cancel" /> &nbsp;&nbsp; 
+			<a href="/resume"><input type="button" name="cancel" value="Cancel" /></a> &nbsp;&nbsp; 
 			<input type="submit" name="next" value="Next &gt;&gt;" />
 		</td>
 	</tr>
@@ -72,8 +88,8 @@ function checkValid()
 {
     var fullname = $("#full_name").val();
     var birthday = $("#birthday").val();
-    var email1 = $("#email_1").val();
-    var mobile1 = $("#mobile_1").val();
+    var email1 = $("#email1").val();
+    var mobile1 = $("#mobile1").val();
     var address = $("#address").val();
     
     if(fullname == '' || birthday == '' || email1 == '' || mobile1 == '' || address == '') {
