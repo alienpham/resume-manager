@@ -1,8 +1,7 @@
 <?php echo $this->headScript ();?>
-<?php
-echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
+<?php echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
 
-<form id="form" action="../..." method="post">
+<form id="form" action="/resume/save-expectation" method="post">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td width="52%" valign="top">
@@ -16,44 +15,38 @@ echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
                 <td valign="top" class="subtitle_popup">Current Salary:</td>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
-                <td colspan="2" bgcolor="#FFECEC"><input type="text"
-                    name="textfield2" id="textfield2" /> USD</td>
+                <td colspan="2" bgcolor="#FFECEC">
+                	<input type="text" name="current_salary"/> USD
+                </td>
             </tr>
             <tr>
                 <td valign="top" class="subtitle_popup">Expected Salary:</td>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
-                <td colspan="2" bgcolor="#FFECEC"><input type="text"
-                    name="textfield4" id="textfield4" /> <input
-                    type="text" name="textfield5" id="textfield5" /> USD</td>
+                <td colspan="2" bgcolor="#FFECEC">
+                	<input type="text" name="estimated_salary_from" /> 
+                    <input type="text" name="estimated_salary_to" /> USD</td>
             </tr>
             <tr>
-                <td valign="top" class="subtitle_popup">Expected
-                Location:</td>
+                <td valign="top" class="subtitle_popup">Expected Location:</td>
                 <td>&nbsp;</td>
                 <td width="4%" bgcolor="#FFECEC">&nbsp;</td>
                 <td width="25%" valign="top" bgcolor="#FFECEC">
                     <input class="province" type="button" name="province" value="Province" />
-                    <div class="multiselect" style="display:none;z-index:999; position:fixed">
-                        <div style="width:100px; float:left">
-                            <label><input type="checkbox" name="option[]" value="1" />Green</label> 
-                            <label><input type="checkbox" name="option[]" value="2" />Red</label> 
-                            <label><input type="checkbox" name="option[]" value="3" />Blue</label> 
-                            <label><input type="checkbox" name="option[]" value="4" />Orange</label> 
-                            <label><input type="checkbox" name="option[]" value="5" />Purple</label> 
-                            <label><input type="checkbox" name="option[]" value="6" />Black</label> 
-                            <label><input type="checkbox" name="option[]" value="7" />White</label>
-                        </div>
-                        <div style="width:100px; float:left">
-                            <label><input type="checkbox" name="option[]" value="1" />Green</label> 
-                            <label><input type="checkbox" name="option[]" value="2" />Red</label> 
-                            <label><input type="checkbox" name="option[]" value="3" />Blue</label> 
-                            <label><input type="checkbox" name="option[]" value="4" />Orange</label> 
-                            <label><input type="checkbox" name="option[]" value="5" />Purple</label> 
-                            <label><input type="checkbox" name="option[]" value="6" />Black</label> 
-                            <label><input type="checkbox" name="option[]" value="7" />White</label>
-                        </div>
-                    </div>
+                    <div class="multiselect" style="display:none; position:fixed">
+                    	<div style="width:160px; float:left">
+                    <?php 
+                    $i = 1;
+                    foreach($this->listProvince as $province) :
+                    	if($i % 22 == 0): echo '</div><div style="width:160px; float:left">';endif;
+                    ?>
+                    	<label><input type="checkbox" name="option[]" value="<?php echo $province['province_id']?>" /><?php echo $province['name']?></label>
+                        	
+                    <?php 
+                    $i++;
+                    endforeach;?>
+                    	</div>
+                   </div>
                 </td>
             </tr>
             <tr>
@@ -67,10 +60,11 @@ echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td colspan="3" align="center"><input type="submit"
-                    name="button" id="button" value="&lt;&lt; Back" />
-                &nbsp;&nbsp; <input type="submit" name="button3"
-                    id="button14" value="Complete" /></td>
+                <td colspan="3" align="center">
+                	<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
+                	<input type="submit" name="Back" value="&lt;&lt; Back" />&nbsp;&nbsp; 
+                	<input type="submit" name="Complete" value="Complete" />
+                </td>
             </tr>
         </table>
         </td>

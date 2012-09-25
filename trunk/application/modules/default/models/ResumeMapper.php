@@ -40,7 +40,6 @@ class Default_Model_ResumeMapper {
 			'tel' 			=> $resume->getTel(),
 			'address' 		=> $resume->getAddress(),
 			'province_id' 	=> $resume->getProvinceId(),
-			'view_count' 	=> $resume->getViewCount(),
 			'created_date' 	=> $resume->getCreatedDate(),
 			'updated_date' 	=> $resume->getUpdatedDate(),
         	'created_consultant_id' 	=> $resume->getCreatedConsultantId(),
@@ -124,5 +123,15 @@ class Default_Model_ResumeMapper {
         
         return $db->fetchAll($sql);
     }
+    
+	public function getProvince() 
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'SELECT * FROM province_lookup ';
+        $result = $db->fetchAll($sql);
+        
+        return $db->fetchAll($sql);
+    }
+    
 }
 ?>
