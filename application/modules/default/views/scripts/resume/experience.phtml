@@ -51,7 +51,8 @@ echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
                 <td>&nbsp;</td>
                 <td colspan="3" align="center">
                 	<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
-                	<input type="submit" name="button" value="SAVE"/>
+                	<input type="submit" name="button" value="Save"/>
+                	<input type="submit" name="button" value="Next"/>
                 </td>
             </tr>
         </table>
@@ -82,12 +83,7 @@ echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
             ?>
             <tr>
                 <td valign="top"><?php echo $startDate;?> - <?php echo $endDate; ?><br />
-                    <span class="a-left">
-                        <img src="/images/icons/user_edit.png" width="16" height="16" />
-                        <img src="/images/icons/user.png" width="16" height="16" />
-                        <img src="/images/icons/user_add.png" width="16" height="16" /> 
-                        <img src="/images/icons/user_delete.png" width="16" height="16" />
-                    </span>
+                    <span class="a-left">Edit</span>
                 </td>
                 <td>
                     <strong><?php echo $row->getCompanyName();?></strong><br />

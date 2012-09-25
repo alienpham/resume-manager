@@ -626,10 +626,12 @@ form#form #button1:hover,form#form #button2:hover,form#form #button3:hover
 }
 
 .multiselect {
-    width:20em;
+    width:500px;
     height:15em;
     border:solid 1px #c0c0c0;
     overflow:auto;
+    background-color:#ffffff;
+    padding:10px;
 }
  
 .multiselect label {

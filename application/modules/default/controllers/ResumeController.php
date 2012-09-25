@@ -86,8 +86,7 @@ class ResumeController extends Zend_Controller_Action
     
 	public function saveExperienceAction()
     {
-		$post = $this->getRequest()->getPost();
-///print_r($post);exit;	
+		$post = $this->getRequest()->getPost();	
 		$date = new DateTime($post['startdate']);
         $startDate = $date->format('Y-m-d');
 
@@ -106,18 +105,34 @@ class ResumeController extends Zend_Controller_Action
 		$experienceMapper = new Default_Model_ExperienceMapper();
 		$experienceMapper->save($experienceRowset);
 		
-		$this->_redirect('resume/experience/id/' . $post['resume_id']);
+		if($post['button'] == 'Next') $this->_redirect('resume/expectation/id/' . $post['resume_id']);
+		else $this->_redirect('resume/experience/id/' . $post['resume_id']);
     }
 	
 	public function expectationAction()
 	{
-		//echo 111;exit;
+		$resumeId = $this->getRequest()->getParam('id');
+		$resume = new Default_Model_ResumeMapper();
+		$listProvince = $resume->getProvince();
+//print_r($listProvince);exit;		
+		$this->view->listProvince = $listProvince;
+		$this->view->resumeId = $resumeId;
 	
 	}
 	
     public function saveExpectationAction()
 	{
-		//echo 111;exit;
+		$post = $this->getRequest()->getPost();
+		$expectation = new Default_Model_Expectation();
+		$expectation->setResumeId($post['resume_id']);
+		$expectation->setEstimatedSalaryTo($post['estimated_salary_to']);
+		$expectation->setEstimatedSalaryFrom($post['estimated_salary_from']);
+		$expectation->setCurrentSalary($post['current_salary']);
+			
+		$expectationMapper = new Default_Model_ExpectationMapper();
+		$expectationMapper->save($expectation);
+		
+		$this->_redirect('resume/expectation/id/' . $post['resume_id']);
 	
 	}
 	
