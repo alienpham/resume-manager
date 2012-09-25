@@ -33,7 +33,11 @@ class Default_Model_ExpectationMapper {
 			'current_salary' 		=> $expectation->getCurrentSalary()
 		);
 
-		return $this->getDbTable()->insert($data);
+        if (null === ($id = $expectation->getResExpectationId())) {
+            $this->getDbTable()->insert($data);
+        } else {
+            $this->getDbTable()->update($data, array('res_expectation_id = ?' => $id));
+        }
     }
 	
 	public function find ($id, Default_Model_Expectation $expectation)
@@ -66,6 +70,13 @@ class Default_Model_ExpectationMapper {
             $entries[] = $entry;
         }
         return $entries;
+    }
+    
+    public function saveExProvince($expectationId, $provinceId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "INSERT INTO res_expectation_has_location(res_expectation_id, province_id) VALUES ($expectationId, $provinceId)";
+        return $db->query($sql);
     }
 }
 ?>

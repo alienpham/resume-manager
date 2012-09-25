@@ -27,30 +27,30 @@ class Default_Model_ResumeMapper {
 	public function save (Default_Model_Resume $resume)
     {
         $data = array(
-			'resume_code' 	=> $resume->getResumeCode(), 
-			'full_name' 	=> $resume->getFullName(), 
-			'birthday' 		=> $resume->getBirthday(), 
-			'gender' 		=> $resume->getGender(),
-         	'marital_status'=> $resume->getMaritaStatus(),
-         	'status' 		=> $resume->getStatus(),
-			'email_1' 		=> $resume->getEmail1(),
-			'email_2' 		=> $resume->getEmail2(),
-			'mobile_1' 		=> $resume->getMobile1(),
-			'mobile_2' 		=> $resume->getMobile2(),
-			'tel' 			=> $resume->getTel(),
-			'address' 		=> $resume->getAddress(),
-			'province_id' 	=> $resume->getProvinceId(),
-			'created_date' 	=> $resume->getCreatedDate(),
-			'updated_date' 	=> $resume->getUpdatedDate(),
-        	'created_consultant_id' 	=> $resume->getCreatedConsultantId(),
-			'updated_consultant_id' 	=> $resume->getUpdatedConsultantId()
-		);
-//print_r($data); exit;    
+            'resume_code' 	=> $resume->getResumeCode(), 
+            'full_name' 	=> $resume->getFullName(), 
+            'birthday' 		=> $resume->getBirthday(), 
+            'gender' 		=> $resume->getGender(),
+            'marital_status'=> $resume->getMaritalStatus(),
+            'status' 		=> $resume->getStatus(),
+            'email_1' 		=> $resume->getEmail1(),
+            'email_2' 		=> $resume->getEmail2(),
+            'mobile_1' 		=> $resume->getMobile1(),
+            'mobile_2' 		=> $resume->getMobile2(),
+            'tel' 			=> $resume->getTel(),
+            'address' 		=> $resume->getAddress(),
+            'province_id' 	=> $resume->getProvinceId(),
+            'created_date' 	=> $resume->getCreatedDate(),
+            'updated_date' 	=> $resume->getUpdatedDate(),
+            'created_consultant_id' 	=> $resume->getCreatedConsultantId(),
+            'updated_consultant_id' 	=> $resume->getUpdatedConsultantId()
+        );
 
-			
-		return $this->getDbTable()->insert($data);
-
-		
+        if (null === ($id = $resume->getResumeId())) {
+            return $this->getDbTable()->insert($data);
+        } else {
+            return $this->getDbTable()->update($data, array('resume_id = ?' => $id));
+        }
     }
 	
 	public function find ($id, Default_Model_Resume $resume)
@@ -74,7 +74,7 @@ class Default_Model_ResumeMapper {
 		$resume->setMobile2($row->mobile_2);
 		$resume->setTel($row->tel);
 		$resume->setAddress($row->address);
-		$resume->setPrivinceId($row->province_id);
+		$resume->setProvinceId($row->province_id);
 		$resume->setViewCount($row->view_count);
 		$resume->setCreatedDate($row->created_date);
 		$resume->setUpdatedDate($row->updated_date);
