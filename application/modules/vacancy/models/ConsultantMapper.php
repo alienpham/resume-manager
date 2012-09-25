@@ -51,7 +51,21 @@ class Vacancy_Model_ConsultantMapper {
 	 */
 	public function save(Vacancy_Model_Consultant $obj)
 	{
-		$data = array();
+		$data = array(
+			'consultant_id' => $obj->getConsultantId(),
+			'title' => $obj->getTitle(),
+			'full_name' => $obj->getFullName(),
+			'abbreviated_name' => $obj->getAbbreviatedName(),
+			'job_title' => $obj->getJobTitle(),
+			'office_phone' => $obj->getOfficePhone(),
+			'email' => $obj->getEmail(),
+			'password' => $obj->getPassword(),
+			'join_date' => $obj->getJoinDate(),
+			'resign_date' => $obj->getResignDate(),
+			'status' => $obj->getStatus(),
+			'created_date' => $obj->getCreateDate(),
+			'updated_date' => $obj->getUpdateDate(),
+		);
 
 		return $this->getDbTable()->insert($data);
 	}
@@ -71,26 +85,20 @@ class Vacancy_Model_ConsultantMapper {
 		}
 		$row = $result->current();
 
-		$consultant->setResumeId($row->resume_id)
-		->setResumeCode($row->resume_code)
+		$entry->setConsultantId($row->consultant_id)
+		->setTitle($row->title)
 		->setFullName($row->full_name)
-		->setBirthday($row->birthday)
-		->setGender($row->gender)
-		->setMaritalStatus($row->marital_status)
+		->setAbbreviatedName($row->abbreviated_name)
+		->setJobTitle($row->job_title)
+		->setOfficePhone($row->office_phone)
+		->setEmail($row->email)
+		->setPassword($row->password)
+		->setJoinDate($row->join_date)
+		->setResignDate($row->resign_date)
 		->setStatus($row->status)
-		->setEmail1($row->email_1)
-		->setEmail2($row->email_2)
-		->setMobile1($row->mobile_1)
-		->setMobile2($row->mobile_2)
-		->setTel($row->tel)
-		->setAddress($row->address)
-		->setPrivinceId($row->province_id)
-		->setNationalityId($row->nationality_id)
-		->setViewCount($row->view_count)
-		->setCreatedDate($row->created_date)
-		->setUpdatedDate($row->updated_date);
+		->setCreateDate($row->created_date)
+		->setUpdateDate($row->updated_date);
 	}
-
 
 	/**
 	 *
@@ -106,27 +114,62 @@ class Vacancy_Model_ConsultantMapper {
 
 		foreach ($resultSet as $row) {
 			$entry = new Vacancy_Model_Consultant();
-			$entry->setResumeId($row->resume_id)
-			->setResumeCode($row->resume_code)
+			$entry->setConsultantId($row->consultant_id)
+			->setTitle($row->title)
 			->setFullName($row->full_name)
-			->setBirthday($row->birthday)
-			->setGender($row->gender)
-			->setMaritalStatus($row->marital_status)
+			->setAbbreviatedName($row->abbreviated_name)
+			->setJobTitle($row->job_title)
+			->setOfficePhone($row->office_phone)
+			->setEmail($row->email)
+			->setPassword($row->password)
+			->setJoinDate($row->join_date)
+			->setResignDate($row->resign_date)
 			->setStatus($row->status)
-			->setEmail1($row->email_1)
-			->setEmail2($row->email_2)
-			->setMobile1($row->mobile_1)
-			->setMobile2($row->mobile_2)
-			->setTel($row->tel)
-			->setAddress($row->address)
-			->setPrivinceId($row->province_id)
-			->setNationalityId($row->nationality_id)
-			->setViewCount($row->view_count)
-			->setCreatedDate($row->created_date)
-			->setUpdatedDate($row->updated_date);
+			->setCreateDate($row->created_date)
+			->setUpdateDate($row->updated_date);
 
 			$entries[] = $entry;
 		}
 		return $entries;
+	}
+
+	/**
+	 *
+	 * To fetch all active consultants
+	 *
+	 * @return array objects
+	 */
+	public function getColsultants() {
+		$db = $this->getDbTable();
+
+		//$db->getAdapter()->getProfiler()->setEnabled(true);
+
+		$select = $db->select()->setIntegrityCheck(false)->from(
+			'consultant AS c',
+			array(
+				'consultant_id',
+				'title',
+				'full_name',
+				'abbreviated_name',
+				'job_title',
+				'office_phone',
+				'email',
+				'join_date',
+				'resign_date',
+				'status'
+			)
+		)
+		->join('consultant_has_role AS cr', 'c.consultant_id=cr.consultant_id', array())
+		->join('role_lookup AS rl', 'cr.role_id=rl.role_id AND rl.role_type=\'' . Vacancy_Model_RoleLookup::ROLE_TYPE_CONSULTANT . '\'', array('role_type', 'department_id', 'name', 'level'))
+		->where('c.status=?', Vacancy_Model_Consultant::STATUS_ACTIVE)
+		->order('c.full_name ASC');
+
+		$rows = $db->fetchAll($select);
+
+		//print_r($db->getAdapter()->getProfiler()->getLastQueryProfile()->getQuery());
+		//$db->getAdapter()->getProfiler()->setEnabled(false);
+		//exit;
+
+		return $rows;
 	}
 }
