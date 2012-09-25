@@ -1,5 +1,13 @@
 <?php
 class Vacancy_Model_Consultant {
+	const STATUS_ACTIVE		= 'Active';
+	const STATUS_INACTIVE	= 'Inactive';
+	const STATUS_DELETE		= 'Deleted';
+
+	const TITLE_MR		= 'Mr.';
+	const TITLE_MRS		= 'Mrs.';
+	const TITLE_MS		= 'Ms.';
+
 	protected $_consultant_id;
 	protected $_title;
 	protected $_full_name;

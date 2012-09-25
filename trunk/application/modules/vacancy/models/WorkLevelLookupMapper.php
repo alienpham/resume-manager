@@ -96,24 +96,9 @@ class Vacancy_Model_WorkLevelLookupMapper {
 
 		foreach ($resultSet as $row) {
 			$entry = new Vacancy_Model_WorkLevelLookup();
-			$entry->setResumeId($row->resume_id)
-			->setResumeCode($row->resume_code)
-			->setFullName($row->full_name)
-			->setBirthday($row->birthday)
-			->setGender($row->gender)
-			->setMaritalStatus($row->marital_status)
-			->setStatus($row->status)
-			->setEmail1($row->email_1)
-			->setEmail2($row->email_2)
-			->setMobile1($row->mobile_1)
-			->setMobile2($row->mobile_2)
-			->setTel($row->tel)
-			->setAddress($row->address)
-			->setPrivinceId($row->province_id)
-			->setNationalityId($row->nationality_id)
-			->setViewCount($row->view_count)
-			->setCreatedDate($row->created_date)
-			->setUpdatedDate($row->updated_date);
+			$entry->setWorkLevelId($entry->work_level_id)
+				->setName($entry->name)
+				->setSortOrder($entry->sort_order);
 
 			$entries[] = $entry;
 		}

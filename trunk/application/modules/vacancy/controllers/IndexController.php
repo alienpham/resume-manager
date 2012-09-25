@@ -23,8 +23,9 @@ class Vacancy_IndexController extends Zend_Controller_Action
 	 * To add new a vacancy
 	 */
 	public function addVacancyAction() {
-
+		$consultantMapper = New Vacancy_Model_ConsultantMapper();
+		$colsultants = $consultantMapper->getColsultants();
+		$this->view->consultants = $colsultants;
 	}
-
 }
 
