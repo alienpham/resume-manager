@@ -30,7 +30,7 @@ class ResumeController extends Zend_Controller_Action
         $where = '';
         $choice = $this->_getParam('choice', 'name');
         $search = $this->_getParam('search', '');
-        if($choice == 'name') $where = 'full_name like "%' . $search . '%"';
+        if($choice == 'full_name') $where = 'full_name like "%' . $search . '%"';
         
         //http://zendgeek.blogspot.com
         $rows = $resume->getListResume($where);
