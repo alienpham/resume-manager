@@ -46,10 +46,11 @@ class Default_Model_ResumeMapper {
             'updated_consultant_id' 	=> $resume->getUpdatedConsultantId()
         );
 
-        if (null === ($id = $resume->getResumeId())) {
+        if (null == ($id = $resume->getResumeId())) {
             return $this->getDbTable()->insert($data);
         } else {
-            return $this->getDbTable()->update($data, array('resume_id = ?' => $id));
+            $this->getDbTable()->update($data, array('resume_id = ?' => $id));
+            return $id;
         }
     }
 	
@@ -117,7 +118,8 @@ class Default_Model_ResumeMapper {
     public function getListResume($where = null, $orderby = null) 
     {
         $db = $this->getDbTable()->getAdapter();
-        if($where) $where = 'WHERE ' .$where;
+        if($where) $where = ' WHERE ' .$where;
+        //if($orderby) $orderby = ' ORDER BY ' .$orderby;
         $sql = 'SELECT * FROM resume ' . $where;
 //echo $sql;exit;
         $result = $db->fetchAll($sql);

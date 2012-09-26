@@ -23,7 +23,7 @@ class ResumeController extends Zend_Controller_Action
 
         $currentPage = 1;
         $page = $this->_getParam('page',1);
-        if(!empty($i)) {
+        if(!empty($page)) {
             $currentPage = $page;
         }
         
@@ -63,7 +63,8 @@ class ResumeController extends Zend_Controller_Action
         
         $resumeRowset = new Default_Model_Resume();
         	
-        $resumeRowset->setResumeCode('R-01');
+        $resumeRowset->setResumeId($post['resume_id']);
+        $resumeRowset->setResumeCode('R' . $post['resume_id']);
         $resumeRowset->setFullName($post['full_name']);
         $resumeRowset->setBirthday($birthday);
         $resumeRowset->setGender($post['gender']);
@@ -82,18 +83,25 @@ class ResumeController extends Zend_Controller_Action
         
         $resume = new Default_Model_ResumeMapper();
         $resumeId = $resume->save($resumeRowset);
-       
+        //$resume->update(array('resume_code = ?' => 'R' . $resumeId), array('resume_id = ?' => $resumeId));
+        
         $this->_redirect('/resume/experience/id/' . $resumeId);
     }
     
     public function experienceAction()
     {
+    	
+    	$experid = $this->getRequest()->getParam('experid', 0);
         $resumeId = $this->getRequest()->getParam('id');
         $experienceMapper = new Default_Model_ExperienceMapper();
         $rows = $experienceMapper->fetchAll('resume_id = ' . $resumeId, 'end_date DESC');
         
+        $experienceRowSet = new Default_Model_Experience();
+        $experienceMapper->find($experid, $experienceRowSet);
+        
         $this->view->resumeId = $resumeId;
         $this->view->rows = $rows;
+        $this->view->experienceRowSet = $experienceRowSet;
     }    
     
 	public function saveExperienceAction()
@@ -106,6 +114,8 @@ class ResumeController extends Zend_Controller_Action
         $endDate = $date->format('Y-m-d');
         
         $experienceRowset = new Default_Model_Experience();
+        $experienceRowset->setId($post['experid']);
+        $experienceRowset->setResumeId($post['resume_id']);
         $experienceRowset->setResumeId($post['resume_id']);
         $experienceRowset->setStartDate($startDate);
         $experienceRowset->setEndDate($endDate);
@@ -120,15 +130,31 @@ class ResumeController extends Zend_Controller_Action
         if($post['button'] == 'Next') $this->_redirect('resume/expectation/id/' . $post['resume_id']);
         else $this->_redirect('/resume/experience/id/' . $post['resume_id']);
     }
+    
+    public function delExperienceAction()
+    {
+    	$experId = $this->getRequest()->getParam('experid');
+    	$resumeId = $this->getRequest()->getParam('id');
+    	$experienceMapper = new Default_Model_ExperienceMapper();
+    	$experienceMapper->delete(array('id = ?' => $experId));
+    	
+    	$this->_redirect('/resume/experience/id/' . $resumeId);
+    }
 	
 	public function expectationAction()
 	{
         $resumeId = $this->getRequest()->getParam('id');
+        
         $resume = new Default_Model_ResumeMapper();
         $listProvince = $resume->getProvince();
         
+        $expectationRowSet = new Default_Model_Expectation();
+        $expectationMapper = new Default_Model_ExpectationMapper();
+        $expectationMapper->find($resumeId, $expectationRowSet);
+        
         $this->view->listProvince = $listProvince;
         $this->view->resumeId = $resumeId;
+        $this->view->expectationRowSet = $expectationRowSet;
 	
 	}
 	
@@ -136,6 +162,7 @@ class ResumeController extends Zend_Controller_Action
 	{
         $post = $this->getRequest()->getPost();
         $expectation = new Default_Model_Expectation();
+        $expectation->setResExpectationId($post['expecid']);
         $expectation->setResumeId($post['resume_id']);
         $expectation->setEstimatedSalaryTo($post['estimated_salary_to']);
         $expectation->setEstimatedSalaryFrom($post['estimated_salary_from']);

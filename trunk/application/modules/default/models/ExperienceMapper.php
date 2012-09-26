@@ -24,6 +24,10 @@ class Default_Model_ExperienceMapper {
 		$this->getDbTable ()->update ( $data, $where );
 	}
 	
+	public function delete($where) {
+		$this->getDbTable ()->delete($where);
+	}
+	
 	public function save (Default_Model_Experience $experience)
     {
         $data = array(
@@ -35,8 +39,13 @@ class Default_Model_ExperienceMapper {
         	'info' 			=> $experience->getInfo(),
         	'sort_order' 	=> $experience->getSortOrder()        	
 		);
-
-		return $this->getDbTable()->insert($data);
+		
+    	if (null == ($id = $experience->getId())) {
+            return $this->getDbTable()->insert($data);
+        } else {      	
+            $this->getDbTable()->update($data, array('id = ?' => $id));
+            return $id;
+        }
     }
 	
 	public function find ($id, Default_Model_Experience $experience)

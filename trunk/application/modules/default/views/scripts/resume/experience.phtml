@@ -18,9 +18,9 @@ echo $this->partial ( '/resume/menu-add-resume.phtml' )?>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
                 <td bgcolor="#FFECEC">
-                    <input type="text" name="startdate" id="startdate" style="width: 164px">
+                    <input type="text" name="startdate" id="startdate" style="width:164px" value="<?php echo $this->experienceRowSet->getStartDate();?>">
                     <span class="subtitle_popup" style="padding-left:20px">End date:<span class="error">*</span></span> 
-                    <input type="text" name="enddate" id="enddate" style="width: 163px">
+                    <input type="text" name="enddate" id="enddate" style="width:163px" value="<?php echo $this->experienceRowSet->getEndDate();?>">
                 </td>
             </tr>
             <tr>
@@ -28,7 +28,7 @@ echo $this->partial ( '/resume/menu-add-resume.phtml' )?>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
                 <td colspan="2" bgcolor="#FFECEC">
-                	<input type="text" name="job_title" id="job_title" style="width: 415px" />
+                	<input type="text" name="job_title" id="job_title" style="width: 415px" value="<?php echo $this->experienceRowSet->getJobTitle();?>"/>
                 </td>
             </tr>
             <tr>
@@ -36,7 +36,7 @@ echo $this->partial ( '/resume/menu-add-resume.phtml' )?>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
                 <td height="30" colspan="2" bgcolor="#FFECEC">
-                	<input type="text" name="company_name" id="company_name" style="width: 415px" />
+                	<input type="text" name="company_name" id="company_name" style="width:415px" value="<?php echo $this->experienceRowSet->getCompanyName();?>"/>
                 </td>
             </tr>
             <tr>
@@ -44,15 +44,17 @@ echo $this->partial ( '/resume/menu-add-resume.phtml' )?>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
                 <td height="30" colspan="2" bgcolor="#FFECEC">
-                	<textarea name="info" id="info" style="height:200px; width:500px"></textarea></td>
+                	<textarea name="info" id="info" style="height:200px; width:500px"><?php echo $this->experienceRowSet->getInfo();?></textarea></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td colspan="3" align="center">
                 	<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
+                	<input type="hidden" name="experid" value="<?php echo $this->experienceRowSet->getId();?>" />
+                	<a href="/resume/personal-info/id/<?php echo $this->resumeId; ?>"><input type="button" name="button" value="Back"/></a>
                 	<input type="submit" name="button" value="Save"/>
-                	<input type="submit" name="button" value="Next"/>
+                	<a href="/resume/expectation/id/<?php echo $this->resumeId; ?>"><input type="button" name="button" value="Next"/></a>
                 </td>
             </tr>
         </table>
@@ -82,32 +84,16 @@ echo $this->partial ( '/resume/menu-add-resume.phtml' )?>
                 $endDate = date_format($date, 'M Y');
             ?>
             <tr>
-                <td valign="top"><?php echo $startDate;?> - <?php echo $endDate; ?><br />
-                    <span class="a-left">Edit</span>
+                <td valign="top" width="125"><?php echo $startDate;?> - <?php echo $endDate; ?><br />
+                    <span class="a-left"><a href="/resume/experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Edit</a></span> |
+                    <span class="a-left"><a href="/resume/del-experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Delete</a></span>
                 </td>
-                <td>
+                <td align="left">
                     <strong><?php echo $row->getCompanyName();?></strong><br />
                     <?php echo $row->getJobTitle();?>
                 </td>
             </tr>
             <?php endforeach;?>
-            <tr>
-                <td valign="top">Nov 2006 - Oct 2010<br />
-                    <span class="a-left">
-                        <img src="/images/icons/user_edit.png" width="16" height="16" />
-                        <img src="/images/icons/user.png" width="16" height="16" />
-                        <img src="/images/icons/user_add.png" width="16" height="16" /> 
-                        <img src="/images/icons/user_delete.png" width="16" height="16" />
-                    </span>
-                </td>
-                <td>
-                    <strong>AUSTRALIAN &amp; VIETNAMESE JOINT VENTURE INTERIORS COMPANY</strong><br />
-                    Call Center Manager
-                </td>
-            </tr>
-            <tr>
-                <td height="15" colspan="2"></td>
-            </tr>
         </table>
         </td>
     </tr>

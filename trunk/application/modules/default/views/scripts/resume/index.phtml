@@ -39,11 +39,7 @@
                     <input id="button4" type="button" value="Add Resume" class="link_button" /></a>
                 </td>
                 <td width="35%"><em>Showing 30 of 50 records</em></td>
-                <td width="15%" align="right">
-                    <strong>View:</strong> 
-                    <a href="view_detail.html">Detail</a> | 
-                    <a href="brief_view.html">Brief</a>
-                </td>
+
                 <td width="5%" align="right">&nbsp;</td>
                 <td width="30%" align="right">
                     Today Entry: <strong>New 18</strong> | Updated: <strong>20</strong> | Total: <strong>120000</strong>
@@ -65,6 +61,7 @@
     <tbody>
         <?php 
         $experienceMapper = new Default_Model_ExperienceMapper();
+        $expectationMapper = new Default_Model_ExpectationMapper();
         foreach ( $this->rows as $row ) :
             $experienceList = $experienceMapper->fetchAll('resume_id = ' . $row['resume_id'], 'end_date DESC');
         ?>
@@ -75,11 +72,11 @@
             <td class="a-left">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder">
                 <tr>
-                    <td width="154" valign="top">
+                    <td width="145" valign="top">
                         <a href="/resume/personal-info/id/<?php echo $row['resume_id']?>"><strong><?php echo $row['full_name'];?></strong></a>
                         <br /> <?php echo $row['resume_code'];?>
                     </td>
-                    <td width="470" valign="top">
+                    <td width="491" valign="top">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder01">
                         <?php foreach ( $experienceList as $experience ) :
                              $date = new DateTime($experience->getStartDate());
@@ -89,10 +86,10 @@
                             $endDate = $date->format('M Y');
                         ?>
                         <tr>
-                            <td width="83" valign="top">
+                            <td width="115" valign="top">
                                 <?php echo $startDate;?> - <?php echo $endDate;?> 
                             </td>
-                            <td width="381" valign="top">
+                            <td width="376" valign="top">
                                 <strong class="text_green"><?php echo $experience->getCompanyName();?></strong>
                                 <br /> <?php echo $experience->getJobTitle();?>
                             </td>
@@ -100,13 +97,16 @@
                         <?php endforeach;?>
                     </table>
                     </td>
-                    <td width="282" valign="top"><strong
-                        class="text_blue">FOREIGN TRADE UNIVERSITY OF
-                    HCMC</strong><br />
-                    Bachelor of Foreign language
-                    <p>&nbsp;</p>
-                    [S]: $1,000<br />
-                    [E]: $1 500-$2 000<br />
+                    <td width="270" valign="top">
+                    <?php
+                    
+                    $expectation = $expectationMapper->getExpectation($row['resume_id']);
+                    $currentSalary = number_format($expectation['current_salary']);
+                    @$salaryFrom = number_format($expectation['estimated_salary_from']);
+                    @$salaryTo = number_format($expectation['estimated_salary_to']);
+                    ?>
+                    [S]: <?php echo $currentSalary; ?><br />
+                    [E]: <?php echo $salaryFrom; ?>-<?php echo $salaryTo; ?><br />
                     [L]: HCMC, Binh Duong
                     <p>&nbsp;</p>
                     Upd: 14-Apr-11 Views: 124 Sent: 7 Email:</td>
@@ -352,10 +352,12 @@
         <td>
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td width="7%"><input id="button2" type="submit"
-                    value="Add Resume" class="link_button" /></td>
-                <td width="5%"><input id="button3" type="submit"
-                    value="Add Shortlist" class="link_button" /></td>
+                <td width="7%">
+                	<a href="/resume/personal-info">
+                	<input id="button2" type="submit" value="Add Resume" class="link_button" />
+                	</a>
+            	</td>
+                
                 <td width="84%">&nbsp;</td>
             </tr>
         </table>
