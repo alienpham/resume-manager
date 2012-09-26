@@ -1,3 +1,6 @@
+<!-- Add fancyBox main JS and CSS files -->
+<?php echo $this->headScript();?>
+<?php echo $this->headLink();?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td>
@@ -17,7 +20,9 @@
                     <input id="button1" type="submit" value="Search" />
                 </td>
                 <td width="8%">
-                    <input id="button8" type="submit" value="Advanced Search" />
+                    <a href="#inline" class="fancybox">
+                    <input type="button" value="Advanced Search" />
+                    </a>
                 </td>
                 <td width="48%" align="right">&nbsp;</td>
             </tr>
@@ -32,9 +37,6 @@
             <tr>
                 <td width="7%"><a href="/resume/personal-info">
                     <input id="button4" type="button" value="Add Resume" class="link_button" /></a>
-                </td>
-                <td width="5%">
-                    <input id="button5" type="submit" value="Add Short List" class="link_button" />
                 </td>
                 <td width="35%"><em>Showing 30 of 50 records</em></td>
                 <td width="15%" align="right">
@@ -380,3 +382,9 @@
     </tr>
     <?php endif;?>
 </table>
+<?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script>
