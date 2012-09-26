@@ -114,10 +114,10 @@ class Company_Model_CompanyMapper {
         return $result;
     }
     
-	public function getIndustryName ($industry_id)
+	public function getIndustryName ($table, $where, $field)
     {
     	$db = $this->getDbTable()->getAdapter();
-        $sql = "SELECT * FROM industry_lookup WHERE industry_id IN($industry_id)";
+        $sql = "SELECT * FROM $table WHERE $where";
         $result = $db->fetchAll($sql);
         $num=0;
         $str="";
@@ -125,9 +125,9 @@ class Company_Model_CompanyMapper {
         foreach ($result as $rs)
         {
         	if ($num==0)
-        		$str=$rs['abbreviation'];
+        		$str=$rs[$field];
         	else 
-        		$str=" | ".$rs['abbreviation'];
+        		$str=" | ".$rs[$field];
         	$num++;
         }
         return $str;

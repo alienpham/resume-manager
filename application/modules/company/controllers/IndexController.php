@@ -35,7 +35,7 @@ class Company_IndexController extends Zend_Controller_Action
 			$list = $company->getListCompany($condition,$order_by);
 			foreach($list as $rs)
 			{
-				$industry_name = $company->getIndustryName($rs['industry_id']);
+				$industry_name = $company->getIndustryName("industry_lookup","industry_id='".$rs['industry_id']."'","abbreviation");
 				$data .= '<tr>
 						  <td class="a-center"><input type="checkbox" name="company_id" id="company_id" value="'.$rs['company_id'].'" /></td>
 						  <td class="a-left">'.$rs['company_code'].'</td>
