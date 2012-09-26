@@ -32,27 +32,28 @@ class Default_Model_ExpectationMapper {
 			'estimated_salary_from' => $expectation->getEstimatedSalaryFrom(), 
 			'current_salary' 		=> $expectation->getCurrentSalary()
 		);
-
-        if (null === ($id = $expectation->getResExpectationId())) {
-            $this->getDbTable()->insert($data);
+		
+        if (null == ($id = $expectation->getResExpectationId())) {
+            return $this->getDbTable()->insert($data);
         } else {
             $this->getDbTable()->update($data, array('res_expectation_id = ?' => $id));
+            return $id;
         }
     }
 	
-	public function find ($id, Default_Model_Expectation $expectation)
+	public function find ($resumeid, Default_Model_Expectation $expectation)
     {
-        $result = $this->getDbTable()->find($id);        
-        if (0 == count($result)) {
+        $row = $this->getDbTable()->fetchRow(array('resume_id = ?' => $resumeid));        
+        if (0 == count($row)) {
             return;
         }
-        $row = $result->current();
-        
-        $expectation->setResExpectationId($row->res_expectation_id);
-		$expectation->setResumeId($row->resume_id);
-		$expectation->setEstimatedSalaryTo($row->estimated_salary_to);
-		$expectation->setEstimatedSalaryFrom($row->estimated_salary_from);
-		$expectation->setCurrentSalary($row->current_salary);   
+        //$row = $result->current();
+
+        $expectation->setResExpectationId($row['res_expectation_id']);
+		$expectation->setResumeId($row['resume_id']);
+		$expectation->setEstimatedSalaryTo($row['estimated_salary_to']);
+		$expectation->setEstimatedSalaryFrom($row['estimated_salary_from']);
+		$expectation->setCurrentSalary($row['current_salary']);   
     }
 
 
@@ -69,6 +70,7 @@ class Default_Model_ExpectationMapper {
 			$entry->setCurrentSalary($row->current_salary);
             $entries[] = $entry;
         }
+        
         return $entries;
     }
     
@@ -77,6 +79,12 @@ class Default_Model_ExpectationMapper {
         $db = $this->getDbTable()->getAdapter();
         $sql = "INSERT INTO res_expectation_has_location(res_expectation_id, province_id) VALUES ($expectationId, $provinceId)";
         return $db->query($sql);
+    }
+    
+    public function getExpectation($resumeid) 
+    {
+        $row = $this->getDbTable()->fetchRow(array('resume_id = ?' => $resumeid)); 
+        return $row;
     }
 }
 ?>
