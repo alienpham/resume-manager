@@ -119,6 +119,7 @@ class Default_Model_ResumeMapper {
         $db = $this->getDbTable()->getAdapter();
         if($where) $where = 'WHERE ' .$where;
         $sql = 'SELECT * FROM resume ' . $where;
+//echo $sql;exit;
         $result = $db->fetchAll($sql);
         
         return $db->fetchAll($sql);
