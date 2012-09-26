@@ -6,7 +6,7 @@ class ResumeController extends Zend_Controller_Action
     {
         /* Initialize action controller here */
         $view = new Zend_View();
-        $view->headScript()->appendFile ( '/js/jquery-1.7.1.js' );
+        $view->headScript()->appendFile ( '/js/jquery-1.8.0.min.js' );
         $view->headLink()->appendStylesheet ( '/js/themes/base/jquery.ui.all.css' );
         $view->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );
         $view->headScript()->appendFile ( '/js/jquery.ui.core.js' );
@@ -14,6 +14,11 @@ class ResumeController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $view = new Zend_View();
+        $view->headScript()->appendFile ( '/js/jquery.mousewheel-3.0.6.pack.js' );
+        $view->headScript()->appendFile ( '/js/jquery.fancybox.js?v=2.1.0' );
+        $view->headLink()->appendStylesheet ( '/js/jquery.fancybox.css?v=2.1.0' );
+        
         $resume = new Default_Model_ResumeMapper();
 
         $currentPage = 1;
