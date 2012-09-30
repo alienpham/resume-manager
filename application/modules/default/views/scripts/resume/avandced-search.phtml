@@ -1,4 +1,5 @@
 <div style="width:900px;height: 500px; display: none;" id="inline">
+<form name="frmAvanSearch" id="frmAvanSearch" method="post" action="/resume/avandce-search" >
 <table cellpadding="0" cellspacing="0" style="border-collapse: collapse">
     <tr>
         <td valign="top" style="padding: 15px 15px 15px 15px">
@@ -27,7 +28,7 @@
                                 <td>&nbsp;</td>
                                 <td width="5%" bgcolor="#FFECEC">&nbsp;</td>
                                 <td width="63%" bgcolor="#FFECEC">
-                                    <input type="text" name="textfield" id="textfield" style="width: 230px" />
+                                    <input type="text" name="full_name" id="full_name" style="width: 230px" />
                                 </td>
                             </tr>
                             <tr>
@@ -331,14 +332,14 @@
                 </td>
             </tr>
             <tr>
-                <td align="center"><input type="submit" name="button3"
-                    id="button3" value="Search">&nbsp;&nbsp;&nbsp; <input
-                    type="submit" name="button4" id="button7"
-                    value="Cancel" /></td>
+                <td align="center">
+                <input type="button" name="avansearch" id="avansearch" value="Search">&nbsp;&nbsp;&nbsp; 
+                <input type="button" name="cancel" id="cancel" value="Cancel"  onclick="event.preventDefault(); parent.$.fancybox.close();"/></td>
             </tr>
         </table>
         </td>
     </tr>
     <tr></tr>
 </table>
+</form>
 </div>

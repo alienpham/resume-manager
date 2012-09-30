@@ -29,15 +29,18 @@
         <td>&nbsp;</td>
         <td width="4%" bgcolor="#FFECEC">&nbsp;</td>
         <td width="25%" valign="top" bgcolor="#FFECEC">
-            <input class="province" type="button" name="province" value="Province" />
+            <input class="province" type="text" name="province" value="" />
             <div class="multiselect" style="display:none; position:fixed">
             	<div style="width:160px; float:left">
             <?php 
             $i = 1;
+            $checked = '';
             foreach($this->listProvince as $province) :
             	if($i % 22 == 0): echo '</div><div style="width:160px; float:left">';endif;
+            	if(in_array($province['province_id'], $this->resumeProvince, true)) $checked = "checked";
+            	else $checked = '';
             ?>
-            	<label><input type="checkbox" name="option[]" value="<?php echo $province['province_id']?>" /> <?php echo $province['name']?></label>
+            	<label><input type="checkbox" name="option[]" value="<?php echo $province['province_id']?>" <?php echo $checked;?>/> <?php echo $province['name']?></label>
                 	
             <?php 
             $i++;
@@ -74,22 +77,16 @@ $(document).ready(function(){
     });
 });
 
+$('.multiselect').mouseleave(function(){
+	$(".multiselect").hide('slow');
+});
+
 jQuery.fn.multiselect = function() {
     $(this).each(function() {
         var checkboxes = $(this).find("input:checkbox");
         checkboxes.each(function() {
             var checkbox = $(this);
-            // Highlight pre-selected checkboxes
-            if (checkbox.attr("checked"))
-                checkbox.parent().addClass("multiselect-on");
- 
-            // Highlight checkboxes that the user selects
-            checkbox.click(function() {
-                if (checkbox.attr("checked"))
-                    checkbox.parent().addClass("multiselect-on");
-                else
-                    checkbox.parent().removeClass("multiselect-on");
-            });
+           
         });
     });
 };
