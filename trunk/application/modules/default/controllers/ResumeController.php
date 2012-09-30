@@ -31,6 +31,8 @@ class ResumeController extends Zend_Controller_Action
         $choice = $this->_getParam('choice', 'name');
         $search = $this->_getParam('search', '');
         if($choice == 'full_name') $where = 'full_name like "%' . $search . '%"';
+        if($choice == 'resume_code') $where = 'resume_code like "%' . $search . '%"';
+        if($choice == 'job_title') $where = 'job_title like "%' . $search . '%"';
         
         //http://zendgeek.blogspot.com
         $rows = $resume->getListResume($where);
@@ -42,6 +44,21 @@ class ResumeController extends Zend_Controller_Action
         $this->view->rows = $rows;
     }
     
+	public function resumeReportAction()
+	{
+	    $this->_helper->layout->disableLayout();
+	    
+	    $resume = new Default_Model_ResumeMapper();
+        $countNew = $resume->countResumeWith('new');
+        $countUpdate = $resume->countResumeWith('update');
+        $countTotal = $resume->countResumeWith('total');
+
+	    $html = 'Today Entry: <strong>New '. $countNew .'</strong> | ';
+        $html .= 'Updated: <strong>'. $countUpdate .'</strong$countNew> | ';
+        $html .= 'Total: <strong>'. $countTotal .'</strong>';
+        echo $html;
+	    exit;
+	}
 	
 	public function personalInfoAction()
     {
@@ -62,9 +79,10 @@ class ResumeController extends Zend_Controller_Action
         $birthday = $date->format('Y-m-d');
         
         $resumeRowset = new Default_Model_Resume();
-        	
+        if($post['resume_id']) $resumeCode = 'R' . $post['resume_id'];
+        else $resumeCode = 'R';
         $resumeRowset->setResumeId($post['resume_id']);
-        $resumeRowset->setResumeCode('R' . $post['resume_id']);
+        $resumeRowset->setResumeCode($resumeCode);
         $resumeRowset->setFullName($post['full_name']);
         $resumeRowset->setBirthday($birthday);
         $resumeRowset->setGender($post['gender']);
@@ -77,13 +95,13 @@ class ResumeController extends Zend_Controller_Action
         $resumeRowset->setTel($post['tel']);
         $resumeRowset->setAddress($post['address']);
         $resumeRowset->setProvinceId(1);
-        $resumeRowset->setCreatedDate(date('Y-m-d'));
+        if(!$post['resume_id']) $resumeRowset->setCreatedDate(date('Y-m-d'));
         $resumeRowset->setCreatedConsultantId(1);
         $resumeRowset->setUpdatedConsultantId(1);
         
         $resume = new Default_Model_ResumeMapper();
         $resumeId = $resume->save($resumeRowset);
-        //$resume->update(array('resume_code = ?' => 'R' . $resumeId), array('resume_id = ?' => $resumeId));
+        if($resumeCode == 'R') $resume->updateResumCode('R' . $resumeId, $resumeId);
         
         $this->_redirect('/resume/experience/id/' . $resumeId);
     }
@@ -151,10 +169,19 @@ class ResumeController extends Zend_Controller_Action
         $expectationRowSet = new Default_Model_Expectation();
         $expectationMapper = new Default_Model_ExpectationMapper();
         $expectationMapper->find($resumeId, $expectationRowSet);
-        
+
+        $provinceArr = array();
+        if($expectationRowSet->getResExpectationId()) {
+            $resumeProvince = $expectationMapper->getExpectationProvince($expectationRowSet->getResExpectationId());
+            foreach($resumeProvince as $province){
+                $provinceArr[] = $province['province_id'];
+            }
+	    }
+	    
         $this->view->listProvince = $listProvince;
         $this->view->resumeId = $resumeId;
         $this->view->expectationRowSet = $expectationRowSet;
+        $this->view->resumeProvince = $provinceArr;
 	
 	}
 	
@@ -171,6 +198,7 @@ class ResumeController extends Zend_Controller_Action
         $expectationMapper = new Default_Model_ExpectationMapper();
         $expectationId = $expectationMapper->save($expectation);
         
+        $expectationMapper->delExProvince($expectationId);
         foreach($post['option'] as $provinceId ) {
             $expectationMapper->saveExProvince($expectationId, $provinceId);
         }
@@ -178,6 +206,26 @@ class ResumeController extends Zend_Controller_Action
         if($post['button'] == 'Complete') $this->_redirect('/resume');
         else $this->_redirect('/resume/experience/id/' . $post['resume_id']);
         //$this->_redirect('resume/expectation/id/' . $post['resume_id']);
+	}
+	
+	public function avandceSearchAction()
+	{
+	    $where = '';
+        $post = $this->getRequest()->getPost();
+        if($post['full_name']) $where .= 'full_name like "%' . $post['full_name'] . '%"';
+
+        $resume = new Default_Model_ResumeMapper();
+        $rows = $resume->getListResume($where);
+        $paginator = Zend_Paginator::factory($rows);
+        $paginator->setItemCountPerPage(10);
+        $paginator->setCurrentPageNumber(1);
+    
+        $this->view->paginator = $paginator;
+        $this->view->rows = $rows;
+        
+        $this->_helper->layout->disableLayout();
+        $this->render('list-resume', array('paginator' => $paginator, 'rows' => $rows));
+
 	}
 	
 	function exportToWordAction()

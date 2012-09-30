@@ -77,14 +77,39 @@ class Default_Model_ExpectationMapper {
     public function saveExProvince($expectationId, $provinceId)
     {
         $db = $this->getDbTable()->getAdapter();
+       
         $sql = "INSERT INTO res_expectation_has_location(res_expectation_id, province_id) VALUES ($expectationId, $provinceId)";
         return $db->query($sql);
+    }
+    
+    public function delExProvince($expectationId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "DELETE FROM res_expectation_has_location WHERE res_expectation_id = " . $expectationId;
+        return $db->query($sql); 
     }
     
     public function getExpectation($resumeid) 
     {
         $row = $this->getDbTable()->fetchRow(array('resume_id = ?' => $resumeid)); 
         return $row;
+    }
+    
+    /*public function getExpectationProvince($expecid) 
+    {
+        $sql = "SELECT province_id FROM res_expectation_has_location WHERE res_expectation_id = " . $expecid;
+        $rows = $this->getDbTable()->getAdapter()->query($sql)->fetchAll();
+        return $rows;
+    }*/
+    
+    public function getExpectationProvince($expecid) 
+    {
+        $sql = "SELECT rex.province_id, p.name FROM res_expectation_has_location as rex ";
+        $sql .= "INNER JOIN province_lookup as p ON p.province_id = rex.province_id ";
+        $sql .= "WHERE res_expectation_id = " . $expecid;
+
+        $rows = $this->getDbTable()->getAdapter()->query($sql)->fetchAll();
+        return $rows;
     }
 }
 ?>

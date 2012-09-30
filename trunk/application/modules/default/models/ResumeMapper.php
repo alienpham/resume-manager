@@ -20,8 +20,10 @@ class Default_Model_ResumeMapper {
         return $this->_dbTable;
     }
     
-	public function update($data, $where) {
-		$this->getDbTable ()->update ( $data, $where );
+	public function updateResumCode($code, $resumeId) {
+		$db = $this->getDbTable()->getAdapter();
+        $sql = 'UPDATE resume SET resume_code = "'. $code .'" WHERE resume_id = '. $resumeId;
+        $db->query($sql);
 	}
 	
 	public function save (Default_Model_Resume $resume)
@@ -49,6 +51,7 @@ class Default_Model_ResumeMapper {
         if (null == ($id = $resume->getResumeId())) {
             return $this->getDbTable()->insert($data);
         } else {
+            unset($data['created_date']);
             $this->getDbTable()->update($data, array('resume_id = ?' => $id));
             return $id;
         }
@@ -84,7 +87,7 @@ class Default_Model_ResumeMapper {
     }
 
 
-	public function fetchAll ($where = null, $orderby = null)
+	public function fetchAll ($where = null, $orderby = 'updated_date DESC')
     {
         $resultSet = $this->getDbTable()->fetchAll($where, $orderby);
 
@@ -115,12 +118,12 @@ class Default_Model_ResumeMapper {
         return $entries;
     }
     
-    public function getListResume($where = null, $orderby = null) 
+    public function getListResume($where = null, $orderby ='updated_date DESC') 
     {
         $db = $this->getDbTable()->getAdapter();
         if($where) $where = ' WHERE ' .$where;
-        //if($orderby) $orderby = ' ORDER BY ' .$orderby;
-        $sql = 'SELECT * FROM resume ' . $where;
+        if($orderby) $orderby = ' ORDER BY ' .$orderby;
+        $sql = 'SELECT * FROM resume ' . $where . $orderby;
 //echo $sql;exit;
         $result = $db->fetchAll($sql);
         
@@ -134,6 +137,15 @@ class Default_Model_ResumeMapper {
         $result = $db->fetchAll($sql);
         
         return $db->fetchAll($sql);
+    }
+    
+    public function countResumeWith($cond)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        if($cond == 'new') $sql = 'SELECT * FROM resume WHERE created_date = CURDATE()';
+        if($cond == 'update') $sql = 'SELECT * FROM resume WHERE SUBSTR(updated_date, 1, 10) = CURDATE()';
+        if($cond == 'total') $sql = 'SELECT * FROM resume ';
+        return $db->query($sql)->rowCount();
     }
     
 }
