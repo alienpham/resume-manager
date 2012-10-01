@@ -118,12 +118,17 @@ class Default_Model_ResumeMapper {
         return $entries;
     }
     
-    public function getListResume($where = null, $orderby ='updated_date DESC') 
+    public function getListResume($cond = null, $orderby =' updated_date DESC') 
     {
         $db = $this->getDbTable()->getAdapter();
-        if($where) $where = ' WHERE ' .$where;
+        $where = '';
+        if($cond) {
+            $cond = implode(' AND ', $cond);
+            $where = ' WHERE ' .$cond;
+        }
         if($orderby) $orderby = ' ORDER BY ' .$orderby;
         $sql = 'SELECT * FROM resume ' . $where . $orderby;
+
 //echo $sql;exit;
         $result = $db->fetchAll($sql);
         

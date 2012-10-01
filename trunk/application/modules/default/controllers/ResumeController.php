@@ -117,9 +117,21 @@ class ResumeController extends Zend_Controller_Action
         $experienceRowSet = new Default_Model_Experience();
         $experienceMapper->find($experid, $experienceRowSet);
         
+        $resume = new Default_Model_ExperienceMapper();
+        $listFunction = $resume->getFunction();
+        
+        $functionArr = array();
+        if($experienceRowSet->getId()) {
+            $experFunction = $experienceMapper->getExperFunction($experienceRowSet->getId());
+            foreach($experFunction as $function){
+                $functionArr[] = $function['function_id'];
+            }
+	    }
         $this->view->resumeId = $resumeId;
         $this->view->rows = $rows;
         $this->view->experienceRowSet = $experienceRowSet;
+        $this->view->listFunction = $listFunction;
+        $this->view->experFunction = $functionArr;
     }    
     
 	public function saveExperienceAction()
@@ -143,7 +155,12 @@ class ResumeController extends Zend_Controller_Action
         $experienceRowset->setSortOrder(1);   
         
         $experienceMapper = new Default_Model_ExperienceMapper();
-        $experienceMapper->save($experienceRowset);
+        $experienceId = $experienceMapper->save($experienceRowset);
+        
+        $experienceMapper->delExperFunction($experienceId);
+        foreach($post['option'] as $functionId ) {
+            $experienceMapper->saveExperFunction($experienceId, $functionId);
+        }
         
         if($post['button'] == 'Next') $this->_redirect('resume/expectation/id/' . $post['resume_id']);
         else $this->_redirect('/resume/experience/id/' . $post['resume_id']);
@@ -210,12 +227,15 @@ class ResumeController extends Zend_Controller_Action
 	
 	public function avandceSearchAction()
 	{
-	    $where = '';
+	    $cond = array();
         $post = $this->getRequest()->getPost();
-        if($post['full_name']) $where .= 'full_name like "%' . $post['full_name'] . '%"';
-
+        if(@$post['full_name']) $cond[] = 'full_name like "%' . $post['full_name'] . '%" ';
+        if(@$post['email']) $cond[] = '(email_1 like "%' . $post['email'] . '%" OR email_2 like "%' . $post['email'] . '%")';
+        if(@$post['phone']) $cond[] = '(mobile_1 like "%' . $post['phone'] . '%" OR mobile_2 like "%' . $post['phone'] . '%") ';
+        //if($post['full_name']) $cond[] = 'full_name like "%' . $post['full_name'] . '%"';
+        
         $resume = new Default_Model_ResumeMapper();
-        $rows = $resume->getListResume($where);
+        $rows = $resume->getListResume($cond);
         $paginator = Zend_Paginator::factory($rows);
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber(1);

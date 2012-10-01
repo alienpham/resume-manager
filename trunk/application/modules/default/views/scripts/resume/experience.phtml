@@ -40,6 +40,35 @@ echo $this->partial ( '/resume/menu-add-resume.phtml' )?>
                 </td>
             </tr>
             <tr>
+                <td class="subtitle_popup">Function:</td>
+                <td>&nbsp;</td>
+                <td bgcolor="#FFECEC">&nbsp;</td>
+                <td height="30" colspan="2" bgcolor="#FFECEC">
+                	<input type="text" name="function" id="function" style="width:415px" value=""/>
+                	<div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:fixed">
+                    	<div style="width: 33%; float: left">
+                            <ul style="list-style-type:none;">
+                            <?php 
+                            $i = 1;
+                            $checked = '';
+                            foreach($this->listFunction as $function) :
+                                if($i % 44 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
+                                if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
+                                if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
+                                else $checked = '';
+                            ?>
+                                <li><input type="checkbox" name="option[]" value="<?php echo $function['function_id']?>" <?php echo $checked;?>/> <?php echo $function['name']?></li>
+                                    
+                            <?php 
+                            $i++;
+                            endforeach;?>
+                            </ul>
+                    	</div>
+                        <div style="clear: both">&nbsp;</div>
+               		</div>
+                </td>
+            </tr>
+            <tr>
                 <td valign="top" class="subtitle_popup">Info:</td>
                 <td>&nbsp;</td>
                 <td bgcolor="#FFECEC">&nbsp;</td>
@@ -101,8 +130,14 @@ echo $this->partial ( '/resume/menu-add-resume.phtml' )?>
 </form>
 <script>
 $(function() {
-    $( "#startdate" ).datepicker();
-    $( "#enddate" ).datepicker();
+    $( "#startdate" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+    $( "#enddate" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
 });
 
 function checkValid()
@@ -118,4 +153,28 @@ function checkValid()
     }
     return true;
 }   
+</script>
+<script>
+$(document).ready(function(){
+    $("#function").click(function(){
+        if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');
+        else $(".multiselect").hide('slow');
+    });
+});
+
+$('.multiselect').mouseleave(function(){
+	$(".multiselect").hide('slow');
+});
+
+jQuery.fn.multiselect = function() {
+    $(this).each(function() {
+        var checkboxes = $(this).find("input:checkbox");
+        checkboxes.each(function() {
+            var checkbox = $(this);
+           
+        });
+    });
+};
+
+$(".multiselect").multiselect();
 </script>

@@ -85,5 +85,39 @@ class Default_Model_ExperienceMapper {
         }
         return $entries;
     }
+    
+    public function getFunction() 
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'SELECT * FROM function_lookup ';
+        $result = $db->fetchAll($sql);
+        
+        return $db->fetchAll($sql);
+    }
+    
+    public function saveExperFunction($experienceId, $functionId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+       
+        $sql = "INSERT INTO res_experience_has_function(res_experience_id, function_id) VALUES ($experienceId, $functionId)";
+        return $db->query($sql);
+    }
+    
+    public function delExperFunction($experienceId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "DELETE FROM res_experience_has_function WHERE res_experience_id = " . $experienceId;
+        return $db->query($sql); 
+    }
+    
+    public function getExperFunction($experienceId) 
+    {
+        $sql = "SELECT exper.function_id, f.name FROM res_experience_has_function as exper ";
+        $sql .= "INNER JOIN function_lookup as f ON exper.function_id = f.function_id ";
+        $sql .= "WHERE res_experience_id = " . $experienceId;
+
+        $rows = $this->getDbTable()->getAdapter()->query($sql)->fetchAll();
+        return $rows;
+    }
 }
 ?>
