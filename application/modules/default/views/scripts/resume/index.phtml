@@ -61,10 +61,12 @@ $(document).ready(function() {
 
     $("#avansearch").click(function(){
         var name = $('#full_name').val();
+        var email = $('#email').val();
+        var phone = $('#phone').val();
         $.ajax({
       	  	url: '/resume/avandce-search',
         	type: "POST",
-			data: { full_name: name},
+			data: { full_name: name, email: email, phone: phone},
       	  	success: function(result) {
       	    	$('#box').html(result);
         	  	$.fancybox.close();
