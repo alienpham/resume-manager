@@ -16,6 +16,11 @@ class Company_IndexController extends Zend_Controller_Action
 	{
 		// To do
 		$post = $this->getRequest()->getPost();
+		$currentPage = 1;
+        $page = $this->_getParam('page',1);
+        if(!empty($page)) {
+            $currentPage = $page;
+        }
 		$condition="1";
 		if (isset($post['txtSearch']) && trim($post['txtSearch'])!="")
 		{
@@ -33,6 +38,9 @@ class Company_IndexController extends Zend_Controller_Action
 		$data="";
 		try{
 			$list = $company->getListCompany($condition,$order_by);
+			$paginator = Zend_Paginator::factory($list);
+	        $paginator->setItemCountPerPage(20);
+	        $paginator->setCurrentPageNumber($currentPage);
 			foreach($list as $rs)
 			{
 				$industry_name = $company->getIndustryName("industry_lookup","industry_id='".$rs['industry_id']."'","abbreviation");
@@ -55,10 +63,9 @@ class Company_IndexController extends Zend_Controller_Action
 						  <td><a href="#"><img src="/images/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="/images/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
 						</tr>';
 			}
-		$this->view->data = $data;
+		 $this->view->paginator = $paginator;
+		 $this->view->data = $data;
 		}catch(Exception $e){echo $e;}
 	}
-
-
 }
 
