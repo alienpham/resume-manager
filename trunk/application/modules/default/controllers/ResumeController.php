@@ -27,15 +27,15 @@ class ResumeController extends Zend_Controller_Action
             $currentPage = $page;
         }
         
-        $where = '';
+        $where = array();
         $choice = $this->_getParam('choice', 'name');
         $search = $this->_getParam('search', '');
-        if($choice == 'full_name') $where = 'full_name like "%' . $search . '%"';
-        if($choice == 'resume_code') $where = 'resume_code like "%' . $search . '%"';
-        if($choice == 'job_title') $where = 'job_title like "%' . $search . '%"';
+        if($choice == 'full_name') $where[] = 'full_name like "%' . $search . '%"';
+        if($choice == 'resume_code') $where[] = 'resume_code like "%' . $search . '%"';
+        if($choice == 'job_title') $where[] = 'job_title like "%' . $search . '%"';
         
         //http://zendgeek.blogspot.com
-        $rows = $resume->getListResume($where);
+        $rows = $resume->getListResume($where, $choice);
         $paginator = Zend_Paginator::factory($rows);
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber($currentPage);
@@ -232,7 +232,8 @@ class ResumeController extends Zend_Controller_Action
         if(@$post['full_name']) $cond[] = 'full_name like "%' . $post['full_name'] . '%" ';
         if(@$post['email']) $cond[] = '(email_1 like "%' . $post['email'] . '%" OR email_2 like "%' . $post['email'] . '%")';
         if(@$post['phone']) $cond[] = '(mobile_1 like "%' . $post['phone'] . '%" OR mobile_2 like "%' . $post['phone'] . '%") ';
-        //if($post['full_name']) $cond[] = 'full_name like "%' . $post['full_name'] . '%"';
+        if(@$post['gender']) $cond[] = 'gender = "'. $post['gender'] .'"';
+        if(@$post['marital_status']) $cond[] = 'marital_status = "'. $post['marital_status'] .'"';
         
         $resume = new Default_Model_ResumeMapper();
         $rows = $resume->getListResume($cond);

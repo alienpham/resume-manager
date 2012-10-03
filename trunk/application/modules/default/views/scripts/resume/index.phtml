@@ -63,10 +63,19 @@ $(document).ready(function() {
         var name = $('#full_name').val();
         var email = $('#email').val();
         var phone = $('#phone').val();
+        var gender = $('input[name=gender]:radio:checked').val();
+        var marital_status = $('input[name=marital_status]:radio:checked').val();
+        
         $.ajax({
       	  	url: '/resume/avandce-search',
         	type: "POST",
-			data: { full_name: name, email: email, phone: phone},
+			data: { 
+                full_name: name, 
+                email: email, 
+                phone: phone, 
+                gender: gender, 
+                marital_status: marital_status
+            },
       	  	success: function(result) {
       	    	$('#box').html(result);
         	  	$.fancybox.close();
