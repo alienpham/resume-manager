@@ -39,7 +39,7 @@ class Company_IndexController extends Zend_Controller_Action
 		try{
 			$list = $company->getListCompany($condition,$order_by);
 			$paginator = Zend_Paginator::factory($list);
-	        $paginator->setItemCountPerPage(20);
+	        $paginator->setItemCountPerPage(1);
 	        $paginator->setCurrentPageNumber($currentPage);
 			foreach($list as $rs)
 			{
@@ -64,6 +64,7 @@ class Company_IndexController extends Zend_Controller_Action
 						</tr>';
 			}
 		 $this->view->paginator = $paginator;
+		 $this->view->rows = $list;
 		 $this->view->data = $data;
 		}catch(Exception $e){echo $e;}
 	}
