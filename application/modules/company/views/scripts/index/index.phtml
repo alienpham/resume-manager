@@ -86,19 +86,11 @@
 	</tr>
 
 	<tr>
-	  <td><form id="form2" action="../..." method="post">
-		  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-			  <td width="5%"><label for="choice">Showing</label></td>
-			  <td width="4%"><select name="choice6">
-				  <option>30</option>
-			  </select></td>
-			  <td width="91%">records per page</td>
-			</tr>
-		  </table>
-	  </form></td>
+	  <td></td>
 	</tr>
 	<tr>
-	  <td align="center">Back&nbsp;&nbsp;|&nbsp;&nbsp;1&nbsp;&nbsp;|&nbsp;&nbsp;2&nbsp;&nbsp;|&nbsp;&nbsp;3&nbsp;&nbsp;|&nbsp;&nbsp;4&nbsp;&nbsp;|&nbsp;&nbsp;5&nbsp;&nbsp;|&nbsp;&nbsp;Next</td>
+	  <td align="center"><div id="box">
+    <?php echo $this->partial ( 'company/', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
+</div></td>
 	</tr>
   </table>
