@@ -118,7 +118,7 @@ class Default_Model_ResumeMapper {
         return $entries;
     }
     
-    public function getListResume($cond = null, $orderby =' updated_date DESC') 
+    public function getListResume($cond = null, $choice = null, $orderby =' updated_date DESC') 
     {
         $db = $this->getDbTable()->getAdapter();
         $where = '';
@@ -126,10 +126,16 @@ class Default_Model_ResumeMapper {
             $cond = implode(' AND ', $cond);
             $where = ' WHERE ' .$cond;
         }
+        
+        $join='';
+        if($choice == 'job_title') {
+            $join = ' INNER JOIN res_experience as exper ON r.resume_id = exper.resume_id ';
+        }
+        
         if($orderby) $orderby = ' ORDER BY ' .$orderby;
-        $sql = 'SELECT * FROM resume ' . $where . $orderby;
+        $sql = 'SELECT * FROM resume as r' . $join . $where . $orderby;
 
-//echo $sql;exit;
+//echo $sql;//exit;
         $result = $db->fetchAll($sql);
         
         return $db->fetchAll($sql);
