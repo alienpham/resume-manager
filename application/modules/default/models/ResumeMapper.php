@@ -118,7 +118,7 @@ class Default_Model_ResumeMapper {
         return $entries;
     }
     
-    public function getListResume($cond = null, $choice = null, $orderby =' updated_date DESC') 
+    public function getListResume($cond = null, $choice = array(), $orderby =' updated_date DESC') 
     {
         $db = $this->getDbTable()->getAdapter();
         $where = '';
@@ -128,8 +128,12 @@ class Default_Model_ResumeMapper {
         }
         
         $join='';
-        if($choice == 'job_title') {
-            $join = ' INNER JOIN res_experience as exper ON r.resume_id = exper.resume_id ';
+        if(in_array('job_title', $choice) || in_array('company_name', $choice) || in_array('functions', $choice)) {
+            $join .= ' INNER JOIN res_experience as exper ON r.resume_id = exper.resume_id ';
+            $join .= ' INNER JOIN res_experience_has_function as exper_fun ON exper.id = exper_fun.res_experience_id ';
+        }
+        if(in_array('salary', $choice)) {
+            $join .= ' INNER JOIN res_expectation as expec ON r.resume_id = expec.resume_id ';
         }
         
         if($orderby) $orderby = ' ORDER BY ' .$orderby;

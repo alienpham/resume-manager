@@ -65,6 +65,19 @@ $(document).ready(function() {
         var phone = $('#phone').val();
         var gender = $('input[name=gender]:radio:checked').val();
         var marital_status = $('input[name=marital_status]:radio:checked').val();
+        var job_title = $('#job_title').val();
+        var company_name = $('#company_name').val();
+        var symbol = $('#symbol').val();
+        var salary = $('#salary').val();
+
+        
+        //var functions = $('input[name="option[]"]:checkbox:checked');
+        var functions = '';
+        var checkboxes = $('input[name="option[]"]:checkbox:checked');
+        checkboxes.each(function() {
+        	if(functions) functions = functions + ',' + $(this).val();
+        	else functions = $(this).val();
+        });
         
         $.ajax({
       	  	url: '/resume/avandce-search',
@@ -74,7 +87,12 @@ $(document).ready(function() {
                 email: email, 
                 phone: phone, 
                 gender: gender, 
-                marital_status: marital_status
+                marital_status: marital_status,
+                job_title: job_title,
+                company_name: company_name,
+                symbol: symbol,
+                functions: functions,
+                salary: salary
             },
       	  	success: function(result) {
       	    	$('#box').html(result);
@@ -90,4 +108,28 @@ $(document).ready(function() {
   	  	}
   	});
 });
+</script>
+<script>
+$(document).ready(function(){
+    $("#function").click(function(){
+        if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');
+        else $(".multiselect").hide('slow');
+    });
+});
+
+$('.multiselect').mouseleave(function(){
+    $(".multiselect").hide('slow');
+});
+
+jQuery.fn.multiselect = function() {
+    $(this).each(function() {
+        var checkboxes = $(this).find("input:checkbox");
+        checkboxes.each(function() {
+            var checkbox = $(this);
+           
+        });
+    });
+};
+
+$(".multiselect").multiselect();
 </script>
