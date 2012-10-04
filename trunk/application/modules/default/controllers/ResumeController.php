@@ -35,7 +35,7 @@ class ResumeController extends Zend_Controller_Action
         if($choice == 'job_title') $where[] = 'job_title like "%' . $search . '%"';
         
         //http://zendgeek.blogspot.com
-        $rows = $resume->getListResume($where, $choice);
+        $rows = $resume->getListResume($where, array($choice));
         $paginator = Zend_Paginator::factory($rows);
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber($currentPage);
@@ -229,14 +229,36 @@ class ResumeController extends Zend_Controller_Action
 	{
 	    $cond = array();
         $post = $this->getRequest()->getPost();
+//print_r($post);
         if(@$post['full_name']) $cond[] = 'full_name like "%' . $post['full_name'] . '%" ';
         if(@$post['email']) $cond[] = '(email_1 like "%' . $post['email'] . '%" OR email_2 like "%' . $post['email'] . '%")';
         if(@$post['phone']) $cond[] = '(mobile_1 like "%' . $post['phone'] . '%" OR mobile_2 like "%' . $post['phone'] . '%") ';
         if(@$post['gender']) $cond[] = 'gender = "'. $post['gender'] .'"';
         if(@$post['marital_status']) $cond[] = 'marital_status = "'. $post['marital_status'] .'"';
+        $choice = array();
+        if(@$post['job_title']) {
+            $choice[] = 'job_title';
+            $cond[] = 'job_title like  "%'. $post['job_title'] .'%"';   
+        }
+	    if(@$post['company_name']) {
+            $choice[] = 'company_name';
+            $cond[] = 'company_name like  "%'. $post['company_name'] .'%"';   
+        }
+	    if(@$post['salary']) {
+            $choice[] = 'salary';
+            $symbol = $post['symbol'];
+            if($symbol == 1) $symbol = '=';
+            else if($symbol == 2) $symbol = '>';
+            else $symbol = '<';
+            $cond[] = 'current_salary '. $symbol .'  "'. $post['salary'] .'"';   
+        }
+    	if(@$post['functions']) {
+            $choice[] = 'functions';
+            $cond[] = 'function_id in ('. $post['functions'] .')';   
+        }
         
         $resume = new Default_Model_ResumeMapper();
-        $rows = $resume->getListResume($cond);
+        $rows = $resume->getListResume($cond, $choice);
         $paginator = Zend_Paginator::factory($rows);
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber(1);
