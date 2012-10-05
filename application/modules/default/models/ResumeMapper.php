@@ -162,6 +162,16 @@ class Default_Model_ResumeMapper {
         if($cond == 'total') $sql = 'SELECT * FROM resume ';
         return $db->query($sql)->rowCount();
     }
-    
+	
+	public function insertComment($data)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "INSERT INTO res_comment(resume_id, consultant_id, content) VALUES (";
+		$sql .= $data['resume_id'] . ",";
+		$sql .= "1,";
+		$sql .= "'" . $data['content'] . "');";
+		
+        return $db->query($sql);
+    }
 }
 ?>

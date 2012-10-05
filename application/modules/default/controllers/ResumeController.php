@@ -225,6 +225,25 @@ class ResumeController extends Zend_Controller_Action
         //$this->_redirect('resume/expectation/id/' . $post['resume_id']);
 	}
 	
+	public function commentAction()
+	{
+		$this->_helper->layout->disableLayout();
+        $post = $this->getRequest()->getPost();
+	}
+	
+	public function saveCommentAction()
+	{
+        $post = $this->getRequest()->getPost();
+        //$post['resume_id'] = 1;
+		//$post['consultant_id'] = 1;
+		//$post['content'] = "This is tessting";
+		
+		$resume = new Default_Model_ResumeMapper();
+		$resume->insertComment($post);
+		echo "successful";
+		exit;
+	}
+	
 	public function avandceSearchAction()
 	{
 	    $cond = array();
