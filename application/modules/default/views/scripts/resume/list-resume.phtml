@@ -1,0 +1,132 @@
+<table width="100%" class="datagrid">
+    <thead>
+        <tr>
+            <th width="26"><input type="checkbox" name="checkbox"
+                id="checkbox" /></th>
+            <th class="a-left">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+        $experienceMapper = new Default_Model_ExperienceMapper();
+        $expectationMapper = new Default_Model_ExpectationMapper();
+        foreach ( $this->rows as $row ) :
+            $date = new DateTime($row['updated_date']);
+            $updatedDate = $date->format('d M Y');
+            $experienceList = $experienceMapper->fetchAll('resume_id = ' . $row['resume_id'], 'end_date DESC');
+        ?>
+        <tr>
+            <td valign="top" class="a-center">
+                <input type="checkbox" name="checkbox5" id="checkbox5" />
+            </td>
+            <td class="a-left">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder">
+                <tr>
+                    <td width="145" valign="top">
+                        <a href="/resume/personal-info/id/<?php echo $row['resume_id']?>"><strong><?php echo $row['full_name'];?></strong></a>
+                        <br /> <?php echo $row['resume_code'];?>
+                    </td>
+                    <td width="491" valign="top">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder01">
+                        <?php foreach ( $experienceList as $experience ) :
+                            $date = new DateTime($experience->getStartDate());
+                            $startDate = $date->format('M Y');
+                
+                	        $date = new DateTime($experience->getEndDate());
+                            $endDate = $date->format('M Y');
+                        ?>
+                        <tr>
+                            <td width="115" valign="top">
+                                <?php echo $startDate;?> - <?php echo $endDate;?> 
+                            </td>
+                            <td width="376" valign="top">
+                                <strong class="text_green"><?php echo $experience->getCompanyName();?></strong>
+                                <br /> <?php echo $experience->getJobTitle();?>
+                            </td>
+                        </tr>
+                        <?php endforeach;?>
+                    </table>
+                    </td>
+                    <td width="270" valign="top">
+                    <?php
+                    
+                    $expectation = $expectationMapper->getExpectation($row['resume_id']);
+                    
+                    $provinceArr = array();
+                    if($expectation['res_expectation_id']) {
+                        $resumeProvince = $expectationMapper->getExpectationProvince($expectation['res_expectation_id']);
+                        foreach($resumeProvince as $province){
+                            $provinceArr[] = $province['name'];
+                        }
+                    }
+        
+                    $currentSalary = number_format($expectation['current_salary']);
+                    @$salaryFrom = number_format($expectation['estimated_salary_from']);
+                    @$salaryTo = number_format($expectation['estimated_salary_to']);
+                    ?>
+                    [S]: <?php if($currentSalary) echo '$'.$currentSalary; ?><br />
+                    [E]: <?php if($salaryFrom) echo '$'.$salaryFrom; ?><?php if($salaryTo) echo ' - '.'$'.$salaryTo; ?><br />
+                    [L]: <?php echo implode(', ', $provinceArr);?>
+                    <p>&nbsp;</p>
+                    Updated: <?php echo $updatedDate; ?> </td>
+                    <td width="286" valign="top" class="color_bg">
+                        <img src="/images/icons/add.png" width="16" height="16" />
+                        <img src="/images/icons/application_add.png" width="16" height="16" />
+                        <img src="/images/icons/add.png" width="16" height="16" />
+                        <img src="/images/icons/application_add.png" width="16" height="16" />
+                        <p>&nbsp;</p>
+                        <strong class="text_green">Sent Feb-11</strong> 
+                        <strong>by HoanN</strong>: <br />
+                        <img src="../img/process_orange_90.gif" width="100" height="10" /> <br />
+                        Unilever Vietnam Ltd<br />Business Development Manager
+                        <p>&nbsp;</p>
+                        <strong class="text_green">Comment Jan-10</strong> 
+                        <strong>by MaiB:</strong><br />Lorem ipsum dolor sit amet,<br />
+                        consectetur adipisicing elit…. 
+                        <a href="#">view</a>
+                    </td>
+                </tr>
+            </table>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="7%">
+                	<a href="/resume/personal-info">
+                	<input id="button2" type="submit" value="Add Resume" class="link_button" />
+                	</a>
+            	</td>
+                
+                <td width="84%">&nbsp;</td>
+            </tr>
+        </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="5%"><label for="choice">Showing</label></td>
+                <td width="4%"><select name="choice6">
+                    <option>30</option>
+                </select></td>
+                <td width="91%">records per page</td>
+            </tr>
+        </table>
+        </td>
+    </tr>
+
+    <?php if(count($this->paginator)) :?>
+    <tr>
+        <td align="center"><?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?></td>
+    </tr>
+    <?php endif;?>
+</table>
