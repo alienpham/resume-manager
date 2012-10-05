@@ -10,14 +10,19 @@
         <?php 
         $experienceMapper = new Default_Model_ExperienceMapper();
         $expectationMapper = new Default_Model_ExpectationMapper();
+        $resumeMapper = new Default_Model_ResumeMapper();
         foreach ( $this->rows as $row ) :
             $date = new DateTime($row['updated_date']);
             $updatedDate = $date->format('d M Y');
             $experienceList = $experienceMapper->fetchAll('resume_id = ' . $row['resume_id'], 'end_date DESC');
+            $comments = $resumeMapper->getComments($row['resume_id']);
+            $comment = end($comments);
+            $date = new DateTime($comment['created_date']);
+            $createdComment = $date->format('M-d');
         ?>
         <tr>
             <td valign="top" class="a-center">
-                <input type="checkbox" name="checkbox5" id="checkbox5" />
+                <input type="checkbox" id="checkbox<?php echo $row['resume_id']?>" />
             </td>
             <td class="a-left">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder">
@@ -70,20 +75,15 @@
                     <p>&nbsp;</p>
                     Updated: <?php echo $updatedDate; ?> </td>
                     <td width="286" valign="top" class="color_bg">
-                        <img src="/images/icons/add.png" width="16" height="16" />
-                        <img src="/images/icons/application_add.png" width="16" height="16" />
-                        <img src="/images/icons/add.png" width="16" height="16" />
-                        <img src="/images/icons/application_add.png" width="16" height="16" />
+                        <a href="#comment" class="addcomment" id="<?php echo $row['resume_id']?>">Add Comment</a>
                         <p>&nbsp;</p>
-                        <strong class="text_green">Sent Feb-11</strong> 
-                        <strong>by HoanN</strong>: <br />
-                        <img src="../img/process_orange_90.gif" width="100" height="10" /> <br />
-                        Unilever Vietnam Ltd<br />Business Development Manager
-                        <p>&nbsp;</p>
-                        <strong class="text_green">Comment Jan-10</strong> 
-                        <strong>by MaiB:</strong><br />Lorem ipsum dolor sit amet,<br />
-                        consectetur adipisicing elit…. 
-                        <a href="#">view</a>
+                        <div id="viewcomment<?php echo $row['resume_id']?>">
+                            <strong class="text_green">Comment <?php echo $createdComment;?></strong> 
+                            <strong>by <?php echo $comment['username'];?>:</strong><br />
+                            <?php echo substr($comment['content'], 0, 90);?>
+                            <a href="#">view</a>
+                        </div>
+                        
                     </td>
                 </tr>
             </table>

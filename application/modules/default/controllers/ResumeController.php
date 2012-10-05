@@ -4,6 +4,9 @@ class ResumeController extends Zend_Controller_Action
 
     public function init()
     {
+        $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
+		if (! isset ( $aNamespace->islogin )) $this->_redirect ( '/user' );
+		
         /* Initialize action controller here */
         $view = new Zend_View();
         $view->headScript()->appendFile ( '/js/jquery-1.8.0.min.js' );
@@ -39,7 +42,7 @@ class ResumeController extends Zend_Controller_Action
         $paginator = Zend_Paginator::factory($rows);
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber($currentPage);
-    
+        
         $this->view->paginator = $paginator;
         $this->view->rows = $rows;
     }
@@ -73,6 +76,7 @@ class ResumeController extends Zend_Controller_Action
 	
 	public function saveResumeAction()
     {
+        $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
         $post = $this->getRequest()->getPost();
 
         $date = new DateTime($post['birthday']);
@@ -96,12 +100,12 @@ class ResumeController extends Zend_Controller_Action
         $resumeRowset->setAddress($post['address']);
         $resumeRowset->setProvinceId(1);
         if(!$post['resume_id']) $resumeRowset->setCreatedDate(date('Y-m-d'));
-        $resumeRowset->setCreatedConsultantId(1);
-        $resumeRowset->setUpdatedConsultantId(1);
+        $resumeRowset->setCreatedConsultantId($aNamespace->consultant_id);
+        $resumeRowset->setUpdatedConsultantId($aNamespace->consultant_id);
         
         $resume = new Default_Model_ResumeMapper();
         $resumeId = $resume->save($resumeRowset);
-        if($resumeCode == 'R') $resume->updateResumCode('R' . $resumeId, $resumeId);
+        if($resumeCode == 'R') $resume->updateResumCode('R' . $resumeId, $aNamespace->consultant_id, $resumeId);
         
         $this->_redirect('/resume/experience/id/' . $resumeId);
     }
@@ -234,13 +238,20 @@ class ResumeController extends Zend_Controller_Action
 	public function saveCommentAction()
 	{
         $post = $this->getRequest()->getPost();
-        //$post['resume_id'] = 1;
-		//$post['consultant_id'] = 1;
-		//$post['content'] = "This is tessting";
 		
 		$resume = new Default_Model_ResumeMapper();
 		$resume->insertComment($post);
-		echo "successful";
+
+		$comments = $resume->getComments($post['resume_id']);
+        $comment = end($comments);
+        $date = new DateTime($comment['created_date']);
+        $createdComment = $date->format('M-d');
+            
+		$html = '<strong class="text_green">Comment '. $createdComment .'</strong> ';
+        $html .= '<strong>by ' . $comment['username'] . '</strong>:<br />';
+        $html .= substr($comment['content'], 0, 90);
+        $html .= ' <a href="#">view</a>';
+        echo $html;
 		exit;
 	}
 	
