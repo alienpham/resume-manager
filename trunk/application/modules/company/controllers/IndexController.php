@@ -43,7 +43,7 @@ class Company_IndexController extends Zend_Controller_Action
 	        $paginator->setCurrentPageNumber($currentPage);
 			foreach($list as $rs)
 			{
-				$industry_name = $company->getIndustryName("industry_lookup","industry_id='".$rs['industry_id']."'","abbreviation");
+				$industry_name = $company->getFieldValue("industry_lookup","industry_id='".$rs['industry_id']."'","abbreviation");
 				$data .= '<tr>
 						  <td class="a-center"><input type="checkbox" name="company_id" id="company_id" value="'.$rs['company_id'].'" /></td>
 						  <td class="a-left">'.$rs['company_code'].'</td>
