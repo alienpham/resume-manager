@@ -105,16 +105,19 @@ class Company_Model_CompanyMapper {
         return $entries;
     }
     
-	public function getListCompany ($where = null, $orderby = null)
+	public function getListCompany ($where = null, $orderby = null, $offest=null, $limit=null)
     {
     	$db = $this->getDbTable()->getAdapter();
-        $sql = "SELECT * FROM company WHERE $where ORDER BY $orderby";
+    	if ($offest==null)
+       		$sql = "SELECT * FROM company WHERE $where ORDER BY $orderby";
+       	else 
+       		$sql = "SELECT * FROM company WHERE $where ORDER BY $orderby LIMIT $offest,$limit";
         $result = $db->fetchAll($sql);
         
         return $result;
     }
     
-	public function getIndustryName ($table, $where, $field)
+	public function getFieldValue ($table, $where, $field)
     {
     	$db = $this->getDbTable()->getAdapter();
         $sql = "SELECT * FROM $table WHERE $where";
@@ -132,4 +135,119 @@ class Company_Model_CompanyMapper {
         }
         return $str;
     }
+    
+	public function pagingProcess($TotalRows,$RowsInPage,$maxpage,$page,$jsname){
+		if ($maxpage) $numfrom = 1;
+		else $numfrom = 0;
+
+		$numto = $RowsInPage;
+		if ($TotalRows < $numto) $numto = $TotalRows;
+
+		if($page >1){
+			$numfrom = ($RowsInPage)*($page-1)+1;
+			$numto = ($RowsInPage)*$page;
+
+			if ($TotalRows < $numto) $numto = $TotalRows;
+		}
+
+		$arrnumpage=explode('.',$TotalRows/$RowsInPage);
+		if ($TotalRows%$RowsInPage!=0)
+			$numpage=$arrnumpage[0]+1;
+		else
+			$numpage=$arrnumpage[0];
+
+		$vl=explode('.',$page/$maxpage);
+		//if ($page%$maxpage==0)
+		$step=$vl[0];
+
+		if ($step==0)
+		{
+			$start=1;
+			$step=1;
+		}
+		else
+		if ($page%$maxpage==0)
+		{
+			$start=($step-1)*$maxpage+1;
+		}
+		else
+		{
+			$start=$step*$maxpage+1;
+		}
+		$end=$start+$maxpage-1;
+
+		if ($page>1)
+		$str="<a href='#' onClick=\"".$jsname."(".($page-1).");\">Back</a> &nbsp;";
+		else
+		$str="<font color='#999999'>Back &nbsp;</font>";
+		//Middle
+		if ($end<$numpage){
+			$k=0;
+			for($i=$start;$i<=$end;$i++){
+				if ($k==0)
+				{
+					if ($i==$page)
+
+					$str.="<b>".$i.'</b>';
+
+					else
+					$str.="<a href='#' onClick=\"".$jsname."(".$i.");\">".$i.'</a>';
+				}
+				else{
+					if ($i==$page)
+
+					$str.=" | <b>".$i.'</b>';
+
+					else
+					$str.=" | <a href=\"#\" onClick=\"".$jsname."(".$i.");\">".$i.'</a>';
+				}
+				$k++;
+			}
+
+		}
+		else{
+			if ($start==1)
+			{
+				$end=$numpage;
+			}
+			else
+			if ($end-$numpage>0)
+			{
+				$start=$start-($end-$numpage);
+				$end=$numpage;
+			}
+			else
+			if ($end-$start<$maxpage)
+			$start=$start-($end-$start);
+			$k=0;
+			for($i=$start;$i<=$end;$i++){
+				if ($k==0)
+				{
+					if ($i==$page)
+
+					$str.="<b>".$i.'</b>';
+					else
+					$str.="<a href='#' onClick=\"".$jsname."(".$i.");\">".$i.'</a>';
+				}
+				else{
+					if ($i==$page)
+
+					$str.=" | <b>".$i.'</b>';
+
+					else
+					$str.=" | <a href=\"#\" onClick=\"".$jsname."(".$i.");\">".$i.'</a>';
+				}
+					
+				$k++;
+			}
+		}
+		//Next
+		if ($page<$numpage)
+		{
+			$str.=" &nbsp;<a href='#' onClick=\"".$jsname."(".($page+1).");\">Next</a>";
+		}
+		else
+		$str.=' <font color="#999999">&nbsp;Next</font>';
+		return $str.'<br/>( '.$numfrom.'-'.$numto.' of '.$TotalRows.' records - Page '.$page.' of '.$numpage.' pages)';
+	}
 }

@@ -1,6 +1,6 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-	  <td><form id="form" action="../..." method="post">
+	  <td><form id="form" action="/company" method="post">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		  <tr>
 			<td width="5%"><label for="choice">Search : </label></td>
@@ -28,6 +28,7 @@
 			<td width="3%"><input id="button3" type="submit" value="Ok" /></td>
 		  </tr>
 		</table>
+        <input type="hidden" name="page" id="page" value="1" />
 	  </form></td>
 	</tr>
 	<tr>
@@ -90,7 +91,7 @@
 	</tr>
 	<tr>
 	  <td align="center"><div id="box">
-    <?php echo $this->partial ( 'company/', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
+     <?php echo $this->partial ( '/company/index.phtml', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
 </div></td>
 	</tr>
   </table>
