@@ -14,7 +14,6 @@ class Company_IndexController extends Zend_Controller_Action
 
 	public function indexAction()
 	{
-		// To do
 		$post = $this->getRequest()->getPost();
 		$currentPage = 1;
         $page = $this->_getParam('page',1);
@@ -36,37 +35,37 @@ class Company_IndexController extends Zend_Controller_Action
 			$order_by = $post['sort_name_id']." ".$post['sort_type_id'];
 		$company = new Company_Model_CompanyMapper();
 		$data="";
-		try{
-			$list = $company->getListCompany($condition,$order_by);
-			$paginator = Zend_Paginator::factory($list);
-	        $paginator->setItemCountPerPage(1);
-	        $paginator->setCurrentPageNumber($currentPage);
-			foreach($list as $rs)
-			{
-				$industry_name = $company->getFieldValue("industry_lookup","industry_id='".$rs['industry_id']."'","abbreviation");
-				$data .= '<tr>
-						  <td class="a-center"><input type="checkbox" name="company_id" id="company_id" value="'.$rs['company_id'].'" /></td>
-						  <td class="a-left">'.$rs['company_code'].'</td>
-						  <td class="a-left"><a href="#">'.$rs['full_name_en'].'</a></td>
-						  <td class="a-left">'.$industry_name.'</td>
-						  <td class="a-center color_bg">23</td>
-						  <td class="a-center color_bg">23</td>
-						  <td class="a-center color_bg">23</td>
-						  <td class="a-center color_bg">23</td>
-						  <td class="a-center color_bg">23</td>
-						  <td class="a-center color_bg">23</td>
-						  <td class="a-center color_bg">23</td>
-						  <td class="a-center color_bg">23</td>
-						  <td class="a-center color_bg">23</td>
-						  <td>&nbsp;</td>
-						  <td></td>
-						  <td><a href="#"><img src="/images/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="/images/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-						</tr>';
-			}
-		 $this->view->paginator = $paginator;
-		 $this->view->rows = $list;
-		 $this->view->data = $data;
-		}catch(Exception $e){echo $e;}
+
+		$list = $company->getListCompany($condition,$order_by);
+		$paginator = Zend_Paginator::factory($list);
+		$paginator->setItemCountPerPage(1);
+		$paginator->setCurrentPageNumber($currentPage);
+		foreach($list as $rs)
+		{
+			$industry_name = $company->getFieldValue("industry_lookup","industry_id='".$rs['industry_id']."'","abbreviation");
+			$data .= '<tr>
+					  <td class="a-center"><input type="checkbox" name="company_id" id="company_id" value="'.$rs['company_id'].'" /></td>
+					  <td class="a-left">'.$rs['company_code'].'</td>
+					  <td class="a-left"><a href="#">'.$rs['full_name_en'].'</a></td>
+					  <td class="a-left">'.$industry_name.'</td>
+					  <td class="a-center color_bg">23</td>
+					  <td class="a-center color_bg">23</td>
+					  <td class="a-center color_bg">23</td>
+					  <td class="a-center color_bg">23</td>
+					  <td class="a-center color_bg">23</td>
+					  <td class="a-center color_bg">23</td>
+					  <td class="a-center color_bg">23</td>
+					  <td class="a-center color_bg">23</td>
+					  <td class="a-center color_bg">23</td>
+					  <td>&nbsp;</td>
+					  <td></td>
+					  <td><a href="#"><img src="/images/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="/images/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
+					</tr>';
+		}
+		
+		$this->view->paginator = $paginator;
+		$this->view->rows = $list;
+		$this->view->data = $data;
 	}
 }
 

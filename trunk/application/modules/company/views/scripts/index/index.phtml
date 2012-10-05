@@ -90,8 +90,8 @@
 	  <td></td>
 	</tr>
 	<tr>
-	  <td align="center"><div id="box">
-     <?php echo $this->partial ( '/company/index.phtml', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
-</div></td>
+		<td align="center"><div id="box">
+			<?php echo $this->partial ( 'pagination.phtml', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
+		</div></td>
 	</tr>
   </table>
