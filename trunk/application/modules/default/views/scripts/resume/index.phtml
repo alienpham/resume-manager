@@ -55,8 +55,34 @@
     <?php echo $this->partial ( '/resume/list-resume.phtml', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
 </div>
 <?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
+<?php echo $this->partial ( '/resume/comment.phtml' )?>
 <script type="text/javascript">
 $(document).ready(function() {
+	$(".addcomment").fancybox();
+	$(".addcomment").click(function(){
+		$('input[name=resume_id]').val($(this).attr('id'));
+	});
+	$("#insertcomment").click(function(){
+        if(!$('#contentcomment').val()) {
+            $('#msgcomment').html('Content is not null'); 
+            return;
+        }
+        var resume_id = $('input[name=resume_id]').val();
+		$.ajax({
+      	  	url: '/resume/save-comment',
+        	type: "POST",
+			data: { 
+                resume_id: resume_id, 
+                consultant_id: $('input[name=consultant_id]').val(), 
+                content: $('#contentcomment').val()
+            },
+      	  	success: function(result) {
+                $('#viewcomment' + resume_id).html(result);
+        	  	$.fancybox.close();
+      	  	}
+      	});
+    });
+    
     $(".fancybox").fancybox();
 
     $("#avansearch").click(function(){

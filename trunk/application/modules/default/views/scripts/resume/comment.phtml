@@ -1,9 +1,11 @@
-<div style="width:400px;height: 200px; " id="comment">
+<?php $aNamespace = new Zend_Session_Namespace ( 'zs_User' ); ?>
+<div style="width:600px;height: 300px; display:none" id="comment">
 <form name="frmcomment" method="post" action="/resume/save-comment">
-	content
-	<textarea name="content"></textarea>
-	<input type="hidden" name="resume_id" value="1">
-	<input type="hidden" name="consultant_id" value="1">
-	<input type="submit" name="add" value="ADD">
+<div style="background:#990000" class="title_popup">COMMENT</div><br />
+	<label>Content</label> &nbsp;&nbsp;<span id="msgcomment" class="error"></span><br />
+	<textarea name="content" id="contentcomment" style="width:500px;height:150px"></textarea><br /><br />
+	<input type="hidden" name="resume_id" value="">
+	<input type="hidden" name="consultant_id" value="<?php echo $aNamespace->consultant_id;?>">
+	<input type="button" name="add" id="insertcomment" value="ADD">
 </form>
 </div>

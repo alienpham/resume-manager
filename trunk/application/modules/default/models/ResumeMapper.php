@@ -20,9 +20,9 @@ class Default_Model_ResumeMapper {
         return $this->_dbTable;
     }
     
-	public function updateResumCode($code, $resumeId) {
+	public function updateResumCode($code,$consultantId, $resumeId) {
 		$db = $this->getDbTable()->getAdapter();
-        $sql = 'UPDATE resume SET resume_code = "'. $code .'" WHERE resume_id = '. $resumeId;
+        $sql = 'UPDATE resume SET resume_code = "'. $code .'", updated_consultant_id = '. $consultantId .' WHERE resume_id = '. $resumeId;
         $db->query($sql);
 	}
 	
@@ -171,7 +171,17 @@ class Default_Model_ResumeMapper {
 		$sql .= "1,";
 		$sql .= "'" . $data['content'] . "');";
 		
-        return $db->query($sql);
+        $db->query($sql);
+    }
+    
+    public function getComments($resumeId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT rc.*, c.username FROM res_comment AS rc ";
+        $sql .= "INNER JOIN consultant AS c ON c.consultant_id = rc.consultant_id";
+        $sql .= " WHERE resume_id = " . $resumeId;
+		
+        return $db->fetchAll($sql);
     }
 }
 ?>
