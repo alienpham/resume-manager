@@ -105,16 +105,31 @@ class Company_Model_CompanyMapper {
         return $entries;
     }
     
-	public function getListCompany ($where = null, $orderby = null, $offest=null, $limit=null)
+	public function getListCompany ($where = null, $orderby = null, $offset="", $limit="")
     {
     	$db = $this->getDbTable()->getAdapter();
-    	if ($offest==null)
+    	if ($limit=="")
        		$sql = "SELECT * FROM company WHERE $where ORDER BY $orderby";
        	else 
-       		$sql = "SELECT * FROM company WHERE $where ORDER BY $orderby LIMIT $offest,$limit";
+       		$sql = "SELECT * FROM company WHERE $where ORDER BY $orderby LIMIT $offset,$limit";
         $result = $db->fetchAll($sql);
         
         return $result;
+    }
+    
+	public function countCompany ($where = null, $orderby = null)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+       	$sql = "SELECT * FROM company WHERE $where ORDER BY $orderby";
+        $result = $db->fetchAll($sql);
+        
+        return count($result);
+    }
+    
+    public function countProccess($company_id,$process_id)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT count(*) FROM ";
     }
     
 	public function getFieldValue ($table, $where, $field)
