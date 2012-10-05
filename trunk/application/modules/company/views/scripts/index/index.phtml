@@ -89,9 +89,11 @@
 	<tr>
 	  <td></td>
 	</tr>
+	<?php if(count($this->paginator)) :?>
 	<tr>
 		<td align="center"><div id="box">
 			<?php echo $this->partial ( 'pagination.phtml', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
 		</div></td>
 	</tr>
+	<?php endif;?>
   </table>
