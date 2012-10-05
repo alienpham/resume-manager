@@ -36,10 +36,16 @@ class Company_IndexController extends Zend_Controller_Action
 		$company = new Company_Model_CompanyMapper();
 		$data="";
 
-		$list = $company->getListCompany($condition,$order_by);
+		$list = $company->getListCompany($condition,$order_by,($currentPage-1)*1,1);
+		$totalRecord=$company->countCompany($condition,$order_by);
+		/*if ($totalRecord%1)
+			$pageRange=$totalRecord/1;
+		else */
+		$pageRange=3;
 		$paginator = Zend_Paginator::factory($list);
 		$paginator->setItemCountPerPage(1);
 		$paginator->setCurrentPageNumber($currentPage);
+		$paginator->setPageRange($pageRange);
 		foreach($list as $rs)
 		{
 			$industry_name = $company->getFieldValue("industry_lookup","industry_id='".$rs['industry_id']."'","abbreviation");
