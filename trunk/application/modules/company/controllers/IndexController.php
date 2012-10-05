@@ -37,12 +37,13 @@ class Company_IndexController extends Zend_Controller_Action
 		$data="";
 
 		$list = $company->getListCompany($condition,$order_by,($currentPage-1)*1,1);
+		$rows = $company->getListCompany($condition,$order_by);
 		$totalRecord=$company->countCompany($condition,$order_by);
 		/*if ($totalRecord%1)
 			$pageRange=$totalRecord/1;
 		else */
 		$pageRange=3;
-		$paginator = Zend_Paginator::factory($list);
+		$paginator = Zend_Paginator::factory($rows);
 		$paginator->setItemCountPerPage(1);
 		$paginator->setCurrentPageNumber($currentPage);
 		$paginator->setPageRange($pageRange);
