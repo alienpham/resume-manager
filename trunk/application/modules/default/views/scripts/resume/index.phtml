@@ -60,6 +60,7 @@
 $(document).ready(function() {
 	$(".addcomment").fancybox();
 	$(".addcomment").click(function(){
+		$('#contentcomment').val(''); 
 		$('input[name=resume_id]').val($(this).attr('id'));
 	});
 	$("#insertcomment").click(function(){
