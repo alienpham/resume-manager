@@ -12,6 +12,7 @@ class IndexController extends Zend_Controller_Action
 	{
 		$aNamespace = new Zend_Session_Namespace ( 'zs_User' );
 		if (! isset ( $aNamespace->islogin )) $this->_redirect ( '/user' );
+		$this->_redirect ( '/resume' );
 	}
 }
 
