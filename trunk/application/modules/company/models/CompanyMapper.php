@@ -126,10 +126,41 @@ class Company_Model_CompanyMapper {
         return count($result);
     }
     
-    public function countProccess($company_id,$process_id)
+    public function countAct($company_id)
     {
+    	$str_date=date('Y-m');
     	$db = $this->getDbTable()->getAdapter();
-    	$sql = "SELECT count(*) FROM ";
+    	$sql = "SELECT count(*) as numact FROM com_activity WHERE action_date like '%".$str_date."%' AND company_id='$company_id'";
+    	$result = $db->fetchAll($sql);
+    	return $result[0]['numact'];
+    }
+    
+	public function countNewVacancy($company_id)
+    {
+    	$str_date=date('Y-m');
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT v.vacancy_id as vacancy_id, v2.va_process_history_id as va_proccess_history_id FROM vacancy v, va_process_history v2 WHERE v.vacancy_id = v2.vacancy_id AND v2.status = 'Open' AND v.company_id='$company_id' AND date_format(v2.action_date,'%Y-%m-%d') >= '%".$str_date."-01%'";
+    	$result = $db->fetchAll($sql);
+    	return count($result);
+    }
+    
+	public function countOpenVacancy($company_id)
+    {
+    	$str_date=date('Y-m');
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT count(*) as numnewvacancy FROM vacancy WHERE created_date like '%".$str_date."%' AND updated_date like '%".$str_date."%' AND date_format(created_date,'%Y-%m-%d') = date_format(updated_date,'%Y-%m-%d') AND company_id='$company_id'";
+    	$result = $db->fetchAll($sql);
+    	return $result[0]['numnewvacancy'];
+    }
+    
+	public function countRsProcess($company_id,$process_id)
+    {
+    	$str_date=date('Y-m');
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT count(*) as numrsproc FROM candidate_has_process WHERE 
+    			action_date like '%".$str_date."%' AND candidate_id IN (SELECT candidate_id FROM candidate WHERE vacancy_id IN (SELECT vacancy_id FROM vacancy WHERE company_id = '$company_id')) AND resume_process_id IN($process_id)";
+    	$result = $db->fetchAll($sql);
+    	return $result[0]['numrsproc'];
     }
     
 	public function getFieldValue ($table, $where, $field)
@@ -149,6 +180,19 @@ class Company_Model_CompanyMapper {
         	$num++;
         }
         return $str;
+    }
+    
+    public function getLookup($table,$where,$field_id,$field_name)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT * FROM $table WHERE $where";
+        $result = $db->fetchAll($sql);
+        $data="";
+        foreach($result as $rs)
+        {
+        	$data.="<option value='".$rs[$field_id]."'>".$rs[$field_name]."</option>";
+        }
+        return $data;
     }
     
 	public function pagingProcess($TotalRows,$RowsInPage,$maxpage,$page,$jsname){
