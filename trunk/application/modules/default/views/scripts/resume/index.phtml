@@ -56,14 +56,19 @@
 </div>
 <?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
 <?php echo $this->partial ( '/resume/comment.phtml' )?>
+<div id="allcomment" style="width:500px;height: 200px; display: none;" id="inline">&nbsp;</div>
+<?php echo $this->partial ( '/resume/detail-resume.phtml' )?>
+<div id="detail_resume" style="width:500px;height: 200px; display: none;" id="inline">&nbsp;</div>
 <script type="text/javascript">
 $(document).ready(function() {
+    //Begin Comment for candidate
 	$(".addcomment").fancybox();
 	$(".addcomment").click(function(){
 		$('#contentcomment').val(''); 
 		$('input[name=resume_id]').val($(this).attr('id'));
 	});
-	$("#insertcomment").click(function(){
+
+    $("#insertcomment").click(function(){
         if(!$('#contentcomment').val()) {
             $('#msgcomment').html('Content is not null'); 
             return;
@@ -84,8 +89,31 @@ $(document).ready(function() {
       	});
     });
     
-    $(".fancybox").fancybox();
+    $(".allcomment").fancybox();
+    $(".allcomment").click(function(){
+		var resume_id = $(this).attr('id');
+		$.ajax({
+      	  	url: '/resume/all-comment',
+        	type: "POST",
+			data: { 
+                resume_id: resume_id, 
+            },
+      	  	success: function(result) {
+                $('#allcomment').html(result);
+      	  	}
+      	});
+	});
+    //End Comment for candidate
 
+    //Begin View detail candidate
+    $(".detail_resume").click(function(){
+		var resume_id = $(this).attr('id');
+		$(".detail_resume").fancybox();
+	});
+    //End View detail candidate
+    
+    //Begin Avansearch
+    $(".fancybox").fancybox();
     $("#avansearch").click(function(){
         var name = $('#full_name').val();
         var email = $('#email').val();
@@ -127,7 +155,8 @@ $(document).ready(function() {
       	  	}
       	});
     });
-
+    //End Avansearch
+    
     $.ajax({
   	  	url: '/resume/resume-report',
   	  	success: function(result) {

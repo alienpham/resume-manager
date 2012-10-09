@@ -170,17 +170,21 @@ class Default_Model_ResumeMapper {
         $sql = "INSERT INTO res_comment(resume_id, consultant_id, content) VALUES (";
 		$sql .= $data['resume_id'] . ",";
 		$sql .= "1,";
-		$sql .= "'" . $data['content'] . "');";
+		$sql .= "'" . @$data['content'] . "');";
 		
         $db->query($sql);
     }
     
-    public function getComments($resumeId)
+    public function getComments($resumeId, $limit=null)
     {
         $db = $this->getDbTable()->getAdapter();
         $sql = "SELECT rc.*, c.username FROM res_comment AS rc ";
         $sql .= "INNER JOIN consultant AS c ON c.consultant_id = rc.consultant_id";
         $sql .= " WHERE resume_id = " . $resumeId;
+		if($limit) {
+		    $sql .= " ORDER BY rc.res_comment_id DESC LIMIT 1";
+		    return $db->fetchRow($sql);
+		}
 		
         return $db->fetchAll($sql);
     }

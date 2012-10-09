@@ -242,15 +242,36 @@ class ResumeController extends Zend_Controller_Action
 		$resume = new Default_Model_ResumeMapper();
 		$resume->insertComment($post);
 
-		$comments = $resume->getComments($post['resume_id']);
-        $comment = end($comments);
+		$comment = $resume->getComments($post['resume_id'], 1);
         $date = new DateTime($comment['created_date']);
         $createdComment = $date->format('M-d');
             
 		$html = '<strong class="text_green">Comment '. $createdComment .'</strong> ';
         $html .= '<strong>by ' . $comment['username'] . '</strong>:<br />';
         $html .= substr($comment['content'], 0, 90);
-        $html .= ' <a href="#">view</a>';
+        $html .= ' <a href="#allcomment" class="allcomment" id="'.  $post['resume_id'] .'">view all</a>';
+        echo $html;
+		exit;
+	}
+	
+	public function allCommentAction()
+	{
+	    $post = $this->getRequest()->getPost();
+		
+		$resume = new Default_Model_ResumeMapper();
+		$comments = $resume->getComments($post['resume_id']);
+        $html = ''; 
+		foreach($comments as $comment) {
+        
+            $date = new DateTime($comment['created_date']);
+            $createdComment = $date->format('M-d');
+            $html .= '<div>'; 
+    		$html .= '<strong class="text_green">Comment '. $createdComment .'</strong> ';
+            $html .= '<strong>by ' . $comment['username'] . '</strong>:';
+            $html .= substr($comment['content'], 0, 90);
+            $html .= '</div>'; 
+        }
+        
         echo $html;
 		exit;
 	}
@@ -298,6 +319,20 @@ class ResumeController extends Zend_Controller_Action
         
         $this->_helper->layout->disableLayout();
         $this->render('list-resume', array('paginator' => $paginator, 'rows' => $rows));
+
+	}
+	
+    public function detailResumeAction()
+	{
+        $post = $this->getRequest()->getPost();
+
+        $resumeRowSet = new Default_Model_Resume();
+        $resumeMapper = new Default_Model_ResumeMapper();
+        $rows = $resumeMapper->find($post['resume_id'], $resumeRowSet);
+
+        $this->view->rows = $rows;
+        $this->_helper->layout->disableLayout();
+        $this->render('detail-resume', array('rows' => $rows));
 
 	}
 	
