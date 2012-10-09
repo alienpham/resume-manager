@@ -15,8 +15,7 @@
             $date = new DateTime($row['updated_date']);
             $updatedDate = $date->format('d M Y');
             $experienceList = $experienceMapper->fetchAll('resume_id = ' . $row['resume_id'], 'end_date DESC');
-            $comments = $resumeMapper->getComments($row['resume_id']);
-            $comment = end($comments);
+            $comment = $resumeMapper->getComments($row['resume_id'], 1);
             $date = new DateTime($comment['created_date']);
             $createdComment = $date->format('M-d');
         ?>
@@ -28,7 +27,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder">
                 <tr>
                     <td width="145" valign="top">
-                        <a href="/resume/personal-info/id/<?php echo $row['resume_id']?>"><strong><?php echo $row['full_name'];?></strong></a>
+                        <a href="#detail_resume" class="detail_resume" id="<?php echo $row['resume_id']?>"><strong><?php echo $row['full_name'];?></strong></a>
                         <br /> <?php echo $row['resume_code'];?>
                     </td>
                     <td width="491" valign="top">
@@ -81,7 +80,7 @@
                             <strong class="text_green">Comment <?php echo $createdComment;?></strong> 
                             <strong>by <?php echo $comment['username'];?>:</strong><br />
                             <?php echo substr($comment['content'], 0, 90);?>
-                            <a href="#">view</a>
+                            <a href="#allcomment"  class="allcomment" id="<?php echo $row['resume_id'] ?>">view all</a>
                         </div>
                         
                     </td>
