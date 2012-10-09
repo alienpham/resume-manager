@@ -39,6 +39,7 @@ class Company_IndexController extends Zend_Controller_Action
 			$order_by = $post['sort_name_id']." ".$post['sort_type_id'];
 		$company = new Company_Model_CompanyMapper();
 		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","abbreviation");
+		
 		$data="";
 
 		$list = $company->getListCompany($condition,$order_by,($currentPage-1)*1,1);
