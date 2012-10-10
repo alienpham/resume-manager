@@ -38,7 +38,7 @@ class Company_IndexController extends Zend_Controller_Action
 		if (isset($post['sort_name_id']))
 			$order_by = $post['sort_name_id']." ".$post['sort_type_id'];
 		$company = new Company_Model_CompanyMapper();
-		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","abbreviation");
+		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","abbreviation",$post['industry_id']);
 		
 		$data="";
 
@@ -86,7 +86,10 @@ class Company_IndexController extends Zend_Controller_Action
 					  <td><a href="#"><img src="public/images/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="public/images/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
 					</tr>';
 		}
-		
+		$this->view->ccode_id=$this->_getParam('ccode_id',"");
+		$this->view->sort_name_id=$this->_getParam('sort_name_id',"");
+		$this->view->sort_type_id=$this->_getParam('sort_type_id',"");
+		$this->view->txtSearch=$this->_getParam('txtSearch',"");
 		$this->view->paginator = $paginator;
 		$this->view->list_industry=$list_industry;
 		$this->view->rows = $list;

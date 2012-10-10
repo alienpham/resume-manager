@@ -1,8 +1,8 @@
 <form name="frmAddCompany" method="post" action="<?php echo $this->baseUrl; ?>/company/company/add-company">
-<input type="hidden" name="company_id" id="company_id" value="<?php $this->company_id;?>"/>
+<input type="hidden" name="company_id" id="company_id" value="<?php echo $this->company_id;?>"/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td><h3>ADD COMPANY</h3></td>
+        <td><h3><?php echo $this->title_page;?></h3></td>
       </tr>
       <tr>
         <td height="10"></td>
@@ -28,15 +28,15 @@
                   <td class="subtitle_popup">Company Full Name:<span class="require">*</span></td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="full_name_en" id="full_name_en" style="width:230px" /></td>
-                  <td bgcolor="#FFECEC"><input type="text" name="full_name_vn" id="full_name_vn" style="width:230px" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="full_name_en" id="full_name_en" style="width:230px" value="<?php  echo $this->full_name_en;?>" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="full_name_vn" id="full_name_vn" style="width:230px" value="<?php  echo $this->full_name_vn;?>" /></td>
                 </tr>
                 <tr>
                   <td class="subtitle_popup">Short Name:<span class="require">*</span></td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="short_name_en" id="short_name_en" style="width:230px" /></td>
-                  <td bgcolor="#FFECEC"><input type="text" name="short_name_vn" id="short_name_vn" style="width:230px" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="short_name_en" id="short_name_en" style="width:230px" value="<?php  echo $this->short_name_en;?>"/></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="short_name_vn" id="short_name_vn" style="width:230px" value="<?php  echo $this->short_name_vn;?>"/></td>
                 </tr>
                 <tr>
                   <td>&nbsp;</td>
