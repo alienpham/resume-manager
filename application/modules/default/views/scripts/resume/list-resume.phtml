@@ -74,7 +74,8 @@
                     <p>&nbsp;</p>
                     Updated: <?php echo $updatedDate; ?> </td>
                     <td width="286" valign="top" class="color_bg">
-                        <a href="#comment" class="addcomment" id="<?php echo $row['resume_id']?>">Add Comment</a>
+                        <a href="#comment" class="addcomment" id="<?php echo $row['resume_id']?>">Add Comment</a>&nbsp;&nbsp;
+                        <a href="/resume/export-to-word/id/<?php echo $row['resume_id']?>">Export to word</a>
                         <p>&nbsp;</p>
                         <div id="viewcomment<?php echo $row['resume_id']?>">
                             <strong class="text_green">Comment <?php echo $createdComment;?></strong> 
