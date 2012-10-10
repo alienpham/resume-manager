@@ -182,7 +182,7 @@ class Company_Model_CompanyMapper {
         return $str;
     }
     
-    public function getLookup($table,$where,$field_id,$field_name)
+    public function getLookup($table,$where,$field_id,$field_name,$selected)
     {
     	$db = $this->getDbTable()->getAdapter();
         $sql = "SELECT * FROM $table WHERE $where";
@@ -190,7 +190,10 @@ class Company_Model_CompanyMapper {
         $data="";
         foreach($result as $rs)
         {
-        	$data.="<option value='".$rs[$field_id]."'>".$rs[$field_name]."</option>";
+        	if ($rs[$field_id]==$selected)
+        		$data.="<option value='".$rs[$field_id]."' selected>".$rs[$field_name]."</option>";
+        	else 
+        		$data.="<option value='".$rs[$field_id]."'>".$rs[$field_name]."</option>";
         }
         return $data;
     }

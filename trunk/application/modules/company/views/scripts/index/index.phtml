@@ -5,10 +5,10 @@
 		  <tr>
 			<td width="5%"><label for="choice">Search : </label></td>
 			<td width="6%"><select name="ccode_id" id="ccode_id" style="width:125px">
-				<option value="1">Company Code</option>
-                <option value="2">Company Name</option>
+				<option value="1" <?php if ($this->ccode_id==1) echo "selected";?> >Company Code</option>
+                <option value="2" <?php if ($this->ccode_id==2) echo "selected";?>>Company Name</option>
 			</select></td>
-			<td width="12%"><input name="txtSearch" id="txtSearch" type="text"/></td>
+			<td width="12%"><input name="txtSearch" id="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/></td>
 			<td width="7%"><select name="industry_id" style="width:120px">
             	<option value="0">Please select</option>
 			  <?php echo $this->list_industry; ?>
@@ -19,12 +19,12 @@
 			<td width="24%">&nbsp;</td>
 			<td width="4%"><label for="choice">Sort : </label></td>
 			<td width="5%"><select name="sort_name_id" id="sort_name_id" style="width:80px">
-			  <option value="full_name_en">Name</option>
-              <option value="created_date">Created Date</option>
+			  <option value="full_name_en" <?php if ($this->sort_name_id=="full_name_en") echo "selected";?>>Name</option>
+              <option value="created_date" <?php if ($this->sort_name_id=="created_date") echo "selected";?>>Created Date</option>
 			</select></td>
 			<td width="5%"><select name="sort_type_id" id="sort_type_id" style="width:60px">
-			  <option value="ASC">ASC</option>
-              <option value="DESC">DESC</option>
+			  <option value="ASC" <?php if ($this->sort_type_id=="ASC") echo "selected";?>>ASC</option>
+              <option value="DESC" <?php if ($this->sort_type_id=="DESC") echo "selected";?>>DESC</option>
 			</select></td>
 			<td width="3%"><input id="button3" type="submit" value="Ok" /></td>
 		  </tr>
