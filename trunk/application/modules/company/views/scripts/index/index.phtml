@@ -93,7 +93,7 @@
 	<?php if(count($this->paginator)) :?>
 	<tr>
 		<td align="center"><div id="box">
-			<?php echo $this->partial ( 'pagination.phtml', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
+            <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
 		</div></td>
 	</tr>
 	<?php endif;?>
