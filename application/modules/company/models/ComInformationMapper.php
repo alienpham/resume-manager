@@ -31,9 +31,6 @@ class Company_Model_ComInformationMapper {
 			'apply_to' 		=> $cominformation->getApplyTo(), 
 			'content' 		=> $cominformation->getContent()
 		);
-//print_r($data); exit;    
-
-			
 		return $this->getDbTable()->insert($data);
     }
 	

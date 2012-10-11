@@ -38,21 +38,16 @@ class Company_IndexController extends Zend_Controller_Action
 		if (isset($post['sort_name_id']))
 			$order_by = $post['sort_name_id']." ".$post['sort_type_id'];
 		$company = new Company_Model_CompanyMapper();
-		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","abbreviation",$post['industry_id']);
+		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","abbreviation",isset($post['industry_id'])?$post['industry_id']:"");
 		
 		$data="";
 
-		$list = $company->getListCompany($condition,$order_by,($currentPage-1)*1,1);
+		$list = $company->getListCompany($condition,$order_by,($currentPage-1)*20,20);
 		$rows = $company->getListCompany($condition,$order_by);
 		$totalRecord=$company->countCompany($condition,$order_by);
-		/*if ($totalRecord%1)
-			$pageRange=$totalRecord/1;
-		else */
-		$pageRange=3;
 		$paginator = Zend_Paginator::factory($rows);
-		$paginator->setItemCountPerPage(1);
+		$paginator->setItemCountPerPage(20);
 		$paginator->setCurrentPageNumber($currentPage);
-		$paginator->setPageRange($pageRange);
 		foreach($list as $rs)
 		{
 			$numact=$company->countAct($rs['company_id']);
