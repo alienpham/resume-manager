@@ -56,9 +56,8 @@
 </div>
 <?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
 <?php echo $this->partial ( '/resume/comment.phtml' )?>
-<div id="allcomment" style="width:500px;height: 200px; display: none;" id="inline">&nbsp;</div>
-<?php echo $this->partial ( '/resume/detail-resume.phtml' )?>
-<div id="detail_resume" style="width:500px;height: 200px; display: none;" id="inline">&nbsp;</div>
+<div id="allcomment" style="width:500px;height: 200px; display: none;">&nbsp;</div>
+<div id="detail_resume" style="width:900px;height: 500px; display: none;">&nbsp;</div>
 <script type="text/javascript">
 $(document).ready(function() {
     //Begin Comment for candidate
@@ -106,9 +105,19 @@ $(document).ready(function() {
     //End Comment for candidate
 
     //Begin View detail candidate
+    $(".detail_resume").fancybox();
     $(".detail_resume").click(function(){
 		var resume_id = $(this).attr('id');
-		$(".detail_resume").fancybox();
+		$.ajax({
+      	  	url: '/resume/detail-resume',
+        	type: "POST",
+			data: { 
+                resume_id: resume_id, 
+            },
+      	  	success: function(result) {
+                $('#detail_resume').html(result);
+      	  	}
+      	});
 	});
     //End View detail candidate
     
