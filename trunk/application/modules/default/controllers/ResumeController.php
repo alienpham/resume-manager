@@ -318,7 +318,7 @@ class ResumeController extends Zend_Controller_Action
         $this->view->rows = $rows;
         
         $this->_helper->layout->disableLayout();
-        $this->render('list-resume', array('paginator' => $paginator, 'rows' => $rows));
+        $this->render('list-resume');
 
 	}
 	
@@ -328,58 +328,42 @@ class ResumeController extends Zend_Controller_Action
 
         $resumeRowSet = new Default_Model_Resume();
         $resumeMapper = new Default_Model_ResumeMapper();
-        $rows = $resumeMapper->find($post['resume_id'], $resumeRowSet);
+        $resumeMapper->find($post['resume_id'], $resumeRowSet);
 
-        $this->view->rows = $rows;
+        $this->view->resume = $resumeRowSet;
         $this->_helper->layout->disableLayout();
-        $this->render('detail-resume', array('rows' => $rows));
-
+        $this->render('detail-resume');
 	}
 	
 	function exportToWordAction()
 	{
+        $resume_id = $this->_getParam('id');
+        $resumeRowSet = new Default_Model_Resume();
+        $resumeMapper = new Default_Model_ResumeMapper();
+        $resumeMapper->find($resume_id, $resumeRowSet);
+	    
 	    Zend_Loader::loadFile('PHPWord.php');
-        
-        // New Word Document
         $PHPWord = new PHPWord();
+
+        $document = $PHPWord->loadTemplate('candidate/template_resume.docx');
+        $document->setValue('Value1', $resumeRowSet->getFullName());
+        $document->setValue('Value2', $resumeRowSet->getBirthday());
+        $document->setValue('Value3', $resumeRowSet->getGender());
+        $document->setValue('Value4', $resumeRowSet->getMaritalStatus());
+        $document->setValue('Value5', $resumeRowSet->getAddress());
+        $document->setValue('Value6', $resumeRowSet->getEmail1());
+        $document->setValue('Value7', $resumeRowSet->getMobile1());
         
-        // New portrait section
-        $section = $PHPWord->createSection();
-        
-        // Add text elements
-        $section->addText('Hello World!');
-        $section->addTextBreak(2);
-        
-        $section->addText('I am inline styled.', array('name'=>'Verdana', 'color'=>'006699'));
-        $section->addTextBreak(2);
-        
-        $PHPWord->addFontStyle('rStyle', array('bold'=>true, 'italic'=>true, 'size'=>16));
-        $PHPWord->addParagraphStyle('pStyle', array('align'=>'center', 'spaceAfter'=>100));
-        $section->addText('I am styled by two style definitions.', 'rStyle', 'pStyle');
-        $section->addText('I have only a paragraph style definition.', null, 'pStyle');
-        
-        
-        
-        // Save File
-        $objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
-        $objWriter->save('candidate/resume.docx');
-        
-        //$filename = "report".date('dmY-his').".doc";
-        //header("Content-Type: application/xml; charset=UTF-8");
-        //header("Expires: 0");
-        //header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-        //header("content-disposition: attachment;filename=$filename");
-        
-        //echo $html;
-        //exit;
+        $resumeName = str_replace(' ', '', $resumeRowSet->getFullName()) .'.docx';
+        $document->save('candidate/'. $resumeName);
         
         header("Cache-Control: public");     
         header("Content-Description: File Transfer");     
-        header("Content-Disposition: attachment; filename=resume.docx");     
-        header("Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document");     
+        header("Content-Disposition: attachment; filename=$resumeName");     
+        header("Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document");
         header("Content-Transfer-Encoding: binary");         
 
-        readfile('candidate/resume.docx'); 
+        readfile('candidate/' . $resumeName); 
         exit;
 	}
 }
