@@ -64,6 +64,7 @@ class Company_CompanyController extends Zend_Controller_Action
 				$rscompany->setCreatedDate(date('Y-m-d H:i:s'));
 				$rscompany->setUpdatedDate(date('Y-m-d H:i:s'));
 				$ComapnyId=$company->save ($rscompany);
+				
 				$consultantincharge= new Company_Model_ComHasConsultantIncharge();
 				$consultantincharge->setConsultantId($post['consultant_id']);
 				$consultantincharge->setCompanyId($ComapnyId);
@@ -71,6 +72,15 @@ class Company_CompanyController extends Zend_Controller_Action
 				$consultantincharge->setActionDate(date('Y-m-d H:i:s'));
 				$conincharge = new Company_Model_ComHasConsultantInchargeMapper();
 				$conincharge->save($consultantincharge);
+				
+				$rscominfomation= new Company_Model_ComInformation();
+				$rscominfomation->setCompanyId($ComapnyId);
+				$rscominfomation->setApplyTo("Internal");
+				$rscominfomation->setCompanyId($ComapnyId);
+				$rscominfomation->setContent($post['contents']);
+				
+				$cominfomation = new Company_Model_ComInformationMapper();
+				$cominfomation->save($rscominfomation);
 				$this->_redirect('/company');
 			}
 			else 
