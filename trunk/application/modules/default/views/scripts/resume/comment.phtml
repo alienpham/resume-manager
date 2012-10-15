@@ -1,11 +1,14 @@
 <?php $aNamespace = new Zend_Session_Namespace ( 'zs_User' ); ?>
-<div style="width:600px;height: 300px; display:none" id="comment">
-<form name="frmcomment" method="post" action="/resume/save-comment">
-<div style="background:#990000" class="title_popup">COMMENT</div><br />
-	<label>Content</label> &nbsp;&nbsp;<span id="msgcomment" class="error"></span><br />
-	<textarea name="content" id="contentcomment" style="width:500px;height:150px"></textarea><br /><br />
-	<input type="hidden" name="resume_id" value="">
-	<input type="hidden" name="consultant_id" value="<?php echo $aNamespace->consultant_id;?>">
-	<input type="button" name="add" id="insertcomment" value="ADD">
-</form>
+<div style="width:550px;height: 300px; display:none" id="comment">
+	<form name="frmcomment" method="post" action="/resume/save-comment">
+		<div style="color:#70b4e2;"><b>ADD COMMENT</b></div><br />
+		<label>Content</label> &nbsp;&nbsp;<span id="msgcomment" class="error"></span><br />
+		<textarea name="content" id="contentcomment" style="width:500px;height:150px"></textarea><br /><br />
+		<input type="hidden" name="resume_id" value="">
+		<input type="hidden" name="consultant_id" value="<?php echo $aNamespace->consultant_id;?>">
+		<div class="actions">
+			<input type="button" class="button01" name="add" id="insertcomment" value="Add">
+			<input type="button" class="button02" name="cancel" value="Cancel" onclick="event.preventDefault(); parent.$.fancybox.close();">
+		</div>
+	</form>
 </div>

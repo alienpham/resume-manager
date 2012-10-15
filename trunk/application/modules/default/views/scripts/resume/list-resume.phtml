@@ -1,137 +1,103 @@
-<table width="100%" class="datagrid">
-    <thead>
-        <tr>
-            <th width="26"><input type="checkbox" name="checkbox"
-                id="checkbox" /></th>
-            <th class="a-left">&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php 
-        $experienceMapper = new Default_Model_ExperienceMapper();
-        $expectationMapper = new Default_Model_ExpectationMapper();
-        $resumeMapper = new Default_Model_ResumeMapper();
-        foreach ( $this->rows as $row ) :
-            $date = new DateTime($row['updated_date']);
-            $updatedDate = $date->format('d M Y');
-            $experienceList = $experienceMapper->fetchAll('resume_id = ' . $row['resume_id'], 'end_date DESC');
-            $comment = $resumeMapper->getComments($row['resume_id'], 1);
-            $date = new DateTime($comment['created_date']);
-            $createdComment = $date->format('M-d');
+<div class="list-resumes clearfix">
+    <div class="head">
+        <div class="checkbox">
+            <input type="checkbox" value="" />
+        </div>
+        <div class="name">
+            <h4>Name</h4>
+        </div>
+        <div class="experience">
+            <h4>Experience</h4>
+        </div>
+        <div class="salary">
+            <h4>Desired salary</h4>
+        </div>
+        <div class="comments">
+            <h4>Commentd</h4>
+        </div>
+    </div>
+    <?php 
+    $experienceMapper = new Default_Model_ExperienceMapper();
+    $expectationMapper = new Default_Model_ExpectationMapper();
+    $resumeMapper = new Default_Model_ResumeMapper();
+    foreach ( $this->rows as $row ) :
+        $date = new DateTime($row['updated_date']);
+        $updatedDate = $date->format('d M Y');
+        $experienceList = $experienceMapper->fetchAll('resume_id = ' . $row['resume_id'], 'end_date DESC');
+        $comment = $resumeMapper->getComments($row['resume_id'], 1);
+        $date = new DateTime($comment['created_date']);
+        $createdComment = $date->format('M-d');
+    ?>
+    <div class="info-content">
+        <div class="checkbox">
+            <input type="checkbox" value="" />
+        </div>
+        <div class="name">
+            <h4><a href="#detail_resume" class="detail_resume" id="<?php echo $row['resume_id']?>"><?php echo $row['full_name'];?></a></h4>
+            <p><?php echo $row['resume_code'];?></p>
+        </div>
+        <div class="experience">
+            <ul>
+            <?php foreach ( $experienceList as $experience ) :
+                $date = new DateTime($experience->getStartDate());
+                $startDate = $date->format('M Y');
+    
+                $date = new DateTime($experience->getEndDate());
+                $endDate = $date->format('M Y');
+            ?>
+                <li>
+                    <div style="width:30%;float:left"><?php echo $startDate;?> - <?php echo $endDate;?></div>
+                    <div class="companies" style="width:65%;float:left">
+                        <p style="color:#227DBA;font-weight:bold;text-transform: uppercase;"><?php echo $experience->getCompanyName();?></p>
+                        <p><?php echo $experience->getJobTitle();?></p>
+                    </div>
+                </li>
+            <?php endforeach;?>
+            </ul>
+        </div>
+        <?php
+        $expectation = $expectationMapper->getExpectation($row['resume_id']);
+        $provinceArr = array();
+        if($expectation['res_expectation_id']) {
+            $resumeProvince = $expectationMapper->getExpectationProvince($expectation['res_expectation_id']);
+            foreach($resumeProvince as $province){
+                $provinceArr[] = $province['name'];
+            }
+        }
+
+        $currentSalary = number_format($expectation['current_salary']);
+        @$salaryFrom = number_format($expectation['estimated_salary_from']);
+        @$salaryTo = number_format($expectation['estimated_salary_to']);
         ?>
-        <tr>
-            <td valign="top" class="a-center">
-                <input type="checkbox" id="checkbox<?php echo $row['resume_id']?>" />
-            </td>
-            <td class="a-left">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder">
-                <tr>
-                    <td width="145" valign="top">
-                        <a href="#detail_resume" class="detail_resume" id="<?php echo $row['resume_id']?>"><strong><?php echo $row['full_name'];?></strong></a>
-                        <br /> <?php echo $row['resume_code'];?>
-                    </td>
-                    <td width="491" valign="top">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="noboder01">
-                        <?php foreach ( $experienceList as $experience ) :
-                            $date = new DateTime($experience->getStartDate());
-                            $startDate = $date->format('M Y');
-                
-                	        $date = new DateTime($experience->getEndDate());
-                            $endDate = $date->format('M Y');
-                        ?>
-                        <tr>
-                            <td width="115" valign="top">
-                                <?php echo $startDate;?> - <?php echo $endDate;?> 
-                            </td>
-                            <td width="376" valign="top">
-                                <strong class="text_green"><?php echo $experience->getCompanyName();?></strong>
-                                <br /> <?php echo $experience->getJobTitle();?>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                    </table>
-                    </td>
-                    <td width="270" valign="top">
-                    <?php
-                    
-                    $expectation = $expectationMapper->getExpectation($row['resume_id']);
-                    
-                    $provinceArr = array();
-                    if($expectation['res_expectation_id']) {
-                        $resumeProvince = $expectationMapper->getExpectationProvince($expectation['res_expectation_id']);
-                        foreach($resumeProvince as $province){
-                            $provinceArr[] = $province['name'];
-                        }
-                    }
-        
-                    $currentSalary = number_format($expectation['current_salary']);
-                    @$salaryFrom = number_format($expectation['estimated_salary_from']);
-                    @$salaryTo = number_format($expectation['estimated_salary_to']);
-                    ?>
-                    [S]: <?php if($currentSalary) echo '$'.$currentSalary; ?><br />
-                    [E]: <?php if($salaryFrom) echo '$'.$salaryFrom; ?><?php if($salaryTo) echo ' - '.'$'.$salaryTo; ?><br />
-                    [L]: <?php echo implode(', ', $provinceArr);?>
-                    <p>&nbsp;</p>
-                    Updated: <?php echo $updatedDate; ?> </td>
-                    <td width="286" valign="top" class="color_bg">
-                        <a href="#comment" class="addcomment" id="<?php echo $row['resume_id']?>">Add Comment</a>&nbsp;&nbsp;
-                        <a href="/resume/export-to-word/id/<?php echo $row['resume_id']?>">Export to word</a>
-                        <p>&nbsp;</p>
-                        <div id="viewcomment<?php echo $row['resume_id']?>">
-                            <strong class="text_green">Comment <?php echo $createdComment;?></strong> 
-                            <strong>by <?php echo $comment['username'];?>:</strong><br />
-                            <?php echo substr($comment['content'], 0, 90);?>
-                            <a href="#allcomment"  class="allcomment" id="<?php echo $row['resume_id'] ?>">view all</a>
-                        </div>
-                        
-                    </td>
-                </tr>
-            </table>
-            </td>
-        </tr>
-        <?php endforeach;?>
-    </tbody>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-        <td>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td width="7%">
-                	<a href="/resume/personal-info">
-                	<input id="button2" type="submit" value="Add Resume" class="link_button" />
-                	</a>
-            	</td>
-                
-                <td width="84%">&nbsp;</td>
-            </tr>
-        </table>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td width="5%"><label for="choice">Showing</label></td>
-                <td width="5%">
-					<select name="rowperpage">
-						<option>20</option>
-						<option>30</option>
-						<option>50</option>
-						<option>100</option>
-					</select>
-				</td>
-                <td width="91%">records per page</td>
-            </tr>
-        </table>
-        </td>
-    </tr>
-
+        <div class="salary">
+            <p>[S]: <?php if($currentSalary) echo '$'.$currentSalary; ?></p>
+            <p>[E]: <?php if($salaryFrom) echo '$'.$salaryFrom; ?><?php if($salaryTo) echo ' - '.'$'.$salaryTo; ?></p>
+            <p>[L]: <?php echo implode(', ', $provinceArr);?></p>
+            <p class="update-date">Update: <?php echo $updatedDate; ?></p>
+        </div>
+        <div class="comments">
+            <a href="#comment" class="addcomment" id="<?php echo $row['resume_id']?>">Add Comment</a>
+            <a href="/resume/export-to-word/id/<?php echo $row['resume_id']?>" class="export-word">Export to word</a>
+            <div class="info-comment" id="viewcomment<?php echo $row['resume_id']?>">
+                <p class="update-date">Comment <?php echo $createdComment;?></p> <span>by</span> <span class="user-name"><?php echo $comment['username'];?></span>
+                <p><?php echo substr($comment['content'], 0, 90);?></p>
+                <a href="#allcomment"  class="allcomment" id="<?php echo $row['resume_id'] ?>">View all</a>
+            </div>
+        </div>
+    </div>
+    <?php endforeach;?>
+</div> 
+<div style="clear:both">&nbsp;</div>
+<!-- pagging -->
+<div class="footer clearfix">
+	<b>Sort</b>
+    <select name="rowperpage">
+		<option>20</option>
+		<option>30</option>
+		<option>50</option>
+		<option>100</option>
+	</select>
     <?php if(count($this->paginator)) :?>
-    <tr>
-        <td align="center"><?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?></td>
-    </tr>
+        <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
     <?php endif;?>
-</table>
+</div>

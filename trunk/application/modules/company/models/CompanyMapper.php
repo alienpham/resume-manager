@@ -174,7 +174,7 @@ class Company_Model_CompanyMapper {
         foreach ($result as $rs)
         {
         	if ($num==0)
-        		$str=$rs[$field];
+        		@$str=$rs[$field];
         	else 
         		$str=" | ".$rs[$field];
         	$num++;

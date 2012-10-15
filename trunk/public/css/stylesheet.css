@@ -1,0 +1,525 @@
+img{border:0px;	}
+.clearfix:after {
+	visibility:hidden;
+	content:".";
+	display:block;
+	clear:both;
+	height:0;
+}
+*{margin:0; padding:0; }
+ul,
+li {list-style-type:none; }
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #252525;
+	line-height:18px;
+
+}
+a{
+	color:#8ab036;
+	text-decoration:none;	
+}
+a:hover{text-decoration:underline; }
+
+.top{
+	background:#8ab036;
+	padding:10px 20px;
+}
+.top h1{
+	color:#fff;
+	font-size:16px;
+	text-transform:uppercase;
+}
+.header{
+	clear:both;		
+	background:#f3f3f3;
+	border-bottom:2px solid #8ab036;
+	padding: 25px 20px 0;
+}
+.main-menu{
+	float:left;
+}
+.main-menu li{
+	background:#8ab036;
+	display:inline;
+	margin:0 2px 0 0;
+	border: 1px solid #83b020;
+	float:left;
+	border-radius:8px 8px 0 0;
+	-moz-border-radius: 8px 8px 0 0;
+	-webkit-border-radius: 8px 8px 0 0;
+	
+	-moz-box-shadow: inset 0 0 2px 0 #fff;
+	-webkit-box-shadow: inset 0 0 2px 0 #fff;
+	box-shadow: inset 0 0 2px 0 #fff;
+	
+	opacity:0.8;
+}
+.main-menu li a{
+	color: #FFFFFF;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 7px 18px 5px;
+}
+.main-menu li:hover,
+.main-menu li:hover a,
+.main-menu li.active{
+	opacity:1;
+	text-decoration:none;
+}
+.header .user-login{
+	float:right;
+	padding-top:8px
+}
+.header .user-login p{
+	float:left;
+	margin-right:10px;	
+}
+.header .user-login p a{
+	color:#70b4e2;
+	font-weight:bold;	
+}
+.header .user-login a{
+	color:#252525;	
+}
+
+.content {
+	margin:25px 0;
+	padding:0 20px;
+}
+.content label{
+	font-weight:bold;
+	margin-right:10px;	
+}
+.content select,
+.content input[type="text"],
+.footer select,
+.footer .pages a,
+textarea,
+.form-login input[type="text"],
+.form-login input[type="password"]
+{
+	background:#f3f3f3;
+	border:1px solid #dddddd;
+	border-radius:3px;
+	padding:5px;
+	font-family:'Arial';
+	width:130px;
+}
+.content input[type="text"],
+.form-login input[type="text"],
+.form-login input[type="password"]
+{
+	padding:5px 10px;
+	color:#848484;
+	width:185px;
+	margin-left:15px;
+}
+
+.button01{
+	background:#1b7cbd;
+	border: 1px solid #227dba;
+
+	border-radius:3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 2px 0 #fff;
+	-webkit-box-shadow: inset 0 0 2px 0 #fff;
+	box-shadow: inset 0 0 2px 0 #fff;
+	
+	color:#fff;
+	font-weight:bold;
+	padding: 5px 10px;
+	font-family:'Arial';
+	cursor:pointer;
+}
+
+.today-entry{
+	clear:both;
+	float:right;
+	margin: 0 0 10px 0;	
+}
+.today-entry span{
+	color:#70b4e2;
+	font-weight:bold;
+}
+
+.list-resumes,
+.info-content{
+	float: left;
+    width: 100%;
+}
+.list-resumes .head{
+	background:#1b7cbd;	
+	width:100%;
+	float: left;
+}
+.list-resumes .head .checkbox,
+.list-resumes .head .name,
+.list-resumes .head .experience,
+.list-resumes .head .salary,
+.list-resumes .head .comments{	
+	background:url(../images/bg-header.jpg) no-repeat top right;
+}
+.list-resumes .checkbox,
+.list-resumes .name,
+.list-resumes .experience,
+.list-resumes .salary,
+.list-resumes .comments{
+	padding:6px 1.5% 7px;
+	float:left;	
+}
+.list-resumes .checkbox{
+	padding:10px 1%;
+	width:1%;
+}
+.list-resumes .name,
+.list-resumes .salary{
+	width:14%;	
+}
+.list-resumes .experience{
+	width:32%;
+}
+.list-resumes .salary{
+	
+}
+.list-resumes .comments{
+	width:25%;
+	background:none !important;
+}
+.list-resumes .head h4{
+	text-transform:uppercase;
+	color:#fff;	
+}
+
+.info-content{
+	margin-top: 5px;
+	border-bottom:1px solid #bcbcbc;
+	
+}
+.info-content .name h4 a{
+	color:#8AB036;
+	text-transform: capitalize;
+}
+.info-content .experience ul li{
+	display:block;
+	width:100%;	
+	float:left;
+}
+
+.info-content .experience .companies{
+	margin:0 0 10px 20px;
+}
+.info-content .update-date{
+	color:#535353;
+	margin-top:10px;
+}	
+.info-content .addcomment,
+.info-content .export-word{
+	font-weight: bold;
+	background:url(../images/icon-add.png) no-repeat left 1px;
+	padding-left: 18px;	
+}
+.info-content .export-word{
+	background:url(../images/icon-export.png) no-repeat left 1px;
+	color:#1b7cbd;
+	margin-left:20px;
+}
+.info-content .info-comment .update-date{
+	float:left;	
+	margin-right:10px;
+}
+.info-content .info-comment span,
+.info-content .info-comment a{
+	float:left;	
+	margin: 10px 5px 0 0;
+}
+.info-content .info-comment span.user-name{
+	color: #70B4E2;	
+}
+.info-content .info-comment p{
+	clear:both;	
+}
+
+.footer label{
+	font-size:14px;
+	margin-right:8px;
+}
+.footer select{
+	width:60px;	
+}
+.footer .pages{
+	display: inline;
+
+    margin-left: 20px;
+}
+.footer .pages a{
+	padding:5px 7px;
+	color:#252525;
+}
+.footer .pages a.active{
+	text-decoration:underline;	
+}
+
+/*========== Add Resume ============*/
+.content .img-steps{
+	text-align:center;
+}
+.content .from-add-01{
+	clear:both;	
+	margin:40px 0 20px 20px;
+}
+.content h2{
+	clear:both;	
+	color:#1b7cbd;
+	font-size:14px;
+}
+.content .from-add-01 ul,
+#adv-search ul{
+	margin:20px 0;	
+	float:left;
+
+}
+.content .from-add-01 ul,
+.form-login ul{
+	clear:both;	
+}
+.content .from-add-01 ul li,
+#adv-search ul li,
+.form-login ul li{
+	clear: both;
+    display: block;
+    float: left;
+    margin: 5px 0 7px;
+}
+.content .from-add-01 ul li label,
+#adv-search ul li label,
+.form-login ul li label{
+	width:160px;
+	float:left;
+	margin-top: 5px;
+}
+.content .from-add-01 ul li label em,
+.form-login em{
+	color:#e60000;	
+}
+.content .from-add-01 ul li input[type="text"],
+#adv-search ul li input[type="text"],
+.form-login ul li input[type="text"],
+.form-login ul li input[type="password"]
+{
+	width:249px;
+	margin-left:0;
+}
+.content .from-add-01 ul li input[type="radio"],
+#adv-search ul li input[type="radio"]{
+	float: left;
+    margin: 5px 5px 10px 0;
+}
+.content .from-add-01 ul li span,
+#adv-search ul li span{
+	float: left;
+    margin-top: 2px;
+    width: 50px;
+}
+.content .from-add-01 ul li textarea{
+	
+}
+
+.content .from-add-01 .actions{
+	width:269px;
+	float:left;
+	text-align:right;	
+	margin:15px 0 0 0;
+}
+.content .button02,
+#comment .button02
+{
+	background: none repeat scroll 0 0 #f3f3f3;
+    border: 1px solid #dddddd;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 2px 0 #FFFFFF inset;
+    color: #848484;
+    cursor: pointer;
+    font-family: 'Arial';
+    font-weight: bold;
+    padding: 5px 10px;
+	margin-right:10px;
+}
+
+/*======== Advanced Search =============*/
+#adv-search h2{
+	text-transform:uppercase;	
+}
+#adv-search ul li{
+	display:inline;	
+	float:left;
+	clear:none;
+	margin-right:20px;
+}
+#adv-search ul li label{
+	width:118px;
+}
+#adv-search ul li input[type="text"]{
+	width:200px;	
+}
+#adv-search ul li select,
+#adv-search ul li input.cost{
+	width:70px;	
+}
+
+#adv-search ul li input[type="checkbox"],
+#adv-search ul li p{
+	float:left;
+}
+#adv-search .actions{
+	clear: both;
+    padding: 10px 0 0;
+    text-align: center;
+}
+
+.multiselect {
+    width:500px;
+    height:15em;
+    border:solid 1px #c0c0c0;
+    overflow:auto;
+    background-color:#ffffff;
+    padding:10px;
+}
+ 
+.multiselect label {
+    display:block;
+}
+
+.multiselect ul li {
+    clear: none;
+    display: none;
+    margin-right: 0px;
+}
+.add-date{
+	margin-bottom: 0 !important;
+
+}
+.add-date li{
+	clear: none !important;
+    float: left !important;
+    margin-right: 50px !important;
+}
+.add-date li.two label{
+	width:80px !important;	
+}
+.add-date li input[type="text"]{
+	width:120px !important;	
+}
+
+.content textarea{
+	font-size:12px;
+	color: #848484;
+	min-width:400px;
+	min-height:160px;	
+}
+
+.summary{
+	background:#fff;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px 5px 5px 5px;
+    float: left;
+    margin: -35px 0 0 20px;
+    min-height: 250px;
+    padding: 25px;
+    /*width: 410px;*/
+}
+.summary h2{
+	color:#8AB036;		
+}
+.summary ul li{
+	display:block;	
+}
+.summary ul li>div{
+	float:left;	
+	margin-right: 40px;
+}
+.summary .action-link a{
+	color:#C20000;
+}
+
+.form-login{
+	background:#fff;
+	border: 1px solid #DDDDDD;
+    border-radius: 5px 5px 5px 5px;
+    height: auto;
+    margin: 100px auto 0;
+    overflow: hidden;
+    padding-bottom: 20px;
+    width: 380px;
+}
+.form-login h1{
+	color: #1B7CBD;
+    font-size: 16px;
+	background:#F3F3F3;
+	border-bottom: 1px solid #DDDDDD;
+	padding:15px 20px;
+	border-radius: 5px 5px 0 0;
+}
+.form-login ul{
+	float: left;
+    padding: 25px 20px 10px;	
+}
+.form-login label{
+	width:100px !important;	
+}
+.form-login input[type="text"],
+.form-login input[type="password"]
+{
+	width:230px !important;	
+}
+.form-login a{
+	clear: both;
+    color: #1A7CBD;
+    float: left;
+    font-weight: bold;
+    margin: 0 0 3px 20px;
+}
+
+/*paging*/
+.pagination,
+.pagination{
+	clear:both;
+	margin:10px 0;	
+}
+.pagination .disabled{
+	display:none;
+}	
+.pagination span,
+.pagination span,
+.pagination .current,
+.pagination a{
+	background: none repeat scroll 0 0 #F3F3F3;
+	border: 1px solid #DDDDDD;
+	border-radius: 3px 3px 3px 3px;
+	padding:4px 6px;
+	color:#252525;
+	text-decoration:none;
+}
+.pagination a:hover{
+	text-decoration:underline;	
+}
+.pagination span,
+.pagination span,
+.pagination .current{
+	text-decoration:underline;	
+}
+/*end paging*/
+.error{
+color:red;
+}
+
+
+
+
+
+

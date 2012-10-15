@@ -1,73 +1,53 @@
 <?php echo $this->headScript ();?>
-<?php echo $this->partial ( 'resume/menu-add-resume.phtml' )?>
 
+<div class="img-steps">
+	<img src="/images/img-step-03.png" width="480" height="58" alt="" />
+</div>
 <form id="form" action="/resume/save-expectation" method="post">
-<table style="width:50%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-        <td width="10%" align="right"></td>
-        <td width="4%"></td>
-        <td colspan="3" bgcolor="#FFECEC"></td>
-    </tr>
-    <tr>
-        <td valign="top" class="subtitle_popup">Current Salary:</td>
-        <td>&nbsp;</td>
-        <td bgcolor="#FFECEC">&nbsp;</td>
-        <td colspan="2" bgcolor="#FFECEC">
-        	<input type="text" name="current_salary" value="<?php echo $this->expectationRowSet->getCurrentSalary();?>"/> USD
-        </td>
-    </tr>
-    <tr>
-        <td valign="top" class="subtitle_popup">Expected Salary:</td>
-        <td>&nbsp;</td>
-        <td bgcolor="#FFECEC">&nbsp;</td>
-        <td colspan="2" bgcolor="#FFECEC">
-        	<input type="text" name="estimated_salary_from" value="<?php echo $this->expectationRowSet->getEstimatedSalaryFrom();?>"/> 
-            <input type="text" name="estimated_salary_to" value="<?php echo $this->expectationRowSet->getEstimatedSalaryTo();?>"/> USD</td>
-    </tr>
-	<tr>
-        <td valign="top" class="subtitle_popup">Expected Location:</td>
-        <td>&nbsp;</td>
-        <td width="4%" bgcolor="#FFECEC">&nbsp;</td>
-        <td width="25%" valign="top" bgcolor="#FFECEC">
-            <input class="province" type="text" name="province" value="" />
+<div class="from-add-01">
+	<h2>Expectation</h2>
+	<ul>
+		<li>
+			<label>Current Salary</label>
+			<input type="text" name="current_salary" value="<?php echo $this->expectationRowSet->getCurrentSalary();?>"/> USD
+		</li>
+		<li>
+			<label>Expected Salary</label>
+			<input type="text" name="estimated_salary_from" value="<?php echo $this->expectationRowSet->getEstimatedSalaryFrom();?>"/> 
+            <input type="text" name="estimated_salary_to" value="<?php echo $this->expectationRowSet->getEstimatedSalaryTo();?>"/> USD
+		</li>
+		<li>
+			<label>Expected Location</label>
+			<input class="province" type="text" name="province" value="" />
             <div class="multiselect" style="display:none; position:fixed">
-            	<div style="width:160px; float:left">
-            <?php 
-            $i = 1;
-            $checked = '';
-            foreach($this->listProvince as $province) :
-            	if($i % 22 == 0): echo '</div><div style="width:160px; float:left">';endif;
-            	if(in_array($province['province_id'], $this->resumeProvince, true)) $checked = "checked";
-            	else $checked = '';
-            ?>
-            	<label><input type="checkbox" name="option[]" value="<?php echo $province['province_id']?>" <?php echo $checked;?>/> <?php echo $province['name']?></label>
-                	
-            <?php 
-            $i++;
-            endforeach;?>
+				<div style="width:160px; float:left">
+				<?php 
+				$i = 1;
+				$checked = '';
+				foreach($this->listProvince as $province) :
+					if($i % 22 == 0): echo '</div><div style="width:160px; float:left">';endif;
+					if(in_array($province['province_id'], $this->resumeProvince, true)) $checked = "checked";
+					else $checked = '';
+				?>
+					<label><input type="checkbox" name="option[]" value="<?php echo $province['province_id']?>" <?php echo $checked;?>/> <?php echo $province['name']?></label>
+						
+				<?php 
+				$i++;
+				endforeach;?>
             	</div>
            </div>
-        </td>
-    </tr>	
-    <tr>
-        <td></td>
-        <td></td>
-        <td colspan="3" bgcolor="#FFECEC"></td>
-    </tr>
-    <tr>
-        <td colspan="5"></td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td colspan="3" align="center">
-        	<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
-        	<input type="hidden" name="expecid" value="<?php echo $this->expectationRowSet->getResExpectationId();?>" />
-        	<a href="/resume/experience/id/<?php echo $this->resumeId; ?>"><input type="button" name="button" value="Back" /></a>&nbsp;&nbsp; 
-        	<input type="submit" name="button" value="Complete" />
-        </td>
-    </tr>
-</table>
+		</li>
+		<li>
+			<label>&nbsp;</label>
+			<div class="actions">
+				<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
+				<input type="hidden" name="expecid" value="<?php echo $this->expectationRowSet->getResExpectationId();?>" />
+				<a href="/resume/experience/id/<?php echo $this->resumeId; ?>"><input type="button" class="button02" name="button" value="Back" /></a>
+				<input type="submit" class="button01" name="button" value="Complete" />
+			</div>
+		</li>
+	</ul>
+</div>
 </form>
 <script>
 $(document).ready(function(){

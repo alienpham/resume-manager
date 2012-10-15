@@ -13,6 +13,7 @@ class ResumeController extends Zend_Controller_Action
         $view->headLink()->appendStylesheet ( '/js/themes/base/jquery.ui.all.css' );
         $view->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );
         $view->headScript()->appendFile ( '/js/jquery.ui.core.js' );
+		$this->view->username = $aNamespace->username;
     }
 
     public function indexAction()
@@ -45,6 +46,7 @@ class ResumeController extends Zend_Controller_Action
         
         $this->view->paginator = $paginator;
         $this->view->rows = $rows;
+		
     }
     
 	public function resumeReportAction()
@@ -246,10 +248,9 @@ class ResumeController extends Zend_Controller_Action
         $date = new DateTime($comment['created_date']);
         $createdComment = $date->format('M-d');
             
-		$html = '<strong class="text_green">Comment '. $createdComment .'</strong> ';
-        $html .= '<strong>by ' . $comment['username'] . '</strong>:<br />';
-        $html .= substr($comment['content'], 0, 90);
-        $html .= ' <a href="#allcomment" class="allcomment" id="'.  $post['resume_id'] .'">view all</a>';
+		$html = '<p class="update-date">Comment '. $createdComment .'</p> <span>by</span> <span class="user-name">'. $comment['username'] . '</span>';
+        $html .= '<p>' . substr($comment['content'], 0, 90) . '</p>';
+        $html .= '<a href="#allcomment" class="allcomment" id="'.  $post['resume_id'] .'">view all</a>';
         echo $html;
 		exit;
 	}
@@ -261,15 +262,18 @@ class ResumeController extends Zend_Controller_Action
 		$resume = new Default_Model_ResumeMapper();
 		$comments = $resume->getComments($post['resume_id']);
         $html = ''; 
+		$html .= '<div style="color:#70b4e2;"><b>ALL COMMENT</b></div><br />';
 		foreach($comments as $comment) {
         
             $date = new DateTime($comment['created_date']);
             $createdComment = $date->format('M-d');
+			
             $html .= '<div>'; 
-    		$html .= '<strong class="text_green">Comment '. $createdComment .'</strong> ';
-            $html .= '<strong>by ' . $comment['username'] . '</strong>:';
-            $html .= substr($comment['content'], 0, 90);
+			$html .= substr($comment['content'], 0, 90);
+    		$html .= '<div align="right"><strong class="text_green">Comment '. $createdComment .'</strong> ';
+            $html .= '<strong>by ' . $comment['username'] . '</strong></div>';
             $html .= '</div>'; 
+			$html .= '<div style="border-top: 1px solid #BCBCBC; margin-top:10px">&nbsp;</div>'; 
         }
         
         echo $html;
@@ -346,14 +350,94 @@ class ResumeController extends Zend_Controller_Action
         $PHPWord = new PHPWord();
 
         $document = $PHPWord->loadTemplate('candidate/template_resume.docx');
-        $document->setValue('Value1', $resumeRowSet->getFullName());
-        $document->setValue('Value2', $resumeRowSet->getBirthday());
-        $document->setValue('Value3', $resumeRowSet->getGender());
-        $document->setValue('Value4', $resumeRowSet->getMaritalStatus());
-        $document->setValue('Value5', $resumeRowSet->getAddress());
-        $document->setValue('Value6', $resumeRowSet->getEmail1());
-        $document->setValue('Value7', $resumeRowSet->getMobile1());
+        $document->setValue('fullname', $resumeRowSet->getFullName());
+        $document->setValue('birthday', $resumeRowSet->getBirthday());
+        $document->setValue('gender', $resumeRowSet->getGender());
+        $document->setValue('maritalstatus', $resumeRowSet->getMaritalStatus());
+        $document->setValue('address', $resumeRowSet->getAddress());
+        $document->setValue('email', $resumeRowSet->getEmail1());
+        $document->setValue('phone', $resumeRowSet->getMobile1());
+
+        $experienceMapper = new Default_Model_ExperienceMapper();
+        $experienceList = $experienceMapper->fetchAll('resume_id = ' . $resume_id, 'end_date DESC');
+        $table = ''; //empty table
+    	if(count($experienceList)){ //if there was data returned from queryDB()
+    		$table .= '<w:tbl>';
+    		$table .= '<w:tblPr><w:tblW w:w = "4000" w:type="pct"/></w:tblPr>';
+    		foreach ( $experienceList as $experience ) {
+    		    $date = new DateTime($experience->getStartDate());
+                $startDate = $date->format('M Y');
         
+                $date = new DateTime($experience->getEndDate());
+                $endDate = $date->format('M Y');
+           
+    			$table .= '<w:tr>'; //new xml table row
+    			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
+    			$table .= $startDate .'-'. $endDate; //cell contents
+    			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
+    			$table .= '<w:tc><w:p><w:r><w:t>';
+    			$table .= $experience->getCompanyName() .'<w:br/>'. $experience->getJobTitle();
+    			$table .= '</w:t></w:r></w:p></w:tc>';
+    			$table .= '</w:tr>';
+    		} //done with dynamic data
+            $table .= '</w:tbl>'; //close xml table
+    	}
+        $document->setValue('experience', $table);
+        
+
+        $expectationMapper = new Default_Model_ExpectationMapper();
+        $expectation = $expectationMapper->getExpectation($resume_id);
+        
+        $provinceArr = array();
+        if($expectation['res_expectation_id']) {
+            $resumeProvince = $expectationMapper->getExpectationProvince($expectation['res_expectation_id']);
+            foreach($resumeProvince as $province){
+                $provinceArr[] = $province['name'];
+            }
+        }
+
+        $currentSalary = number_format($expectation['current_salary']);
+        @$salaryFrom = number_format($expectation['estimated_salary_from']);
+        @$salaryTo = number_format($expectation['estimated_salary_to']);
+
+        $table = ''; //empty table
+		$table .= '<w:tbl>';
+		$table .= '<w:tblPr><w:tblW w:w = "4000" w:type="pct"/></w:tblPr>';
+		if($currentSalary) {
+			$table .= '<w:tr>'; //new xml table row
+			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
+			$table .= 'Salary:'; //cell contents
+			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
+			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
+			$table .= '$' . $currentSalary; //cell contents
+			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
+			$table .= '</w:tr>';
+		}
+		
+        if($salaryFrom) {
+			$table .= '<w:tr>'; //new xml table row
+			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
+			$table .= 'Estimated:'; //cell contents
+			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
+			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
+			$table .= '$' . $salaryFrom .' - ' . '$' . $salaryTo; //cell contents
+			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
+			$table .= '</w:tr>';
+		}
+		
+        if(count($provinceArr)) {
+			$table .= '<w:tr>'; //new xml table row
+			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
+			$table .= 'Location: '; //cell contents
+			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
+			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
+			$table .= implode(', ', $provinceArr); //cell contents
+			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
+			$table .= '</w:tr>';
+		}
+        $table .= '</w:tbl>'; //close xml table
+        $document->setValue('expection', $table);
+                    
         $resumeName = str_replace(' ', '', $resumeRowSet->getFullName()) .'.docx';
         $document->save('candidate/'. $resumeName);
         

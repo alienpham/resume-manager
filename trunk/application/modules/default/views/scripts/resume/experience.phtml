@@ -1,132 +1,170 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<?php
-echo $this->partial ( '/resume/menu-add-resume.phtml' )?>
+<div class="img-steps">
+	<img src="/images/img-step-02.png" width="480" height="58" alt="" />
+</div>
 <form name="frm" method="post" action="/resume/save-experience" onsubmit="return checkValid()">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-        <td width="50%" valign="top">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td width="17%" align="right"></td>
-                <td width="4%"></td>
-                <td bgcolor="#FFECEC">&nbsp;</td>
-                <td bgcolor="#FFECEC" id="error" class="error"></td>
-            </tr>
-            <tr>
-                <td class="subtitle_popup">Start date:<span class="error">*</span></td>
-                <td>&nbsp;</td>
-                <td bgcolor="#FFECEC">&nbsp;</td>
-                <td bgcolor="#FFECEC">
-                    <input type="text" name="startdate" id="startdate" style="width:164px" value="<?php echo $this->experienceRowSet->getStartDate();?>">
-                    <span class="subtitle_popup" style="padding-left:20px">End date:<span class="error">*</span></span> 
-                    <input type="text" name="enddate" id="enddate" style="width:163px" value="<?php echo $this->experienceRowSet->getEndDate();?>">
-                </td>
-            </tr>
-            <tr>
-                <td class="subtitle_popup">Job Title:<span class="error">*</span></td>
-                <td>&nbsp;</td>
-                <td bgcolor="#FFECEC">&nbsp;</td>
-                <td colspan="2" bgcolor="#FFECEC">
-                	<input type="text" name="job_title" id="job_title" style="width: 415px" value="<?php echo $this->experienceRowSet->getJobTitle();?>"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="subtitle_popup">Company:<span class="error">*</span></td>
-                <td>&nbsp;</td>
-                <td bgcolor="#FFECEC">&nbsp;</td>
-                <td height="30" colspan="2" bgcolor="#FFECEC">
-                	<input type="text" name="company_name" id="company_name" style="width:415px" value="<?php echo $this->experienceRowSet->getCompanyName();?>"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="subtitle_popup">Function:</td>
-                <td>&nbsp;</td>
-                <td bgcolor="#FFECEC">&nbsp;</td>
-                <td height="30" colspan="2" bgcolor="#FFECEC">
-                	<input type="text" name="function" id="function" style="width:415px" value=""/>
-                	<div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:fixed">
-                    	<div style="width: 33%; float: left">
-                            <ul style="list-style-type:none;">
-                            <?php 
-                            $i = 1;
-                            $checked = '';
-                            foreach($this->listFunction as $function) :
-                                if($i % 44 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
-                                if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
-                                if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
-                                else $checked = '';
-                            ?>
-                                <li><input type="checkbox" name="option[]" value="<?php echo $function['function_id']?>" <?php echo $checked;?>/> <?php echo $function['name']?></li>
-                                    
-                            <?php 
-                            $i++;
-                            endforeach;?>
-                            </ul>
-                    	</div>
-                        <div style="clear: both">&nbsp;</div>
-               		</div>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top" class="subtitle_popup">Info:</td>
-                <td>&nbsp;</td>
-                <td bgcolor="#FFECEC">&nbsp;</td>
-                <td height="30" colspan="2" bgcolor="#FFECEC">
-                	<textarea name="info" id="info" style="height:200px; width:500px"><?php echo $this->experienceRowSet->getInfo();?></textarea></td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td colspan="3" align="center">
-                	<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
-                	<input type="hidden" name="experid" value="<?php echo $this->experienceRowSet->getId();?>" />
-                	<a href="/resume/personal-info/id/<?php echo $this->resumeId; ?>"><input type="button" name="button" value="Back"/></a>
-                	<input type="submit" name="button" value="Save"/>
-                	<a href="/resume/expectation/id/<?php echo $this->resumeId; ?>"><input type="button" name="button" value="Next"/></a>
-                </td>
-            </tr>
-        </table>
-        </td>
-        <td>&nbsp;</td>
-        <td width="48%" valign="top">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td colspan="2"><strong>Resume Preview</strong></td>
-            </tr>
-            <tr>
-                <td colspan="2">&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="2" bgcolor="#999999" style="font-size: 15px; padding: 5px 5px; color: #FFFFFF">
-                    <strong>CAREER SUMMARY</strong>
-                </td>
-            </tr>
-            <tr>
-                <td height="15" colspan="2"></td>
-            </tr>
-            <?php foreach($this->rows as $row) : 
-                $date = date_create($row->getStartDate());
-                $startDate = date_format($date, 'M Y');
-                
-                $date = date_create($row->getEndDate());
-                $endDate = date_format($date, 'M Y');
-            ?>
-            <tr>
-                <td valign="top" width="125"><?php echo $startDate;?> - <?php echo $endDate; ?><br />
-                    <span class="a-left"><a href="/resume/experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Edit</a></span> |
-                    <span class="a-left"><a href="/resume/del-experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Delete</a></span>
-                </td>
-                <td align="left">
-                    <strong><?php echo $row->getCompanyName();?></strong><br />
-                    <?php echo $row->getJobTitle();?>
-                </td>
-            </tr>
-            <?php endforeach;?>
-        </table>
-        </td>
-    </tr>
-</table>
+<div class="from-add-01">
+	<h2>Experience</h2>
+	<ul>
+		<li>
+			<label>&nbsp;</label>
+			<em class="error"></em>
+		</li>
+		<li>
+			<label>Start date <em>*</em></label>
+			<input type="text" name="startdate" id="startdate" value="<?php echo $this->experienceRowSet->getStartDate();?>" style="width:120px">
+			<b>End date</b>
+			<input type="text" name="enddate" id="enddate" value="<?php echo $this->experienceRowSet->getEndDate();?>" style="width:120px">
+		</li>
+		<li>
+			<label>Job Title <em>*</em></label>
+			<input type="text" name="job_title" id="job_title" value="<?php echo $this->experienceRowSet->getJobTitle();?>"/>
+		</li>
+		<li>
+			<label>Company <em>*</em></label>
+			<input type="text" name="company_name" id="company_name" value="<?php echo $this->experienceRowSet->getCompanyName();?>"/>
+		</li>
+		<li>
+			<label>Function <em>*</em></label>
+			<input type="text" name="function" id="function" value=""/>
+			<div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:absolute;margin-left:15px">
+				<div style="width: 33%; float: left">
+					<ul style="list-style-type:none;">
+					<?php 
+					$i = 1;
+					$checked = '';
+					foreach($this->listFunction as $function) :
+						if($i % 44 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
+						if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
+						if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
+						else $checked = '';
+					?>
+						<li style="float:none;display:block;"><input type="checkbox" name="option[]" value="<?php echo $function['function_id']?>" <?php echo $checked;?>/> <?php echo $function['name']?></li>
+							
+					<?php 
+					$i++;
+					endforeach;?>
+					</ul>
+				</div>
+				<div style="clear: both">&nbsp;</div>
+			</div>
+		</li>
+		<li>
+			<label>Info</label>
+			<textarea name="info" id="info"><?php echo $this->experienceRowSet->getInfo();?></textarea></td>
+		</li>
+		<li>
+			<label>&nbsp;</label>
+			<div class="actions">
+				<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
+				<input type="hidden" name="experid" value="<?php echo $this->experienceRowSet->getId();?>" />
+				<a href="/resume/personal-info/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;">
+					<input type="button" class="button02" name="button" value="Back"/>
+				</a>
+				<input type="submit" class="button01" name="button" value="Save"/>
+				<a href="/resume/expectation/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;"><input type="button" class="button01" name="button" value="Next"/></a>
+			</div>
+		</li>
+	</ul>
+<!--
+	<table style="float:left" cellspacing="10">
+		<tr>
+			<td><label>Start date <em>*</em></label></td>
+			<td>
+				<input type="text" name="startdate" id="startdate" value="<?php echo $this->experienceRowSet->getStartDate();?>">
+				<label>End date <em>*</em></label>
+				<input type="text" name="enddate" id="enddate" value="<?php echo $this->experienceRowSet->getEndDate();?>">
+			</td>
+		</tr>
+		<tr>
+			<td><label>Job Title <em>*</em></label></td>
+			<td>
+				<input type="text" name="job_title" id="job_title" value="<?php echo $this->experienceRowSet->getJobTitle();?>"/>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Company <em>*</em></label></td>
+			<td>
+				<input type="text" name="company_name" id="company_name" value="<?php echo $this->experienceRowSet->getCompanyName();?>"/>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Function <em>*</em></label></td>
+			<td>
+				<input type="text" name="function" id="function" value=""/>
+				<div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:absolute;margin-left:15px">
+					<div style="width: 33%; float: left">
+						<ul style="list-style-type:none;">
+						<?php 
+						$i = 1;
+						$checked = '';
+						foreach($this->listFunction as $function) :
+							if($i % 46 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
+							if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
+							if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
+							else $checked = '';
+						?>
+							<li style="float:none;display:block;"><input type="checkbox" name="option[]" value="<?php echo $function['function_id']?>" <?php echo $checked;?>/> <?php echo $function['name']?></li>
+								
+						<?php 
+						$i++;
+						endforeach;?>
+						</ul>
+					</div>
+					<div style="clear: both">&nbsp;</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td><label>Info</label></td>
+			<td>
+				<textarea name="info" id="info" style="margin-left:15px"><?php echo $this->experienceRowSet->getInfo();?></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td><label>&nbsp;</label></td>
+			<td>
+				<div class="actions">
+					<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
+					<input type="hidden" name="experid" value="<?php echo $this->experienceRowSet->getId();?>" />
+					<a href="/resume/personal-info/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;">
+						<input type="button" class="button02" name="button" value="Back"/>
+					</a>
+					<input type="submit" class="button01" name="button" value="Save"/>
+					<a href="/resume/expectation/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;"><input type="button" class="button01" name="button" value="Next"/></a>
+				</div>
+			</td>
+		</tr>
+	</table>
+-->	
+	<div class="summary">
+		<h2>Career Summary</h2>
+		<ul>
+		 <?php foreach($this->rows as $row) : 
+			$date = date_create($row->getStartDate());
+			$startDate = date_format($date, 'M Y');
+			
+			$date = date_create($row->getEndDate());
+			$endDate = date_format($date, 'M Y');
+		?>
+			<li>
+				<div class="edit">
+					<p><?php echo $startDate;?> - <?php echo $endDate; ?></p>
+					<p class="action-link">
+						<a href="/resume/experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Edit</a> | 
+						<a href="/resume/del-experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Delete</a>
+					</p>
+				</div>
+				<div class="jobs">
+					<p class="name" style="font-weight:bold;text-transform: uppercase;"><a href="#"><?php echo $row->getCompanyName();?></a></p>
+					<p><?php echo $row->getJobTitle();?></p>
+				</div>                            
+			</li>
+		<?php endforeach;?>
+		</ul>
+	</div>
+</div>
 </form>
 <script>
 $(function() {
@@ -148,7 +186,7 @@ function checkValid()
 	var company_name = $("#company_name").val();
     
     if(startdate == '' || enddate == '' || job_title == '' || company_name == '') {
-        $('#error').html('Please input into field required (*)');
+        $('.error').html('Please input into field required (*)');
         return false;
     }
     return true;
