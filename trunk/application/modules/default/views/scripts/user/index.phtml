@@ -1,12 +1,20 @@
 <?php echo $this->headLink();?>
 <form class="box login" name="login" method="post" action="/user/login">
-    <fieldset class="boxBody">
-      <label>Email &nbsp;&nbsp;<span style="color:red"><?php echo $this->message; ?></span></label>
-      <input type="text" tabindex="1" name="email">
-      <label>Password</label>
-      <input type="password" tabindex="2" name="password">
-    </fieldset>
-    <footer>
-	  <input type="submit" class="btnLogin" value="Login" tabindex="4">
-	</footer>
-</form>
+<div class="form-login">
+	<h1>LOGIN</h1>
+	<ul>
+		<li>
+			<label>Email <em>*</em></label>
+			<input type="text" tabindex="1" name="email">
+		</li>
+		<li>
+			<label>Password <em>*</em></label>
+			<input type="password" tabindex="2" name="password">
+		</li>
+		<li>
+			<label>&nbsp;</label>
+			<input type="submit" class="button01" class="btnLogin" value="Login" tabindex="3" >
+		</li>
+	</ul>
+</div> 
+</form>   
