@@ -1,63 +1,34 @@
 <!-- Add fancyBox main JS and CSS files -->
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-        <td>
-        <form id="form" action="/resume" method="post">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td width="5%"><label for="choice">Search : </label></td>
-                <td width="9%">
-                    <select name="choice" style="width:110px"> 
-                        <option value="full_name">Name</option>
-                        <option value="resume_code">Resume Code</option>
-                        <option value="job_title">Job Title</option>
-                    </select>
-                </td>
-                <td width="13%">
-                    <input name="search" id="textbox" type="text" />
-                </td>
-                <td width="5%">
-                    <input id="button1" type="submit" value="Search" />
-                </td>
-                <td width="8%">
-                    <a href="#inline" class="fancybox">
-                    <input type="button" value="Advanced Search" />
-                    </a>
-                </td>
-                <td width="*%" align="right">&nbsp;</td>
-            </tr>
-        </table>
-        </form>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td width="7%"><a href="/resume/personal-info">
-                    <input id="button4" type="button" value="Add Resume" class="link_button" /></a>
-                </td>
-                <td width="35%"></td>
-
-                <td width="5%" align="right">&nbsp;</td>
-                <td width="30%" align="right">
-                    <div id="report"></div>
-                </td>
-            </tr>
-        </table>
-        </td>
-    </tr>
-</table>
+<div class="block-search">
+<form id="form" action="/resume" method="post">
+	<label>Search</label>
+	<select name="choice" style="width:110px"> 
+		<option value="full_name">Name</option>
+		<option value="resume_code">Resume Code</option>
+		<option value="job_title">Job Title</option>
+	</select>
+	<input type="text" value="" name="search" />
+	<input  class="button01" id="button1" type="submit" value="Search" />
+	<a href="#inline" class="fancybox" style="text-decoration:none;">
+		<input class="button01" type="button" value="Advanced Search" />
+	</a>
+	<br />
+	<br />
+	<a href="/resume/personal-info" style="text-decoration:none;">
+		<input class="button01" type="button" value="Add Resume" />
+	</a>
+</form>
+</div>  
+<p class="today-entry" id="report">&nbsp;</p>
 <div id="box">
     <?php echo $this->partial ( '/resume/list-resume.phtml', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
 </div>
 <?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
 <?php echo $this->partial ( '/resume/comment.phtml' )?>
-<div id="allcomment" style="width:500px;height: 200px; display: none;">&nbsp;</div>
-<div id="detail_resume" style="width:900px;height: 500px; display: none;">&nbsp;</div>
+<div id="allcomment" style="width:500px;height: auto; display: none;overflow: hidden;">&nbsp;</div>
+<div id="detail_resume" style="width:550px;height: 450px; display: none;">&nbsp;</div>
 <script type="text/javascript">
 $(document).ready(function() {
     //Begin Comment for candidate
@@ -88,7 +59,14 @@ $(document).ready(function() {
       	});
     });
     
-    $(".allcomment").fancybox();
+    $(".allcomment").fancybox({
+		autoScale: true,
+		autoDimensions: true,
+		width: 550,
+		height: 300,
+		scrolling: 'no',
+		autoResize: true
+	});
     $(".allcomment").click(function(){
 		var resume_id = $(this).attr('id');
 		$.ajax({
@@ -107,6 +85,7 @@ $(document).ready(function() {
     //Begin View detail candidate
     $(".detail_resume").fancybox();
     $(".detail_resume").click(function(){
+		$('#detail_resume').html('');
 		var resume_id = $(this).attr('id');
 		$.ajax({
       	  	url: '/resume/detail-resume',

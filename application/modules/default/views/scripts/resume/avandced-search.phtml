@@ -2,240 +2,94 @@
 $resume = new Default_Model_ExperienceMapper();
 $listFunction = $resume->getFunction();
 ?>
-<div style="width:900px;height: 500px; display: none;" id="inline">
+<div style="width:900px;height: 450px; display: none;" id="inline">
+<div id="adv-search" class="content">
 <form name="frmAvanSearch" id="frmAvanSearch" method="post" action="/resume/avandce-search" >
-<table cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-    <tr>
-        <td valign="top" style="padding: 15px 15px 15px 15px">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td>
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td colspan="3" bgcolor="#990000" class="title_popup">
-                            <img src="/images/icons/icon_expand.gif" width="9" height="9" /> SEARCH PERSONAL DETAILS
-                        </td>
-                    </tr>
-                    <tr>
-                        <td height="20" colspan="3"></td>
-                    </tr>
-                    <tr>
-                        <td width="45%" valign="top">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td width="28%" align="right"></td>
-                                <td width="4%"></td>
-                                <td colspan="2" bgcolor="#FFECEC"></td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">Candidate Name:</td>
-                                <td>&nbsp;</td>
-                                <td width="5%" bgcolor="#FFECEC">&nbsp;</td>
-                                <td width="63%" bgcolor="#FFECEC">
-                                    <input type="text" name="full_name" id="full_name" style="width: 230px" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">Email:</td>
-                                <td>&nbsp;</td>
-                                <td bgcolor="#FFECEC">&nbsp;</td>
-                                <td bgcolor="#FFECEC">
-                                    <input type="text" name="email" id="email" style="width: 230px" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">Phone:</td>
-                                <td>&nbsp;</td>
-                                <td bgcolor="#FFECEC">&nbsp;</td>
-                                <td bgcolor="#FFECEC">
-                                    <input type="text" name="phone" id="phone" style="width: 230px" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td colspan="2" bgcolor="#FFECEC"></td>
-                            </tr>
-                        </table>
-                        </td>
-                        <td width="2%">&nbsp;</td>
-                        <td width="53%" valign="top">
-                        <table width="100%" border="0" cellspacing="0"
-                            cellpadding="0">
-                            <tr>
-                                <td width="25%" align="right"></td>
-                                <td width="4%"></td>
-                                <td colspan="2" bgcolor="#FFECEC"></td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">Gender:</td>
-                                <td>&nbsp;</td>
-                                <td width="4%" bgcolor="#FFECEC">&nbsp;</td>
-                                <td width="67%" bgcolor="#FFECEC">
-                                    <input type="radio" name="gender" value="Male" />Male&nbsp;&nbsp;&nbsp; 
-                                    <input type="radio" name="gender" value="Female" /> Female
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top" class="subtitle_popup">Marital Status:</td>
-                                <td>&nbsp;</td>
-                                <td bgcolor="#FFECEC">&nbsp;</td>
-                                <td bgcolor="#FFECEC">
-                                    <input type="radio" name="marital_status" value="Single" /> Single &nbsp;&nbsp;&nbsp; 
-                                    <input type="radio" name="marital_status" value="Married" /> Married &nbsp;&nbsp;&nbsp; 
-                                    <input type="radio" name="marital_status" value="Divorced" /> Divorced
-                                </td>
-                            </tr>
-                        </table>
-                        </td>
-                    </tr>
-                </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                <table width="100%" border="0" cellspacing="0"
-                    cellpadding="0">
-                    <tr>
-                        <td colspan="3" bgcolor="#990000"
-                            class="title_popup"><img
-                            src="/images/icons/icon_expand.gif" width="9"
-                            height="9" /> SEARCH EXPERIENCE, SALARY,
-                        WORK LOCATION</td>
-                    </tr>
-                    <tr>
-                        <td height="20" colspan="3"></td>
-                    </tr>
-                    <tr>
-                        <td width="45%" valign="top">
-                        <table width="100%" border="0" cellspacing="0"
-                            cellpadding="0">
-                            <tr>
-                                <td width="28%" align="right"></td>
-                                <td width="4%"></td>
-                                <td colspan="2" bgcolor="#FFECEC"></td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">Job Title:</td>
-                                <td>&nbsp;</td>
-                                <td width="5%" bgcolor="#FFECEC">&nbsp;</td>
-                                <td width="63%" bgcolor="#FFECEC">
-                                    <input type="text" name="job_title" id="job_title" style="width: 230px" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">Company:</td>
-                                <td>&nbsp;</td>
-                                <td bgcolor="#FFECEC">&nbsp;</td>
-                                <td bgcolor="#FFECEC">
-                                    <input type="text" name="company_name" id="company_name" style="width: 230px" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">Function:</td>
-                                <td>&nbsp;</td>
-                                <td bgcolor="#FFECEC">&nbsp;</td>
-                                <td bgcolor="#FFECEC">
-                                    <input type="text" name="function" id="function" style="width: 230px" value=""/>
-                                    <div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:fixed">
-                                        <div style="width: 33%; float: left">
-                                            <ul style="list-style-type:none;">
-                                            <?php 
-                                            $i = 1;
-                                            $checked = '';
-                                            foreach($listFunction as $function) :
-                                                if($i % 44 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
-                                                if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
-                                                //if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
-                                                //else $checked = '';
-                                            ?>
-                                                <li><input type="checkbox" name="option[]" value="<?php echo $function['function_id']?>" <?php echo $checked;?>/> <?php echo $function['name']?></li>
-                                                    
-                                            <?php 
-                                            $i++;
-                                            endforeach;?>
-                                            </ul>
-                                        </div>
-                                        <div style="clear: both">&nbsp;</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td colspan="2" bgcolor="#FFECEC"></td>
-                            </tr>
+	<h2>Search Personal Details</h2>
+	<ul>
+		<li>
+			<label>Candidate Name</label>
+			<input type="text" name="full_name" id="full_name" value="" />
+		</li>
+		<li>
+			<label>Email</label>
+			<input type="text" name="email" id="email" value="" />
+		</li>                    
+		<li>
+			<label>Phone</label>
+			<input type="text" name="phone" id="phone" value="" />
+		</li>
+		<li>
+			<label>Gender</label>
+			<input type="radio" name="gender" value="female" /> <span>Female</span>
+			<input type="radio" name="gender" value="male" /> <span>Male</span>
+		</li>
+		<li>
+			<label>Marital Status</label>
+			<input type="radio" name="marital_status" value="single" /> <span>Single</span>
+			<input type="radio" name="marital_status" value="mrried" /> <span>Married</span>
+			<input type="radio" name="marital_status" value="divorced" /> <span>Divorced</span>
+		</li>
 
-                        </table>
-                        </td>
-                        <td width="2%">&nbsp;</td>
-                        <td width="53%" valign="top">
-                        <table width="100%" border="0" cellspacing="0"
-                            cellpadding="0">
-                            <tr>
-                                <td width="25%" align="right"></td>
-                                <td width="4%"></td>
-                                <td colspan="2" bgcolor="#FFECEC"></td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">Salary:</td>
-                                <td>&nbsp;</td>
-                                <td bgcolor="#FFECEC">&nbsp;</td>
-                                <td bgcolor="#FFECEC">
-                                    <select name="symbol" id="symbol" style="width: 60px">
-                                        <option value="1">=</option>
-                                        <option value="2"> &gt; </option>
-                                        <option value="3"> &lt; </option>
-                                    </select> 
-                                    <input name="salary" type="text" id="salary" style="width: 80px" value="" /> USD
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">Duties:</td>
-                                <td>&nbsp;</td>
-                                <td bgcolor="#FFECEC">&nbsp;</td>
-                                <td bgcolor="#FFECEC">
-                                    <input type="text" name="textfield6" style="width: 230px" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="subtitle_popup">&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td bgcolor="#FFECEC">&nbsp;</td>
-                                <td bgcolor="#FFECEC">
-                                    <input type="checkbox" name="checkbox" id="checkbox" /> Search last
-                                experience only</td>
-                            </tr>
-                            
-                            
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td colspan="2" bgcolor="#FFECEC"></td>
-                            </tr>
-                        </table>
-                        </td>
-                    </tr>
-                </table>
-                </td>
-            </tr>
-            <tr>
-                <td height="20"></td>
-            </tr>
-            <tr>
-                <td>
-                <hr />
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                <input type="button" name="avansearch" id="avansearch" value="Search">&nbsp;&nbsp;&nbsp; 
-                <input type="button" name="cancel" id="cancel" value="Cancel"  onclick="event.preventDefault(); parent.$.fancybox.close();"/></td>
-            </tr>
-        </table>
-        </td>
-    </tr>
-    <tr></tr>
-</table>
+	</ul>
+
+	<h2>SEARCH EXPERIENCE, SALARY, WORK LOCATION</h2>
+	<ul>
+		<li>
+			<label>Job Title</label>
+			<input type="text" name="job_title" id="job_title" value="" />
+		</li>
+		<li>
+			<label>Salary</label>
+			<select name="symbol" id="symbol" style="width: 60px">
+				<option value="1">=</option>
+				<option value="2"> &gt; </option>
+				<option value="3"> &lt; </option>
+			</select> 
+			<input class="cost" type="text" name="salary" id="salary" value="" /> <span style="float:none !important; ">USD</span>
+		</li>
+		<li>
+			<label>Company</label>
+			<input type="text" name="company_name" id="company_name" value="" />
+		</li>                    
+		<li>
+			<label>Info</label>
+			<input type="text" name="info" id="info" value="" />
+		</li>
+		<li>
+			<label>Function</label>
+			<input type="text" name="function" id="function" value=""/>
+			<div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:absolute">
+				<div style="width: 33%; float: left">
+					<ul style="list-style-type:none;margin: 10px 0;">
+					<?php 
+					$i = 1;
+					$checked = '';
+					foreach($listFunction as $function) :
+						if($i % 46 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;margin: 10px 0;">';endif;
+						if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
+						//if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
+						//else $checked = '';
+					?>
+						<li style="float:none;display:block;"><input type="checkbox" name="option[]" value="<?php echo $function['function_id']?>" <?php echo $checked;?>/>&nbsp; <?php echo $function['name']?></li>
+							
+					<?php 
+					$i++;
+					endforeach;?>
+					</ul>
+				</div>
+				<div style="clear: both">&nbsp;</div>
+			</div>
+		</li>
+		<li>
+			<label>&nbsp;</label>
+			<input type="checkbox" value="" /> <p>Search last experience only</p>
+		</li>
+	</ul>
+	<div class="actions">
+		<input type="button" class="button02" name="cancel" id="cancel" value="Cancel"  onclick="event.preventDefault(); parent.$.fancybox.close();">
+		<input type="button" class="button01" name="avansearch" id="avansearch" value="Search">
+	</div>
 </form>
+</div>
 </div>

@@ -1,96 +1,69 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<?php echo $this->partial('/resume/menu-add-resume.phtml')?>
 <form name="frm" method="post" action="/resume/save-resume" onsubmit="return checkValid()">
-<table style="width:50%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-        <td width="19%" align="right"></td>
-        <td width="4%"></td>
-        <td id="error" class="error"></td>
-    </tr>
-    <tr>
-		<td align="right" >Full Name:<span class=error>*</span></td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC"> 
-            <input type="text" name="full_name" id="full_name" style="width: 225px" value="<?php echo $this->resumeRowset->getFullName();?>"/>
-        </td>
-	</tr>
-	<tr>
-		<td align="right">Birthday:<span class=error>*</span></td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC">
-            <input type="text" name="birthday" id="birthday" style="width: 225px" value="<?php echo $this->resumeRowset->getBirthDay();?>" />
-        </td>
-	</tr>		
-	<tr>
-		<td align="right">Gender:<span class="error">*</span></td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC">
-			<input type="radio"	name="gender" value="Male" <?php echo ($this->resumeRowset->getGender() == 'Male')? "checked" : "" ?>/> Male &nbsp;&nbsp;&nbsp; 
-			<input type="radio" name="gender" value="Female" <?php echo ($this->resumeRowset->getGender() == 'Female')? "checked" : "" ?>/> Female
-		</td>
-	</tr>
-	<tr>
-		<td align="right">Marital Status:</td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC">
-			<input type="radio"	name="marital_status" value="Single" <?php echo ($this->resumeRowset->getMaritalStatus() == 'Single')? "checked" : "" ?>/> Single &nbsp;&nbsp;&nbsp;
-			<input type="radio" name="marital_status" value="Married" <?php echo ($this->resumeRowset->getMaritalStatus() == 'Married')? "checked" : "" ?>/> Married &nbsp;&nbsp;&nbsp; 
-			<input type="radio" name="marital_status" value="Divorced" <?php echo ($this->resumeRowset->getMaritalStatus() == 'Divorced')? "checked" : "" ?>/> Divorced
-		</td>
-	</tr>
-	<tr>
-		<td align="right" >Email1:<span class="error">*</span></td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC" >
-            <input type="text" name="email1" id="email1"  value="<?php echo $this->resumeRowset->getEmail1();?>" style="width:225px" />
-        </td>
-	</tr>
-	<tr>
-		<td align="right">Email2:</td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC">
-            <input type="text" name="email2" value="<?php echo $this->resumeRowset->getEmail2();?>" style="width:225px" />
-        </td>
-	</tr>
-	<tr>
-		<td align="right">Mobile1:<span class="error">*</span></td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC">
-            <input type="text" name="mobile1" id="mobile1" value="<?php echo $this->resumeRowset->getMobile1();?>" style="width:225px" />
-        </td>
-	</tr>
-	<tr>
-		<td align="right">Mobile2:</td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC">
-            <input type="text" name="mobile2"  value="<?php echo $this->resumeRowset->getMobile2();?>" style="width:225px" />
-        </td>
-	</tr>
-	<tr>
-		<td align="right">Telephone:</td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC">
-            <input type="text" name="tel" value="<?php echo $this->resumeRowset->getTel();?>" style="width:225px" />
-        </td>
-	</tr>
-	<tr>
-		<td align="right">Address:<span class="error">*</span></td>
-		<td width="4%"></td>
-		<td bgcolor="#FFECEC">
-            <input type="text" name="address" id="address" value="<?php echo $this->resumeRowset->getAddress();?>" style="width:225px" />
-        </td>
-	</tr>
-	<tr>	
-		<td>&nbsp;</td>
-		<td width="4%"></td>
-		<td>
-			<input type="hidden" name="resume_id" value="<?php echo $this->resumeRowset->getResumeId();?>" />
-			<a href="/resume"><input type="button" name="cancel" value="Cancel" /></a> &nbsp;&nbsp; 
-			<input type="submit" name="next" value="Next" />
-		</td>
-	</tr>
-</table>
+<div class="img-steps">
+	<img src="/images/img-step-01.png" width="480" height="58" alt="" />
+</div>
+<div class="from-add-01">
+	<h2>Personal Details</h2>
+	<ul>
+		<li>
+			<label>&nbsp;</label>
+			<em class="error"></em>
+		</li>
+		<li>
+			<label>Full Name <em>*</em></label>
+			<input type="text" name="full_name" id="full_name" value="<?php echo $this->resumeRowset->getFullName();?>"/>
+		</li>
+		<li>
+			<label>Birthday <em>*</em></label>
+			<input type="text" name="birthday" id="birthday" value="<?php echo $this->resumeRowset->getBirthDay();?>" />
+		</li>
+		<li>
+			<label>Gender <em>*</em></label>
+			<input type="radio"	name="gender" value="Male" <?php echo ($this->resumeRowset->getGender() == 'Male')? "checked" : "" ?>/> <span>Male</span>  
+			<input type="radio" name="gender" value="Female" <?php echo ($this->resumeRowset->getGender() == 'Female')? "checked" : "" ?>/> <span>Female</span>
+		</li>
+		<li>
+			<label>Marital Status</label>
+			<input type="radio"	name="marital_status" value="Single" <?php echo ($this->resumeRowset->getMaritalStatus() == 'Single')? "checked" : "" ?>/> <span>Single</span> 
+			<input type="radio" name="marital_status" value="Married" <?php echo ($this->resumeRowset->getMaritalStatus() == 'Married')? "checked" : "" ?>/> <span>Married</span>  
+			<input type="radio" name="marital_status" value="Divorced" <?php echo ($this->resumeRowset->getMaritalStatus() == 'Divorced')? "checked" : "" ?>/> <span>Divorced</span>
+		</li>
+		<li>
+			<label>Email 1 <em>*</em></label>
+			<input type="text" name="email1" id="email1"  value="<?php echo $this->resumeRowset->getEmail1();?>"/>
+		</li>
+		<li>
+			<label>Email 2</label>
+			<input type="text" name="email2" id="email2"  value="<?php echo $this->resumeRowset->getEmail2();?>"/>
+		</li>
+		<li>
+			<label>Mobile 1 <em>*</em></label>
+			<input type="text" name="mobile1" id="mobile1" value="<?php echo $this->resumeRowset->getMobile1();?>"/>
+		</li>
+		<li>
+			<label>Mobile 2</label>
+			<input type="text" name="mobile2" id="mobile2" value="<?php echo $this->resumeRowset->getMobile2();?>"/>
+		</li>
+		<li>
+			<label>Telephone</label>
+			<input type="text" name="tel" value="<?php echo $this->resumeRowset->getTel();?>"/>
+		</li>
+		<li>
+			<label>Address <em>*</em></label>
+			<input type="text" name="address" id="address" value="<?php echo $this->resumeRowset->getAddress();?>"/>
+		</li>
+		<li>
+			<label>&nbsp;</label>
+			<div class="actions">
+				<input type="hidden" name="resume_id" value="<?php echo $this->resumeRowset->getResumeId();?>" />
+				<a href="/resume" style="text-decoration:none;"><input type="button" class="button02" name="cancel" value="Cancel" /></a> &nbsp;&nbsp; 
+				<input type="submit" class="button01" name="next" value="Next" />
+			</div>
+		</li>
+	</ul>
+</div>
 </form>
 <script>
 $(function() {
@@ -109,7 +82,7 @@ function checkValid()
     var address = $("#address").val();
     
     if(fullname == '' || birthday == '' || email1 == '' || mobile1 == '' || address == '') {
-        $('#error').html('Please input into field required (*)');
+        $('.error').html('Please input into field required (*)');
         return false;
     }
     return true;

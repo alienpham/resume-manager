@@ -11,8 +11,7 @@ class UserController extends Zend_Controller_Action
 	public function indexAction()
 	{
 	    $view = new Zend_View();
-        $view->headLink()->appendStylesheet ( '/css/login/reset.css' );
-        $view->headLink()->appendStylesheet ( '/css/login/structure.css' );
+        $view->headLink()->appendStylesheet ( '/css/stylesheet.css' );
         
 	    $this->_helper->layout->disableLayout ();
 		$aNamespace = new Zend_Session_Namespace ( 'zs_User' );
