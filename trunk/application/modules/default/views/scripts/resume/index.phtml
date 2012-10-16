@@ -157,12 +157,14 @@ $(document).ready(function() {
 $(document).ready(function(){
     $("#function").click(function(){
         if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');
-        else $(".multiselect").hide('slow');
     });
 });
 
-$('.multiselect').mouseleave(function(){
-    $(".multiselect").hide('slow');
+$("body").click(function(e){
+	var $parentClass = $(e.target).parents('.multiselect');
+    if(e.target.className !== "function" && $parentClass.length < 1) {
+    	$(".multiselect").hide('slow');
+    }       
 });
 
 jQuery.fn.multiselect = function() {
