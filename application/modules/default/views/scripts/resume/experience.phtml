@@ -1,7 +1,7 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
 <div class="img-steps">
-	<img src="/images/img-step-02.png" width="480" height="58" alt="" />
+	<img src="/images/img-step-02.png" alt="Experience" />
 </div>
 <form name="frm" method="post" action="/resume/save-experience" onsubmit="return checkValid()">
 <div class="from-add-01">
@@ -26,16 +26,16 @@
 			<input type="text" name="company_name" id="company_name" value="<?php echo $this->experienceRowSet->getCompanyName();?>"/>
 		</li>
 		<li>
-			<label>Function <em>*</em></label>
-			<input type="text" name="function" id="function" value=""/>
-			<div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:absolute;margin-left:15px">
+            <label>Function</label>
+            <input type="text" name="function" class="function" value=""/>
+			<div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:absolute;margin-left:170px">
 				<div style="width: 33%; float: left">
 					<ul style="list-style-type:none;">
 					<?php 
 					$i = 1;
 					$checked = '';
 					foreach($this->listFunction as $function) :
-						if($i % 44 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
+						if($i % 46 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
 						if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
 						if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
 						else $checked = '';
@@ -52,7 +52,7 @@
 		</li>
 		<li>
 			<label>Info</label>
-			<textarea name="info" id="info"><?php echo $this->experienceRowSet->getInfo();?></textarea></td>
+			<textarea name="info" id="info"><?php echo $this->experienceRowSet->getInfo();?></textarea>
 		</li>
 		<li>
 			<label>&nbsp;</label>
@@ -67,77 +67,7 @@
 			</div>
 		</li>
 	</ul>
-<!--
-	<table style="float:left" cellspacing="10">
-		<tr>
-			<td><label>Start date <em>*</em></label></td>
-			<td>
-				<input type="text" name="startdate" id="startdate" value="<?php echo $this->experienceRowSet->getStartDate();?>">
-				<label>End date <em>*</em></label>
-				<input type="text" name="enddate" id="enddate" value="<?php echo $this->experienceRowSet->getEndDate();?>">
-			</td>
-		</tr>
-		<tr>
-			<td><label>Job Title <em>*</em></label></td>
-			<td>
-				<input type="text" name="job_title" id="job_title" value="<?php echo $this->experienceRowSet->getJobTitle();?>"/>
-			</td>
-		</tr>
-		<tr>
-			<td><label>Company <em>*</em></label></td>
-			<td>
-				<input type="text" name="company_name" id="company_name" value="<?php echo $this->experienceRowSet->getCompanyName();?>"/>
-			</td>
-		</tr>
-		<tr>
-			<td><label>Function <em>*</em></label></td>
-			<td>
-				<input type="text" name="function" id="function" value=""/>
-				<div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:absolute;margin-left:15px">
-					<div style="width: 33%; float: left">
-						<ul style="list-style-type:none;">
-						<?php 
-						$i = 1;
-						$checked = '';
-						foreach($this->listFunction as $function) :
-							if($i % 46 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
-							if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
-							if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
-							else $checked = '';
-						?>
-							<li style="float:none;display:block;"><input type="checkbox" name="option[]" value="<?php echo $function['function_id']?>" <?php echo $checked;?>/> <?php echo $function['name']?></li>
-								
-						<?php 
-						$i++;
-						endforeach;?>
-						</ul>
-					</div>
-					<div style="clear: both">&nbsp;</div>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td><label>Info</label></td>
-			<td>
-				<textarea name="info" id="info" style="margin-left:15px"><?php echo $this->experienceRowSet->getInfo();?></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td><label>&nbsp;</label></td>
-			<td>
-				<div class="actions">
-					<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
-					<input type="hidden" name="experid" value="<?php echo $this->experienceRowSet->getId();?>" />
-					<a href="/resume/personal-info/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;">
-						<input type="button" class="button02" name="button" value="Back"/>
-					</a>
-					<input type="submit" class="button01" name="button" value="Save"/>
-					<a href="/resume/expectation/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;"><input type="button" class="button01" name="button" value="Next"/></a>
-				</div>
-			</td>
-		</tr>
-	</table>
--->	
+	
 	<div class="summary">
 		<h2>Career Summary</h2>
 		<ul>
@@ -192,16 +122,20 @@ function checkValid()
     return true;
 }   
 </script>
+
 <script>
 $(document).ready(function(){
-    $("#function").click(function(){
+    $(".function").click(function(){
         if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');
-        else $(".multiselect").hide('slow');
     });
 });
 
-$('.multiselect').mouseleave(function(){
-	$(".multiselect").hide('slow');
+$("body").click(function(e){
+	var $parentClass = $(e.target).parents('.multiselect');
+    if(e.target.className !== "function" && $parentClass.length < 1) {
+    	$(".multiselect").hide('slow');
+    	
+    }       
 });
 
 jQuery.fn.multiselect = function() {

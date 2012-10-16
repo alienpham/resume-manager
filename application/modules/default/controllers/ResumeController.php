@@ -114,7 +114,6 @@ class ResumeController extends Zend_Controller_Action
     
     public function experienceAction()
     {
-    	
     	$experid = $this->getRequest()->getParam('experid', 0);
         $resumeId = $this->getRequest()->getParam('id');
         $experienceMapper = new Default_Model_ExperienceMapper();
