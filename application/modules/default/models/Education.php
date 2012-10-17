@@ -1,13 +1,13 @@
 <?php
-class Default_Model_Experience
+class Default_Model_Education
 {
-	protected $_id;
+	protected $_res_education_id;
 	protected $_resume_id;
 	protected $_start_date;
 	protected $_end_date;
-	protected $_job_title;
-	protected $_company_name;
-	protected $_duties;
+	protected $_school_name;
+	protected $_program_name;
+	protected $_program_info;
 	protected $_sort_order;
     
 	public function __construct(array $options = null)
@@ -54,11 +54,11 @@ class Default_Model_Experience
 		$this->_resume_id = $id;
 	}
 	
-	public function getId() {
-		return $this->_id;
+	public function getEducationId() {
+		return $this->_res_education_id;
 	}
-	public function setId($id) {
-		$this->_id = $id;
+	public function setEducationId($id) {
+		$this->_res_education_id = $id;
 	}
 	
 	public function getStartDate() {
@@ -75,25 +75,25 @@ class Default_Model_Experience
 		$this->_end_date = $date;
 	}
 	
-	public function getJobTitle() {
-		return $this->_job_title;
+	public function getSchoolName() {
+		return $this->_school_name;
 	}
-	public function setJobTitle($job) {
-		$this->_job_title = $job;
-	}
-	
-	public function getCompanyName() {
-		return $this->_company_name;
-	}
-	public function setCompanyName($company) {
-		$this->_company_name = $company;
+	public function setSchoolName($school) {
+		$this->_school_name = $school;
 	}
 	
-	public function getDuties() {
-		return $this->_duties;
+	public function getProgramName() {
+		return $this->_program_name;
 	}
-	public function setDuties($info) {
-		$this->_duties = $info;
+	public function setProgramName($program) {
+		$this->_program_name = $program;
+	}
+	
+	public function getProgramInfo() {
+		return $this->_program_info;
+	}
+	public function setProgramInfo($info) {
+		$this->_program_info = $info;
 	}
 	
 	public function getSortOrder() {

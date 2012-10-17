@@ -36,7 +36,7 @@ class Default_Model_ExperienceMapper {
 			'end_date' 		=> $experience->getEndDate(), 
 			'job_title' 	=> $experience->getJobTitle(),
         	'company_name' 	=> $experience->getCompanyName(),
-        	'info' 			=> $experience->getInfo(),
+        	'duties' 		=> $experience->getDuties(),
         	'sort_order' 	=> $experience->getSortOrder()        	
 		);
 		
@@ -62,7 +62,7 @@ class Default_Model_ExperienceMapper {
 		$experience->setEndDate($row->end_date);
 		$experience->setJobTitle($row->job_title);
 		$experience->setCompanyName($row->company_name);
-		$experience->setInfo($row->info);
+		$experience->setDuties($row->duties);
 		$experience->setSortOrder($row->sort_order);      
     }
 
@@ -79,7 +79,7 @@ class Default_Model_ExperienceMapper {
 			$entry->setEndDate($row->end_date);
 			$entry->setJobTitle($row->job_title);
 			$entry->setCompanyName($row->company_name);
-			$entry->setInfo($row->info);
+			$entry->setDuties($row->duties);
 			$entry->setSortOrder($row->sort_order);  
             $entries[] = $entry;
         }

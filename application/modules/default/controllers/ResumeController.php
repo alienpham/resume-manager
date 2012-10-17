@@ -75,7 +75,7 @@ class ResumeController extends Zend_Controller_Action
         
         $this->view->resumeRowset = $resumeRowset;
     }
-	
+    
 	public function saveResumeAction()
     {
         $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
@@ -109,7 +109,60 @@ class ResumeController extends Zend_Controller_Action
         $resumeId = $resume->save($resumeRowset);
         if($resumeCode == 'R') $resume->updateResumCode('R' . $resumeId, $aNamespace->consultant_id, $resumeId);
         
-        $this->_redirect('/resume/experience/id/' . $resumeId);
+        $this->_redirect('/resume/education/id/' . $resumeId);
+    }
+    
+    public function educationAction()
+    {
+        $resumeId = $this->getRequest()->getParam('id', 0);
+        $educationId = $this->getRequest()->getParam('educationid', 0);
+        
+        $educationMapper = new Default_Model_EducationMapper();
+        $rows = $educationMapper->fetchAll('resume_id = ' . $resumeId, 'end_date DESC');
+        
+        $educationRowset = new Default_Model_Education();
+        $educationMapper->find($educationId, $educationRowset);
+        
+        $this->view->resumeId = $resumeId;
+        $this->view->rows = $rows;
+        $this->view->educationRowset = $educationRowset;
+    }
+    
+     public function saveEducationAction()
+    {
+        $post = $this->getRequest()->getPost();	
+        $date = new DateTime($post['startdate']);
+        $startDate = $date->format('Y-m-d');
+        
+        $date = new DateTime($post['enddate']);
+        $endDate = $date->format('Y-m-d');
+
+        $educationRowset = new Default_Model_Education();
+        $educationRowset->setEducationId($post['educationid']);
+        $educationRowset->setResumeId($post['resume_id']);
+        $educationRowset->setStartDate($startDate);
+        $educationRowset->setEndDate($endDate);
+        $educationRowset->setSchoolName($post['school_name']);
+        $educationRowset->setProgramName($post['program_name']);
+        $educationRowset->setProgramInfo($post['program_info']);  
+        $educationRowset->setSortOrder(1);   
+        
+        $educationMapper = new Default_Model_EducationMapper();
+        $educationId = $educationMapper->save($educationRowset);
+        
+        if($post['button'] == 'Next') $this->_redirect('resume/experience/id/' . $post['resume_id']);
+        else $this->_redirect('/resume/education/id/' . $post['resume_id']);
+    }
+    
+    public function delEducationAction()
+    {
+    	$resumeId = $this->getRequest()->getParam('id');
+        $educationId = $this->getRequest()->getParam('educationid', 0);
+        
+    	$educationMapper = new Default_Model_EducationMapper();
+    	$educationMapper->delete(array('res_education_id = ?' => $educationId));
+    	
+    	$this->_redirect('/resume/education/id/' . $resumeId);
     }
     
     public function experienceAction()
@@ -139,7 +192,7 @@ class ResumeController extends Zend_Controller_Action
         $this->view->experFunction = $functionArr;
     }    
     
-	public function saveExperienceAction()
+   	public function saveExperienceAction()
     {
         $post = $this->getRequest()->getPost();	
         $date = new DateTime($post['startdate']);
@@ -151,12 +204,11 @@ class ResumeController extends Zend_Controller_Action
         $experienceRowset = new Default_Model_Experience();
         $experienceRowset->setId($post['experid']);
         $experienceRowset->setResumeId($post['resume_id']);
-        $experienceRowset->setResumeId($post['resume_id']);
         $experienceRowset->setStartDate($startDate);
         $experienceRowset->setEndDate($endDate);
         $experienceRowset->setJobTitle($post['job_title']);
         $experienceRowset->setCompanyName($post['company_name']);
-        $experienceRowset->setInfo($post['info']);  
+        $experienceRowset->setDuties($post['duties']);  
         $experienceRowset->setSortOrder(1);   
         
         $experienceMapper = new Default_Model_ExperienceMapper();
@@ -338,6 +390,44 @@ class ResumeController extends Zend_Controller_Action
         $this->render('detail-resume');
 	}
 	
+	public function exportEmailAction()
+	{
+	    $resume = new Default_Model_ResumeMapper();
+        $rows = $resume->fetchAll();
+        
+	    header("Pragma: public");
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header("Cache-Control: pre-check=0, post-check=0, max-age=0");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        header("Content-Transfer-Encoding: none");
+        header("Content-Type: application/vnd.ms-excel;");
+        header("Content-type: application/x-msexcel");
+        header("Content-Disposition: attachment; filename=ListEmailResume".date('Ymd').".xls");
+
+        $table = '<html><body>';
+        $table .= '<meta content="text/html; charset=utf-8" http-equiv="Content-Type">';
+        $table .= '<table border="1">';
+        $table .= '<tr>'; //new xml table row
+        $table .= '<td>Candidate</td>';
+        $table .= '<td>Email</td>';
+        $table .= '</tr>';
+        foreach ($rows AS $row) :
+            $table .= '<tr>'; //new xml table row
+		        $table .= '<td>';
+                $table .= $row->getFullName();
+                $table .= '</td>';
+                 $table .= '<td>';
+                $table .= $row->getEmail1();
+                $table .= '</td>';
+            $table .= '</tr>';
+        endforeach;
+        $table .= '</table></body></html>';
+        echo $table;
+        exit;
+    }
+
+
 	function exportToWordAction()
 	{
         $resume_id = $this->_getParam('id');
@@ -349,20 +439,57 @@ class ResumeController extends Zend_Controller_Action
         $PHPWord = new PHPWord();
 
         $document = $PHPWord->loadTemplate('candidate/template_resume.docx');
-        $document->setValue('fullname', $resumeRowSet->getFullName());
+        $document->setValue('fullname', ucwords(strtolower($resumeRowSet->getFullName())));
         $document->setValue('birthday', $resumeRowSet->getBirthday());
         $document->setValue('gender', $resumeRowSet->getGender());
         $document->setValue('maritalstatus', $resumeRowSet->getMaritalStatus());
         $document->setValue('address', $resumeRowSet->getAddress());
         $document->setValue('email', $resumeRowSet->getEmail1());
         $document->setValue('phone', $resumeRowSet->getMobile1());
-
+        
+        //element education in file doc
+        $educationMapper = new Default_Model_EducationMapper();
+        $educationList = $educationMapper->fetchAll('resume_id = ' . $resume_id, 'end_date DESC');
+        $table = ''; //empty table
+    	if(count($educationList)){ //if there was data returned from queryDB()
+    		$table .= '<w:tbl>';
+    		//$table .= '<w:tblPr><w:tblW w:w = "4000" w:type="pct"/></w:tblPr>';
+    		foreach ( $educationList as $education ) {
+    		    $date = new DateTime($education->getStartDate());
+                $startDate = $date->format('M Y');
+        
+                $date = new DateTime($education->getEndDate());
+                $endDate = $date->format('M Y');
+           
+    			$table .= '<w:tr>'; //new xml table row
+        			$table .= '<w:tc>';
+            			$table .= '<w:tcPr>';
+            			$table .= '<w:tcW w:w="2500" w:type="dxa"/></w:tcPr>';
+            			$table .= '<w:p><w:r><w:t>'; //start cell
+            			$table .= $startDate .'-'. $endDate; //cell contents
+            			$table .= '</w:t></w:r></w:p>';
+        			$table .= '</w:tc>'; //close cell
+        			$table .= '<w:tc>';
+            			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>';
+        			    $table .= strtoupper($education->getSchoolName()) .'</w:t></w:r><w:br/><w:r><w:t>'. ucwords(strtolower($education->getProgramName()));
+            			$table .= '</w:t></w:r></w:p>';
+            			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>Program Info:</w:t></w:r><w:br/><w:r><w:t>';
+        			    $table .= $education->getProgramInfo();
+            			$table .= '</w:t></w:r></w:p>';
+        			$table .= '</w:tc>';
+    			$table .= '</w:tr>';
+    		} //done with dynamic data
+            $table .= '</w:tbl>'; //close xml table
+    	}
+        $document->setValue('education', $table);
+        
+        //element experience in file doc
         $experienceMapper = new Default_Model_ExperienceMapper();
         $experienceList = $experienceMapper->fetchAll('resume_id = ' . $resume_id, 'end_date DESC');
         $table = ''; //empty table
     	if(count($experienceList)){ //if there was data returned from queryDB()
     		$table .= '<w:tbl>';
-    		$table .= '<w:tblPr><w:tblW w:w = "4000" w:type="pct"/></w:tblPr>';
+    		//$table .= '<w:tblPr><w:tblW w:w = "4000" w:type="pct"/></w:tblPr>';
     		foreach ( $experienceList as $experience ) {
     		    $date = new DateTime($experience->getStartDate());
                 $startDate = $date->format('M Y');
@@ -371,19 +498,28 @@ class ResumeController extends Zend_Controller_Action
                 $endDate = $date->format('M Y');
            
     			$table .= '<w:tr>'; //new xml table row
-    			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
-    			$table .= $startDate .'-'. $endDate; //cell contents
-    			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
-    			$table .= '<w:tc><w:p><w:r><w:t>';
-    			$table .= $experience->getCompanyName() .'<w:br/>'. $experience->getJobTitle();
-    			$table .= '</w:t></w:r></w:p></w:tc>';
+        			$table .= '<w:tc>';
+            			$table .= '<w:tcPr>';
+            			$table .= '<w:tcW w:w="2500" w:type="dxa"/></w:tcPr>';
+            			$table .= '<w:p><w:r><w:t>'; //start cell
+            			$table .= $startDate .'-'. $endDate; //cell contents
+            			$table .= '</w:t></w:r></w:p>';
+        			$table .= '</w:tc>'; //close cell
+        			$table .= '<w:tc>';
+            			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>';
+        			    $table .= strtoupper($experience->getCompanyName()) .'</w:t></w:r><w:br/><w:r><w:t>'. ucwords(strtolower($experience->getJobTitle()));
+            			$table .= '</w:t></w:r></w:p>';
+            			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>Duties:</w:t></w:r><w:br/><w:r><w:t>';
+        			    $table .= $experience->getDuties();
+            			$table .= '</w:t></w:r></w:p>';
+        			$table .= '</w:tc>';
     			$table .= '</w:tr>';
     		} //done with dynamic data
             $table .= '</w:tbl>'; //close xml table
     	}
         $document->setValue('experience', $table);
         
-
+        //element expection in file doc
         $expectationMapper = new Default_Model_ExpectationMapper();
         $expectation = $expectationMapper->getExpectation($resume_id);
         
@@ -437,9 +573,11 @@ class ResumeController extends Zend_Controller_Action
         $table .= '</w:tbl>'; //close xml table
         $document->setValue('expection', $table);
                     
+        //rename and save file doc
         $resumeName = str_replace(' ', '', $resumeRowSet->getFullName()) .'.docx';
         $document->save('candidate/'. $resumeName);
         
+        //header download file word
         header("Cache-Control: public");     
         header("Content-Description: File Transfer");     
         header("Content-Disposition: attachment; filename=$resumeName");     
@@ -447,6 +585,7 @@ class ResumeController extends Zend_Controller_Action
         header("Content-Transfer-Encoding: binary");         
 
         readfile('candidate/' . $resumeName); 
+        unlink('candidate/' . $resumeName);
         exit;
 	}
 }
