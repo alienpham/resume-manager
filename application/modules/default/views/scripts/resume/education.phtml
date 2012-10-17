@@ -1,0 +1,99 @@
+<?php echo $this->headScript();?>
+<?php echo $this->headLink();?>
+<div class="img-steps">
+	<img src="/images/img-step-02.png" alt="Experience" />
+</div>
+<form name="frm" method="post" action="/resume/save-education" onsubmit="return checkValid()">
+<div class="from-add-01">
+	<h2>Education</h2>
+	<ul>
+		<li>
+			<label>&nbsp;</label>
+			<em class="error"></em>
+		</li>
+		<li>
+			<label>Start date <em>*</em></label>
+			<input type="text" name="startdate" id="startdate" value="<?php echo $this->educationRowset->getStartDate();?>" style="width:120px">
+			<b>&nbsp;&nbsp;End date</b>
+			<input type="text" name="enddate" id="enddate" value="<?php echo $this->educationRowset->getEndDate();?>" style="width:120px">
+		</li>
+		<li>
+			<label>School Name <em>*</em></label>
+			<input type="text" style="width:390px" name="school_name" id="school_name" value="<?php echo $this->educationRowset->getSchoolName();?>"/>
+		</li>
+		<li>
+			<label>Program Name <em>*</em></label>
+			<input type="text" style="width:390px" name="program_name" id="program_name" value="<?php echo $this->educationRowset->getProgramName();?>"/>
+		</li>
+		<li>
+			<label>Program Info</label>
+			<textarea name="program_info" id="program_info"><?php echo $this->educationRowset->getProgramInfo();?></textarea>
+		</li>
+		<li>
+			<label>&nbsp;</label>
+			<div class="actions">
+				<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
+				<input type="hidden" name="educationid" value="<?php echo $this->educationRowset->getEducationId();?>" />
+				<a href="/resume/personal-info/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;">
+					<input type="button" class="button02" name="button" value="Back"/>
+				</a>
+				<input type="submit" class="button01" name="button" value="Save"/>
+				<a href="/resume/experience/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;"><input type="button" class="button01" name="button" value="Next"/></a>
+			</div>
+		</li>
+	</ul>
+	
+	<div class="summary">
+		<h2>Education Review</h2>
+		<ul>
+		 <?php foreach($this->rows as $row) : 
+			$date = date_create($row->getStartDate());
+			$startDate = date_format($date, 'M Y');
+			
+			$date = date_create($row->getEndDate());
+			$endDate = date_format($date, 'M Y');
+		?>
+			<li>
+				<div class="edit">
+					<p><?php echo $startDate;?> - <?php echo $endDate; ?></p>
+					<p class="action-link">
+						<a href="/resume/education/id/<?php echo $this->resumeId; ?>/educationid/<?php echo $row->getEducationId();?>">Edit</a> | 
+						<a href="/resume/del-education/id/<?php echo $this->resumeId; ?>/educationid/<?php echo $row->getEducationId();?>">Delete</a>
+					</p>
+				</div>
+				<div class="jobs">
+					<p class="name" style="font-weight:bold;text-transform: uppercase;"><a href="#"><?php echo $row->getSchoolName();?></a></p>
+					<p><?php echo $row->getProgramName();?></p>
+				</div>                            
+			</li>
+		<?php endforeach;?>
+		</ul>
+	</div>
+</div>
+</form>
+<script>
+$(function() {
+    $( "#startdate" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+    $( "#enddate" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+});
+
+function checkValid()
+{
+	var startdate = $("#startdate").val();
+	var enddate = $("#enddate").val();
+	var job_title = $("#school_name").val();
+	var company_name = $("#program_name").val();
+    
+    if(startdate == '' || enddate == '' || job_title == '' || company_name == '') {
+        $('.error').html('Please input into field required (*)');
+        return false;
+    }
+    return true;
+}   
+</script>
