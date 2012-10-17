@@ -1,7 +1,7 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
 <div class="img-steps">
-	<img src="/images/img-step-02.png" alt="Experience" />
+	<img src="/images/img-step-03.png" alt="Experience" />
 </div>
 <form name="frm" method="post" action="/resume/save-experience" onsubmit="return checkValid()">
 <div class="from-add-01">
@@ -14,20 +14,20 @@
 		<li>
 			<label>Start date <em>*</em></label>
 			<input type="text" name="startdate" id="startdate" value="<?php echo $this->experienceRowSet->getStartDate();?>" style="width:120px">
-			<b>End date</b>
+			<b>&nbsp;&nbsp;End date</b>
 			<input type="text" name="enddate" id="enddate" value="<?php echo $this->experienceRowSet->getEndDate();?>" style="width:120px">
 		</li>
 		<li>
 			<label>Job Title <em>*</em></label>
-			<input type="text" name="job_title" id="job_title" value="<?php echo $this->experienceRowSet->getJobTitle();?>"/>
+			<input type="text" style="width:390px" name="job_title" id="job_title" value="<?php echo $this->experienceRowSet->getJobTitle();?>"/>
 		</li>
 		<li>
 			<label>Company <em>*</em></label>
-			<input type="text" name="company_name" id="company_name" value="<?php echo $this->experienceRowSet->getCompanyName();?>"/>
+			<input type="text" style="width:390px" name="company_name" id="company_name" value="<?php echo $this->experienceRowSet->getCompanyName();?>"/>
 		</li>
 		<li>
             <label>Function</label>
-            <input type="text" name="function" class="function" value=""/>
+            <input type="text" name="function" class="function" value="" style="width:390px"/>
 			<div class="multiselect" style="width:800px; height:250px; padding:10px;display:none; position:absolute;margin-left:170px">
 				<div style="width: 33%; float: left">
 					<ul style="list-style-type:none;">
@@ -51,15 +51,15 @@
 			</div>
 		</li>
 		<li>
-			<label>Info</label>
-			<textarea name="info" id="info"><?php echo $this->experienceRowSet->getInfo();?></textarea>
+			<label>Duties</label>
+			<textarea name="duties" id="duties"><?php echo $this->experienceRowSet->getDuties();?></textarea>
 		</li>
 		<li>
 			<label>&nbsp;</label>
 			<div class="actions">
 				<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
 				<input type="hidden" name="experid" value="<?php echo $this->experienceRowSet->getId();?>" />
-				<a href="/resume/personal-info/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;">
+				<a href="/resume/education/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;">
 					<input type="button" class="button02" name="button" value="Back"/>
 				</a>
 				<input type="submit" class="button01" name="button" value="Save"/>
