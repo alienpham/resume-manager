@@ -14,6 +14,7 @@ class ResumeController extends Zend_Controller_Action
         $view->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );
         $view->headScript()->appendFile ( '/js/jquery.ui.core.js' );
 		$this->view->username = $aNamespace->username;
+		date_default_timezone_set('Asia/Krasnoyarsk');
     }
 
     public function indexAction()

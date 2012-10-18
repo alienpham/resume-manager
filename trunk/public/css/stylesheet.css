@@ -518,6 +518,163 @@ textarea,
 color:red;
 }
 
+.list-company,
+.info-content{
+	float: left;
+    width: 100%;
+}
+.list-company .head{
+	background:#1b7cbd;	
+	width:100%;
+	float: left;
+}
+
+.list-company .head .checkbox,
+.list-company .head .code,
+.list-company .head .name,
+.list-company .head .ind,
+.list-company .head .act,
+.list-company .head .newva,
+.list-company .head .openva,
+.list-company .head .ressent,
+.list-company .head .inter,
+.list-company .head .offer,
+.list-company .head .accept,
+.list-company .head .joined,
+.list-company .head .status,
+.list-company .head .cons,
+.list-company .head .action{	
+	background:url(../images/bg-header.jpg) no-repeat top right;
+}
+.list-company .checkbox,
+.list-company .code,
+.list-company .name,
+.list-company .ind,
+.list-company .act,
+.list-company .newva,
+.list-company .openva,
+.list-company .ressent,
+.list-company .inter,
+.list-company .offer,
+.list-company .accept,
+.list-company .joined,
+.list-company .status,
+.list-company .cons,
+.list-company .action{
+	padding:2px 1% 2px;
+	float:left;	
+}
+.list-company .checkbox{
+	padding:3px 1%;
+	width:1%;
+}
+.list-company .code
+{
+	width:3%;	
+	line-height:25px;
+}
+.list-company .ind,
+.list-company .act
+{
+	width:1.5%;	
+	line-height:25px;
+}
+.list-company .newva,
+.list-company .accept
+{
+	width:4.5%;	
+	line-height:25px;
+}
+.list-company .openva,
+.list-company .ressent,
+.list-company .offer
+{
+	width:5%;	
+	line-height:25px;
+}
+.list-company .inter,
+.list-company .joined,
+.list-company .status,
+.list-company .cons
+{
+	width:4%;	
+	line-height:25px;
+}
+.list-company .name{
+	width:12%;
+	line-height:25px;
+}
+.list-company .action{
+	background:none !important;
+	line-height:25px;
+}
+.list-company .head h4{
+	text-transform:uppercase;
+	color:#fff;	
+	line-height:25px;
+}
+
+.list-company .info-content h4 a{
+	text-transform:uppercase;
+	color:#8AB036;	
+}
+
+.list-company .info-content .checkbox{
+	padding:3px 1%;
+	width:1%;
+	line-height:25px;
+}
+
+.list-company .info-content .code
+{
+	width:3%;	
+	line-height:25px;
+}
+.list-company .info-content .ind,
+.list-company .info-content .act
+{
+	width:1.5%;	
+	line-height:25px;
+}
+.list-company .info-content .newva,
+.list-company .info-content .accept
+{
+	width:4.5%;	
+	line-height:25px;
+}
+.list-company .info-content .openva,
+.list-company .info-content .ressent,
+.list-company .info-content .offer
+{
+	width:5%;	
+	line-height:25px;
+}
+.list-company .info-content .inter,
+.list-company .info-content .joined,
+.list-company .info-content .status,
+.list-company .info-content .cons
+{
+	width:4%;	
+	line-height:25px;
+}
+
+.list-company .info-content .name{
+	width:12%;
+	line-height:25px;
+}
+
+.list-company .info-content .action{
+	padding-left:20px;
+	float:left;	
+	line-height:25px;
+}
+
+.list-company .info-content .action a.editcom{
+	font-weight: bold;
+	padding-left:18px;
+	background:url(../images/icon-add.png) no-repeat left 1px;
+	line-height:25px;
+}
 
 
 

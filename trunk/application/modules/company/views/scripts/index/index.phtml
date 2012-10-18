@@ -1,82 +1,100 @@
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-	  <td><form id="form" action="<?php echo $this->baseUrl; ?>/company/" method="post">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-			<td width="5%"><label for="choice">Search : </label></td>
-			<td width="6%"><select name="ccode_id" id="ccode_id" style="width:125px">
+<div class="block-search">
+<form id="form" action="/company/" method="post">
+	<label>Search</label>
+	<select name="ccode_id" id="ccode_id" style="width:125px">
 				<option value="1" <?php if ($this->ccode_id==1) echo "selected";?> >Company Code</option>
                 <option value="2" <?php if ($this->ccode_id==2) echo "selected";?>>Company Name</option>
-			</select></td>
-			<td width="12%"><input name="txtSearch" id="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/></td>
-			<td width="7%"><select name="industry_id" style="width:120px">
+			</select>
+	<input name="txtSearch" id="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/>
+	<select name="industry_id" style="width:120px">
             	<option value="0">Please select</option>
 			  <?php echo $this->list_industry; ?>
-			</select></td>
-			<td width="6%"><input id="btSearch" name="btSearch" type="submit" value="Ok" /></td>
-			<td width="7%">&nbsp;</td>
-			<td width="9%">&nbsp;</td>
-			<td width="24%">&nbsp;</td>
-			<td width="4%"><label for="choice">Sort : </label></td>
-			<td width="5%"><select name="sort_name_id" id="sort_name_id" style="width:80px">
+			</select>
+            <input id="btSearch" name="btSearch" type="submit" value="Search" style="margin-right:420px"/>
+              <input type="hidden" name="page" id="page" value="1" />
+              
+              <label for="choice">Sort : </label>
+              <select name="sort_name_id" id="sort_name_id" style="width:80px">
 			  <option value="full_name_en" <?php if ($this->sort_name_id=="full_name_en") echo "selected";?>>Name</option>
               <option value="created_date" <?php if ($this->sort_name_id=="created_date") echo "selected";?>>Created Date</option>
-			</select></td>
-			<td width="5%"><select name="sort_type_id" id="sort_type_id" style="width:60px">
+			</select>
+            <select name="sort_type_id" id="sort_type_id" style="width:60px">
 			  <option value="ASC" <?php if ($this->sort_type_id=="ASC") echo "selected";?>>ASC</option>
               <option value="DESC" <?php if ($this->sort_type_id=="DESC") echo "selected";?>>DESC</option>
-			</select></td>
-			<td width="3%"><input id="button3" type="submit" value="Ok" /></td>
-		  </tr>
-		</table>
-        <input type="hidden" name="page" id="page" value="1" />
-	  </form></td>
-	</tr>
-	<tr>
-	  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		<tr>
-		  <td width="6%"><input id="btAddCompany" name="btAddCompany" type="button" value="Add Company" class="add_button" onclick="window.location='<?php echo $this->baseUrl; ?>/company/company/add-company'" /></td>
-		  <td width="6%"><input id="btDeleteCompany" name="btDeleteCompany" type="button" value="Delete" class="del_button" /></td>
-		  <td width="42%"><em>Showing 30 of 50 records</em></td>
-		  <td width="41%" align="right">Month: Apr-2011 <a href="#">(Change)</a> | Open Vacancies: 18 | Candidates in Process: 20</td>
-		</tr>
-	  </table></td>
-	</tr>
-  </table>
-  <div id="box">
-	<table width="100%" class="datagrid">
-	  <thead>
-		<tr>
-		  <th width="26"><input type="checkbox" name="checkbox" id="checkbox" /></th>
-		  <th width="57" class="a-left">Code</th>
-		  <th width="165" class="a-left">Company</th>
-		  <th width="38" class="a-left">Ind</th>
-		  <th width="49" class="color_bg">Act</th>
-		  <th width="47" class="color_bg">New<br />
-		  Vac</th>
-		  <th width="51" class="color_bg">Open<br />
-		  Vac</th>
-		  <th width="50" class="color_bg">Res<br />
-		  Sent</th>
-		  <th width="50" class="color_bg">Inter<br />
-		  view 1</th>
-		  <th width="52" class="color_bg">Inter<br />
-		  view +</th>
-		  <th width="52" class="color_bg">Offer<br />
-		  Made</th>
-		  <th width="50" class="color_bg">Offer<br />
-		  Accpt</th>
-		  <th width="53" class="color_bg">Joined</th>
-		  <th width="127" class="a-left">Acc Status</th>
-		  <th width="104" class="a-left">Cons</th>
-		  <th width="60" class="a-left">Action</th>
-		</tr>
-	  </thead>
-	  <tbody>
-		<?php echo $this->data; ?>
-	  </tbody>
-	</table>
-  </div>
+			</select>
+            <input id="button3" type="submit" value="Sort" />
+</form>
+</div>  <br />
+
+<p class="today-entry" id="report">Month: Apr-2011 <a href="#">(Change)</a> | Open Vacancies: 18 | Candidates in Process: 20</p>
+<br />
+	<br />
+	<a href="/company/add-company" style="text-decoration:none;">
+		<input class="button01" type="button" value="Add Company" />
+	</a>
+    <a href="/company/del-company" style="text-decoration:none; display:none">
+        <input class="button01" type="button" value="Delete Company" />
+    </a><br />
+<br />
+<div id="box">   
+    <div class="list-company clearfix">
+        <div class="head">
+            <div class="checkbox">
+                <input type="checkbox" value="" />
+            </div>
+            <div class="code">
+                <h4>Code</h4>
+            </div>
+            <div class="name">
+                <h4>Company</h4>
+            </div>
+            <div class="ind">
+                <h4>Ind</h4>
+            </div>
+            <div class="act">
+                <h4>Act</h4>
+            </div>
+            <div class="newva">
+                <h4>New Vac</h4>
+            </div>
+            <div class="openva">
+                <h4>Open Vac</h4>
+            </div>
+            <div class="ressent">
+                <h4>Res Sent</h4>
+            </div>
+            <div class="inter">
+                <h4>Inter 1</h4>
+            </div>
+            <div class="inter">
+                <h4>Inter +</h4>
+            </div>
+            <div class="offer">
+                <h4>Off Made</h4>
+            </div>
+            <div class="accept">
+                <h4>Off Acpt</h4>
+            </div>
+            <div class="joined">
+                <h4>Joined</h4>
+            </div>
+            <div class="status">
+                <h4>Status</h4>
+            </div>
+            <div class="cons">
+                <h4>Cons</h4>
+            </div>
+            <div class="action">
+                <h4>action</h4>
+            </div>
+        </div>
+        <div class="info-content">
+        <?php echo $this->data; ?>
+        </div>
+    </div>
+</div>
+<div style="clear:both">&nbsp;</div>
+  
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
