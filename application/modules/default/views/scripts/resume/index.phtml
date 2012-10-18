@@ -30,7 +30,7 @@
 </div>
 <?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
 <?php echo $this->partial ( '/resume/comment.phtml' )?>
-<div id="allcomment" style="width:500px;height: auto; display: none;overflow: hidden;">&nbsp;</div>
+<div id="allcomment" style="width:500px;height: auto; display: none;overflow:auto;">&nbsp;</div>
 <div id="detail_resume" style="width:550px;height: 450px; display: none;">&nbsp;</div>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -63,12 +63,9 @@ $(document).ready(function() {
     });
     
     $(".allcomment").fancybox({
-		autoScale: true,
-		autoDimensions: true,
-		width: 550,
-		height: 300,
-		scrolling: 'no',
-		autoResize: true
+		'titlePosition'		: 'inside',
+		'transitionIn'		: 'none',
+		'transitionOut'		: 'none'
 	});
     $(".allcomment").click(function(){
 		var resume_id = $(this).attr('id');
