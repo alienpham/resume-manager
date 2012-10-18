@@ -35,6 +35,28 @@ $listFunction = $resume->getFunction();
 	</tr>
 </table>
 <?php 
+$educationMapper = new Default_Model_EducationMapper();
+$educationList = $educationMapper->fetchAll('resume_id = ' . $this->resume->getResumeId(), 'end_date DESC');
+?>
+<h2>EDUCATION</h2>
+<table cellpadding="5" cellspacing="6">
+    <?php foreach ( $educationList as $education ) :
+        $date = new DateTime($education->getStartDate());
+        $startDate = $date->format('M Y');
+
+        $date = new DateTime($education->getEndDate());
+        $endDate = $date->format('M Y');
+    ?>
+    <tr>
+        <td style="width:30%" valign="top"><?php echo $startDate;?> - <?php echo $endDate;?></td>
+        <td class="companies" style="width:65%">
+            <p style="color:#70b4e2;font-weight:bold;text-transform: uppercase;"><?php echo $education->getSchoolName();?></p>
+            <p><?php echo $education->getProgramName();?></p>
+        </td>
+    </tr>
+    <?php endforeach;?>                  
+</table>
+<?php 
 $experienceMapper = new Default_Model_ExperienceMapper();
 $experienceList = $experienceMapper->fetchAll('resume_id = ' . $this->resume->getResumeId(), 'end_date DESC');
 
