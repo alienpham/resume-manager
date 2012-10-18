@@ -26,80 +26,15 @@
 </div>  
 <p class="today-entry" id="report">&nbsp;</p>
 <div id="box">
-    <?php echo $this->partial ( '/resume/list-resume.phtml', array('rows' => $this->rows, 'paginator' => $this->paginator) )?>
+    <?php echo $this->partial ( '/resume/list-resume.phtml', array('paginator' => $this->paginator) )?>
 </div>
 <?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
 <?php echo $this->partial ( '/resume/comment.phtml' )?>
 <div id="allcomment" style="width:500px;height: auto; display: none;overflow:auto;">&nbsp;</div>
-<div id="detail_resume" style="width:550px;height: 450px; display: none;">&nbsp;</div>
+<div id="detail_resume" style="width:700px;height: 450px; display: none;">&nbsp;</div>
 <script type="text/javascript">
 $(document).ready(function() {
-    //Begin Comment for candidate
-	$(".addcomment").fancybox();
-	$(".addcomment").click(function(){
-		$('#contentcomment').val(''); 
-		$('input[name=resume_id]').val($(this).attr('id'));
-	});
 
-    $("#insertcomment").click(function(){
-        if(!$('#contentcomment').val()) {
-            $('#msgcomment').html('Content is not null'); 
-            return;
-        }
-        var resume_id = $('input[name=resume_id]').val();
-		$.ajax({
-      	  	url: '/resume/save-comment',
-        	type: "POST",
-			data: { 
-                resume_id: resume_id, 
-                consultant_id: $('input[name=consultant_id]').val(), 
-                content: $('#contentcomment').val()
-            },
-      	  	success: function(result) {
-                $('#viewcomment' + resume_id).html(result);
-        	  	$.fancybox.close();
-      	  	}
-      	});
-    });
-    
-    $(".allcomment").fancybox({
-		'titlePosition'		: 'inside',
-		'transitionIn'		: 'none',
-		'transitionOut'		: 'none'
-	});
-    $(".allcomment").click(function(){
-		var resume_id = $(this).attr('id');
-		$.ajax({
-      	  	url: '/resume/all-comment',
-        	type: "POST",
-			data: { 
-                resume_id: resume_id, 
-            },
-      	  	success: function(result) {
-                $('#allcomment').html(result);
-      	  	}
-      	});
-	});
-    //End Comment for candidate
-
-    //Begin View detail candidate
-    $(".detail_resume").fancybox();
-    $(".detail_resume").click(function(){
-		$('#detail_resume').html('');
-		var resume_id = $(this).attr('id');
-		$.ajax({
-      	  	url: '/resume/detail-resume',
-        	type: "POST",
-			data: { 
-                resume_id: resume_id, 
-            },
-      	  	success: function(result) {
-                $('#detail_resume').html(result);
-      	  	}
-      	});
-	});
-    //End View detail candidate
-    
     //Begin Avansearch
     $(".fancybox").fancybox();
     $("#avansearch").click(function(){
