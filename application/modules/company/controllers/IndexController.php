@@ -62,7 +62,7 @@ class Company_IndexController extends Zend_Controller_Action
 			$industry_name = $company->getFieldValue("industry_lookup","industry_id='".$rs['industry_id']."'","abbreviation");
 			$consultant_id = $company->getFieldValue("com_has_consultant_incharge","company_id='".$rs['company_id']."'","consultant_id");
 			$consultant_name = $company->getFieldValue("consultant","consultant_id='$consultant_id'","abbreviated_name");
-			$data .= '<tr>
+			/*$data .= '<tr>
 					  <td class="a-center"><input type="checkbox" name="company_id" id="company_id" value="'.$rs['company_id'].'" /></td>
 					  <td class="a-left">'.$rs['company_code'].'</td>
 					  <td class="a-left"><a href="#">'.$rs['full_name_en'].'</a></td>
@@ -79,7 +79,55 @@ class Company_IndexController extends Zend_Controller_Action
 					  <td>'.$rs['status'].'</td>
 					  <td>'.$consultant_name.'</td>
 					  <td><a href="#"><img src="public/images/icons/user.png" title="Show profile" width="16" height="16" /></a><a href="#"><img src="public/images/icons/user_edit.png" title="Edit user" width="16" height="16" /></a></td>
-					</tr>';
+					</tr>';*/
+			$data.='<div class="checkbox">
+                <input type="checkbox" name="company_id" id="company_id" value="'.$rs['company_id'].'"  />
+            </div>
+            <div class="code">
+                '.$rs['company_code'].'
+            </div>
+            <div class="name">
+                <h4><a href="#">'.$rs['full_name_en'].'</a></h4>
+            </div>
+            <div class="ind">
+                <b>'.$industry_name.'</b>
+            </div>
+            <div class="act">
+                '.$numact.'
+            </div>
+            <div class="newva">
+                '.$newVa.'
+            </div>
+            <div class="openva">
+                '.$openVa.'
+            </div>
+            <div class="ressent">
+                '.$numRsSent.'
+            </div>
+            <div class="inter">
+                '.$numInt1.'
+            </div>
+            <div class="inter">
+                '.$numInt2.'
+            </div>
+            <div class="offer">
+                '.$numOffMade.'
+            </div>
+            <div class="accept">
+                '.$numOffAcpt.'
+            </div>
+            <div class="joined">
+                '.$numJoin.'
+            </div>
+            <div class="status">
+                '.$consultant_name.'
+            </div>
+            <div class="cons">
+                '.$consultant_name.'
+            </div>
+            <div class="action">
+                <a href="#" class="editcom">Edit</a> 
+            </div><br>';
 		}
 		$this->view->ccode_id=$this->_getParam('ccode_id',"");
 		$this->view->sort_name_id=$this->_getParam('sort_name_id',"");

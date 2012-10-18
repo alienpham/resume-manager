@@ -178,7 +178,7 @@ class Default_Model_ResumeMapper {
     public function getComments($resumeId, $limit=null)
     {
         $db = $this->getDbTable()->getAdapter();
-        $sql = "SELECT rc.*, c.username FROM res_comment AS rc ";
+        $sql = "SELECT rc.*, c.full_name FROM res_comment AS rc ";
         $sql .= "INNER JOIN consultant AS c ON c.consultant_id = rc.consultant_id";
         $sql .= " WHERE resume_id = " . $resumeId;
 		if($limit) {
