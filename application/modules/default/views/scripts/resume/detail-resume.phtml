@@ -39,7 +39,9 @@ $educationMapper = new Default_Model_EducationMapper();
 $educationList = $educationMapper->fetchAll('resume_id = ' . $this->resume->getResumeId(), 'end_date DESC');
 ?>
 <h2>EDUCATION</h2>
-<table cellpadding="5" cellspacing="6">
+<?php if($educationList):?>
+<table cellpadding="5" cellspacing="6"> 
+    
     <?php foreach ( $educationList as $education ) :
         $date = new DateTime($education->getStartDate());
         $startDate = $date->format('M Y');
@@ -54,8 +56,11 @@ $educationList = $educationMapper->fetchAll('resume_id = ' . $this->resume->getR
             <p><?php echo $education->getProgramName();?></p>
         </td>
     </tr>
-    <?php endforeach;?>                  
+    <?php endforeach;?> 
 </table>
+<?php else:?>
+<br />
+<?php endif;?>
 <?php 
 $experienceMapper = new Default_Model_ExperienceMapper();
 $experienceList = $experienceMapper->fetchAll('resume_id = ' . $this->resume->getResumeId(), 'end_date DESC');

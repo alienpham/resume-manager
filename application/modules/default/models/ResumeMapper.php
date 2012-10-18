@@ -20,9 +20,9 @@ class Default_Model_ResumeMapper {
         return $this->_dbTable;
     }
     
-	public function updateResumCode($code,$consultantId, $resumeId) {
+	public function updateResumCode($code, $resumeId) {
 		$db = $this->getDbTable()->getAdapter();
-        $sql = 'UPDATE resume SET resume_code = "'. $code .'", updated_consultant_id = '. $consultantId .' WHERE resume_id = '. $resumeId;
+        $sql = 'UPDATE resume SET resume_code = "'. $code .'" WHERE resume_id = '. $resumeId;
         $db->query($sql);
 	}
 	
@@ -47,11 +47,13 @@ class Default_Model_ResumeMapper {
             'created_consultant_id' 	=> $resume->getCreatedConsultantId(),
             'updated_consultant_id' 	=> $resume->getUpdatedConsultantId()
         );
-
+//print_r($data);exit;
         if (null == ($id = $resume->getResumeId())) {
             return $this->getDbTable()->insert($data);
         } else {
             unset($data['created_date']);
+            unset($data['created_consultant_id']);
+            unset($data['resume_code']);
             $this->getDbTable()->update($data, array('resume_id = ?' => $id));
             return $id;
         }
@@ -138,9 +140,9 @@ class Default_Model_ResumeMapper {
         }
         
         if($orderby) $orderby = ' ORDER BY ' .$orderby;
-        $sql = 'SELECT * FROM resume as r' . $join . $where . $orderby;
+        $sql = 'SELECT * FROM resume as r ' . $join . $where . $orderby;
 
-//echo $sql;//exit;
+        //echo $sql;//exit;
         $result = $db->fetchAll($sql);
         
         return $db->fetchAll($sql);
@@ -178,7 +180,7 @@ class Default_Model_ResumeMapper {
     public function getComments($resumeId, $limit=null)
     {
         $db = $this->getDbTable()->getAdapter();
-        $sql = "SELECT rc.*, c.full_name FROM res_comment AS rc ";
+        $sql = "SELECT rc.*, c.full_name, c.username FROM res_comment AS rc ";
         $sql .= "INNER JOIN consultant AS c ON c.consultant_id = rc.consultant_id";
         $sql .= " WHERE resume_id = " . $resumeId;
 		if($limit) {

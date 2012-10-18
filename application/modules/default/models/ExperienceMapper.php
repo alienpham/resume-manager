@@ -43,7 +43,7 @@ class Default_Model_ExperienceMapper {
     	if (null == ($id = $experience->getId())) {
             return $this->getDbTable()->insert($data);
         } else {      	
-            $this->getDbTable()->update($data, array('id = ?' => $id));
+            $this->getDbTable()->update($data, array('res_experience_id = ?' => $id));
             return $id;
         }
     }
@@ -56,7 +56,7 @@ class Default_Model_ExperienceMapper {
         }
         $row = $result->current();
         
-        $experience->setId($row->id);
+        $experience->setId($row->res_experience_id);
 		$experience->setResumeId($row->resume_id);
 		$experience->setStartDate($row->start_date);
 		$experience->setEndDate($row->end_date);
@@ -73,7 +73,7 @@ class Default_Model_ExperienceMapper {
         $entries = array();
         foreach ($resultSet as $row) {
             $entry = new Default_Model_Experience();
-            $entry->setId($row->id);
+            $entry->setId($row->res_experience_id);
             $entry->setResumeId($row->resume_id);
 			$entry->setStartDate($row->start_date);
 			$entry->setEndDate($row->end_date);

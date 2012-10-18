@@ -20,7 +20,11 @@
     $experienceMapper = new Default_Model_ExperienceMapper();
     $expectationMapper = new Default_Model_ExpectationMapper();
     $resumeMapper = new Default_Model_ResumeMapper();
-    foreach ( $this->rows as $row ) :
+    $userMapper = new Default_Model_User();
+
+    foreach ( $this->paginator as $row ) :
+        $consultantCreated = $userMapper->getConsultantName($row['created_consultant_id']);
+        $consultantUpdated = $userMapper->getConsultantName($row['updated_consultant_id']);
         $date = new DateTime($row['updated_date']);
         $updatedDate = $date->format('d M Y');
         $experienceList = $experienceMapper->fetchAll('resume_id = ' . $row['resume_id'], 'end_date DESC');
@@ -73,7 +77,11 @@
             <p>[S]: <?php if($currentSalary) echo '$'.$currentSalary; ?></p>
             <p>[E]: <?php if($salaryFrom) echo '$'.$salaryFrom; ?><?php if($salaryTo) echo ' - '.'$'.$salaryTo; ?></p>
             <p>[L]: <?php echo implode(', ', $provinceArr);?></p>
-            <p class="update-date">Update: <?php echo $updatedDate; ?></p>
+            <p class="update-date">
+                Update: <?php echo $updatedDate; ?><br />
+                <?php if($consultantUpdated['username']) ?>Updated By: <?php echo $consultantUpdated['username']; ?><br />
+                Created By: <?php echo $consultantCreated['username']; ?><br />
+            </p>
         </div>
         <div class="comments">
             <a href="#comment" class="addcomment" id="<?php echo $row['resume_id']?>">Add Comment</a>
@@ -103,3 +111,72 @@
         <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
     <?php endif;?>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    //Begin Comment for candidate
+    $(".addcomment").fancybox();
+    $(".addcomment").click(function(){
+        $('#contentcomment').val(''); 
+        $('input[name=resume_id]').val($(this).attr('id'));
+    });
+
+    $("#insertcomment").click(function(){
+        if(!$('#contentcomment').val()) {
+            $('#msgcomment').html('Content is not null'); 
+            return;
+        }
+        var resume_id = $('input[name=resume_id]').val();
+        $.ajax({
+            url: '/resume/save-comment',
+            type: "POST",
+            data: { 
+                resume_id: resume_id, 
+                consultant_id: $('input[name=consultant_id]').val(), 
+                content: $('#contentcomment').val()
+            },
+            success: function(result) {
+                $('#viewcomment' + resume_id).html(result);
+                $.fancybox.close();
+            }
+        });
+    });
+    
+    $(".allcomment").fancybox({
+        'titlePosition'     : 'inside',
+        'transitionIn'      : 'none',
+        'transitionOut'     : 'none'
+    });
+    $(".allcomment").click(function(){
+        var resume_id = $(this).attr('id');
+        $.ajax({
+            url: '/resume/all-comment',
+            type: "POST",
+            data: { 
+                resume_id: resume_id, 
+            },
+            success: function(result) {
+                $('#allcomment').html(result);
+            }
+        });
+    });
+    //End Comment for candidate
+
+    //Begin View detail candidate
+    $(".detail_resume").fancybox();
+    $(".detail_resume").click(function(){
+        $('#detail_resume').html('');
+        var resume_id = $(this).attr('id');
+        $.ajax({
+            url: '/resume/detail-resume',
+            type: "POST",
+            data: { 
+                resume_id: resume_id, 
+            },
+            success: function(result) {
+                $('#detail_resume').html(result);
+            }
+        });
+    });
+    //End View detail candidate
+});
+</script>

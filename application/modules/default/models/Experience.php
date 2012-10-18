@@ -1,7 +1,7 @@
 <?php
 class Default_Model_Experience
 {
-	protected $_id;
+	protected $_res_experience_id;
 	protected $_resume_id;
 	protected $_start_date;
 	protected $_end_date;
@@ -55,10 +55,10 @@ class Default_Model_Experience
 	}
 	
 	public function getId() {
-		return $this->_id;
+		return $this->_res_experience_id;
 	}
 	public function setId($id) {
-		$this->_id = $id;
+		$this->_res_experience_id = $id;
 	}
 	
 	public function getStartDate() {

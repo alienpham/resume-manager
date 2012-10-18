@@ -27,7 +27,7 @@ class ResumeController extends Zend_Controller_Action
         $resume = new Default_Model_ResumeMapper();
 
         $currentPage = 1;
-        $page = $this->_getParam('page',1);
+        $page = $this->_getParam('page', 1);
         if(!empty($page)) {
             $currentPage = $page;
         }
@@ -42,12 +42,10 @@ class ResumeController extends Zend_Controller_Action
         //http://zendgeek.blogspot.com
         $rows = $resume->getListResume($where, array($choice));
         $paginator = Zend_Paginator::factory($rows);
-        $paginator->setItemCountPerPage(10);
+        $paginator->setItemCountPerPage(20);
         $paginator->setCurrentPageNumber($currentPage);
         
         $this->view->paginator = $paginator;
-        $this->view->rows = $rows;
-		
     }
     
 	public function resumeReportAction()
@@ -102,13 +100,13 @@ class ResumeController extends Zend_Controller_Action
         $resumeRowset->setTel($post['tel']);
         $resumeRowset->setAddress($post['address']);
         $resumeRowset->setProvinceId(1);
-        if(!$post['resume_id']) $resumeRowset->setCreatedDate(date('Y-m-d'));
+        $resumeRowset->setCreatedDate(date('Y-m-d'));
         $resumeRowset->setCreatedConsultantId($aNamespace->consultant_id);
         $resumeRowset->setUpdatedConsultantId($aNamespace->consultant_id);
         
         $resume = new Default_Model_ResumeMapper();
         $resumeId = $resume->save($resumeRowset);
-        if($resumeCode == 'R') $resume->updateResumCode('R' . $resumeId, $aNamespace->consultant_id, $resumeId);
+        if(!$post['resume_id']) $resume->updateResumCode('R' . $resumeId, $resumeId);
         
         $this->_redirect('/resume/education/id/' . $resumeId);
     }
@@ -367,11 +365,11 @@ class ResumeController extends Zend_Controller_Action
         $resume = new Default_Model_ResumeMapper();
         $rows = $resume->getListResume($cond, $choice);
         $paginator = Zend_Paginator::factory($rows);
-        $paginator->setItemCountPerPage(10);
+        $paginator->setItemCountPerPage(20);
         $paginator->setCurrentPageNumber(1);
     
         $this->view->paginator = $paginator;
-        $this->view->rows = $rows;
+        //$this->view->rows = $rows;
         
         $this->_helper->layout->disableLayout();
         $this->render('list-resume');

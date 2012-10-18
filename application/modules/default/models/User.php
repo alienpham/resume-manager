@@ -26,5 +26,12 @@ class Default_Model_User {
         $sql = "SELECT * FROM consultant WHERE email = '" .$email. "' and password = '" . md5($pass) . "'";
         return $db->fetchRow($sql);
 	}
+	
+    public function getConsultantName ($id)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT username FROM consultant WHERE consultant_id = " . $id;
+        return $db->fetchRow($sql);
+    }
 }
 ?>
