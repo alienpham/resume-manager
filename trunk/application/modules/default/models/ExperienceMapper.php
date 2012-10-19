@@ -63,6 +63,7 @@ class Default_Model_ExperienceMapper {
 		$experience->setJobTitle($row->job_title);
 		$experience->setCompanyName($row->company_name);
 		$experience->setDuties($row->duties);
+		$experience->setExperienceOther($row->experience_other);
 		$experience->setSortOrder($row->sort_order);      
     }
 
@@ -80,6 +81,7 @@ class Default_Model_ExperienceMapper {
 			$entry->setJobTitle($row->job_title);
 			$entry->setCompanyName($row->company_name);
 			$entry->setDuties($row->duties);
+			$entry->setExperienceOther($row->experience_other);
 			$entry->setSortOrder($row->sort_order);  
             $entries[] = $entry;
         }
@@ -118,6 +120,14 @@ class Default_Model_ExperienceMapper {
 
         $rows = $this->getDbTable()->getAdapter()->query($sql)->fetchAll();
         return $rows;
+    }
+    
+    public function saveExperienceOther($resumeId, $other)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "INSERT INTO res_experience(resume_id, experience_other) VALUES($resumeId, '". $other ."') ";
+        //echo $sql;exit;
+        return $db->query($sql); 
     }
 }
 ?>

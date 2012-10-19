@@ -353,7 +353,9 @@ textarea,
 
 /*======== Advanced Search =============*/
 #adv-search h2{
-	text-transform:uppercase;	
+	text-transform:uppercase;
+	background-color:#cccccc;
+	padding:5px 0px;
 }
 #adv-search ul li{
 	display:inline;	

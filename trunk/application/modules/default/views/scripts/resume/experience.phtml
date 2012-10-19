@@ -3,12 +3,16 @@
 <div class="img-steps">
 	<img src="/images/img-step-03.png" alt="Experience" />
 </div>
-<form name="frm" method="post" action="/resume/save-experience" onsubmit="return checkValid()">
-<div class="from-add-01">
+<div class="from-add-01" id="exp_nomal">
+    <form name="frm" method="post" action="/resume/save-experience" onsubmit="return checkValid()">
 	<h2>Experience</h2>
 	<ul>
+        <li>
+            <label>&nbsp;</label>
+            <input type="checkbox" name="show" class="showother" value=""> Other
+        </li>
 		<li>
-			<label>&nbsp;</label>
+			<label></label>
 			<em class="error"></em>
 		</li>
 		<li>
@@ -67,35 +71,65 @@
 			</div>
 		</li>
 	</ul>
-	
-	<div class="summary">
-		<h2>Career Summary</h2>
-		<ul>
-		 <?php foreach($this->rows as $row) : 
-			$date = date_create($row->getStartDate());
-			$startDate = date_format($date, 'M Y');
-			
-			$date = date_create($row->getEndDate());
-			$endDate = date_format($date, 'M Y');
-		?>
-			<li>
-				<div class="edit">
-					<p><?php echo $startDate;?> - <?php echo $endDate; ?></p>
-					<p class="action-link">
-						<a href="/resume/experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Edit</a> | 
-						<a href="/resume/del-experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Delete</a>
-					</p>
-				</div>
-				<div class="jobs">
-					<p class="name" style="font-weight:bold;text-transform: uppercase;"><a href="#"><?php echo $row->getCompanyName();?></a></p>
-					<p><?php echo $row->getJobTitle();?></p>
-				</div>                            
-			</li>
-		<?php endforeach;?>
-		</ul>
-	</div>
-</div>
 </form>
+</div>
+<div class="from-add-01" id="exp_other" style="display:none">
+    <form name="frm" method="post" action="/resume/save-experience1" onsubmit="return checkValid2()">
+    <h2>Experience</h2>
+    <ul>
+        <li>
+            <input type="checkbox" name="show1" class="showother" checked="checked"> Other
+        </li>
+        <li>
+            <em class="error"></em>
+        </li>
+        <li>
+			<textarea name="experience_other" id="experience_other" style="height:300px; width:570px"></textarea>
+        </li>
+        <li>
+            <div class="actions">
+                <input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
+                <input type="hidden" name="experid" value="<?php echo $this->experienceRowSet->getId();?>" />
+                <a href="/resume/education/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;">
+                    <input type="button" class="button02" name="button" value="Back"/>
+                </a>
+                <input type="submit" class="button01" name="button" value="Save"/>
+                <a href="/resume/expectation/id/<?php echo $this->resumeId; ?>" style="text-decoration:none;"><input type="button" class="button01" name="button" value="Next"/></a>
+            </div>
+        </li>
+    </ul>
+    </form>
+</div>
+<div class="summary">
+	<h2>Career Summary</h2>
+	<ul>
+	 <?php foreach($this->rows as $row) : 
+	 if(!$row->getExperienceOther()) :
+		$date = date_create($row->getStartDate());
+		$startDate = date_format($date, 'M Y');
+		
+		$date = date_create($row->getEndDate());
+		$endDate = date_format($date, 'M Y');
+	?>
+		<li>
+			<div class="edit" style="clear:both">
+				<p><?php echo $startDate;?> - <?php echo $endDate; ?></p>
+				<p class="action-link">
+					<a href="/resume/experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Edit</a> | 
+					<a href="/resume/del-experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Delete</a>
+				</p>
+			</div>
+			<div class="jobs">
+				<p class="name" style="font-weight:bold;text-transform: uppercase;"><a href="#"><?php echo $row->getCompanyName();?></a></p>
+				<p><?php echo $row->getJobTitle();?></p>
+			</div>
+		</li>
+	<?php 
+	endif;
+	endforeach;?>
+	</ul>
+</div>
+
 <script>
 $(function() {
     $( "#startdate" ).datepicker({
@@ -121,9 +155,34 @@ function checkValid()
     }
     return true;
 }   
+
+function checkValid()
+{
+    var other = $("#experience_other").val();
+    
+    if(other == '') {
+        $('.error').html('Please input into field required (*)');
+        return false;
+    }
+    return true;
+}   
 </script>
 
 <script>
+$(document).ready(function(){
+    $('.showother').click(function(){
+        if($(this).is(':checked')) {
+        	$('input[name=show1]').attr('checked', true);
+            $("#exp_nomal").hide('slow');
+            $("#exp_other").show('slow');
+        } else {
+        	$('input[name=show]').attr('checked', false);
+        	$("#exp_other").hide('slow');
+            $("#exp_nomal").show('slow');
+        }
+    });
+});
+
 $(document).ready(function(){
     $(".function").click(function(){
         if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');

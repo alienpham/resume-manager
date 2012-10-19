@@ -8,6 +8,7 @@ class Default_Model_Experience
 	protected $_job_title;
 	protected $_company_name;
 	protected $_duties;
+	protected $_experience_other;
 	protected $_sort_order;
     
 	public function __construct(array $options = null)
@@ -94,6 +95,13 @@ class Default_Model_Experience
 	}
 	public function setDuties($info) {
 		$this->_duties = $info;
+	}
+	
+    public function getExperienceOther() {
+		return $this->_experience_other;
+	}
+	public function setExperienceOther($info) {
+		$this->_experience_other = $info;
 	}
 	
 	public function getSortOrder() {
