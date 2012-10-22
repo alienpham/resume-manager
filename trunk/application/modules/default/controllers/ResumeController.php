@@ -16,7 +16,14 @@ class ResumeController extends Zend_Controller_Action
 		$this->view->username = $aNamespace->username;
 		date_default_timezone_set('Asia/Krasnoyarsk');
     }
-
+    
+    public function checkLoginAction()
+    {
+        $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
+		if (! isset ( $aNamespace->islogin )) echo 0;
+		echo 1;		
+		exit;
+    }
     public function indexAction()
     {
         $view = new Zend_View();
@@ -368,6 +375,12 @@ class ResumeController extends Zend_Controller_Action
             else $symbol = '<';
             $cond[] = 'current_salary '. $symbol .'  "'. $post['salary'] .'"';   
         }
+        
+	    if(@$post['experother']) {
+            $choice[] = 'experother';
+            $cond[] = 'experience_other like "%'. $post['experother'] .'%"';   
+        }
+        
     	if(@$post['functions']) {
             $choice[] = 'functions';
             $cond[] = 'function_id in ('. $post['functions'] .')';   
@@ -536,7 +549,9 @@ class ResumeController extends Zend_Controller_Action
             			$table .= '</w:tc>'; //close cell
             			$table .= '<w:tc>';
                 			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>';
-            			    $table .= strtoupper($experience->getCompanyName()) .'</w:t></w:r><w:br/><w:r><w:t>'. ucwords(strtolower($experience->getJobTitle()));
+            			    $table .= strtoupper($experience->getCompanyName());
+            			    $table .= '</w:t></w:r><w:br/><w:r><w:t>';
+            			    $table .= ucwords(strtolower($experience->getJobTitle()));
                 			$table .= '</w:t></w:r></w:p>';
                 			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>Duties:</w:t></w:r><w:br/><w:r><w:t>';
             			    $table .= $experience->getDuties();

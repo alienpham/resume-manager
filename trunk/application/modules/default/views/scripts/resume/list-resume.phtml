@@ -15,6 +15,9 @@
         <div class="comments">
             <h4>Commentd</h4>
         </div>
+        <div class="sent">
+            <h4>Sent</h4>
+        </div>
     </div>
     <?php 
     $experienceMapper = new Default_Model_ExperienceMapper();
@@ -94,18 +97,22 @@
                 <?php endif;?>
             </div>
         </div>
+        <div class="sent">
+            test
+        </div>
+        
     </div>
     <?php endforeach;?>
 </div> 
 <div style="clear:both">&nbsp;</div>
 <!-- pagging -->
 <div class="footer clearfix">
-	<b>Sort</b>
-    <select name="rowperpage">
-		<option>20</option>
-		<option>30</option>
-		<option>50</option>
-		<option>100</option>
+	<b>Show</b>
+    <select name="rowperpage" id="rowperpage">
+		<option value="20">20</option>
+		<option value="30">30</option>
+		<option value="50">50</option>
+		<option value="100">100</option>
 	</select>
     <?php if(count($this->paginator)) :?>
         <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
@@ -121,6 +128,7 @@ $(document).ready(function() {
     });
 
     $("#insertcomment").click(function(){
+    	checkLogin();
         if(!$('#contentcomment').val()) {
             $('#msgcomment').html('Content is not null'); 
             return;
@@ -147,6 +155,7 @@ $(document).ready(function() {
         'transitionOut'     : 'none'
     });
     $(".allcomment").click(function(){
+    	checkLogin();
         var resume_id = $(this).attr('id');
         $.ajax({
             url: '/resume/all-comment',
@@ -164,6 +173,7 @@ $(document).ready(function() {
     //Begin View detail candidate
     $(".detail_resume").fancybox();
     $(".detail_resume").click(function(){
+    	checkLogin();
         $('#detail_resume').html('');
         var resume_id = $(this).attr('id');
         $.ajax({
@@ -178,5 +188,9 @@ $(document).ready(function() {
         });
     });
     //End View detail candidate
+
+    $('#rowperpage').change(function(){
+        $this.submit();
+    });
 });
 </script>
