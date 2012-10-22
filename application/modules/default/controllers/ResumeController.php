@@ -222,6 +222,17 @@ class ResumeController extends Zend_Controller_Action
         else $this->_redirect('/resume/experience/id/' . $post['resume_id']);
     }
     
+    public function saveExperience1Action()
+    {
+        $post = $this->getRequest()->getPost();	
+        
+        $experienceMapper = new Default_Model_ExperienceMapper();
+        $experienceMapper->saveExperienceOther($post['resume_id'], $post['experience_other']);
+        
+        if($post['button'] == 'Next') $this->_redirect('resume/expectation/id/' . $post['resume_id']);
+        else $this->_redirect('/resume/experience/id/' . $post['resume_id']);
+    }
+    
     public function delExperienceAction()
     {
     	$experId = $this->getRequest()->getParam('experid');
@@ -427,7 +438,7 @@ class ResumeController extends Zend_Controller_Action
     }
 
 
-	function exportToWordAction()
+    function exportToWordAction()
 	{
         $resume_id = $this->_getParam('id');
         $resumeRowSet = new Default_Model_Resume();
@@ -470,7 +481,9 @@ class ResumeController extends Zend_Controller_Action
         			$table .= '</w:tc>'; //close cell
         			$table .= '<w:tc>';
             			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>';
-        			    $table .= strtoupper($education->getSchoolName()) .'</w:t></w:r><w:br/><w:r><w:t>'. ucwords(strtolower($education->getProgramName()));
+        			    $table .= strtoupper($education->getSchoolName());
+        			    $table .= '</w:t></w:r><w:br/><w:r><w:t>';
+        			    $table .= $education->getProgramName();
             			$table .= '</w:t></w:r></w:p>';
             			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>Program Info:</w:t></w:r><w:br/><w:r><w:t>';
         			    $table .= $education->getProgramInfo();
@@ -488,34 +501,53 @@ class ResumeController extends Zend_Controller_Action
         $table = ''; //empty table
     	if(count($experienceList)){ //if there was data returned from queryDB()
     		$table .= '<w:tbl>';
-    		//$table .= '<w:tblPr><w:tblW w:w = "4000" w:type="pct"/></w:tblPr>';
+    		$table .= '<w:tblPr><w:tblW w:w="4000" w:type="pct"/></w:tblPr>';
     		foreach ( $experienceList as $experience ) {
-    		    $date = new DateTime($experience->getStartDate());
-                $startDate = $date->format('M Y');
-        
-                $date = new DateTime($experience->getEndDate());
-                $endDate = $date->format('M Y');
-           
-    			$table .= '<w:tr>'; //new xml table row
-        			$table .= '<w:tc>';
-            			$table .= '<w:tcPr>';
-            			$table .= '<w:tcW w:w="2500" w:type="dxa"/></w:tcPr>';
-            			$table .= '<w:p><w:r><w:t>'; //start cell
-            			$table .= $startDate .'-'. $endDate; //cell contents
-            			$table .= '</w:t></w:r></w:p>';
-        			$table .= '</w:tc>'; //close cell
-        			$table .= '<w:tc>';
-            			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>';
-        			    $table .= strtoupper($experience->getCompanyName()) .'</w:t></w:r><w:br/><w:r><w:t>'. ucwords(strtolower($experience->getJobTitle()));
-            			$table .= '</w:t></w:r></w:p>';
-            			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>Duties:</w:t></w:r><w:br/><w:r><w:t>';
-        			    $table .= $experience->getDuties();
-            			$table .= '</w:t></w:r></w:p>';
-        			$table .= '</w:tc>';
-    			$table .= '</w:tr>';
+    		    if($experience->getExperienceOther()) {
+    		        $table .= '<w:tr>'; //new xml table row
+            			$table .= '<w:tc>';
+                			$table .= '<w:tcPr>';
+                			$table .= '<w:tcW w:w="2500" w:type="dxa"/></w:tcPr>';
+                			$table .= '<w:p><w:r><w:t>'; //start cell
+                			$table .= 'Other: '; //cell contents
+                			$table .= '</w:t></w:r></w:p>';
+            			$table .= '</w:tc>'; //close cell
+            			$table .= '<w:tc>';
+                			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>';
+            			    $table .= $experience->getExperienceOther();
+                			$table .= '</w:t></w:r></w:p>';
+            			$table .= '</w:tc>';
+    			    $table .= '</w:tr>';
+    		    } else {
+    		    
+        		    $date = new DateTime($experience->getStartDate());
+                    $startDate = $date->format('M Y');
+            
+                    $date = new DateTime($experience->getEndDate());
+                    $endDate = $date->format('M Y');
+               
+        			$table .= '<w:tr>'; //new xml table row
+            			$table .= '<w:tc>';
+                			$table .= '<w:tcPr>';
+                			$table .= '<w:tcW w:w="2500" w:type="dxa"/></w:tcPr>';
+                			$table .= '<w:p><w:r><w:t>'; //start cell
+                			$table .= $startDate .'-'. $endDate; //cell contents
+                			$table .= '</w:t></w:r></w:p>';
+            			$table .= '</w:tc>'; //close cell
+            			$table .= '<w:tc>';
+                			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>';
+            			    $table .= strtoupper($experience->getCompanyName()) .'</w:t></w:r><w:br/><w:r><w:t>'. ucwords(strtolower($experience->getJobTitle()));
+                			$table .= '</w:t></w:r></w:p>';
+                			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>Duties:</w:t></w:r><w:br/><w:r><w:t>';
+            			    $table .= $experience->getDuties();
+                			$table .= '</w:t></w:r></w:p>';
+            			$table .= '</w:tc>';
+        			$table .= '</w:tr>';
+    		    }
     		} //done with dynamic data
             $table .= '</w:tbl>'; //close xml table
     	}
+
         $document->setValue('experience', $table);
         
         //element expection in file doc
