@@ -130,7 +130,7 @@ class Default_Model_ResumeMapper {
         }
         
         $join='';
-        if(in_array('job_title', $choice) || in_array('company_name', $choice) || in_array('functions', $choice)) {
+        if(in_array('job_title', $choice) || in_array('company_name', $choice) || in_array('experother', $choice) || in_array('functions', $choice)) {
             $join .= ' INNER JOIN res_experience as exper ON r.resume_id = exper.resume_id ';
             if(in_array('functions', $choice))
 				$join .= ' INNER JOIN res_experience_has_function as exper_fun ON exper.id = exper_fun.res_experience_id ';

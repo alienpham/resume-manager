@@ -1,6 +1,16 @@
 <!-- Add fancyBox main JS and CSS files -->
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
+<script>
+function checkLogin(){
+   $.ajax({
+        url: '/resume/check-login',
+        success: function(result){
+            if(!result) document.location.href = '/user/login';
+        }
+   });
+}
+</script>
 <div class="block-search">
 <form id="form" action="/resume" method="post">
 	<label>Search</label>
@@ -34,10 +44,10 @@
 <div id="detail_resume" style="width:700px;height: 450px; display: none;">&nbsp;</div>
 <script type="text/javascript">
 $(document).ready(function() {
-
     //Begin Avansearch
     $(".fancybox").fancybox();
     $("#avansearch").click(function(){
+    	checkLogin();
         var name = $('#full_name').val();
         var email = $('#email').val();
         var phone = $('#phone').val();
@@ -47,7 +57,7 @@ $(document).ready(function() {
         var company_name = $('#company_name').val();
         var symbol = $('#symbol').val();
         var salary = $('#salary').val();
-
+        var experother = $('#experother').val();
         
         //var functions = $('input[name="option[]"]:checkbox:checked');
         var functions = '';
@@ -70,7 +80,8 @@ $(document).ready(function() {
                 company_name: company_name,
                 symbol: symbol,
                 functions: functions,
-                salary: salary
+                salary: salary,
+                experother: experother
             },
       	  	success: function(result) {
       	    	$('#box').html(result);
@@ -91,6 +102,7 @@ $(document).ready(function() {
 <script>
 $(document).ready(function(){
     $("#function").click(function(){
+    	checkLogin();
         if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');
     });
 });
