@@ -1,0 +1,147 @@
+<form name="frmAddCompany" method="post" action="<?php echo $this->baseUrl; ?>/company/company/add-company">
+<input type="hidden" name="company_id" id="company_id" value="<?php echo $this->company_id;?>"/>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><h3><?php echo $this->title_page;?></h3></td>
+      </tr>
+      <tr>
+        <td height="10"></td>
+      </tr>
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="79%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="right">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><span class="require" id="errmsg"></span></td>
+                  </tr>
+                <tr>
+                  <td width="20%" align="right">&nbsp;</td>
+                  <td width="4%">&nbsp;</td>
+                  <td width="4%" bgcolor="#FFECEC">&nbsp;</td>
+                  <td width="36%" bgcolor="#FFECEC"><em><strong>English</strong></em></td>
+                  <td width="36%" bgcolor="#FFECEC"><em><strong>Vietnamese</strong></em></td>
+                </tr>
+                <tr>
+                  <td class="subtitle_popup">Company Full Name:<span class="require">*</span></td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td bgcolor="#FFECEC"><input type="text" name="full_name_en" id="full_name_en" style="width:230px" value="<?php  echo $this->full_name_en;?>" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="full_name_vn" id="full_name_vn" style="width:230px" value="<?php  echo $this->full_name_vn;?>" /></td>
+                </tr>
+                <tr>
+                  <td class="subtitle_popup">Short Name:<span class="require">*</span></td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td bgcolor="#FFECEC"><input type="text" name="short_name_en" id="short_name_en" style="width:230px" value="<?php  echo $this->short_name_en;?>"/></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="short_name_vn" id="short_name_vn" style="width:230px" value="<?php  echo $this->short_name_vn;?>"/></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3" bgcolor="#FFECEC"><hr /></td>
+                </tr>
+                <tr>
+                  <td class="subtitle_popup">Business Type:<span class="require">*</span></td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><select name="busines_type_id" id="busines_type_id" style="width:200px">
+                    <option value="">Please select</option>
+                    <?php echo $this->list_busines_type;?>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td class="subtitle_popup">Industry:<span class="require">*</span></td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><select name="industry_id" id="industry_id" style="width:200px">
+                    <option value="">Please select</option>
+                    <?php echo $this->list_industry;?>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td class="subtitle_popup">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3" bgcolor="#FFECEC"><hr /></td>
+                  </tr>
+                <tr>
+                  <td class="subtitle_popup">Telephone:</td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><input type="text" name="tel" id="tel" style="width:230px" value="<?php  echo $this->tel;?>"/>&nbsp;&nbsp;Ex: 848 38243 780 Ext. 123</td>
+                </tr>
+                <tr>
+                  <td class="subtitle_popup">Fax:</td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><input type="text" name="fax" id="fax" style="width:230px" value="<?php  echo $this->tel;?>"/>&nbsp;&nbsp;Ex: 848 38243 780</td>
+                </tr>
+                <tr>
+                  <td class="subtitle_popup">Email:</td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><input type="text" name="email" id="email" style="width:230px" value="<?php  echo $this->email;?>"/></td>
+                </tr>
+                <tr>
+                  <td class="subtitle_popup">Address:</td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><textarea name="address" rows="2" id="address" style="width:500px"><?php  echo $this->address;?></textarea></td>
+                  </tr>
+                <tr>
+                  <td class="subtitle_popup">Website:</td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><input type="text" name="website" id="website" style="width:230px" value="<?php  echo $this->website;?>" /></td>
+                </tr>
+                <tr>
+                  <td valign="top" class="subtitle_popup">Company Information <br />
+                    (for internal reference):</td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><textarea name="contents" rows="6" id="contents" style="width:500px"><?php  echo $this->website;?></textarea></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3" bgcolor="#FFECEC"><hr /></td>
+                  </tr>
+
+                <tr>
+                  <td class="subtitle_popup">Assigned To:<span class="require">*</span></td>
+                  <td>&nbsp;</td>
+                  <td bgcolor="#FFECEC">&nbsp;</td>
+                  <td colspan="2" bgcolor="#FFECEC"><select name="consultant_id" id="consultant_id" style="width:200px">
+                    <option value="">Please select</option>
+                    <?php echo $this->list_consultant;?>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3" bgcolor="#FFECEC">&nbsp;</td>
+                </tr>
+            </table></td>
+            <td>&nbsp;</td>
+            <td width="19%" valign="top">&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td height="10"></td>
+      </tr>
+      
+      <tr>
+        <td align="center"><input type="submit" name="save" id="save" value="Save">&nbsp;&nbsp;&nbsp;
+          <input type="button" name="cancel" id="cancel" value="Cancel"></td>
+      </tr>
+    </table>
+</form>
+<script language="javascript">
+function checkform()
+{
+	
+}
+</script>
