@@ -1,0 +1,46 @@
+<?php
+class Company_Model_ContactPersonMapper {
+	protected $_dbTable;
+    public function setDbTable ($dbTable)
+    {
+        if (is_string($dbTable)) {
+            $dbTable = new $dbTable();
+        }
+        if (! $dbTable instanceof Zend_Db_Table_Abstract) {
+            throw new Exception('Invalid table data gateway provided');
+        }
+        $this->_dbTable = $dbTable;
+        return $this;
+    }
+    public function getDbTable ()
+    {
+        if (null === $this->_dbTable) {
+            $this->setDbTable('Company_Model_DbTable_ContactPerson');
+        }
+        return $this->_dbTable;
+    }
+    
+	public function update($data, $where) {
+		$this->getDbTable ()->update ( $data, $where );
+	}
+	
+	public function save (Company_Model_ContactPerson $contactperson)
+    {
+        $data = array(
+			'company_id' 	=> $contactperson->getCompanyId(), 
+			'title' 		=> $contactperson->getTitle(), 
+			'full_name' 	=> $contactperson->getFullName(),
+        	'job_title' 	=> $contactperson->getJobTitle(), 
+			'tel_1' 		=> $contactperson->getTel1(), 
+			'tel_2' 		=> $contactperson->getTel2(),
+        	'fax' 			=> $contactperson->getFax(), 
+			'mobile_1' 		=> $contactperson->getMobile1(), 
+			'mobile_2' 		=> $contactperson->getMobile2(),
+        	'email_1' 		=> $contactperson->getEmail1(), 
+			'email_2' 		=> $contactperson->getEmail2(), 
+			'address' 		=> $contactperson->getAddress(),
+		);
+		
+		return $this->getDbTable()->insert($data);
+    }
+}
