@@ -594,7 +594,11 @@ color:red;
 	width:5%;	
 	line-height:25px;
 }
-.list-company .inter,
+.list-company .inter
+{
+	width:5%;	
+	line-height:25px;
+}
 .list-company .joined,
 .list-company .status,
 .list-company .cons
@@ -603,7 +607,7 @@ color:red;
 	line-height:25px;
 }
 .list-company .name{
-	width:12%;
+	width:15%;
 	line-height:25px;
 }
 .list-company .action{
@@ -651,7 +655,11 @@ color:red;
 	width:5%;	
 	line-height:25px;
 }
-.list-company .info-content .inter,
+.list-company .info-content .inter
+{
+	width:5%;	
+	line-height:25px;
+}
 .list-company .info-content .joined,
 .list-company .info-content .status,
 .list-company .info-content .cons
@@ -661,7 +669,7 @@ color:red;
 }
 
 .list-company .info-content .name{
-	width:12%;
+	width:15%;
 	line-height:25px;
 }
 
@@ -673,7 +681,7 @@ color:red;
 
 .list-company .info-content .action a.editcom{
 	font-weight: bold;
-	padding-left:18px;
+	padding-left:28px;
 	background:url(../images/icon-add.png) no-repeat left 1px;
 	line-height:25px;
 }
