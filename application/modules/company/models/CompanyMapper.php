@@ -43,11 +43,14 @@ class Company_Model_CompanyMapper {
 			'created_date' 		=> $company->getCreatedDate(),
 			'updated_date' 		=> $company->getUpdatedDate()
 		);
-//print_r($data); exit;    
-
-			
-		return $this->getDbTable()->insert($data);
-
+		if (null == ($id = $company->getCompanyId())) {
+            return $this->getDbTable()->insert($data);
+        } else {
+        	unset($data['company_code']);
+        	unset($data['created_date']);
+        	$this->getDbTable()->update($data, array('company_id = ?' => $id));
+            return $id;
+        }
 		
     }
 	
@@ -158,6 +161,16 @@ class Company_Model_CompanyMapper {
     	$str_date=date('Y-m');
     	$db = $this->getDbTable()->getAdapter();
     	$sql = "SELECT count(*) as numrsproc FROM candidate_has_process WHERE 
+    			action_date like '%".$str_date."%' AND candidate_id IN (SELECT candidate_id FROM candidate WHERE vacancy_id IN (SELECT vacancy_id FROM vacancy WHERE company_id = '$company_id')) AND resume_process_id IN($process_id)";
+    	$result = $db->fetchAll($sql);
+    	return $result[0]['numrsproc'];
+    }
+    
+	public function countCanProcess($company_id,$process_id)
+    {
+    	$str_date=date('Y-m');
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT count(distinct candidate_id) as numrsproc FROM candidate_has_process WHERE 
     			action_date like '%".$str_date."%' AND candidate_id IN (SELECT candidate_id FROM candidate WHERE vacancy_id IN (SELECT vacancy_id FROM vacancy WHERE company_id = '$company_id')) AND resume_process_id IN($process_id)";
     	$result = $db->fetchAll($sql);
     	return $result[0]['numrsproc'];

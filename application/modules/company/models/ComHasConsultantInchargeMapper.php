@@ -32,14 +32,16 @@ class Company_Model_ComHasConsultantInchargeMapper {
 			'action_date' 	=> $comhasconsultantincharge->getActionDate(), 
 			'status' 		=> $comhasconsultantincharge->getStatus()
 		);
-//print_r($data); exit;    
-
-			
-		return $this->getDbTable()->insert($data);
-
 		
+		return $this->getDbTable()->insert($data);
     }
-	
+    
+	public function updateComIncharge($consultant_id, $company_id) {
+		$db = $this->getDbTable()->getAdapter();
+        $sql = "UPDATE com_has_consultant_incharge SET consultant_id = ' $consultant_id ', action_date = '".date('Y-m-d H:i:s')."' WHERE company_id = '$company_id'";
+        $db->query($sql);
+	}
+    
 	public function find ($id, Company_Model_ComHasConsultantIncharge $company)
     {
         $result = $this->getDbTable()->find($id);        
