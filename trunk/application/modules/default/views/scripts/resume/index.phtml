@@ -40,8 +40,8 @@ function checkLogin(){
 </div>
 <?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
 <?php echo $this->partial ( '/resume/comment.phtml' )?>
-<div id="allcomment" style="width:500px;height: auto; display: none;overflow:auto;">&nbsp;</div>
-<div id="detail_resume" style="width:700px;height: 450px; display: none;">&nbsp;</div>
+<div id="allcomment" style="width:500px;height:200px; overflow-y:scroll; display: none;">&nbsp;</div>
+<div id="detail_resume" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
 <script type="text/javascript">
 $(document).ready(function() {
     //Begin Avansearch
@@ -97,6 +97,7 @@ $(document).ready(function() {
   	    	$('#report').html(result);
   	  	}
   	});
+    
 });
 </script>
 <script>

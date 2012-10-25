@@ -318,7 +318,7 @@ class ResumeController extends Zend_Controller_Action
             
 		$html = '<p class="update-date">Comment '. $createdComment .'</p> <span>by</span> <span class="user-name">'. $comment['username'] . '</span>';
         $html .= '<p>' . substr($comment['content'], 0, 90) . '</p>';
-        $html .= '<a href="#allcomment" class="allcomment" id="'.  $post['resume_id'] .'">view all</a>';
+        $html .= '<a href="#allcomment" class="allcomment" id="'.  $post['resume_id'] .'" onClick="allComment('.  $post['resume_id'] .')">view all</a>';
         echo $html;
 		exit;
 	}
@@ -330,7 +330,7 @@ class ResumeController extends Zend_Controller_Action
 		$resume = new Default_Model_ResumeMapper();
 		$comments = $resume->getComments($post['resume_id']);
         $html = ''; 
-		$html .= '<div style="color:#70b4e2;"><b>ALL COMMENT</b></div><br />';
+		$html .= '<div style="color:#1B7CBD;background-color:#CCC;padding:5px 0px"><b>ALL COMMENT</b></div><br />';
 		foreach($comments as $comment) {
         
             $date = new DateTime($comment['created_date']);
@@ -345,7 +345,10 @@ class ResumeController extends Zend_Controller_Action
         }
         
         echo $html;
-		exit;
+        exit;
+        //$this->_helper->layout->disableLayout();
+        //$this->view->html = $html;
+        //$this->render('comment-all');
 	}
 	
 	public function avandceSearchAction()
