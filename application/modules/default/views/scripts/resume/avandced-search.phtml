@@ -2,8 +2,10 @@
 $resume = new Default_Model_ExperienceMapper();
 $listFunction = $resume->getFunction();
 ?>
-<div style="width:900px;height: 450px; display: none;" id="inline">
+<div style="width:900px;height: 450px; overflow-y:scroll;display: none;" id="inline">
 <div id="adv-search" class="content">
+<div align="center" style="color:#1B7CBD;font-size:16px"><b>ADVANCED SEARCH</b></div>
+<br/>
 <form name="frmAvanSearch" id="frmAvanSearch" method="post" action="/resume/avandce-search" >
 	<h2>Search Personal Details</h2>
 	<ul>

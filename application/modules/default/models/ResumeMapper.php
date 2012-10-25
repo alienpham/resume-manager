@@ -183,10 +183,12 @@ class Default_Model_ResumeMapper {
         $sql = "SELECT rc.*, c.full_name, c.username FROM res_comment AS rc ";
         $sql .= "INNER JOIN consultant AS c ON c.consultant_id = rc.consultant_id";
         $sql .= " WHERE resume_id = " . $resumeId;
+        $sql .= " ORDER BY rc.res_comment_id DESC ";
 		if($limit) {
-		    $sql .= " ORDER BY rc.res_comment_id DESC LIMIT 1";
+		    $sql .= "LIMIT 1";
 		    return $db->fetchRow($sql);
-		}
+		} 
+		
 		
         return $db->fetchAll($sql);
     }
