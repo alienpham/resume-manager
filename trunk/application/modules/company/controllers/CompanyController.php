@@ -9,6 +9,9 @@ class Company_CompanyController extends Zend_Controller_Action
         $view->headLink()->appendStylesheet ( '/js/themes/base/jquery.ui.all.css' );
         $view->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );
         $view->headScript()->appendFile ( '/js/jquery.ui.core.js' );
+        $view->headScript()->appendFile ( '/js/jquery.mousewheel-3.0.6.pack.js' );
+        $view->headScript()->appendFile ( '/js/jquery.fancybox.js?v=2.1.0' );
+        $view->headLink()->appendStylesheet ( '/js/jquery.fancybox.css?v=2.1.0' );
         date_default_timezone_set('Asia/Krasnoyarsk');
 	}
 
@@ -113,5 +116,16 @@ class Company_CompanyController extends Zend_Controller_Action
 		$this->view->list_industry = $list_industry;
 		$this->view->list_busines_type = $list_busines_type;
 		$this->view->list_consultant = $list_consultant;
+	}
+	
+	public function addContactAction()
+	{
+		$post = $this->getRequest()->getPost();
+		$contact_person_id = $this->_getParam('contact_person_id',"");
+		$company_id = $this->_getParam('company_id',"");
+		if ($contact_person_id!="")
+		{
+			
+		}
 	}
 }
