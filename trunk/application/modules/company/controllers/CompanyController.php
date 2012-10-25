@@ -39,15 +39,16 @@ class Company_CompanyController extends Zend_Controller_Action
 		}
 		else 
 			$this->view->title_page = "ADD COMPANY";
-		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","abbreviation",$industry_id);
+		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","name",$industry_id);
 		$list_busines_type=$company->getLookup("busines_type_lookup","1","busines_type_id","name",$busines_type_id);
 		$list_consultant=$company->getLookup("consultant","status='Active'","consultant_id","full_name",$consultant_id);
 		if (isset($post['save']))
 		{
-			if (isset($post['company_id']) && $post['company_id']=="")
+			if (isset($post['company_id']))
 			{
 				$rs=$company->getListCompany("1", "company_id DESC", 0, 1);
 				$rscompany= new Company_Model_Company();
+				$rscompany->setCompanyId($post['company_id']);
 				$rscompany->setCompanyCode("C".($rs[0]['company_id']+1));
 				$rscompany->setFullNameEn($post['full_name_en']);
 				$rscompany->setShortNameEn($post['short_name_en']);
@@ -71,22 +72,41 @@ class Company_CompanyController extends Zend_Controller_Action
 				$consultantincharge->setStatus("Active");
 				$consultantincharge->setActionDate(date('Y-m-d H:i:s'));
 				$conincharge = new Company_Model_ComHasConsultantInchargeMapper();
-				$conincharge->save($consultantincharge);
 				
+				if ($post['company_id']=="")
+				{
+					$conincharge->save($consultantincharge);
+				}
+				else 
+				{
+					$consultant_id=$company->getFieldValue ("com_has_consultant_incharge", "company_id = '$ComapnyId'", "com_consultant_incharge_id");
+					if ($consultant_id=="" && $post['consultant_id']!="")
+						$conincharge->save($consultantincharge);
+					else
+						$conincharge->updateComIncharge($post['consultant_id'], $ComapnyId);
+				}
 				$rscominfomation= new Company_Model_ComInformation();
 				$rscominfomation->setCompanyId($ComapnyId);
 				$rscominfomation->setApplyTo("Internal");
 				$rscominfomation->setCompanyId($ComapnyId);
 				$rscominfomation->setContent($post['contents']);
-				
 				$cominfomation = new Company_Model_ComInformationMapper();
-				$cominfomation->save($rscominfomation);
+				if ($post['company_id']=="")
+				{
+					$cominfomation->save($rscominfomation);
+				}
+				else 
+				{
+					$com_information_id=$company->getFieldValue ("com_information", "company_id = '$ComapnyId'", "com_information_id");
+					if ($com_information_id=="" && $post['contents']!="")
+						$cominfomation->save($rscominfomation);
+					else 
+						$cominfomation->updateComInformation($ComapnyId,$post['contents']);
+				}
+				
 				$this->_redirect('/company');
 			}
-			else 
-			{
-				
-			}
+			
 		}
 		$this->view->baseUrl = $this->getRequest()->getBaseUrl();
 		$this->view->company_id = $company_id;
