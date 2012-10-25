@@ -162,14 +162,18 @@ textarea,
 .list-resumes .head .name,
 .list-resumes .head .experience,
 .list-resumes .head .salary,
-.list-resumes .head .comments{	
+.list-resumes .head .comments,
+.list-resumes .head .sent
+{	
 	background:url(../images/bg-header.jpg) no-repeat top right;
 }
 .list-resumes .checkbox,
 .list-resumes .name,
 .list-resumes .experience,
 .list-resumes .salary,
-.list-resumes .comments{
+.list-resumes .comments,
+.list-resumes .sent
+{
 	padding:6px 1.5% 7px;
 	float:left;	
 }
@@ -179,7 +183,7 @@ textarea,
 }
 .list-resumes .name,
 .list-resumes .salary{
-	width:14%;	
+	width:13%;	
 }
 .list-resumes .experience{
 	width:32%;
@@ -188,14 +192,17 @@ textarea,
 	
 }
 .list-resumes .comments{
-	width:25%;
-	background:none !important;
+	width:16%;
+	/*background:none !important;*/
 }
 .list-resumes .head h4{
 	text-transform:uppercase;
 	color:#fff;	
 }
-
+.list-resumes .sent{
+	width:8%;
+	background:none !important;
+}
 .info-content{
 	margin-top: 5px;
 	border-bottom:1px solid #bcbcbc;
@@ -227,7 +234,7 @@ textarea,
 .info-content .export-word{
 	background:url(../images/icon-export.png) no-repeat left 1px;
 	color:#1b7cbd;
-	margin-left:20px;
+	margin-left:10px;
 }
 .info-content .info-comment .update-date{
 	float:left;	
