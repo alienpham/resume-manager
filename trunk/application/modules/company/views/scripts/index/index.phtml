@@ -1,5 +1,7 @@
+<?php echo $this->headScript();?>
+<?php echo $this->headLink();?>
 <div class="block-search">
-<form id="form" action="/company/" method="post">
+<form id="frmsearch" action="/company/" method="post">
 	<label>Search</label>
 	<select name="ccode_id" id="ccode_id" style="width:125px">
 				<option value="1" <?php if ($this->ccode_id==1) echo "selected";?> >Company Code</option>
@@ -32,15 +34,15 @@
 	<a href="/company/company/add-company" style="text-decoration:none;">
 		<input class="button01" type="button" value="Add Company" />
 	</a>
-    <a href="/company/company/add-contact" style="text-decoration:none;">
-        <input class="button01" type="button" value="Add Contact" />
-    </a><br />
+        <input class="button01" type="button" value="Add Contact" onclick="addContact()"/>
+    <br />
 <br />
+<form name="frmCompanyList">
 <div id="box">   
     <div class="list-company clearfix">
         <div class="head">
             <div class="checkbox">
-                <input type="checkbox" value="" />
+                &nbsp;
             </div>
             <div class="code">
                 <h4>Code</h4>
@@ -114,3 +116,47 @@
 	</tr>
 	<?php endif;?>
   </table>
+ <input type="hidden" name="hdcompany_id" id="hdcompany_id" /> 
+ </form>
+ <script language="javascript">
+ function getValueListCheckBox(list,id)
+{	
+	if(list!=undefined){
+	var num=list.length;
+	if (num==undefined)
+	{
+		if (list.checked)
+			id.value=list.value;
+		else
+			id.value="";
+	}
+	else
+		{
+			count=0;
+			str="";
+			for (i=0;i<num;i++)
+			{
+				if (list[i].checked)
+					{
+						if (count==0)
+							str=list[i].value;
+						else
+							str = str + ", " + list[i].value;
+						count++;
+					}
+			}
+		id.value=str;
+       }
+	}
+	//alert(id.value);
+}
+ 
+ function addContact()
+ {
+	 if ($("#hdcompany_id").val()=="")
+	 	alert("Please select company to add contact.")
+	else
+		window.location="company/company/add-contact/company_id/"+$("#hdcompany_id").val();
+	
+ }
+ </script>
