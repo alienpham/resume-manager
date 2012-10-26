@@ -111,7 +111,6 @@ class Company_CompanyController extends Zend_Controller_Action
 			}
 			
 		}
-		$this->view->baseUrl = $this->getRequest()->getBaseUrl();
 		$this->view->company_id = $company_id;
 		$this->view->list_industry = $list_industry;
 		$this->view->list_busines_type = $list_busines_type;
@@ -121,11 +120,31 @@ class Company_CompanyController extends Zend_Controller_Action
 	public function addContactAction()
 	{
 		$post = $this->getRequest()->getPost();
-		$contact_person_id = $this->_getParam('contact_person_id',"");
 		$company_id = $this->_getParam('company_id',"");
-		if ($contact_person_id!="")
+		$company = new Company_Model_CompanyMapper();
+		$cominfo=$company->getListCompany("company_id = '$company_id'", "company_id DESC", 0, 1);
+		
+		$contact_person_id = $post['contact_person_id'];
+		$title=$post['title'];
+		$full_name=$post['full_name'];
+		$job_title=$post['job_title'];
+		$tel_1=$post['tel_1'];
+		$tel_2=$post['tel_2'];
+		$fax=$post['fax'];
+		$mobile_1=$post['mobile_1'];
+		$mobile_2=$post['mobile_2'];
+		$email_1=$post['email_1'];
+		$email_2=$post['email_2'];
+		$address=$post['address'];
+		
+		if ($contact_person_id=="")
 		{
 			
 		}
+		
+		$this->view->company_id = $company_id;
+		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
+		//$this->view->list_busines_type = $list_busines_type;
+		//$this->view->list_consultant = $list_consultant;
 	}
 }
