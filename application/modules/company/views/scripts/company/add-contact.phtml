@@ -1,3 +1,5 @@
+<form name="frmAddContact" method="post" action="company/company/add-contact">
+<input type="hidden" name="company_id"  id="company_id" value="<?php echo $this->company_id; ?>"/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td><h3>ADD CONTACT PERSON</h3></td>
@@ -18,7 +20,7 @@
                   <td class="subtitle_popup">Company Name</td>
                   <td>&nbsp;</td>
                   <td width="4%" bgcolor="#FFECEC">&nbsp;</td>
-                  <td width="72%" bgcolor="#FFECEC">&nbsp;</td>
+                  <td width="72%" bgcolor="#FFECEC"><strong><?php echo $this->company_name; ?></strong></td>
                 </tr>
                 <tr>
                   <td class="subtitle_popup">Full Name:<span class="require">*</span></td>
@@ -28,62 +30,62 @@
                     <option value="Mr.">Mr.</option>
                     <option value="Mrs.">Mrs.</option>
                     <option value="Ms.">Ms.</option>
-                  </select> <input type="text" name="full_name" id="full_name" style="width:287px" /></td>
+                  </select> <input type="text" name="full_name" id="full_name" style="width:287px" value="<?php echo $this->full_name; ?>"/></td>
                 </tr>
                 <tr>
                   <td class="subtitle_popup">Job Title:<span class="require">*</span></td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="job_title" id="job_title" style="width:350px" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="job_title" id="job_title" style="width:350px" value="<?php echo $this->job_title; ?>"/></td>
                 </tr>
                 
                 <tr>
                   <td valign="top" class="subtitle_popup">Tel 1:</td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="tel_1" id="tel_1" style="width:200px" /> </td>
+                  <td bgcolor="#FFECEC"><input type="text" name="tel_1" id="tel_1" style="width:200px" value="<?php echo $this->tel_1; ?>"/> </td>
                 </tr>
 				 <tr>
                   <td valign="top" class="subtitle_popup">Tel 2:</td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="tel_2" id="tel_2" style="width:200px" /> </td>
+                  <td bgcolor="#FFECEC"><input type="text" name="tel_2" id="tel_2" style="width:200px" value="<?php echo $this->tel_2; ?>" /> </td>
                 </tr>
                 <tr>
                   <td class="subtitle_popup">Fax:</td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="fax" id="fax" style="width:200px" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="fax" id="fax" style="width:200px" value="<?php echo $this->fax; ?>"/></td>
                 </tr>
                 <tr>
                   <td class="subtitle_popup">Mobile 1:</td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="mobile_1" id="mobile_1" style="width:200px" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="mobile_1" id="mobile_1" style="width:200px" value="<?php echo $this->mobile_1; ?>"/></td>
                   </tr>
                 <tr>
                   <td class="subtitle_popup">Mobile 2:</td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="mobile_2" id="mobile_2" style="width:200px" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="mobile_2" id="mobile_2" style="width:200px" value="<?php echo $this->mobile_2; ?>" /></td>
                   </tr>
                 <tr>
                   <td class="subtitle_popup">Email 1:</td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="email_1" id="email_1" style="width:200px" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="email_1" id="email_1" style="width:200px" value="<?php echo $this->email_1; ?>" /></td>
                 </tr>
                 <tr>
                   <td class="subtitle_popup">Email 2:</td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><input type="text" name="email_2" id="email_2" style="width:200px" /></td>
+                  <td bgcolor="#FFECEC"><input type="text" name="email_2" id="email_2" style="width:200px" value="<?php echo $this->email_2; ?>" /></td>
                 </tr>
                 <tr>
                   <td class="subtitle_popup" valign="top">Address:</td>
                   <td>&nbsp;</td>
                   <td bgcolor="#FFECEC">&nbsp;</td>
-                  <td bgcolor="#FFECEC"><textarea name="address" rows="6" id="address" style="width:500px"></textarea></td>
+                  <td bgcolor="#FFECEC"><textarea name="address" rows="6" id="address" style="width:500px"><?php echo $this->address; ?></textarea></td>
                 </tr>
                 <tr>
                   <td>&nbsp;</td>
@@ -109,3 +111,4 @@
         </table></td>
       </tr>
     </table>
+</form>
