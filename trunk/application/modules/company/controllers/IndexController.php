@@ -74,7 +74,7 @@ class Company_IndexController extends Zend_Controller_Action
 			$consultant_id = $company->getFieldValue("com_has_consultant_incharge","company_id='".$rs['company_id']."'","consultant_id");
 			$consultant_name = $company->getFieldValue("consultant","consultant_id='$consultant_id'","abbreviated_name");
 			$data.='<div class="checkbox">
-                <input type="checkbox" name="company_id" id="company_id" value="'.$rs['company_id'].'"  />
+                <input type="radio" name="company_id" id="company_id" value="'.$rs['company_id'].'" onclick="getValueListCheckBox(this,document.frmCompanyList.hdcompany_id)"/>
             </div>
             <div class="code">
                 '.$rs['company_code'].'
