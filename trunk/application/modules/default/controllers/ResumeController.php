@@ -14,7 +14,7 @@ class ResumeController extends Zend_Controller_Action
         $view->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );
         $view->headScript()->appendFile ( '/js/jquery.ui.core.js' );
 		$this->view->username = $aNamespace->username;
-		date_default_timezone_set('Asia/Krasnoyarsk');
+		date_default_timezone_set('Asia/Saigon');
     }
     
     public function checkLoginAction()
@@ -33,6 +33,7 @@ class ResumeController extends Zend_Controller_Action
         
         $resume = new Default_Model_ResumeMapper();
 
+        $rowPerPage = $this->_getParam('rowperpage', 20);
         $currentPage = 1;
         $page = $this->_getParam('page', 1);
         if(!empty($page)) {
@@ -40,16 +41,18 @@ class ResumeController extends Zend_Controller_Action
         }
         
         $where = array();
-        $choice = $this->_getParam('choice', 'name');
+        $choice = $this->_getParam('choice', '');
         $search = $this->_getParam('search', '');
         if($choice == 'full_name') $where[] = 'full_name like "%' . $search . '%"';
         if($choice == 'resume_code') $where[] = 'resume_code like "%' . $search . '%"';
         if($choice == 'job_title') $where[] = 'job_title like "%' . $search . '%"';
         
+        $this->view->choice = $choice;
+        $this->view->search = $search;
         //http://zendgeek.blogspot.com
         $rows = $resume->getListResume($where, array($choice));
         $paginator = Zend_Paginator::factory($rows);
-        $paginator->setItemCountPerPage(20);
+        $paginator->setItemCountPerPage($rowPerPage);
         $paginator->setCurrentPageNumber($currentPage);
         
         $this->view->paginator = $paginator;

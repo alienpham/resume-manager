@@ -11,15 +11,16 @@ function checkLogin(){
    });
 }
 </script>
+<form id="frmresume" action="/resume" method="post">
 <div class="block-search">
-<form id="form" action="/resume" method="post">
 	<label>Search</label>
 	<select name="choice" style="width:110px"> 
-		<option value="full_name">Name</option>
-		<option value="resume_code">Resume Code</option>
-		<option value="job_title">Job Title</option>
+        <option value="">-- Choice -- </option>
+		<option value="full_name" <?php echo ($this->choice == 'full_name')? 'selected': ''?>>Name</option>
+		<option value="resume_code" <?php echo ($this->choice == 'resume_code')? 'selected': ''?>>Resume Code</option>
+		<option value="job_title" <?php echo ($this->choice == 'job_title')? 'selected': ''?>>Job Title</option>
 	</select>
-	<input type="text" value="" name="search" />
+	<input type="text" name="search"  value="<?php echo $this->search;?>"/>
 	<input  class="button01" id="button1" type="submit" value="Search" />
 	<a href="#inline" class="fancybox" style="text-decoration:none;">
 		<input class="button01" type="button" value="Advanced Search" />
@@ -32,12 +33,12 @@ function checkLogin(){
     <a href="/resume/export-email" style="text-decoration:none;">
         <input class="button01" type="button" value="Export Email" />
     </a>
-</form>
 </div>  
 <p class="today-entry" id="report">&nbsp;</p>
 <div id="box">
-    <?php echo $this->partial ( '/resume/list-resume.phtml', array('paginator' => $this->paginator) )?>
+    <?php echo $this->partial ( '/resume/list-resume.phtml', array('paginator' => $this->paginator, 'choice' => $this->choice, 'search' => $this->search) )?>
 </div>
+</form>
 <?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
 <?php echo $this->partial ( '/resume/comment.phtml' )?>
 <div id="allcomment" style="width:500px;height:200px; overflow-y:scroll; display: none;">&nbsp;</div>
