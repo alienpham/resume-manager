@@ -8,8 +8,8 @@ $listFunction = $resume->getFunction();
 <h2>Personal Details</h2>
 <table cellpadding="5" cellspacing="6">
 	<tr>
-		<td>Candidate Name</td>
-		<td><?php echo $this->resume->getFullName();?></td>
+		<td style="width:115px">Candidate Name</td>
+		<td><b><?php echo $this->resume->getFullName();?></b></td>
 	</tr>
 	<tr>
 		<td>Birthday</td>
@@ -85,8 +85,12 @@ $createdComment = $date->format('M-d');
 	<tr>
 		<td style="width:30%" valign="top"><?php echo $startDate;?> - <?php echo $endDate;?></td>
 		<td class="companies" style="width:65%">
+            <?php if($experience->getExperienceOther()) :?>
+                <p>Experience Other</p>
+            <?php else:?>
 			<p style="color:#70b4e2;font-weight:bold;text-transform: uppercase;"><?php echo $experience->getCompanyName();?></p>
 			<p><?php echo $experience->getJobTitle();?></p>
+            <?php endif;?>
 		</td>
 	</tr>
 	<?php endforeach;?>                  

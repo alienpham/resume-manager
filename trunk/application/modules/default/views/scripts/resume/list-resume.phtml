@@ -45,7 +45,10 @@
         </div>
         <div class="experience">
             <ul>
-            <?php foreach ( $experienceList as $experience ) :
+            <?php 
+            $i = 1;
+            foreach ( $experienceList as $experience ) :
+                if($i > 3) break;
                 $date = new DateTime($experience->getStartDate());
                 $startDate = $date->format('M Y');
     
@@ -55,11 +58,17 @@
                 <li>
                     <div style="width:30%;float:left"><?php echo $startDate;?> - <?php echo $endDate;?></div>
                     <div class="companies" style="width:65%;float:left">
+                        <?php if($experience->getExperienceOther()) :?>
+                            <p>Experience Other</p>
+                        <?php else:?>
                         <p style="color:#227DBA;font-weight:bold;text-transform: uppercase;"><?php echo $experience->getCompanyName();?></p>
                         <p><?php echo $experience->getJobTitle();?></p>
+                        <?php endif?>
                     </div>
                 </li>
-            <?php endforeach;?>
+            <?php
+            $i++;
+            endforeach;?>
             </ul>
         </div>
         <?php
