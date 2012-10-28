@@ -73,6 +73,7 @@ $date = new DateTime($comment['created_date']);
 $createdComment = $date->format('M-d');
 ?>
 <h2>CAREER SUMMARY</h2>
+<?php if($experienceList):?>
 <table cellpadding="5" cellspacing="6">
 	<?php foreach ( $experienceList as $experience ) :
 		$date = new DateTime($experience->getStartDate());
@@ -90,6 +91,9 @@ $createdComment = $date->format('M-d');
 	</tr>
 	<?php endforeach;?>                  
 </table>
+<?php else :?>
+<br />
+<?php endif;?>
 <h2>EXPECTION</h2>
 <?php 
 $expectationMapper = new Default_Model_ExpectationMapper();

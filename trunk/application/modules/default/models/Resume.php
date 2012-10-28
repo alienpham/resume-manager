@@ -14,7 +14,6 @@ class Default_Model_Resume
 	protected $_mobile_2;
 	protected $_tel;
 	protected $_address;
-	protected $_province_id;
 	protected $_view_count;
 	protected $_created_date;
 	protected $_updated_date;
@@ -147,13 +146,6 @@ class Default_Model_Resume
 	}
 	public function setAddress($address) {
 		$this->_address = $address;
-	}
-	
-	public function getProvinceId() {
-		return $this->_province_id;
-	}
-	public function setProvinceId($provinceId) {
-		$this->_province_id = $provinceId;
 	}
 	
 	public function getViewCount() {

@@ -109,7 +109,6 @@ class ResumeController extends Zend_Controller_Action
         $resumeRowset->setMobile2($post['mobile2']);
         $resumeRowset->setTel($post['tel']);
         $resumeRowset->setAddress($post['address']);
-        $resumeRowset->setProvinceId(1);
         $resumeRowset->setCreatedDate(date('Y-m-d'));
         $resumeRowset->setCreatedConsultantId($aNamespace->consultant_id);
         $resumeRowset->setUpdatedConsultantId($aNamespace->consultant_id);
@@ -248,7 +247,7 @@ class ResumeController extends Zend_Controller_Action
     	$experId = $this->getRequest()->getParam('experid');
     	$resumeId = $this->getRequest()->getParam('id');
     	$experienceMapper = new Default_Model_ExperienceMapper();
-    	$experienceMapper->delete(array('id = ?' => $experId));
+    	$experienceMapper->delete(array('res_experience_id = ?' => $experId));
     	
     	$this->_redirect('/resume/experience/id/' . $resumeId);
     }
@@ -532,8 +531,8 @@ class ResumeController extends Zend_Controller_Action
                 			$table .= '</w:t></w:r></w:p>';
             			$table .= '</w:tc>'; //close cell
             			$table .= '<w:tc>';
-                			$table .= '<w:p><w:r><w:rPr><w:b/></w:rPr><w:t>';
-            			    $table .= $experience->getExperienceOther();
+                			$table .= '<w:p><w:r><w:t>';
+            			    $table .= stripslashes($experience->getExperienceOther());
                 			$table .= '</w:t></w:r></w:p>';
             			$table .= '</w:tc>';
     			    $table .= '</w:tr>';
