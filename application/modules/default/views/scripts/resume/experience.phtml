@@ -125,6 +125,20 @@
 			</div>
 		</li>
 	<?php 
+	else :
+	?>
+        <li>
+            <div class="edit" style="clear:both">
+                <p>Other</p>
+                <p class="action-link">
+                    <a href="/resume/del-experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Delete</a>
+                </p>
+            </div>
+            <div class="jobs">
+                
+            </div>
+        </li>
+    <?php 
 	endif;
 	endforeach;?>
 	</ul>

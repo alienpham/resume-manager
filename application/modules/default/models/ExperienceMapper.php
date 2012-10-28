@@ -125,8 +125,8 @@ class Default_Model_ExperienceMapper {
     public function saveExperienceOther($resumeId, $other)
     {
         $db = $this->getDbTable()->getAdapter();
-        $sql = "INSERT INTO res_experience(resume_id, experience_other) VALUES($resumeId, '". $other ."') ";
-        //echo $sql;exit;
+        $sql = "INSERT INTO res_experience(resume_id, experience_other) VALUES($resumeId, '". addslashes($other) ."') ";
+//echo $sql;exit;
         return $db->query($sql); 
     }
 }

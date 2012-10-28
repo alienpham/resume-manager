@@ -41,7 +41,6 @@ class Default_Model_ResumeMapper {
             'mobile_2' 		=> $resume->getMobile2(),
             'tel' 			=> $resume->getTel(),
             'address' 		=> $resume->getAddress(),
-            'province_id' 	=> $resume->getProvinceId(),
             'created_date' 	=> $resume->getCreatedDate(),
             'updated_date' 	=> $resume->getUpdatedDate(),
             'created_consultant_id' 	=> $resume->getCreatedConsultantId(),
@@ -80,7 +79,6 @@ class Default_Model_ResumeMapper {
 		$resume->setMobile2($row->mobile_2);
 		$resume->setTel($row->tel);
 		$resume->setAddress($row->address);
-		$resume->setProvinceId($row->province_id);
 		$resume->setViewCount($row->view_count);
 		$resume->setCreatedDate($row->created_date);
 		$resume->setUpdatedDate($row->updated_date);
@@ -109,7 +107,6 @@ class Default_Model_ResumeMapper {
             $entry->setMobile2($row->mobile_2);
             $entry->setTel($row->tel);
             $entry->setAddress($row->address);
-            $entry->setProvinceId($row->province_id);
             $entry->setViewCount($row->view_count);
             $entry->setCreatedDate($row->created_date);
             $entry->setUpdatedDate($row->updated_date);
