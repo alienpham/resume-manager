@@ -58,7 +58,7 @@ class Company_Model_ContactPerson
 		return $this->_contact_person_id;
 	}
 	public function setContactPersonId($contact_person_id) {
-		$this->_contact_person_id = $id;
+		$this->_contact_person_id = $contact_person_id;
 	}
 	
     public function getCompanyId() {
@@ -107,7 +107,7 @@ class Company_Model_ContactPerson
 		return $this->_fax;
 	}
 	public function setFax($fax) {
-		$this->_Fax = $fax;
+		$this->_fax = $fax;
 	}
 	
 	public function getMobile1() {

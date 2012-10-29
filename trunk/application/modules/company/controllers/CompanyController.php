@@ -121,30 +121,44 @@ class Company_CompanyController extends Zend_Controller_Action
 	{
 		$post = $this->getRequest()->getPost();
 		$company_id = $this->_getParam('company_id',"");
+		$contact_person_id = $this->_getParam('contact_person_id');
 		$company = new Company_Model_CompanyMapper();
 		$cominfo=$company->getListCompany("company_id = '$company_id'", "company_id DESC", 0, 1);
-		
-		$contact_person_id = $post['contact_person_id'];
-		$title=$post['title'];
-		$full_name=$post['full_name'];
-		$job_title=$post['job_title'];
-		$tel_1=$post['tel_1'];
-		$tel_2=$post['tel_2'];
-		$fax=$post['fax'];
-		$mobile_1=$post['mobile_1'];
-		$mobile_2=$post['mobile_2'];
-		$email_1=$post['email_1'];
-		$email_2=$post['email_2'];
-		$address=$post['address'];
-		
-		if ($contact_person_id=="")
+		$contact= new Company_Model_ContactPersonMapper();
+		$contactinfo =$contact->getListContact("contact_person_id = '$contact_person_id'", "contact_person_id DESC", 0, 1);
+		if (isset($post['btAddmore']) || isset($post['btSave']))
 		{
-			
+			$rscontact = new Company_Model_ContactPerson();
+			$rscontact->setContactPersonId($contact_person_id);
+			$rscontact->setCompanyId($company_id);
+			$rscontact->setTitle($post['title']);
+			$rscontact->setFullName($post['full_name']);
+			$rscontact->setJobTitle($post['job_title']);
+			$rscontact->setTel1($post['tel_1']);
+			$rscontact->setTel2($post['tel_2']);
+			$rscontact->setFax($post['fax']);
+			$rscontact->setMobile1($post['mobile_1']);
+			$rscontact->setMobile2($post['mobile_2']);
+			$rscontact->setEmail1($post['email_1']);
+			$rscontact->setEmail2($post['email_2']);
+			$rscontact->setAddress($post['address']);
+			$contactid=$contact->save ($rscontact);
+			if (isset($post['btAddmore']))
+				$this->_redirect('/company/company/add-contact/company_id/'.$company_id);
+			else 
+				$this->_redirect('/company');
 		}
-		
 		$this->view->company_id = $company_id;
 		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
-		//$this->view->list_busines_type = $list_busines_type;
-		//$this->view->list_consultant = $list_consultant;
+		$this->view->title = isset($contactinfo[0]['title'])?$contactinfo[0]['title']:"";
+		$this->view->full_name = isset($contactinfo[0]['full_name'])?$contactinfo[0]['full_name']:"";
+		$this->view->job_title = isset($contactinfo[0]['job_title'])?$contactinfo[0]['job_title']:"";
+		$this->view->tel_1 = isset($contactinfo[0]['tel_1'])?$contactinfo[0]['tel_1']:"";
+		$this->view->tel_2 = isset($contactinfo[0]['tel_2'])?$contactinfo[0]['tel_2']:"";
+		$this->view->fax = isset($contactinfo[0]['fax'])?$contactinfo[0]['fax']:"";
+		$this->view->mobile_1 = isset($contactinfo[0]['mobile_1'])?$contactinfo[0]['mobile_1']:"";
+		$this->view->mobile_2 = isset($contactinfo[0]['mobile_2'])?$contactinfo[0]['mobile_2']:"";
+		$this->view->email_1 = isset($contactinfo[0]['email_1'])?$contactinfo[0]['email_1']:"";
+		$this->view->email_2 = isset($contactinfo[0]['email_2'])?$contactinfo[0]['email_2']:"";
 	}
 }
