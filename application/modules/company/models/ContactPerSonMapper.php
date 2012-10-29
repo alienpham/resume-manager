@@ -41,6 +41,23 @@ class Company_Model_ContactPersonMapper {
 			'address' 		=> $contactperson->getAddress(),
 		);
 		
-		return $this->getDbTable()->insert($data);
+    	if (null == ($id = $contactperson->getContactPersonId())) {
+            return $this->getDbTable()->insert($data);
+        } else {
+        	$this->getDbTable()->update($data, array('contact_person_id = ?' => $id));
+            return $id;
+        }
+    }
+    
+	public function getListContact ($where = null, $orderby = null, $offset="", $limit="")
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	if ($limit=="")
+       		$sql = "SELECT * FROM contact_person WHERE $where ORDER BY $orderby";
+       	else 
+       		$sql = "SELECT * FROM contact_person WHERE $where ORDER BY $orderby LIMIT $offset,$limit";
+        $result = $db->fetchAll($sql);
+        
+        return $result;
     }
 }
