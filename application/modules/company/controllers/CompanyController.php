@@ -122,6 +122,7 @@ class Company_CompanyController extends Zend_Controller_Action
 		$post = $this->getRequest()->getPost();
 		$company_id = $this->_getParam('company_id',"");
 		$contact_person_id = $this->_getParam('contact_person_id');
+		
 		$company = new Company_Model_CompanyMapper();
 		$cominfo=$company->getListCompany("company_id = '$company_id'", "company_id DESC", 0, 1);
 		$contact= new Company_Model_ContactPersonMapper();
@@ -148,7 +149,14 @@ class Company_CompanyController extends Zend_Controller_Action
 			else 
 				$this->_redirect('/company');
 		}
+		if ($contact_person_id=="")
+			$this->view->title_page = "ADD CONTACT PERSON";
+		else 
+			$this->view->title_page = "EDIT CONTACT PERSON";
+		
 		$this->view->company_id = $company_id;
+		$this->view->contact_person_id = $contact_person_id;
+		
 		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
 		$this->view->title = isset($contactinfo[0]['title'])?$contactinfo[0]['title']:"";
 		$this->view->full_name = isset($contactinfo[0]['full_name'])?$contactinfo[0]['full_name']:"";
@@ -160,5 +168,17 @@ class Company_CompanyController extends Zend_Controller_Action
 		$this->view->mobile_2 = isset($contactinfo[0]['mobile_2'])?$contactinfo[0]['mobile_2']:"";
 		$this->view->email_1 = isset($contactinfo[0]['email_1'])?$contactinfo[0]['email_1']:"";
 		$this->view->email_2 = isset($contactinfo[0]['email_2'])?$contactinfo[0]['email_2']:"";
+	}
+	
+	public function viewCompanyAction()
+	{
+		$post = $this->getRequest()->getPost();
+		$company_id = $this->_getParam('company_id',"");
+		$company = new Company_Model_CompanyMapper();
+		
+		$cominfo=$company->getListCompany("company_id = '$company_id'", "company_id DESC", 0, 1);
+		$this->view->company_id = $company_id;
+		$this->view->company_code = $cominfo[0]['company_code'];
+		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
 	}
 }

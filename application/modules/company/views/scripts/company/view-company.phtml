@@ -1,0 +1,52 @@
+<?php
+$contact= new Company_Model_ContactPersonMapper();
+$listContact = $contact->getListContact ("company_id='".$this->company_id."'", "full_name ASC")
+?>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><h3><?php echo $this->company_code; ?> - <?php echo $this->company_name; ?></h3></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><table width="100%" class="datagrid" border="1">
+            <thead>
+              <tr>
+                <th width="27" class="a-center">No.</th>
+                <th width="300" class="a-left">Contact Person</th>
+                <th width="303" class="a-left">Contact Info</th>
+                <th width="320" class="a-left">Office Address</th>
+                <th width="320" class="a-left">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            <?php 
+			$num=1;
+			foreach($listContact as $rs){
+				
+				?>
+              <tr>
+                <td valign="top" class="a-center"><?php echo $num;?></td>
+                <td valign="top" class="a-left"><strong><?php echo $rs['full_name'];?> (<?php echo $rs['title'];?>)</strong><br />
+                  <strong><?php echo $rs['job_title'];?></strong>
+</td>
+                <td valign="top" class="a-left"><strong>[T]:</strong> <?php if ($rs['tel_1']!="") echo $rs['tel_1']; if ($rs['tel_2']!="") echo " | ".$rs['tel_2'];?><br />
+                  <strong>[F]:</strong> <?php echo $rs['fax']; ?><br />
+                  <strong>[M]:</strong> <?php if ($rs['mobile_1']!="") echo $rs['mobile_1']; if ($rs['mobile_2']!="") echo " | ".$rs['mobile_2'];?><br />
+                  <strong>[E]:</strong> <?php if ($rs['email_1']!="") echo $rs['email_1']; if ($rs['email_2']!="") echo " | ".$rs['email_2'];?><br /></td>
+                <td valign="top" class="a-left"><?php echo $rs['address']?></td>
+                <td valign="top" class="a-left"><a href="/company/company/add-contact/company_id/<?php echo $rs['company_id'];?>/contact_person_id/<?php echo $rs['contact_person_id'];?>">Edit Contact</a></td>
+              </tr>
+              <?php $num++; }?>
+            </tbody>
+          </table></td>
+        </tr>
+        <tr>
+          <td height="10"></td>
+        </tr>
+        <tr>
+          <td align="center"><input type="submit" name="button3" id="button3" value="Close" onClick="window.location='/company'"/></td>
+        </tr>
+    </table>

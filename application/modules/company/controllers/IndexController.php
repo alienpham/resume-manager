@@ -80,7 +80,7 @@ class Company_IndexController extends Zend_Controller_Action
                 '.$rs['company_code'].'
             </div>
             <div class="name">
-                <h4><a href="#">'.$rs['full_name_en'].'</a></h4>
+                <h4><a href="/company/company/view-company/company_id/'.$rs['company_id'].'">'.$rs['full_name_en'].'</a></h4>
             </div>
             <div class="ind">
                 <b>'.$industry_name.'</b>
