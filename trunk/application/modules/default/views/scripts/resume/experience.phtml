@@ -84,7 +84,9 @@
             <em class="error"></em>
         </li>
         <li>
-			<textarea name="experience_other" id="experience_other" style="height:300px; width:570px"></textarea>
+			<textarea name="experience_other" id="experience_other" style="height:300px; width:570px">
+                <?php echo @$this->experienceRowSet->getExperienceOther(); ?>
+            </textarea>
         </li>
         <li>
             <div class="actions">
@@ -104,58 +106,34 @@
 	<h2>Career Summary</h2>
 	<ul>
 	 <?php foreach($this->rows as $row) : 
-	 if(!$row->getExperienceOther()) :
-		$date = date_create($row->getStartDate());
-		$startDate = date_format($date, 'M Y');
+		//$date = date_create($row->getStartDate());
+		//$startDate = date_format($date, 'M Y');
 		
-		$date = date_create($row->getEndDate());
-		$endDate = date_format($date, 'M Y');
+		//$date = date_create($row->getEndDate());
+		//$endDate = date_format($date, 'M Y');
 	?>
 		<li>
 			<div class="edit" style="clear:both">
-				<p><?php echo $startDate;?> - <?php echo $endDate; ?></p>
+				<p><?php echo $row->getStartDate();?><?php echo ($row->getEndDate())? ' - ' . $row->getEndDate():'Experience Other'; ?></p>
 				<p class="action-link">
 					<a href="/resume/experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Edit</a> | 
 					<a href="/resume/del-experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Delete</a>
 				</p>
 			</div>
 			<div class="jobs">
-				<p class="name" style="font-weight:bold;text-transform: uppercase;"><a href="#"><?php echo $row->getCompanyName();?></a></p>
-				<p><?php echo $row->getJobTitle();?></p>
+                <?php if($row->getExperienceOther()) :?>
+                    <p>Experience Other</p>
+                <?php else:?>
+    				<p class="name" style="font-weight:bold;text-transform: uppercase;"><a href="#"><?php echo $row->getCompanyName();?></a></p>
+    				<p><?php echo $row->getJobTitle();?></p>
+                <?php endif;?>
 			</div>
 		</li>
-	<?php 
-	else :
-	?>
-        <li>
-            <div class="edit" style="clear:both">
-                <p>Other</p>
-                <p class="action-link">
-                    <a href="/resume/del-experience/id/<?php echo $this->resumeId; ?>/experid/<?php echo $row->getId();?>">Delete</a>
-                </p>
-            </div>
-            <div class="jobs">
-                
-            </div>
-        </li>
-    <?php 
-	endif;
-	endforeach;?>
+    <?php endforeach;?>
 	</ul>
 </div>
 
 <script>
-$(function() {
-    $( "#startdate" ).datepicker({
-		changeMonth: true,
-		changeYear: true
-	});
-    $( "#enddate" ).datepicker({
-		changeMonth: true,
-		changeYear: true
-	});
-});
-
 function checkValid()
 {
 	var startdate = $("#startdate").val();
