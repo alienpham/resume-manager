@@ -118,7 +118,7 @@ class ResumeController extends Zend_Controller_Action
         if(!$post['resume_id']) $resume->updateResumCode('R' . $resumeId, $resumeId);
 
 		//upload file resume
-		if (isset($_FILES['file_resume'])) {
+		if ($_FILES['file_resume']['name']) {
 			$this->saveResumeFile($_FILES['file_resume'], $resumeId);
 		}
 
