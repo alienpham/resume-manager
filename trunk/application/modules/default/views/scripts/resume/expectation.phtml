@@ -19,7 +19,7 @@
 		<li>
 			<label>Expected Location</label>
 			<input class="province" type="text" name="province" value="" />
-            <div class="multiselect" style="display:none; position:fixed; margin-left:170px">
+            <div class="multiselect" style="display:none; position:absolute; margin-left:170px">
 				<div style="width:160px; float:left">
 				<?php 
 				$i = 1;
@@ -38,12 +38,17 @@
            </div>
 		</li>
 		<li>
+			<label>Note: </label>
+			<textarea name="note" id="note" style="height:100px; width:520px"></textarea>
+		</li>
+		<li>
 			<label>&nbsp;</label>
 			<div class="actions">
 				<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
 				<input type="hidden" name="expecid" value="<?php echo $this->expectationRowSet->getResExpectationId();?>" />
 				<a href="/resume/experience/id/<?php echo $this->resumeId; ?>"><input type="button" class="button02" name="button" value="Back" /></a>
 				<input type="submit" class="button01" name="button" value="Complete" />
+				<input type="button" class="button01 detail_resume" id="<?php echo $this->resumeId; ?>" name="button" value="Review" /></a>
 			</div>
 		</li>
 	</ul>

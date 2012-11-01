@@ -1,8 +1,5 @@
 <div class="list-resumes clearfix">
     <div class="head">
-        <div class="checkbox">
-            <input type="checkbox" value="" />
-        </div>
         <div class="name">
             <h4>Name</h4>
         </div>
@@ -36,9 +33,6 @@
         $createdComment = $date->format('M-d');
     ?>
     <div class="info-content">
-        <div class="checkbox">
-            <input type="checkbox" value="" />
-        </div>
         <div class="name">
             <h4><a href="#detail_resume" class="detail_resume" id="<?php echo $row['resume_id']?>"><?php echo $row['full_name'];?></a></h4>
             <p><?php echo $row['resume_code'];?></p>
