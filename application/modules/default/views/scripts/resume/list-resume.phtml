@@ -49,14 +49,14 @@
             $i = 1;
             foreach ( $experienceList as $experience ) :
                 if($i > 3) break;
-                $date = new DateTime($experience->getStartDate());
-                $startDate = $date->format('M Y');
+                //$date = new DateTime($experience->getStartDate());
+                //$startDate = $date->format('M Y');
     
-                $date = new DateTime($experience->getEndDate());
-                $endDate = $date->format('M Y');
+                //$date = new DateTime($experience->getEndDate());
+                //$endDate = $date->format('M Y');
             ?>
                 <li>
-                    <div style="width:30%;float:left"><?php echo $startDate;?> - <?php echo $endDate;?></div>
+                    <div style="width:30%;float:left"><?php echo $experience->getStartDate();?><?php echo ($experience->getEndDate())? ' - ' . $experience->getEndDate():'&nbsp;';?></div>
                     <div class="companies" style="width:65%;float:left">
                         <?php if($experience->getExperienceOther()) :?>
                             <p>Experience Other</p>
@@ -122,7 +122,6 @@
 		<option value="30" <?php echo ($this->paginator->getItemCountPerPage() == '30')? 'selected': ''?>>30</option>
 		<option value="50" <?php echo ($this->paginator->getItemCountPerPage() == '50')? 'selected': ''?>>50</option>
 		<option value="100" <?php echo ($this->paginator->getItemCountPerPage() == '100')? 'selected': ''?>>100</option>
-        <option value="5" <?php echo ($this->paginator->getItemCountPerPage() == '5')? 'selected': ''?>>5</option>
 	</select>
     <?php if(count($this->paginator)) :?>
         <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml', array('rowperpage' => $this->paginator->getItemCountPerPage(), 'choice' => $this->choice, 'search' => $this->search)); ?>

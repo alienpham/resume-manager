@@ -139,17 +139,12 @@ class ResumeController extends Zend_Controller_Action
      public function saveEducationAction()
     {
         $post = $this->getRequest()->getPost();	
-        $date = new DateTime($post['startdate']);
-        $startDate = $date->format('Y-m-d');
-        
-        $date = new DateTime($post['enddate']);
-        $endDate = $date->format('Y-m-d');
 
         $educationRowset = new Default_Model_Education();
         $educationRowset->setEducationId($post['educationid']);
         $educationRowset->setResumeId($post['resume_id']);
-        $educationRowset->setStartDate($startDate);
-        $educationRowset->setEndDate($endDate);
+        $educationRowset->setStartDate($post['startdate']);
+        $educationRowset->setEndDate($post['enddate']);
         $educationRowset->setSchoolName($post['school_name']);
         $educationRowset->setProgramName($post['program_name']);
         $educationRowset->setProgramInfo($post['program_info']);  
@@ -203,17 +198,17 @@ class ResumeController extends Zend_Controller_Action
    	public function saveExperienceAction()
     {
         $post = $this->getRequest()->getPost();	
-        $date = new DateTime($post['startdate']);
-        $startDate = $date->format('Y-m-d');
+        //$date = new DateTime($post['startdate']);
+        //$startDate = $date->format('Y-m-d');
         
-        $date = new DateTime($post['enddate']);
-        $endDate = $date->format('Y-m-d');
+        //$date = new DateTime($post['enddate']);
+        //$endDate = $date->format('Y-m-d');
         
         $experienceRowset = new Default_Model_Experience();
         $experienceRowset->setId($post['experid']);
         $experienceRowset->setResumeId($post['resume_id']);
-        $experienceRowset->setStartDate($startDate);
-        $experienceRowset->setEndDate($endDate);
+        $experienceRowset->setStartDate($post['startdate']);
+        $experienceRowset->setEndDate($post['enddate']);
         $experienceRowset->setJobTitle($post['job_title']);
         $experienceRowset->setCompanyName($post['company_name']);
         $experienceRowset->setDuties($post['duties']);  
@@ -284,9 +279,9 @@ class ResumeController extends Zend_Controller_Action
         $expectation = new Default_Model_Expectation();
         $expectation->setResExpectationId($post['expecid']);
         $expectation->setResumeId($post['resume_id']);
-        $expectation->setEstimatedSalaryTo($post['estimated_salary_to']);
-        $expectation->setEstimatedSalaryFrom($post['estimated_salary_from']);
-        $expectation->setCurrentSalary($post['current_salary']);
+        $expectation->setEstimatedSalaryTo(floatval($post['estimated_salary_to']));
+        $expectation->setEstimatedSalaryFrom(floatval($post['estimated_salary_from']));
+        $expectation->setCurrentSalary(floatval($post['current_salary']));
         	
         $expectationMapper = new Default_Model_ExpectationMapper();
         $expectationId = $expectationMapper->save($expectation);
@@ -483,18 +478,18 @@ class ResumeController extends Zend_Controller_Action
     		$table .= '<w:tbl>';
     		//$table .= '<w:tblPr><w:tblW w:w = "4000" w:type="pct"/></w:tblPr>';
     		foreach ( $educationList as $education ) {
-    		    $date = new DateTime($education->getStartDate());
-                $startDate = $date->format('M Y');
+    		    //$date = new DateTime($education->getStartDate());
+                //$startDate = $date->format('M Y');
         
-                $date = new DateTime($education->getEndDate());
-                $endDate = $date->format('M Y');
+                //$date = new DateTime($education->getEndDate());
+                //$endDate = $date->format('M Y');
            
     			$table .= '<w:tr>'; //new xml table row
         			$table .= '<w:tc>';
             			$table .= '<w:tcPr>';
             			$table .= '<w:tcW w:w="2500" w:type="dxa"/></w:tcPr>';
             			$table .= '<w:p><w:r><w:t>'; //start cell
-            			$table .= $startDate .'-'. $endDate; //cell contents
+            			$table .= $education->getStartDate() .'-'. $education->getEndDate(); //cell contents
             			$table .= '</w:t></w:r></w:p>';
         			$table .= '</w:tc>'; //close cell
         			$table .= '<w:tc>';
@@ -519,7 +514,7 @@ class ResumeController extends Zend_Controller_Action
         $table = ''; //empty table
     	if(count($experienceList)){ //if there was data returned from queryDB()
     		$table .= '<w:tbl>';
-    		$table .= '<w:tblPr><w:tblW w:w="4000" w:type="pct"/></w:tblPr>';
+    		//$table .= '<w:tblPr><w:tblW w:w="4000" w:type="pct"/></w:tblPr>';
     		foreach ( $experienceList as $experience ) {
     		    if($experience->getExperienceOther()) {
     		        $table .= '<w:tr>'; //new xml table row
@@ -527,7 +522,7 @@ class ResumeController extends Zend_Controller_Action
                 			$table .= '<w:tcPr>';
                 			$table .= '<w:tcW w:w="2500" w:type="dxa"/></w:tcPr>';
                 			$table .= '<w:p><w:r><w:t>'; //start cell
-                			$table .= 'Other: '; //cell contents
+                			$table .= 'Experience Other: '; //cell contents
                 			$table .= '</w:t></w:r></w:p>';
             			$table .= '</w:tc>'; //close cell
             			$table .= '<w:tc>';
@@ -538,18 +533,18 @@ class ResumeController extends Zend_Controller_Action
     			    $table .= '</w:tr>';
     		    } else {
     		    
-        		    $date = new DateTime($experience->getStartDate());
-                    $startDate = $date->format('M Y');
+        		    //$date = new DateTime($experience->getStartDate());
+                    //$startDate = $date->format('M Y');
             
-                    $date = new DateTime($experience->getEndDate());
-                    $endDate = $date->format('M Y');
+                    //$date = new DateTime($experience->getEndDate());
+                    //$endDate = $date->format('M Y');
                
         			$table .= '<w:tr>'; //new xml table row
             			$table .= '<w:tc>';
                 			$table .= '<w:tcPr>';
                 			$table .= '<w:tcW w:w="2500" w:type="dxa"/></w:tcPr>';
                 			$table .= '<w:p><w:r><w:t>'; //start cell
-                			$table .= $startDate .'-'. $endDate; //cell contents
+                			$table .= $experience->getStartDate() .'-'. $experience->getEndDate(); //cell contents
                 			$table .= '</w:t></w:r></w:p>';
             			$table .= '</w:tc>'; //close cell
             			$table .= '<w:tc>';

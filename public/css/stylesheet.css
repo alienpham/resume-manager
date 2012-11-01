@@ -480,7 +480,7 @@ textarea,
     padding: 25px 20px 10px;	
 }
 .form-login label{
-	width:100px !important;	
+	width:85px !important;	
 }
 .form-login input[type="text"],
 .form-login input[type="password"]

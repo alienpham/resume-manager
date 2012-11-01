@@ -12,7 +12,7 @@
 			<em class="error"></em>
 		</li>
 		<li>
-			<label>Start date <em>*</em></label>
+			<label>Start date</label>
 			<input type="text" name="startdate" id="startdate" value="<?php echo $this->educationRowset->getStartDate();?>" style="width:120px">
 			<b>&nbsp;&nbsp;End date</b>
 			<input type="text" name="enddate" id="enddate" value="<?php echo $this->educationRowset->getEndDate();?>" style="width:120px">
@@ -46,16 +46,10 @@
 	<div class="summary">
 		<h2>Education Review</h2>
 		<ul>
-		 <?php foreach($this->rows as $row) : 
-			$date = date_create($row->getStartDate());
-			$startDate = date_format($date, 'M Y');
-			
-			$date = date_create($row->getEndDate());
-			$endDate = date_format($date, 'M Y');
-		?>
+		 <?php foreach($this->rows as $row) : ?>
 			<li>
 				<div class="edit">
-					<p><?php echo $startDate;?> - <?php echo $endDate; ?></p>
+					<p><?php echo $row->getStartDate()?> - <?php echo $row->getEndDate(); ?></p>
 					<p class="action-link">
 						<a href="/resume/education/id/<?php echo $this->resumeId; ?>/educationid/<?php echo $row->getEducationId();?>">Edit</a> | 
 						<a href="/resume/del-education/id/<?php echo $this->resumeId; ?>/educationid/<?php echo $row->getEducationId();?>">Delete</a>
@@ -72,25 +66,12 @@
 </div>
 </form>
 <script>
-$(function() {
-    $( "#startdate" ).datepicker({
-		changeMonth: true,
-		changeYear: true
-	});
-    $( "#enddate" ).datepicker({
-		changeMonth: true,
-		changeYear: true
-	});
-});
-
 function checkValid()
 {
-	var startdate = $("#startdate").val();
-	var enddate = $("#enddate").val();
 	var job_title = $("#school_name").val();
 	var company_name = $("#program_name").val();
     
-    if(startdate == '' || enddate == '' || job_title == '' || company_name == '') {
+    if(job_title == '' || company_name == '') {
         $('.error').html('Please input into field required (*)');
         return false;
     }

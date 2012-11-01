@@ -45,14 +45,14 @@ $educationList = $educationMapper->fetchAll('resume_id = ' . $this->resume->getR
 <table cellpadding="5" cellspacing="6"> 
     
     <?php foreach ( $educationList as $education ) :
-        $date = new DateTime($education->getStartDate());
-        $startDate = $date->format('M Y');
+        //$date = new DateTime($education->getStartDate());
+        //$startDate = $date->format('M Y');
 
-        $date = new DateTime($education->getEndDate());
-        $endDate = $date->format('M Y');
+        //$date = new DateTime($education->getEndDate());
+        //$endDate = $date->format('M Y');
     ?>
     <tr>
-        <td style="width:30%" valign="top"><?php echo $startDate;?> - <?php echo $endDate;?></td>
+        <td style="width:30%" valign="top"><?php echo $education->getStartDate()?> <?php echo ($education->getEndDate())? ' - ' . $education->getEndDate():'';?></td>
         <td class="companies" style="width:65%">
             <p style="color:#70b4e2;font-weight:bold;text-transform: uppercase;"><?php echo $education->getSchoolName();?></p>
             <p><?php echo $education->getProgramName();?></p>
@@ -76,14 +76,14 @@ $createdComment = $date->format('M-d');
 <?php if($experienceList):?>
 <table cellpadding="5" cellspacing="6">
 	<?php foreach ( $experienceList as $experience ) :
-		$date = new DateTime($experience->getStartDate());
-		$startDate = $date->format('M Y');
+		//$date = new DateTime($experience->getStartDate());
+		//$startDate = $date->format('M Y');
 
-		$date = new DateTime($experience->getEndDate());
-		$endDate = $date->format('M Y');
+		//$date = new DateTime($experience->getEndDate());
+		//$endDate = $date->format('M Y');
 	?>
 	<tr>
-		<td style="width:30%" valign="top"><?php echo $startDate;?> - <?php echo $endDate;?></td>
+		<td style="width:30%" valign="top"><?php echo $experience->getStartDate();?><?php echo ($experience->getEndDate())? ' - ' . $experience->getEndDate():'&nbsp;';?></td>
 		<td class="companies" style="width:65%">
             <?php if($experience->getExperienceOther()) :?>
                 <p>Experience Other</p>
