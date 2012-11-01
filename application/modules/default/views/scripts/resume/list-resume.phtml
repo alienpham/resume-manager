@@ -96,8 +96,12 @@
             </p>
         </div>
         <div class="comments">
-            <a href="#comment" class="addcomment" id="<?php echo $row['resume_id']?>">Add Comment</a>
+			<a href="#comment" class="addcomment" id="<?php echo $row['resume_id']?>">Add Comment</a>
+		<?php if(@$row['file_resume']) : ?>
+			<a href="/resume/download-resume/id/<?php echo $row['resume_id']?>" class="export-word">Download Resume</a>
+		<?php else : ?>
             <a href="/resume/export-to-word/id/<?php echo $row['resume_id']?>" class="export-word">Export to word</a>
+		<?php endif;?>
             <div class="info-comment" id="viewcomment<?php echo $row['resume_id']?>">
                 <?php if($comment):?>
                 <p class="update-date">Comment <?php echo $createdComment;?></p> <span>by</span> <span class="user-name"><?php echo $comment['username'];?></span>

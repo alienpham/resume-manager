@@ -90,8 +90,8 @@ class ResumeController extends Zend_Controller_Action
         $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
         $post = $this->getRequest()->getPost();
 
-        $date = new DateTime($post['birthday']);
-        $birthday = $date->format('Y-m-d');
+        //$date = new DateTime($post['birthday']);
+        //$birthday = $date->format('Y-m-d');
         
         $resumeRowset = new Default_Model_Resume();
         if($post['resume_id']) $resumeCode = 'R' . $post['resume_id'];
@@ -99,7 +99,7 @@ class ResumeController extends Zend_Controller_Action
         $resumeRowset->setResumeId($post['resume_id']);
         $resumeRowset->setResumeCode($resumeCode);
         $resumeRowset->setFullName($post['full_name']);
-        $resumeRowset->setBirthday($birthday);
+        $resumeRowset->setBirthday($post['birthday']);
         $resumeRowset->setGender($post['gender']);
         $resumeRowset->setMaritalStatus($post['marital_status']);
         $resumeRowset->setStatus('Active');
@@ -116,7 +116,12 @@ class ResumeController extends Zend_Controller_Action
         $resume = new Default_Model_ResumeMapper();
         $resumeId = $resume->save($resumeRowset);
         if(!$post['resume_id']) $resume->updateResumCode('R' . $resumeId, $resumeId);
-        
+
+		//upload file resume
+		if (isset($_FILES['file_resume'])) {
+			$this->saveResumeFile($_FILES['file_resume'], $resumeId);
+		}
+
         $this->_redirect('/resume/education/id/' . $resumeId);
     }
     
@@ -633,6 +638,81 @@ class ResumeController extends Zend_Controller_Action
         readfile('candidate/' . $resumeName); 
         unlink('candidate/' . $resumeName);
         exit;
+	}
+	
+	public function saveResumeFile($file_resume, $resumeId)
+	{
+		$data = array (
+			'resume_id' => $resumeId,
+			'filename' => $file_resume["name"],
+			'filetype' => $file_resume["type"],
+			'filesize' => $file_resume["size"] / 1024
+		);
+		
+		$file_tmp = $file_resume["tmp_name"];
+
+		$fp = fopen($file_tmp, 'r');
+		$content = fread($fp, $data['filesize']);
+		$content = addslashes($content);
+		fclose($fp);
+
+		$data['bin_data'] = $content;
+		
+		$fileMapper = new Default_Model_FileMapper();
+		$fileMapper->insertResumeFile($data);
+		return true;
+	}
+	public function downloadResumeAction()
+	{
+		$resumeId = $this->_getParam('id');
+		$fileMapper = new Default_Model_FileMapper();
+		$row = $fileMapper->getResumeFile($resumeId);
+
+		if($row['resume_id']) {
+			$data = $row["bin_data"];
+			$name = $row["filename"];
+			$size = $row["filesize"];
+			$type = $row["filetype"];
+
+			//header("Content-type: $type");
+			//header("Content-length: $size");
+			//header("Content-Disposition: attachment; filename=$name");
+			//header("Content-Description: PHP Generated Data");
+
+		  /*header("Content-type: $type");
+		  header("Content-length: $size");
+		  header("Content-Disposition: attachment; filename=$name");
+		  header("Content-Description: PHP Generated Data");
+		  echo $data;
+		  */
+  
+//header("Cache-Control: public");     
+//header("Content-Description: File Transfer");     
+//header("Content-Disposition: attachment; filename=test");     
+//header("Content-Type: application/msword");
+//header("Content-Transfer-Encoding: binary"); 
+/*
+header('Content-Description: File Transfer');
+header('Content-Type: ' . $type);
+header('Content-Disposition: attachment; filename='.basename($name));
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate');
+header('Pragma: public');
+header('Content-Length: ' . $size);
+echo $data;
+exit;*/
+
+$file = base64_decode($data);
+header("Cache-Control: no-cache private");
+header("Content-Description: File Transfer");
+header('Content-disposition: attachment; filename=' . basename($name));
+header('Content-Type:' . $type);
+header("Content-Transfer-Encoding: binary");
+header('Content-Length: '. $size);
+echo $file;
+exit;
+		}
 	}
 }
 

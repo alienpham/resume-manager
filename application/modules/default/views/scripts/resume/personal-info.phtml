@@ -1,6 +1,6 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<form name="frm" method="post" action="/resume/save-resume" onsubmit="return checkValid()">
+<form name="frm" method="post" action="/resume/save-resume" onsubmit="return checkValid()" ENCTYPE="multipart/form-data">
 <div class="img-steps">
 	<img src="/images/img-step-01.png" alt="Personal Details" />
 </div>
@@ -53,6 +53,10 @@
 		<li>
 			<label>Address <em>*</em></label>
 			<input type="text" name="address" id="address" value="<?php echo $this->resumeRowset->getAddress();?>"/>
+		</li>
+		<li>
+			<label>Upload file (<5Mb)</label>
+			<input type="file" name="file_resume" id="file" value=""/>
 		</li>
 		<li>
 			<label>&nbsp;</label>

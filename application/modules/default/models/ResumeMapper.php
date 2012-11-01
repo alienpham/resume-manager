@@ -137,9 +137,11 @@ class Default_Model_ResumeMapper {
         }
         
         if($orderby) $orderby = ' ORDER BY ' .$orderby;
-        $sql = 'SELECT * FROM resume as r ' . $join . $where . $orderby;
+        $sql = 'SELECT r.*, f.id as file_resume FROM resume as r ';
+		$sql .= 'LEFT JOIN res_file as f ON r.resume_id = f.resume_id ';
+		$sql .= $join . $where . $orderby;
 
-        //echo $sql;//exit;
+        echo $sql;//exit;
         $result = $db->fetchAll($sql);
         
         return $db->fetchAll($sql);
