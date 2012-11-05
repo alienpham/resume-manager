@@ -31,7 +31,7 @@ function checkLogin(){
 		<input class="button01" type="button" value="Add Resume" />
 	</a>
     <a href="/resume/export-email" style="text-decoration:none;">
-        <input class="button01" type="button" value="Export Email" />
+        <input class="button01" id="export_email" type="button" value="Export Email" style="display: none"/>
     </a>
 </div>  
 <p class="today-entry" id="report">&nbsp;</p>
@@ -59,8 +59,8 @@ $(document).ready(function() {
         var symbol = $('#symbol').val();
         var salary = $('#salary').val();
         var experother = $('#experother').val();
+        var keyword = $('#keyword').val();
         
-        //var functions = $('input[name="option[]"]:checkbox:checked');
         var functions = '';
         var checkboxes = $('input[name="option[]"]:checkbox:checked');
         checkboxes.each(function() {
@@ -82,11 +82,13 @@ $(document).ready(function() {
                 symbol: symbol,
                 functions: functions,
                 salary: salary,
-                experother: experother
+                experother: experother,
+                keyword: keyword
             },
       	  	success: function(result) {
       	    	$('#box').html(result);
         	  	$.fancybox.close();
+                $('#export_email').show();
       	  	}
       	});
     });

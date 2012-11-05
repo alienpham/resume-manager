@@ -86,10 +86,11 @@ $createdComment = $date->format('M-d');
 		<td style="width:30%" valign="top"><?php echo $experience->getStartDate();?><?php echo ($experience->getEndDate())? ' - ' . $experience->getEndDate():'&nbsp;';?></td>
 		<td class="companies" style="width:65%">
             <?php if($experience->getExperienceOther()) :?>
-                <p>Experience Other</p>
+                <p style="color:#70b4e2;font-weight:bold;text-transform: uppercase;">Experience Other</p>
             <?php else:?>
 			<p style="color:#70b4e2;font-weight:bold;text-transform: uppercase;"><?php echo $experience->getCompanyName();?></p>
 			<p><?php echo $experience->getJobTitle();?></p>
+            <p><b>Duties: </b><br /><?php echo $experience->getDuties();?></p>
             <?php endif;?>
 		</td>
 	</tr>

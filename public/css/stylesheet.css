@@ -182,18 +182,18 @@ textarea,
 	padding:10px 1%;
 	width:1%;
 }
-.list-resumes .name,
+.list-resumes .name {
+	width:15%;
+}
 .list-resumes .salary{
 	width:13%;	
 }
 .list-resumes .experience{
 	width:32%;
 }
-.list-resumes .salary{
-	
-}
+
 .list-resumes .comments{
-	width:18%;
+	width:19%;
 	/*background:none !important;*/
 }
 .list-resumes .head h4{

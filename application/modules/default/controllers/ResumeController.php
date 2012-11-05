@@ -391,6 +391,17 @@ class ResumeController extends Zend_Controller_Action
             $cond[] = 'function_id in ('. $post['functions'] .')';   
         }
         
+	    if(@$post['keyword']) {
+            $keyword = $post['keyword'];
+            $choice[] = 'keyword';
+            $where  = '(job_title like  "%'. $keyword .'%"';  
+            $where .= ' OR company_name like  "%'. $keyword .'%"';
+            $where .= ' OR duties like  "%'. $keyword .'%"';
+            $where .= ' OR experience_other like  "%'. $keyword .'%")';
+            
+            $cond[] = $where;
+        }
+        
         $resume = new Default_Model_ResumeMapper();
         $rows = $resume->getListResume($cond, $choice);
         $paginator = Zend_Paginator::factory($rows);
