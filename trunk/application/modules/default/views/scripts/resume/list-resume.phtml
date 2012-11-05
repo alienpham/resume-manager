@@ -34,8 +34,20 @@
     ?>
     <div class="info-content">
         <div class="name">
-            <h4><a href="#detail_resume" class="detail_resume" id="<?php echo $row['resume_id']?>"><?php echo $row['full_name'];?></a></h4>
+            <h4>
+                <a href="#detail_resume" class="detail_resume" id="<?php echo $row['resume_id']?>"><?php echo $row['full_name'];?></a>
+                <a href=""><img src="/images/edit.png" width="14px" height="14px" alt="Edit" /></a>
+            </h4>
             <p><?php echo $row['resume_code'];?></p>
+            <?php if($row['mobile_1']) : ?>
+                <p>Phone: <?php echo $row['mobile_1'];?></p>
+            <?php endif;?>
+            <?php if($row['mobile_2']) : ?>
+                <p>Phone: <?php echo $row['mobile_2'];?></p>
+            <?php endif;?>
+            <?php if($row['tel']) : ?>
+                <p>Tel: <?php echo $row['tel'];?></p>
+            <?php endif;?>
         </div>
         <div class="experience">
             <ul>
