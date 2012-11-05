@@ -12,7 +12,9 @@ class Company_CompanyController extends Zend_Controller_Action
         $view->headScript()->appendFile ( '/js/jquery.mousewheel-3.0.6.pack.js' );
         $view->headScript()->appendFile ( '/js/jquery.fancybox.js?v=2.1.0' );
         $view->headLink()->appendStylesheet ( '/js/jquery.fancybox.css?v=2.1.0' );
-        date_default_timezone_set('Asia/Krasnoyarsk');
+        $this->view->fullname = $aNamespace->fullname;
+		$this->view->isAdmin = $aNamespace->isAdmin;
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
 	}
 
 	public function addCompanyAction()
@@ -40,7 +42,7 @@ class Company_CompanyController extends Zend_Controller_Action
 			$busines_type_id=$cominfo[0]['busines_type_id'];
 			$consultant_id=$company->getFieldValue ("com_has_consultant_incharge", "company_id = '$company_id'", "consultant_id");
 		}
-		else 
+		else
 			$this->view->title_page = "ADD COMPANY";
 		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","name",$industry_id);
 		$list_busines_type=$company->getLookup("busines_type_lookup","1","busines_type_id","name",$busines_type_id);
@@ -68,19 +70,19 @@ class Company_CompanyController extends Zend_Controller_Action
 				$rscompany->setCreatedDate(date('Y-m-d H:i:s'));
 				$rscompany->setUpdatedDate(date('Y-m-d H:i:s'));
 				$ComapnyId=$company->save ($rscompany);
-				
+
 				$consultantincharge= new Company_Model_ComHasConsultantIncharge();
 				$consultantincharge->setConsultantId($post['consultant_id']);
 				$consultantincharge->setCompanyId($ComapnyId);
 				$consultantincharge->setStatus("Active");
 				$consultantincharge->setActionDate(date('Y-m-d H:i:s'));
 				$conincharge = new Company_Model_ComHasConsultantInchargeMapper();
-				
+
 				if ($post['company_id']=="")
 				{
 					$conincharge->save($consultantincharge);
 				}
-				else 
+				else
 				{
 					$consultant_id=$company->getFieldValue ("com_has_consultant_incharge", "company_id = '$ComapnyId'", "com_consultant_incharge_id");
 					if ($consultant_id=="" && $post['consultant_id']!="")
@@ -98,31 +100,31 @@ class Company_CompanyController extends Zend_Controller_Action
 				{
 					$cominfomation->save($rscominfomation);
 				}
-				else 
+				else
 				{
 					$com_information_id=$company->getFieldValue ("com_information", "company_id = '$ComapnyId'", "com_information_id");
 					if ($com_information_id=="" && $post['contents']!="")
 						$cominfomation->save($rscominfomation);
-					else 
+					else
 						$cominfomation->updateComInformation($ComapnyId,$post['contents']);
 				}
-				
+
 				$this->_redirect('/company');
 			}
-			
+
 		}
 		$this->view->company_id = $company_id;
 		$this->view->list_industry = $list_industry;
 		$this->view->list_busines_type = $list_busines_type;
 		$this->view->list_consultant = $list_consultant;
 	}
-	
+
 	public function addContactAction()
 	{
 		$post = $this->getRequest()->getPost();
 		$company_id = $this->_getParam('company_id',"");
 		$contact_person_id = $this->_getParam('contact_person_id');
-		
+
 		$company = new Company_Model_CompanyMapper();
 		$cominfo=$company->getListCompany("company_id = '$company_id'", "company_id DESC", 0, 1);
 		$contact= new Company_Model_ContactPersonMapper();
@@ -146,17 +148,17 @@ class Company_CompanyController extends Zend_Controller_Action
 			$contactid=$contact->save ($rscontact);
 			if (isset($post['btAddmore']))
 				$this->_redirect('/company/company/add-contact/company_id/'.$company_id);
-			else 
+			else
 				$this->_redirect('/company');
 		}
 		if ($contact_person_id=="")
 			$this->view->title_page = "ADD CONTACT PERSON";
-		else 
+		else
 			$this->view->title_page = "EDIT CONTACT PERSON";
-		
+
 		$this->view->company_id = $company_id;
 		$this->view->contact_person_id = $contact_person_id;
-		
+
 		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
 		$this->view->title = isset($contactinfo[0]['title'])?$contactinfo[0]['title']:"";
 		$this->view->full_name = isset($contactinfo[0]['full_name'])?$contactinfo[0]['full_name']:"";
@@ -169,13 +171,13 @@ class Company_CompanyController extends Zend_Controller_Action
 		$this->view->email_1 = isset($contactinfo[0]['email_1'])?$contactinfo[0]['email_1']:"";
 		$this->view->email_2 = isset($contactinfo[0]['email_2'])?$contactinfo[0]['email_2']:"";
 	}
-	
+
 	public function viewCompanyAction()
 	{
 		$post = $this->getRequest()->getPost();
 		$company_id = $this->_getParam('company_id',"");
 		$company = new Company_Model_CompanyMapper();
-		
+
 		$cominfo=$company->getListCompany("company_id = '$company_id'", "company_id DESC", 0, 1);
 		$this->view->company_id = $company_id;
 		$this->view->company_code = $cominfo[0]['company_code'];

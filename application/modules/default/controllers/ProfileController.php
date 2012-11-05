@@ -21,11 +21,18 @@ class ProfileController extends Zend_Controller_Action {
 		$view->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );
 		$view->headScript()->appendFile ( '/js/jquery.ui.core.js' );
 		$this->view->username = $aNamespace->username;
-		date_default_timezone_set('Asia/Saigon');
+		$this->view->fullname = $aNamespace->fullname;
+		$this->view->isAdmin = $aNamespace->isAdmin;
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
 	}
 
 	public function indexAction() {
 		$consultantClass = new Vacancy_Model_ConsultantMapper();
 		$db = $consultantClass->getDbTable();
+
+		$select = $db->select()->from('consultant');
+		$rows = $db->fetchAll($select);
+
+		$this->view->rows = $rows;
 	}
 }

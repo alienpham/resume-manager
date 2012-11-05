@@ -41,7 +41,11 @@ class UserController extends Zend_Controller_Action
 		$sess->username = $row['username'];
 		$sess->email = $row['email'];
 		$sess->phone = $row['phone'];
+		$sess->isAdmin = $row['is_admin'];
 		$sess->islogin = 1;
+		$full_name = $row['title'] . ' ' . $row['full_name'];
+		$sess->fullname = $full_name ? $full_name : $row['username'];
+
 
 		$this->_redirect('/resume');
 	}

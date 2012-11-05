@@ -5,7 +5,7 @@ class Company_IndexController extends Zend_Controller_Action
 	{
 		$aNamespace = new Zend_Session_Namespace ( 'zs_User' );
 		if (! isset ( $aNamespace->islogin )) $this->_redirect ( '/user' );
-		
+
         /* Initialize action controller here */
         $view = new Zend_View();
         $view->headScript()->appendFile ( '/js/jquery-1.8.0.min.js' );
@@ -16,7 +16,9 @@ class Company_IndexController extends Zend_Controller_Action
         $view->headScript()->appendFile ( '/js/jquery.fancybox.js?v=2.1.0' );
         $view->headLink()->appendStylesheet ( '/js/jquery.fancybox.css?v=2.1.0' );
 		$this->view->username = $aNamespace->username;
-		date_default_timezone_set('Asia/Krasnoyarsk');
+		$this->view->fullname = $aNamespace->fullname;
+		$this->view->isAdmin = $aNamespace->isAdmin;
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
 	}
 
 	public function indexAction()
@@ -32,22 +34,22 @@ class Company_IndexController extends Zend_Controller_Action
 		{
 			if ($post['ccode_id']==1)
 				$condition = "company_code LIKE '%".$post['txtSearch']."%'";
-			else 
+			else
 			if ($post['ccode_id']==2)
 				$condition = "full_name_en LIKE '%".$post['txtSearch']."%' OR short_name_en LIKE '%".$post['txtSearch']."%' OR full_name_vn LIKE '%".$post['txtSearch']."%' OR short_name_vn LIKE '%".$post['txtSearch']."%'";
 		}
-		
+
 		if (isset($post['industry_id']) && $post['industry_id']!="" && $post['industry_id']!="0")
 		{
 			$condition .= " AND industry_id = '".$post['industry_id']."'";
 		}
-		
+
 		$order_by="full_name_en ASC";
 		if (isset($post['sort_name_id']))
 			$order_by = $post['sort_name_id']." ".$post['sort_type_id'];
 		$company = new Company_Model_CompanyMapper();
 		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","abbreviation",isset($post['industry_id'])?$post['industry_id']:"");
-		
+
 		$data="";
 
 		$list = $company->getListCompany($condition,$order_by,($currentPage-1)*20,20);
@@ -116,7 +118,7 @@ class Company_IndexController extends Zend_Controller_Action
                 '.$consultant_name.'
             </div>
             <div class="action">
-                <a href="company/company/add-company/company_id/'.$rs['company_id'].'" class="editcom">Edit</a> 
+                <a href="company/company/add-company/company_id/'.$rs['company_id'].'" class="editcom">Edit</a>
             </div><br>';
 			$totalOpen+=$openVa;
 			$totalProcess+=$numProcess;
