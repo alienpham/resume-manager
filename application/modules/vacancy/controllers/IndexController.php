@@ -26,6 +26,13 @@ class Vacancy_IndexController extends Zend_Controller_Action
 		$consultantMapper = New Vacancy_Model_ConsultantMapper();
 		$colsultants = $consultantMapper->getColsultants();
 		$this->view->consultants = $colsultants;
+
+		$companyMapper = New Vacancy_Model_CompanyMapper();
+		$companies = $companyMapper->getCompanies();
+		$this->view->companies = $companies;
+
+		$displaySalaryConfig = $companyMapper->getDisplaySalaries();
+		$this->view->displaySalaryConfig = $displaySalaryConfig;
 	}
 }
 

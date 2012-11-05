@@ -10,20 +10,25 @@
     <div class="form-login">
     	<h1>LOGIN</h1>
     	<ul>
+    		<?php if(isset($_REQUEST['msg']) && !empty($_REQUEST['msg'])):?>
+    		<li style="color: red;text-align: center;width: 100%;">
+    			<?php echo $_REQUEST['msg']?>
+    		</li>
+    		<?php endif;?>
     		<li>
-    			<label>Email <em>*</em></label>
-    			<input type="text" tabindex="1" name="email">
+    			<label><strong>Login name</strong><em>*</em></label>
+    			<input type="text" tabindex="1" name="username" placeholder="Username" required/>
     		</li>
     		<li>
-    			<label>Password <em>*</em></label>
-    			<input type="password" tabindex="2" name="password">
+    			<label><strong>Password</strong><em>*</em></label>
+    			<input type="password" tabindex="2" name="password" placeholder="Password" required>
     		</li>
     		<li>
     			<label>&nbsp;</label>
     			<input type="submit" class="button01" class="btnLogin" value="Login" tabindex="3" >
     		</li>
     	</ul>
-    </div> 
+    </div>
 </form>
 </body>
 </html>
