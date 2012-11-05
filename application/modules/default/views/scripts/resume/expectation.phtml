@@ -1,5 +1,5 @@
-<?php echo $this->headScript ();?>
-
+<?php echo $this->headScript();?>
+<?php echo $this->headLink();?>
 <div class="img-steps">
 	<img src="/images/img-step-04.png" alt="Expection" />
 </div>
@@ -48,17 +48,39 @@
 				<input type="hidden" name="expecid" value="<?php echo $this->expectationRowSet->getResExpectationId();?>" />
 				<a href="/resume/experience/id/<?php echo $this->resumeId; ?>"><input type="button" class="button02" name="button" value="Back" /></a>
 				<input type="submit" class="button01" name="button" value="Complete" />
-				<input type="button" class="button01 detail_resume" id="<?php echo $this->resumeId; ?>" name="button" value="Review" /></a>
+				<a href="#detail_resume" class="detail_resume" id="<?php echo $this->resumeId;?>">
+                    <input type="button" class="button01" name="button" value="Review" />
+                </a>
 			</div>
 		</li>
 	</ul>
 </div>
 </form>
+<div id="detail_resume" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
 <script>
 $(document).ready(function(){
     $(".province").click(function(){
         if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');
     });
+
+    //Begin View detail candidate
+    $(".detail_resume").fancybox();
+    $(".detail_resume").click(function(){
+        //checkLogin();
+        $('#detail_resume').html('');
+        var resume_id = $(this).attr('id');
+        $.ajax({
+            url: '/resume/detail-resume',
+            type: "POST",
+            data: { 
+                resume_id: resume_id, 
+            },
+            success: function(result) {
+                $('#detail_resume').html(result);
+            }
+        });
+    });
+    //End View detail candidate
 });
 
 
@@ -68,6 +90,7 @@ $("body").click(function(e){
     	$(".multiselect").hide('slow');
     }       
 });
+
 
 jQuery.fn.multiselect = function() {
     $(this).each(function() {

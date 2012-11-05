@@ -26,6 +26,7 @@ class ResumeController extends Zend_Controller_Action
     }
     public function indexAction()
     {
+        $_SESSION['export-email'] = '';
         $view = new Zend_View();
         $view->headScript()->appendFile ( '/js/jquery.mousewheel-3.0.6.pack.js' );
         $view->headScript()->appendFile ( '/js/jquery.fancybox.js?v=2.1.0' );
@@ -254,6 +255,11 @@ class ResumeController extends Zend_Controller_Action
 	
 	public function expectationAction()
 	{
+	    $view = new Zend_View();
+        $view->headScript()->appendFile ( '/js/jquery.mousewheel-3.0.6.pack.js' );
+        $view->headScript()->appendFile ( '/js/jquery.fancybox.js?v=2.1.0' );
+        $view->headLink()->appendStylesheet ( '/js/jquery.fancybox.css?v=2.1.0' );
+        
         $resumeId = $this->getRequest()->getParam('id');
         
         $resume = new Default_Model_ResumeMapper();
@@ -431,8 +437,10 @@ class ResumeController extends Zend_Controller_Action
 	
 	public function exportEmailAction()
 	{
+	    $query = '';
+	    if(isset($_SESSION['export-email'])) $query = $_SESSION['export-email'];
 	    $resume = new Default_Model_ResumeMapper();
-        $rows = $resume->fetchAll();
+        $rows = $resume->getExportEmail($query);
         
 	    header("Pragma: public");
         header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -451,16 +459,28 @@ class ResumeController extends Zend_Controller_Action
         $table .= '<td>Candidate</td>';
         $table .= '<td>Email</td>';
         $table .= '</tr>';
-        foreach ($rows AS $row) :
+        if(count($rows))
+        {
+            foreach ($rows AS $row) :
+                $table .= '<tr>'; //new xml table row
+    		        $table .= '<td>';
+                    $table .= $row['full_name'];
+                    $table .= '</td>';
+                     $table .= '<td>';
+                    $table .= $row['email_1'];
+                    $table .= '</td>';
+                $table .= '</tr>';
+            endforeach;
+        }else{
             $table .= '<tr>'; //new xml table row
-		        $table .= '<td>';
-                $table .= $row->getFullName();
-                $table .= '</td>';
-                 $table .= '<td>';
-                $table .= $row->getEmail1();
-                $table .= '</td>';
-            $table .= '</tr>';
-        endforeach;
+    		        $table .= '<td>';
+                    $table .= 'no data';
+                    $table .= '</td>';
+                    $table .= '<td>';
+                    $table .= 'no data';
+                    $table .= '</td>';
+                $table .= '</tr>';
+        }
         $table .= '</table></body></html>';
         echo $table;
         exit;

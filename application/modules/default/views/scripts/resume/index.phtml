@@ -31,7 +31,7 @@ function checkLogin(){
 		<input class="button01" type="button" value="Add Resume" />
 	</a>
     <a href="/resume/export-email" style="text-decoration:none;">
-        <input class="button01" id="export_email" type="button" value="Export Email" style="display: none"/>
+        <input var="" class="button01" id="export_email" type="button" value="Export Email" style="display: none"/>
     </a>
 </div>  
 <p class="today-entry" id="report">&nbsp;</p>
@@ -67,6 +67,20 @@ $(document).ready(function() {
         	if(functions) functions = functions + ',' + $(this).val();
         	else functions = $(this).val();
         });
+
+        var param = 'full_name: ' + name
+            ',email: ' + email
+            ',phone: ' + phone
+            ',gender: ' + gender
+            ',marital_status: ' + marital_status
+            ',job_title: ' + job_title
+            ',company_name: ' + company_name
+            ',symbol: ' + symbol
+            ',functions: ' + functions
+            ',salary: ' + salary
+            ',experother: ' + experother
+            ',keyword: ' + keyword
+            
         
         $.ajax({
       	  	url: '/resume/avandce-search',
@@ -88,6 +102,7 @@ $(document).ready(function() {
       	  	success: function(result) {
       	    	$('#box').html(result);
         	  	$.fancybox.close();
+        	  	$('#export_email').attr('var', param);
                 $('#export_email').show();
       	  	}
       	});

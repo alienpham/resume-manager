@@ -5,7 +5,10 @@ $listFunction = $resume->getFunction();
 <div id="adv-search" class="content">
 <div align="center" style="color:#1B7CBD;font-size:16px"><b>RESUME DETAIL</b></div>
 <br />
-<h2>Personal Details</h2>
+<h2>
+    Personal Details
+    <a href="/resume/personal-info/id/<?php echo $this->resume->getResumeId()?>"><img src="/images/edit.png" width="14px" height="14px" alt="Edit" /></a>
+</h2>
 <table cellpadding="5" cellspacing="6">
 	<tr>
 		<td style="width:115px">Candidate Name</td>
@@ -40,7 +43,10 @@ $listFunction = $resume->getFunction();
 $educationMapper = new Default_Model_EducationMapper();
 $educationList = $educationMapper->fetchAll('resume_id = ' . $this->resume->getResumeId(), 'end_date DESC');
 ?>
-<h2>EDUCATION</h2>
+<h2>
+    EDUCATION
+    <a href="/resume/education/id/<?php echo $this->resume->getResumeId()?>"><img src="/images/edit.png" width="14px" height="14px" alt="Edit" /></a>
+</h2>
 <?php if($educationList):?>
 <table cellpadding="5" cellspacing="6"> 
     
@@ -72,7 +78,10 @@ $comment = $resumeMapper->getComments($this->resume->getResumeId(), 1);
 $date = new DateTime($comment['created_date']);
 $createdComment = $date->format('M-d');
 ?>
-<h2>CAREER SUMMARY</h2>
+<h2>
+    CAREER SUMMARY
+    <a href="/resume/experience/id/<?php echo $this->resume->getResumeId()?>"><img src="/images/edit.png" width="14px" height="14px" alt="Edit" /></a>
+</h2>
 <?php if($experienceList):?>
 <table cellpadding="5" cellspacing="6">
 	<?php foreach ( $experienceList as $experience ) :
@@ -99,7 +108,10 @@ $createdComment = $date->format('M-d');
 <?php else :?>
 <br />
 <?php endif;?>
-<h2>EXPECTION</h2>
+<h2>
+    EXPECTION
+    <a href="/resume/expectation/id/<?php echo $this->resume->getResumeId()?>"><img src="/images/edit.png" width="14px" height="14px" alt="Edit" /></a>
+</h2>
 <?php 
 $expectationMapper = new Default_Model_ExpectationMapper();
 $expectation = $expectationMapper->getExpectation($this->resume->getResumeId());
