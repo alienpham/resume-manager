@@ -1,217 +1,257 @@
-<table class="popup" width="80%" border="2" cellpadding="0" cellspacing="0" bordercolor="#CCCCCC" style="border-collapse:collapse">
-  <tr>
-    <td valign="top" style="padding:15px 15px 15px 15px"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><h3>ADD VACANCY</h3></td>
-      </tr>
-      <tr>
-        <td height="10"></td>
-      </tr>
-      <tr>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td bgcolor="#8DC54C" class="title_popup">VACANCY DETAILS</td>
-            </tr>
-          <tr>
-            <td height="10"></td>
-          </tr>
-          <tr>
-            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="49%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td width="36%" align="right">&nbsp;</td>
-                    <td width="4%">&nbsp;</td>
-                    <td width="4%" bgcolor="#f4fde7">&nbsp;</td>
-                    <td width="56%" bgcolor="#f4fde7">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td class="subtitle_popup"> Consultant:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7">
-                    <select name="select" id="select" style="width:150px">
-                    	<option value="0">--Select Consultant--</option>
-                     	<?php if($this->consultants):?>
-                     	<?php foreach ($this->consultants as $consultant):?>
-                     	<option value="<?php echo $consultant->consultant_id?>"><?php echo $consultant->full_name?></option>
-                     	<?php endforeach;?>
-                     	<?php endif;?>
-                    </select>
-                    </td>
-                  </tr>
+<form method="post"
+	action="<?php echo $this->url(array('module' => 'vacancy', 'controller' => 'index', 'action' => 'add-vacancy'), 'vacancy-add-router', true)?>">
+<table class="popup" width="80%" border="2" cellpadding="0"
+	cellspacing="0" bordercolor="#CCCCCC" style="border-collapse: collapse">
+	<tr>
+		<td valign="top" style="padding: 15px 15px 15px 15px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+				<h3>ADD VACANCY</h3>
+				</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td bgcolor="#8DC54C" class="title_popup">VACANCY DETAILS</td>
+					</tr>
+					<tr>
+						<td height="10"></td>
+					</tr>
+					<tr>
+						<td>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="49%">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="36%" align="right">&nbsp;</td>
+										<td width="4%">&nbsp;</td>
+										<td width="4%" bgcolor="#f4fde7">&nbsp;</td>
+										<td width="56%" bgcolor="#f4fde7">&nbsp;</td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup">Consultant:<span class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><select name="vacancy[va_has_consultant][consultant_id]" id="consultant_id"
+											style="width: 150px">
+											<option value="0">--Select Consultant--</option>
+											<?php if($this->consultants):?>
+											<?php foreach ($this->consultants as $consultant):?>
+											<option value="<?php echo $consultant->consultant_id?>"><?php echo $consultant->full_name?></option>
+											<?php endforeach;?>
+											<?php endif;?>
+										</select></td>
+									</tr>
 
 
-                  <tr>
-                    <td class="subtitle_popup">Company:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7"><select name="select3" id="select3" style="width:150px">
-                      <option></option>
-                    </select></td>
-                  </tr>
-                  <tr>
-                    <td class="subtitle_popup">Job Title:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7"><input type="text" name="textfield" id="textfield" style="width:230px"></td>
-                  </tr>
-                  <tr>
-                    <td class="subtitle_popup"># of Vacancies:</td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7"><input name="textfield2" type="text" id="textfield2" style="width:60px" value="1"></td>
-                  </tr>
-                  <tr>
-                    <td class="subtitle_popup">Displayed Salary:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7"><select name="select8" id="select8" style="width:80px">
-                      <option></option>
-                    </select>
-                      <input name="textfield3" type="text" id="textfield3" style="width:80px" value="1">
-                      USD</td>
-                  </tr>
-                  <tr>
-                    <td class="subtitle_popup">Estimated Salary:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7" class="note_popup">
-                      <input name="textfield4" type="text" id="textfield4" style="width:80px" value="1">
-                    USD (for internal reference only)</td>
-                  </tr>
-                  <tr>
-                    <td class="subtitle_popup">Location:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7"><select name="select4" id="select4" style="width:150px">
-                      <option></option>
-                    </select></td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7" class="note_popup">Selected: HCMC, Binh Duong</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td colspan="2" bgcolor="#f4fde7">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td class="subtitle_popup">Work Level:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7"><select name="select5" id="select5" style="width:150px">
-                      <option></option>
-                    </select></td>
-                  </tr>
-                  <tr>
-                    <td class="subtitle_popup">Function:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7"><select name="select6" id="select6" style="width:150px">
-                      <option></option>
-                    </select></td>
-                  </tr>
+									<tr>
+										<td class="subtitle_popup">Company:<span class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><select name="vacancy[company_id]" id="company_id"
+											style="width: 150px">
+											<option value="0">--Select Company--</option>
+											<?php if($this->companies):?>
+											<?php foreach ($this->companies as $company):?>
+											<option value="<?php echo $company->company_id?>"><?php echo $company->full_name_en?></option>
+											<?php endforeach;?>
+											<?php endif;?>
+										</select></td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup">Job Title:<span class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><input type="text" name="vacancy[job_title]"
+											id="job_title" style="width: 230px"></td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup"># of Vacancies:</td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><input name="vacancy[no_of_vacancies]" type="text"
+											id="no_of_vacancies" style="width: 60px" value="1"></td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup">Displayed Salary:<span
+											class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><select name="vacancy[displayed_salary]" id="displayed_salary"
+											style="width: 80px">
+											<?php foreach ($this->displaySalaryConfig as $dSC):?>
+											<option value="<?php echo $dSC?>"><?php echo $dSC?></option>
+											<?php endforeach;?>
+										</select> <input name="vacancy[estimated_salary" type="text" id="estimated_salary"
+											style="width: 80px" value="1"> USD</td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup">Estimated Salary:<span
+											class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7" class="note_popup"><input
+											name="vacancy[estimated_salary" type="text" id="estimated_salary"
+											style="width: 80px" value="1"> USD (for internal reference
+										only)</td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup">Location:<span class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><select name="select4" id="select4"
+											style="width: 150px">
+											<option></option>
+										</select></td>
+									</tr>
+									<tr>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7" class="note_popup">Selected: HCMC, Binh
+										Duong</td>
+									</tr>
+									<tr>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+										<td colspan="2" bgcolor="#f4fde7">&nbsp;</td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup">Work Level:<span class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><select name="select5" id="select5"
+											style="width: 150px">
+											<option></option>
+										</select></td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup">Function:<span class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><select name="select6" id="select6"
+											style="width: 150px">
+											<option></option>
+										</select></td>
+									</tr>
 
-                  <tr>
-                    <td class="subtitle_popup">Priority:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7"><input type="radio" name="radio" id="radio" value="radio">
-                      Urgent &nbsp;&nbsp;
-                        <input type="radio" name="radio" id="radio2" value="radio">
-High &nbsp;&nbsp;
-<input type="radio" name="radio" id="radio3" value="radio">
-Medium &nbsp;&nbsp;
-<input type="radio" name="radio" id="radio4" value="radio">
-Low
-</td>
-                    </tr>
-                  <tr>
-                    <td class="subtitle_popup">Public<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7">
-                      <input type="radio" name="radio" id="radio5" value="radio">
-Yes, Public&nbsp;&nbsp;
-<input type="radio" name="radio" id="radio6" value="radio">
-No, Confidential
-</td>
-                  </tr>
-                  <tr>
-                    <td class="subtitle_popup">Status:<span class="require">*</span></td>
-                    <td>&nbsp;</td>
-                    <td bgcolor="#f4fde7">&nbsp;</td>
-                    <td bgcolor="#f4fde7"><select name="select7" id="select7" style="width:150px">
-                      <option></option>
-                    </select></td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td colspan="2" bgcolor="#f4fde7">&nbsp;</td>
-                  </tr>
-                </table></td>
-                <td>&nbsp;</td>
-                <td width="49%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td bgcolor="#f4fde7" class="subtitle_popup">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td bgcolor="#f4fde7" class="subtitle_left">Job Description &amp; Requirements:</td>
-                  </tr>
-                  <tr>
-                    <td bgcolor="#f4fde7" style="padding:10px 20px 20px 20px"><textarea name="textfield5" cols="50" rows="20" id="textfield5"></textarea></td>
-                  </tr>
-                </table></td>
-              </tr>
-            </table></td>
-          </tr>
-          <tr>
-            <td height="5"></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td bgcolor="#8DC54C" class="title_popup">COMPANY INFORMATION</td>
-          </tr>
-          <tr>
-            <td height="10"></td>
-          </tr>
-          <tr>
-            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td width="24%" valign="top" class="subtitle_popup">Company Information <br />
-                  (will be shown with job postings):</td>
-                <td width="4%">&nbsp;</td>
-                <td width="36%">                  <textarea name="textfield6" cols="60" rows="5" id="textfield6">Company is an Executive Search & Recruitment agency in four main industries: consumer goods & services, finance & banking, ICT, and industrial; a division of NhanViet Management Group (NVM Group) and a partner of Glasford International, a global collaboration of independent executive search firms, operating successfully over 30 countries throughout Europe, the Americas, Middle East, Far-East & Africa.
-
-Our client is <INSERT DESCRIPTION ABOUT THE COMPANY HERE>
-                </textarea>                </td>
-                <td width="36%" valign="top" class="note_popup">Notice:<strong> Updated information will be shown in all job postings of the same company.</strong></td>
-              </tr>
-            </table></td>
-          </tr>
-          <tr>
-            <td height="5"></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td><hr></td>
-      </tr>
-      <tr>
-        <td align="center"><input type="submit" name="button" id="button" value="Save" class="del_button">&nbsp;&nbsp;&nbsp;
-          <input type="submit" class="add_button" name="button2" id="button2" value="Save &amp; Add">
-          &nbsp;&nbsp;&nbsp;
-          <input type="submit" name="button3" id="button3" value="Cancel" class="del_button" /></td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr></tr>
+									<tr>
+										<td class="subtitle_popup">Priority:<span class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><input type="radio" name="radio"
+											id="radio" value="radio"> Urgent &nbsp;&nbsp; <input
+											type="radio" name="radio" id="radio2" value="radio"> High
+										&nbsp;&nbsp; <input type="radio" name="radio" id="radio3"
+											value="radio"> Medium &nbsp;&nbsp; <input type="radio"
+											name="radio" id="radio4" value="radio"> Low</td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup">Public<span class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><input type="radio" name="radio"
+											id="radio5" value="radio"> Yes, Public&nbsp;&nbsp; <input
+											type="radio" name="radio" id="radio6" value="radio"> No,
+										Confidential</td>
+									</tr>
+									<tr>
+										<td class="subtitle_popup">Status:<span class="require">*</span></td>
+										<td>&nbsp;</td>
+										<td bgcolor="#f4fde7">&nbsp;</td>
+										<td bgcolor="#f4fde7"><select name="select7" id="select7"
+											style="width: 150px">
+											<option></option>
+										</select></td>
+									</tr>
+									<tr>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+										<td colspan="2" bgcolor="#f4fde7">&nbsp;</td>
+									</tr>
+								</table>
+								</td>
+								<td>&nbsp;</td>
+								<td width="49%" valign="top">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td bgcolor="#f4fde7" class="subtitle_popup">&nbsp;</td>
+									</tr>
+									<tr>
+										<td bgcolor="#f4fde7" class="subtitle_left">Job Description
+										&amp; Requirements:</td>
+									</tr>
+									<tr>
+										<td bgcolor="#f4fde7" style="padding: 10px 20px 20px 20px"><textarea
+											name="textfield5" cols="50" rows="20" id="textfield5"></textarea></td>
+									</tr>
+								</table>
+								</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+					<tr>
+						<td height="5"></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td bgcolor="#8DC54C" class="title_popup">COMPANY INFORMATION</td>
+					</tr>
+					<tr>
+						<td height="10"></td>
+					</tr>
+					<tr>
+						<td>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="24%" valign="top" class="subtitle_popup">Company
+								Information <br />
+								(will be shown with job postings):</td>
+								<td width="4%">&nbsp;</td>
+								<td width="36%"><textarea name="textfield6" cols="60" rows="5"
+									id="textfield6">Company is an Executive Search & Recruitment agency in four main industries: consumer goods & services, finance & banking, ICT, and industrial; a division of Grey Finders and a partner of Glasford International, a global collaboration of independent executive search firms, operating successfully over 30 countries throughout Europe, the Americas, Middle East, Far-East & Africa. Our client is <INSERT
+									DESCRIPTION ABOUT THE COMPANY HERE>
+                </textarea></td>
+								<td width="36%" valign="top" class="note_popup">Notice:<strong>
+								Updated information will be shown in all job postings of the
+								same company.</strong></td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+					<tr>
+						<td height="5"></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<hr>
+				</td>
+			</tr>
+			<tr>
+				<td align="center"><input type="submit" name="button" id="button"
+					value="Save" class="del_button">&nbsp;&nbsp;&nbsp; <input
+					type="submit" class="add_button" name="button2" id="button2"
+					value="Save &amp; Add"> &nbsp;&nbsp;&nbsp; <input type="submit"
+					name="button3" id="button3" value="Cancel" class="del_button" /></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr></tr>
 </table>
+</form>

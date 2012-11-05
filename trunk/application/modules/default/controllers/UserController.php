@@ -10,47 +10,47 @@ class UserController extends Zend_Controller_Action
 
 	public function indexAction()
 	{
-	    $view = new Zend_View();
-        $view->headLink()->appendStylesheet ( '/css/stylesheet.css' );
-        
-	    $this->_helper->layout->disableLayout ();
+		$view = new Zend_View();
+		$view->headLink()->appendStylesheet ( '/css/stylesheet.css' );
+
+		$this->_helper->layout->disableLayout ();
 		$aNamespace = new Zend_Session_Namespace ( 'zs_User' );
 		if ( isset ( $aNamespace->islogin )) $this->_redirect ('/resume');
-		
+
 		$request = $this->getRequest();
-	    $msg = addslashes ( $request->getParam ( 'msg' ) );
-	    $message = '';
-	    if($msg) $message = 'Email or Password incorrect';
-	    
-	    $this->view->message = $message;
+		$msg = addslashes ( $request->getParam ( 'msg' ) );
+		$message = '';
+		if($msg) $message = 'Username or Password incorrect!';
+
+		$this->view->message = $message;
 	}
-	
+
 	public function loginAction()
 	{
-	    $request = $this->getRequest();
-	    $user = addslashes ( $request->getParam ( 'email' ) );
+		$request = $this->getRequest();
+		$user = addslashes ( $request->getParam ( 'username' ) );
 		$pass = $request->getParam ( 'password' );
-	    
-	    $userObj = new Default_Model_User();
-	    $row = $userObj->checkLogin($user,$pass);
-	    
-	    if(!$row) $this->_redirect('/user?msg=error');
-//print_r($row);exit;
-	    $sess = new Zend_Session_Namespace ( 'zs_User' );
-	    $sess->consultant_id = $row['consultant_id'];
-	    $sess->username = $row['username'];
-	    $sess->email = $row['email'];
-	    $sess->phone = $row['phone'];
-        $sess->islogin = 1;
 
-	    $this->_redirect('/resume');
+		$userObj = new Default_Model_User();
+		$row = $userObj->checkLogin($user, $pass);
+
+		if(!$row) $this->_redirect('/user?msg=Username or Password incorrect!');
+
+		$sess = new Zend_Session_Namespace ( 'zs_User' );
+		$sess->consultant_id = $row['consultant_id'];
+		$sess->username = $row['username'];
+		$sess->email = $row['email'];
+		$sess->phone = $row['phone'];
+		$sess->islogin = 1;
+
+		$this->_redirect('/resume');
 	}
-	
+
 	public function logoutAction()
 	{
-	    Zend_Session::namespaceUnset ( 'zs_User' );
-	    
-	    $this->_redirect('/user');
+		Zend_Session::namespaceUnset ( 'zs_User' );
+
+		$this->_redirect('/user');
 	}
 }
 

@@ -85,7 +85,7 @@ class Vacancy_Model_ConsultantMapper {
 		}
 		$row = $result->current();
 
-		$entry->setConsultantId($row->consultant_id)
+		$consultant->setConsultantId($row->consultant_id)
 		->setTitle($row->title)
 		->setFullName($row->full_name)
 		->setAbbreviatedName($row->abbreviated_name)

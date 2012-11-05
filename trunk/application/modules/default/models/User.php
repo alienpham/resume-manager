@@ -19,14 +19,14 @@ class Default_Model_User {
         }
         return $this->_dbTable;
     }
-    
-    public function checkLogin($email, $pass)
+
+    public function checkLogin($username, $pass)
 	{
 	    $db = $this->getDbTable()->getAdapter();
-        $sql = "SELECT * FROM consultant WHERE email = '" .$email. "' and password = '" . md5($pass) . "'";
+        $sql = "SELECT * FROM consultant WHERE username = '" .$username. "' and password = '" . md5($pass) . "'";
         return $db->fetchRow($sql);
 	}
-	
+
     public function getConsultantName ($id)
     {
         $db = $this->getDbTable()->getAdapter();
