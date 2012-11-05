@@ -1,3 +1,3 @@
-<?php echo $this->partial('partials/header.phtml', array('username'=> $this->username))?>
+<?php echo $this->partial('partials/header.phtml', array('username'=> $this->username, 'fullname' => $this->fullname, 'isAdmin' => $this->isAdmin))?>
 <?php echo $this->layout()->content?>
 <?php echo $this->partial('partials/footer.phtml')?>
