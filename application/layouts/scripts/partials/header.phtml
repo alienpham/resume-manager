@@ -12,13 +12,12 @@
 	</div>
 	<div class="header clearfix">
 	<?php $moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();  ?>
-	<?php $controllerName = Zend_Controller_Front::getInstance()->getRequest()->getControllerName()?>
 		<ul class="main-menu">
 			<li <?php echo ($moduleName == 'default')? 'class="active"': '' ?>><a href="/resume">Resume</a></li>
 			<li <?php echo ($moduleName == 'company')? 'class="active"': '' ?>><a href="/company">Company</a></li>
 			<li <?php echo ($moduleName == 'vacancy')? 'class="active"': '' ?>><a href="/vacancy">Vacancy</a></li>
 			<?php if($this->isAdmin):?>
-			<li <?php echo ($controllerName == 'profile')? 'class="active"': '' ?>><a href="/user-management.html">User Management</a></li>
+			<li <?php echo ($moduleName == 'profile')? 'class="active"': '' ?>><a href="/user-management.html">User Management</a></li>
 			<?php endif;?>
 		</ul>
 		<div class="user-login">
