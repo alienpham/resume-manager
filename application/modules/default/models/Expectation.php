@@ -6,6 +6,7 @@ class Default_Model_Expectation
 	protected $_estimated_salary_to;
 	protected $_estimated_salary_from;
 	protected $_current_salary;
+	protected $_note;
 	    
 	public function __construct(array $options = null)
     {
@@ -77,5 +78,12 @@ class Default_Model_Expectation
 	}
 	public function setCurrentSalary($salary) {
 		$this->_current_salary = $salary;
+	}
+	
+	public function getNote() {
+		return $this->_note;
+	}
+	public function setNote($text) {
+		$this->_note = $text;
 	}
 }

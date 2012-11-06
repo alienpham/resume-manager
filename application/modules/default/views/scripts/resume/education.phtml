@@ -1,8 +1,6 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<div class="img-steps">
-	<img src="/images/img-step-02.png" alt="Experience" />
-</div>
+<?php echo $this->partial('resume/menu-add-resume.phtml', array('step' => 'education', 'resumeId' => $this->resumeId));?>
 <form name="frm" method="post" action="/resume/save-education" onsubmit="return checkValid()">
 <div class="from-add-01">
 	<h2>Education</h2>

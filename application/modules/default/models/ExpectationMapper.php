@@ -30,7 +30,8 @@ class Default_Model_ExpectationMapper {
 			'resume_id' 			=> $expectation->getResumeId(), 
 			'estimated_salary_to' 	=> $expectation->getEstimatedSalaryTo(), 
 			'estimated_salary_from' => $expectation->getEstimatedSalaryFrom(), 
-			'current_salary' 		=> $expectation->getCurrentSalary()
+			'current_salary' 		=> $expectation->getCurrentSalary(),
+			'note' 					=> $expectation->getNote()
 		);
 		
         if (null == ($id = $expectation->getResExpectationId())) {
@@ -54,6 +55,7 @@ class Default_Model_ExpectationMapper {
 		$expectation->setEstimatedSalaryTo($row['estimated_salary_to']);
 		$expectation->setEstimatedSalaryFrom($row['estimated_salary_from']);
 		$expectation->setCurrentSalary($row['current_salary']);   
+		$expectation->setNote($row['note']);  
     }
 
 
@@ -68,6 +70,7 @@ class Default_Model_ExpectationMapper {
 			$entry->setEstimatedSalaryTo($row->estimated_salary_to);
 			$entry->setEstimatedSalaryFrom($row->estimated_salary_from);
 			$entry->setCurrentSalary($row->current_salary);
+			$entry->setNote($row->note);
             $entries[] = $entry;
         }
         

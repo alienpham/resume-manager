@@ -295,6 +295,7 @@ class ResumeController extends Zend_Controller_Action
 		$expectation->setEstimatedSalaryTo(floatval($post['estimated_salary_to']));
 		$expectation->setEstimatedSalaryFrom(floatval($post['estimated_salary_from']));
 		$expectation->setCurrentSalary(floatval($post['current_salary']));
+		$expectation->setNote(($post['note']));
 
 		$expectationMapper = new Default_Model_ExpectationMapper();
 		$expectationId = $expectationMapper->save($expectation);
@@ -618,7 +619,8 @@ class ResumeController extends Zend_Controller_Action
 		$currentSalary = number_format($expectation['current_salary']);
 		@$salaryFrom = number_format($expectation['estimated_salary_from']);
 		@$salaryTo = number_format($expectation['estimated_salary_to']);
-
+		@$note = $expectation['note'];
+		
 		$table = ''; //empty table
 		$table .= '<w:tbl>';
 		$table .= '<w:tblPr><w:tblW w:w = "4000" w:type="pct"/></w:tblPr>';
@@ -654,6 +656,18 @@ class ResumeController extends Zend_Controller_Action
 			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
 			$table .= '</w:tr>';
 		}
+		
+		if(count($note)) {
+			$table .= '<w:tr>'; //new xml table row
+			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
+			$table .= 'Note: '; //cell contents
+			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
+			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
+			$table .= $note; //cell contents
+			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
+			$table .= '</w:tr>';
+		}
+		
 		$table .= '</w:tbl>'; //close xml table
 		$document->setValue('expection', $table);
 
