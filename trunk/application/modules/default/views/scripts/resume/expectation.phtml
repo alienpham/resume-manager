@@ -1,8 +1,6 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<div class="img-steps">
-	<img src="/images/img-step-04.png" alt="Expection" />
-</div>
+<?php echo $this->partial('resume/menu-add-resume.phtml', array('step' => 'expectation', 'resumeId' => $this->resumeId));?>
 <form id="form" action="/resume/save-expectation" method="post">
 <div class="from-add-01">
 	<h2>Expectation</h2>
@@ -38,8 +36,12 @@
            </div>
 		</li>
 		<li>
+			<label>&nbsp;</label>
+			<hr style="width:530px" />
+		</li>
+		<li>
 			<label>Note: </label>
-			<textarea name="note" id="note" style="height:100px; width:520px"></textarea>
+			<textarea name="note" id="note" style="height:100px; width:520px"><?php echo $this->expectationRowSet->getNote();?></textarea>
 		</li>
 		<li>
 			<label>&nbsp;</label>
@@ -83,7 +85,7 @@ $(document).ready(function(){
     //End View detail candidate
 });
 
-
+//click out to invisible multiselect
 $("body").click(function(e){
 	var $parentClass = $(e.target).parents('.multiselect');
     if(e.target.className !== "province" && $parentClass.length < 1) {
@@ -91,13 +93,33 @@ $("body").click(function(e){
     }       
 });
 
+//auto show lable check list in multiselect
+var str = '';
+$(':checkbox[name^=option]').each(function(){
+	if($(this).attr('checked')){
+		str = str + $(this).parent().text() + ';';
+	} 
+});
+str = str.slice(0, -1)
+$('.province').val(str);
+
+//click chekcbox in mutiselect
+$('.multiselect').bind('click', function() {
+	var str = '';
+	$(':checkbox[name^=option]').each(function(){
+		if($(this).attr('checked')){
+			str = str + $(this).parent().text() + ';';
+		} 
+	});
+	str = str.slice(0, -1)
+	$('.province').val(str);
+});
 
 jQuery.fn.multiselect = function() {
     $(this).each(function() {
         var checkboxes = $(this).find("input:checkbox");
         checkboxes.each(function() {
             var checkbox = $(this);
-            //if(checkbox.checked == true) alert(111);
         });
     });
 };

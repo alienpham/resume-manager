@@ -1,11 +1,35 @@
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td width="15%">&nbsp;</td>
-		<td>
-			<input type="button" value="Personal Details" class="link_button" />
-			<input type="button" value="Experience" class="link_button" />
-			<input type="button" value="Expectation" class="link_button" />
-		</td>
-	</tr>
-</table>
-<br />
+<?php if($this->resumeId) :?>
+<div class="img-steps">
+	<ul>
+		<li <?php echo ($this->step == 'personal')? 'class="active"':''?>>
+			<a href="/resume/personal-info/id/<?php echo $this->resumeId; ?>" class="step-01">Step 01</a>
+		</li>
+		<li <?php echo ($this->step == 'education')? 'class="active"':''?>>
+			<a href="/resume/education/id/<?php echo $this->resumeId; ?>" class="step-02">Step 02</a>
+		</li>
+		<li <?php echo ($this->step == 'experience')? 'class="active"':''?>>
+			<a href="/resume/experience/id/<?php echo $this->resumeId; ?>" class="step-03">Step 03</a>
+		</li>
+		<li <?php echo ($this->step == 'expectation')? 'class="active"':''?>>
+			<a href="/resume/expectation/id/<?php echo $this->resumeId; ?>" class="step-04">Step 04</a>
+		</li>
+	</ul>
+</div>
+<?php else : ?>
+<div class="img-steps">
+	<ul>
+		<li <?php echo ($this->step == 'personal')? 'class="active"':''?>>
+			<a href="#" class="step-01">Step 01</a>
+		</li>
+		<li <?php echo ($this->step == 'education')? 'class="active"':''?>>
+			<a href="#" class="step-02">Step 02</a>
+		</li>
+		<li <?php echo ($this->step == 'experience')? 'class="active"':''?>>
+			<a href="#" class="step-03">Step 03</a>
+		</li>
+		<li <?php echo ($this->step == 'expectation')? 'class="active"':''?>>
+			<a href="#" class="step-04">Step 04</a>
+		</li>
+	</ul>
+</div>
+<?php endif;?>

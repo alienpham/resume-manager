@@ -694,6 +694,47 @@ color:red;
 	line-height:25px;
 }
 
+/*=========== img-steps ===========*/
+.content .img-steps{
+	float: left;
+    margin: 0 0 40px 10%;
+}
+.img-steps ul li{
+	float:left;
+	display:inline;
+	margin-right: 15px;
+}	
+.img-steps ul li a{
+	display:block;
+	text-indent:-9999px;	
+	height: 75px;
+    width: 110px;
+}
+.img-steps ul li .step-01{
+	background:url(../images/img-step-a-01.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li .step-02{
+	background:url(../images/img-step-a-02.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li .step-03{
+	background:url(../images/img-step-a-03.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li .step-04{
+	background:url(../images/img-step-a-04.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li .step-05{
+	background:url(../images/img-step-a-05.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li a:hover,
+.img-steps ul li.active a{
+	background-position:bottom;
+	
+}
 
 
 

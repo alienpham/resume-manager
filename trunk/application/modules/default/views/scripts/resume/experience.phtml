@@ -1,8 +1,6 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<div class="img-steps">
-	<img src="/images/img-step-03.png" alt="Experience" />
-</div>
+<?php echo $this->partial('resume/menu-add-resume.phtml', array('step' => 'experience', 'resumeId' => $this->resumeId));?>
 <div class="from-add-01" id="exp_nomal">
     <form name="frm" method="post" action="/resume/save-experience" onsubmit="return checkValid()">
 	<h2>Experience</h2>
@@ -16,7 +14,7 @@
 			<em class="error"></em>
 		</li>
 		<li>
-			<label>Start date <em>*</em></label>
+			<label>Start date</label>
 			<input type="text" name="startdate" id="startdate" value="<?php echo $this->experienceRowSet->getStartDate();?>" style="width:120px">
 			<b>&nbsp;&nbsp;End date</b>
 			<input type="text" name="enddate" id="enddate" value="<?php echo $this->experienceRowSet->getEndDate();?>" style="width:120px">
@@ -134,12 +132,12 @@
 <script>
 function checkValid()
 {
-	var startdate = $("#startdate").val();
-	var enddate = $("#enddate").val();
+	//var startdate = $("#startdate").val();
+	//var enddate = $("#enddate").val();
 	var job_title = $("#job_title").val();
 	var company_name = $("#company_name").val();
     
-    if(startdate == '' || enddate == '' || job_title == '' || company_name == '') {
+    if(job_title == '' || company_name == '') {
         $('.error').html('Please input into field required (*)');
         return false;
     }
@@ -187,6 +185,28 @@ $("body").click(function(e){
     }       
 });
 
+//auto show lable check list in multiselect
+var str = '';
+$(':checkbox[name^=option]').each(function(){
+	if($(this).attr('checked')){
+		str = str + $(this).parent().text() + ';';
+	} 
+});
+str = str.slice(0, -1)
+$('.function').val(str);
+
+//click chekcbox in mutiselect
+$('.multiselect').bind('click', function() {
+	var str = '';
+	$(':checkbox[name^=option]').each(function(){
+		if($(this).attr('checked')){
+			str = str + $(this).parent().text() + ';';
+		} 
+	});
+	str = str.slice(0, -1)
+	$('.function').val(str);
+});
+	
 jQuery.fn.multiselect = function() {
     $(this).each(function() {
         var checkboxes = $(this).find("input:checkbox");
