@@ -16,6 +16,7 @@ class ProfileController extends Zend_Controller_Action {
 
 		/* Initialize action controller here */
 		$view = new Zend_View();
+		$view->headLink()->appendStylesheet ( '/css/stylesheet.css' );
 		$view->headScript()->appendFile ( '/js/jquery-1.8.0.min.js' );
 		$view->headLink()->appendStylesheet ( '/js/themes/base/jquery.ui.all.css' );
 		$view->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );

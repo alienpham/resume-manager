@@ -694,6 +694,63 @@ color:red;
 	line-height:25px;
 }
 
+/* USER MANAGEMENT */
+.clear {
+	clear: both;
+}
+#userManagement .head .checkbox,
+#userManagement .head .username,
+#userManagement .head .fullname,
+#userManagement .head .title,
+#userManagement .head .email,
+#userManagement .head .job-title,
+#userManagement .head .join-date,
+#userManagement .head .status,
+#userManagement .head .admin,
+#userManagement .head .action,
+#userManagement .head .created-date,
+#userManagement .head .modified-date
+ {background: url("../images/bg-header.jpg") no-repeat scroll right top transparent !important;}
+ 
+#userManagement .checkbox,
+#userManagement .username,
+#userManagement .fullname,
+#userManagement .title,
+#userManagement .email,
+#userManagement .job-title,
+#userManagement .join-date,
+#userManagement .status,
+#userManagement .admin,
+#userManagement .action,
+#userManagement .created-date,
+#userManagement .modified-date
+{
+	padding:2px 1% 2px;
+	float:left;	
+}
+
+#userManagement .checkbox{
+	padding:3px 1%;
+	width:1%;
+}
+
+#userManagement .username {
+	width: 8%;
+}
+
+#userManagement .fullname {
+	width: 10%;
+}
+
+#userManagement .title {width: 3%;text-align: center;}
+#userManagement .email {width: 16%;}
+#userManagement .job-title {width: 6%;}
+#userManagement .join-date {width: 6%;}
+#userManagement .status {width: 4%;text-align: center;}
+#userManagement .admin {width: 3%;text-align: center;}
+#userManagement .action {width: 10%;text-align: center;}
+#userManagement .created-date {width: 8%;}
+#userManagement .modified-date {width: 11%;}
 /*=========== img-steps ===========*/
 .content .img-steps{
 	float: left;
