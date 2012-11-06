@@ -677,32 +677,85 @@ class ResumeController extends Zend_Controller_Action
 	{
 		$data = array (
 			'resume_id' => $resumeId,
-			'filename' => $file_resume["name"],
+			'bin_data' => '',
+			'filename' => 'R' . $resumeId .'_'. $file_resume["name"],
 			'filetype' => $file_resume["type"],
 			'filesize' => $file_resume["size"]
 		);
-//echo '<pre>';
-//print_r($file_resume);
-		$file_tmp = $file_resume["tmp_name"];
 
-		$fp = fopen($file_tmp, 'r');
-		$content = fread($fp, $file_resume["size"]);
-		fclose($fp);
-//print_r($content);exit;
-		$content = addslashes($content);
-		$data['bin_data'] = $content;
+		//$file_tmp = $file_resume["tmp_name"];
+		//$fp = fopen($file_tmp, 'r');
+		//$content = fread($fp, $file_resume["size"]);
+		//fclose($fp);
+		//$content = addslashes($content);
+		//$data['bin_data'] = $content;
+		//$data['bin_data'] = '';
 
-		$fileMapper = new Default_Model_FileMapper();
-		$fileMapper->insertResumeFile($data);
-		return true;
+		//if they DID upload a file...
+		if($file_resume["name"])
+		{
+			//if no errors...
+			if(!$file_resume['error'])
+			{
+				//now is the time to modify the future file name and validate the file
+				$new_file_name = strtolower($file_resume['tmp_name']); //rename file
+				$valid_file = true;
+				if($file_resume['size'] > (1024000*3)) //can't be larger than 3 MB
+				{
+					$valid_file = false;
+					$message = 'Oops!  Your file\'s size is to large.';
+				}
+
+				//if the file has passed the test
+				if($valid_file)
+				{
+					//move it to where we want it to be
+					move_uploaded_file($file_resume['tmp_name'], APPLICATION_PATH . '/../public/uploads/' . $data["filename"]);
+					$fileMapper = new Default_Model_FileMapper();
+					$row = $fileMapper->getResumeFile($resumeId);
+					if($row['id']) $fileMapper->updateResumeFile($data);
+					else $fileMapper->insertResumeFile($data);
+					return true;
+				}
+			}
+			//if there is an error...
+			else
+			{
+				//set that to be the returned message
+				$message = 'Ooops!  Your upload triggered the following error:  '.$file_resume['error'];
+			}
+		}
+		
+		return;
 	}
+	
 	public function downloadResumeAction()
 	{
 		$resumeId = $this->_getParam('id');
 		$fileMapper = new Default_Model_FileMapper();
 		$row = $fileMapper->getResumeFile($resumeId);
 
-		if($row['resume_id']) {
+		$file = APPLICATION_PATH . '/../public/uploads/' . $row["filename"];
+		if (file_exists($file))
+		{
+			if (FALSE!== ($handler = fopen($file, 'r')))
+			{
+				header('Content-Description: File Transfer');
+				header('Content-Type: ' . $row["filetype"]);
+				header('Content-Disposition: attachment; filename=' . basename($file));
+				header('Content-Transfer-Encoding: chunked'); //changed to chunked
+				header('Expires: 0');
+				header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+				header('Pragma: public');
+				//header('Content-Length: ' . filesize($file)); //Remove
+
+				//Send the content in chunks
+				readfile($file);
+			}
+		}
+		
+		exit;
+		/*if($row['resume_id']) {
 			$data = stripcslashes($row["bin_data"]);
 			$name = $row["filename"];
 			$size = $row["filesize"];
@@ -714,7 +767,7 @@ class ResumeController extends Zend_Controller_Action
 			header("Content-Description: PHP Generator");
 			echo $data;
 			exit;
-		}
+		}*/
 	}
 }
 
