@@ -5,7 +5,7 @@
  * @author LONG
  *
  */
-class ProfileController extends Zend_Controller_Action {
+class Profile_ProfileController extends Zend_Controller_Action {
 	/**
 	 * (non-PHPdoc)
 	 * @see library/Zend/Controller/Zend_Controller_Action::init()
