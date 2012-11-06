@@ -27,10 +27,18 @@ class Default_Model_FileMapper {
 		return true;
 	}
 	
+	public function updateResumeFile($data) {
+
+		$db = $this->getDbTable()->getAdapter();
+		$resumeId = $data['resume_id'];
+		unset($data['resume_id']);
+		$this->getDbTable()->update($data, array('resume_id' => $resumeId));
+		return true;
+	}
+	
 	public function getResumeFile($resumeId) {
 
 		$db = $this->getDbTable();
-		//$sql  = 'SELECT * FROM res_file WHERE resume_id = ' . $resumeId;
 		$select = $db->select();
 		$select->where(array('resume_id' => $resumeId)); 
 		return $db->fetchRow();

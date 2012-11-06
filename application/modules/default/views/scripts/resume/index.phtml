@@ -3,7 +3,7 @@
 <?php echo $this->headLink();?>
 <script>
 function checkLogin(){
-   $.ajax({
+    $.ajax({
         url: '/resume/check-login',
         success: function(result){
             if(!result) document.location.href = '/user/login';
