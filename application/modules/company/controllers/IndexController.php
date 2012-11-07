@@ -60,6 +60,8 @@ class Company_IndexController extends Zend_Controller_Action
 		$paginator->setCurrentPageNumber($currentPage);
 		$totalOpen=0;
 		$totalProcess=0;
+		
+		/*
 		foreach($list as $rs)
 		{
 			$numact=$company->countAct($rs['company_id']);
@@ -123,6 +125,8 @@ class Company_IndexController extends Zend_Controller_Action
 			$totalOpen+=$openVa;
 			$totalProcess+=$numProcess;
 		}
+		*/
+		
 		$this->view->totalOpen=$totalOpen;
 		$this->view->totalProcess=$totalProcess;
 		$this->view->ccode_id=$this->_getParam('ccode_id',"");
@@ -133,7 +137,8 @@ class Company_IndexController extends Zend_Controller_Action
 		$this->view->list_industry=$list_industry;
 		$this->view->rows = $list;
 		$this->view->baseUrl = $this->getRequest()->getBaseUrl();
-		$this->view->data = $data;
+		$this->view->list = $list;
+		$this->view->company = $company;
 	}
 }
 
