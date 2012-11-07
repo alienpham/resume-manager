@@ -176,13 +176,18 @@ class Company_CompanyController extends Zend_Controller_Action
 
 	public function viewCompanyAction()
 	{
+	    //echo 222;exit;
+	    $this->_helper->layout->disableLayout();
+	    
 		$post = $this->getRequest()->getPost();
 		$company_id = $this->_getParam('company_id',"");
 		$company = new Company_Model_CompanyMapper();
 
-		$cominfo=$company->getListCompany("company_id = '$company_id'", "company_id DESC", 0, 1);
+		$cominfo = $company->getListCompany("company_id = '$company_id'", "company_id DESC", 0, 1);
 		$this->view->company_id = $company_id;
 		$this->view->company_code = $cominfo[0]['company_code'];
 		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
+		
+		$this->render('view-company');
 	}
 }

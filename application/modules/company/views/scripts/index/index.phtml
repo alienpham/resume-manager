@@ -1,5 +1,15 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
+<script>
+function checkLogin(){
+    $.ajax({
+        url: '/resume/check-login',
+        success: function(result){
+            if(!result) document.location.href = '/user/login';
+        }
+   });
+}
+</script>
 <div class="block-search">
 <form id="frmsearch" action="/company/" method="post">
 	<label>Search</label>
@@ -118,6 +128,7 @@
   </table>
  <input type="hidden" name="hdcompany_id" id="hdcompany_id" /> 
  </form>
+ <div id="view_company" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
  <script language="javascript">
  function getValueListCheckBox(list,id)
 {	
@@ -159,4 +170,27 @@
 		window.location="company/company/add-contact/company_id/"+$("#hdcompany_id").val();
 	
  }
+
+
+ $(document).ready(function() {
+     //Begin View detail candidate
+     $(".view_company").fancybox();
+     $(".view_company").click(function(){
+         checkLogin();
+         $('#view_company').html('');
+         var company_id = $(this).attr('id');
+         $.ajax({
+             url: '/company/company/view-company',
+             type: "POST",
+             data: { 
+            	 company_id: company_id, 
+             },
+             success: function(result) {
+                 $('#view_company').html(result);
+             }
+         });
+     });
+     //End View detail candidate
+ });
+
  </script>
