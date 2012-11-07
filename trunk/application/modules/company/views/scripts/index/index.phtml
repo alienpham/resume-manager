@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="info-content">
-        <?php echo $this->data; ?>
+        <?php echo $this->partial('index/list-company.phtml', array('company' => $this->company, 'list' => $this->list)); ?>
         </div>
     </div>
 </div>
