@@ -58,10 +58,12 @@ class Company_IndexController extends Zend_Controller_Action
 		$paginator = Zend_Paginator::factory($rows);
 		$paginator->setItemCountPerPage(20);
 		$paginator->setCurrentPageNumber($currentPage);
+		
+		/*
 		$totalOpen=0;
 		$totalProcess=0;
 		
-		/*
+		
 		foreach($list as $rs)
 		{
 			$numact=$company->countAct($rs['company_id']);
