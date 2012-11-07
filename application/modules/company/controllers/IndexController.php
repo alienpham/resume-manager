@@ -129,15 +129,14 @@ class Company_IndexController extends Zend_Controller_Action
 		}
 		*/
 		
-		$this->view->totalOpen=$totalOpen;
-		$this->view->totalProcess=$totalProcess;
+		//$this->view->totalOpen=$totalOpen;
+		//$this->view->totalProcess=$totalProcess;
 		$this->view->ccode_id=$this->_getParam('ccode_id',"");
 		$this->view->sort_name_id=$this->_getParam('sort_name_id',"");
 		$this->view->sort_type_id=$this->_getParam('sort_type_id',"");
 		$this->view->txtSearch=$this->_getParam('txtSearch',"");
 		$this->view->paginator = $paginator;
 		$this->view->list_industry=$list_industry;
-		$this->view->rows = $list;
 		$this->view->baseUrl = $this->getRequest()->getBaseUrl();
 		$this->view->list = $list;
 		$this->view->company = $company;

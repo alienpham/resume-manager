@@ -12,6 +12,8 @@ class Company_CompanyController extends Zend_Controller_Action
         $view->headScript()->appendFile ( '/js/jquery.mousewheel-3.0.6.pack.js' );
         $view->headScript()->appendFile ( '/js/jquery.fancybox.js?v=2.1.0' );
         $view->headLink()->appendStylesheet ( '/js/jquery.fancybox.css?v=2.1.0' );
+        
+        $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
         $this->view->fullname = $aNamespace->fullname;
 		$this->view->isAdmin = $aNamespace->isAdmin;
         date_default_timezone_set('Asia/Ho_Chi_Minh');
