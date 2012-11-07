@@ -24,7 +24,7 @@ foreach($this->list as $rs) :
 		<?php echo $rs['company_code'] ?>
 	</div>
 	<div class="name">
-		<h4><a href="/company/company/view-company/company_id/'.$rs['company_id'].'"><?php echo $rs['full_name_en'] ?></a></h4>
+		<h4><a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>"><?php echo $rs['full_name_en'] ?></a></h4>
 	</div>
 	<div class="ind">
 		<b><?php echo $industry_name ?></b>

@@ -115,6 +115,8 @@ class Company_Model_CompanyMapper {
        		$sql = "SELECT * FROM company WHERE $where ORDER BY $orderby";
        	else 
        		$sql = "SELECT * FROM company WHERE $where ORDER BY $orderby LIMIT $offset,$limit";
+       		
+       		//echo $sql;exit;
         $result = $db->fetchAll($sql);
         
         return $result;
