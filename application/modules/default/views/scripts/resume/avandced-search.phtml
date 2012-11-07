@@ -102,3 +102,18 @@ $listFunction = $resume->getFunction();
 </form>
 </div>
 </div>
+<script>
+$(document).ready(function(){
+	//click chekcbox in mutiselect
+	$('.multiselect').bind('click', function() {
+		var str = '';
+		$(':checkbox[name^=option]').each(function(){
+			if($(this).attr('checked')){
+				str = str + $(this).parent().text() + ';';
+			} 
+		});
+		str = str.slice(0, -1)
+		$('.function').val(str);
+	});
+});
+</script>
