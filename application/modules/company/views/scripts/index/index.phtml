@@ -14,14 +14,14 @@ function checkLogin(){
 <form id="frmsearch" action="/company/" method="post">
 	<label>Search</label>
 	<select name="ccode_id" id="ccode_id" style="width:125px">
-				<option value="1" <?php if ($this->ccode_id==1) echo "selected";?> >Company Code</option>
-                <option value="2" <?php if ($this->ccode_id==2) echo "selected";?>>Company Name</option>
-			</select>
+        <option value="1" <?php if ($this->ccode_id==1) echo "selected";?> >Company Code</option>
+	   <option value="2" <?php if ($this->ccode_id==2) echo "selected";?>>Company Name</option>
+	</select>
 	<input name="txtSearch" id="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/>
 	<select name="industry_id" style="width:120px">
-            	<option value="0">Please select</option>
-			  <?php echo $this->list_industry; ?>
-			</select>
+	   <option value="0">Please select</option>
+       <?php echo $this->list_industry; ?>
+   </select>
             <input id="btSearch" name="btSearch" type="submit" value="Search" style="margin-right:420px"/>
               <input type="hidden" name="page" id="page" value="1" />
               
@@ -133,31 +133,24 @@ function checkLogin(){
  function getValueListCheckBox(list,id)
 {	
 	if(list!=undefined){
-	var num=list.length;
-	if (num==undefined)
-	{
-		if (list.checked)
-			id.value=list.value;
-		else
-			id.value="";
-	}
-	else
-		{
-			count=0;
-			str="";
-			for (i=0;i<num;i++)
-			{
-				if (list[i].checked)
-					{
-						if (count==0)
-							str=list[i].value;
-						else
-							str = str + ", " + list[i].value;
-						count++;
-					}
-			}
-		id.value=str;
-       }
+    	var num=list.length;
+    	if (num==undefined){
+    		if (list.checked) id.value=list.value;
+    		else id.value="";
+    	} else {
+    		count=0;
+    		str="";
+    		for (i=0;i<num;i++)	{
+    			if (list[i].checked)
+    			{
+    				if (count==0) str=list[i].value;
+    				else str = str + ", " + list[i].value;
+                    
+    				count++;
+    			}
+    		}
+    		id.value=str;
+    	}
 	}
 	//alert(id.value);
 }
