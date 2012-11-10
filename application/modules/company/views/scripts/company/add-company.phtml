@@ -1,6 +1,7 @@
-<form name="frmAddCompany" method="post" action="<?php echo $this->baseUrl; ?>/company/company/add-company">
+
+<form name="frmAddCompany" method="post" action="<?php echo $this->baseUrl; ?>/company/company/add-company" onsubmit="return checkValid()">
 <input type="hidden" name="company_id" id="company_id" value="<?php echo $this->company_id;?>"/>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td><h3><?php echo $this->title_page;?></h3></td>
       </tr>
@@ -8,7 +9,8 @@
         <td height="10"></td>
       </tr>
       <tr>
-        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <td>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="79%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
@@ -138,4 +140,130 @@
           <input type="button" name="cancel" id="cancel" value="Cancel"></td>
       </tr>
     </table>
+  -->
+<div class="from-add-01">
+<ul>
+	<li>
+			<label>&nbsp;</label>
+			<em class="error"><?php if(isset($masage)) echo $masage; ?></em>
+	</li>
+	<li>
+		<label><h2>ADD COMPANY</h2></label>
+	</li>
+	<li>
+		<label> </label>
+		<label>English</label>
+		<label></label>
+		<label>VietNamese</label>
+	</li>
+	<li>
+		<label>Company Full Name:<em>*</em></label>
+		<label><input type="text" name="full_name_en" id="full_name_en" value="<?php  echo $this->full_name_en;?>"></label>
+		<label></label>
+		<label><input type="text" name="full_name_vn" id="full_name_vn" value="<?php  echo $this->full_name_vn;?>"></label>
+	</li>
+	<li>
+		<label>Short Name:<em>*</em></label>
+		<label><input type="text" name="short_name_en" id="short_name_en" value="<?php  echo $this->short_name_en;?>"></label>
+		<label></label>
+		<label><input type="text" name="short_name_vn" id="short_name_vn" value="<?php  echo $this->short_name_vn;?>"></label>
+	</li>
+	<li>
+		<label>Business Type:<em>*</em></label>
+		<label>
+			<select name="busines_type_id" id="busines_type_id">
+				<option value="">Please Select</option>
+				<?php echo $this->list_industry;?>
+			</select>
+		</label>
+	</li>
+	<li>
+		<label>Industry:<em>*</em></label>
+		<label>
+			<select name="industry_id" id="industry_id">
+				<option value="">Please Select</option>
+				<?php echo $this->list_industry;?>
+			</select>
+		</label>
+	</li>
+	<li>
+		<label>Telephone:</label>
+		<input type="text" name="tel" id="tel" value="<?php  echo $this->tel;?>">
+		Ex: 848 38243 780 Ext. 123
+	</li>
+	<li>
+		<label>Fax:</label>
+		<input type="text" name="fax" id="fax" value="<?php  echo $this->tel;?>">
+		Ex: 848 38243 780
+	</li>
+	<li>
+		<label>Email:</label>
+		<label><input type="text" name="email" id="email" value="<?php  echo $this->email;?>"></label>
+	</li>
+	<li>
+		<label>Address:</label>
+		<label>
+			<textarea name="address" rows="2" id="address" style="width:500px"><?php  echo $this->address;?></textarea>
+		</label>
+	</li>
+	<li>
+		<label>Website:</label>
+		<label><input type="text" name="website" id="website" value="<?php  echo $this->website;?>"></label>
+	</li>
+	<li>
+		<label>Company information<br />
+		(for internal reference)
+		</label>
+		<label>
+			<textarea name="contents" rows="6" id="contents" style="width:500px"><?php  echo $this->website;?></textarea>
+		</label>
+	</li>
+	<li>
+		<label>Asigned To:<em>*</em></label>
+		<label>
+			<select name="consultant_id" id="consultant_id" style="width:200px">
+				<option value="">Please Select</option>
+				<?php echo $this->list_consultant;?>
+			</select>
+		</label>
+	</li>
+	<li>
+		 <label></label>
+		 <input type="submit" name="save" id="save" value="Save">&nbsp;&nbsp;&nbsp;
+         <input type="button" name="cancel" id="cancel" value="Cancel">
+	</li>
+</ul>
+</div>
 </form>
+<script>
+function checkValid()
+{
+	var full_name_en = $("#full_name_en").val();
+	var full_name_vn = $("#full_name_vn").val();
+	var short_name_en = $("#short_name_en").val();
+	var short_name_vn = $("#short_name_vn").val();
+	var busines_type_id = $("#busines_type_id").val();
+	var industry_id = $("#industry_id").val();
+    var consultant_id = $("#consultant_id").val();
+    var email = $('#email').val();
+
+    if(full_name_en == '' || full_name_vn == '' || short_name_en == '' || short_name_vn == '' || busines_type_id == '' || industry_id == '' || consultant_id == '') {
+        $('.error').html('Please input into field required (*)');
+        return false;
+    }
+
+    var check = /^([a-zA-Z0-9\_\.\-+])+\@([a-zA-Z0-9\-]+\.)+(a-z){2,4}$/;
+    if(!check.test(email))
+    {
+    	$('.error').html('please enter a valid email address');
+    	return false;
+    }
+   
+    return true;
+}   
+</script>
+
+	
+
+
+
