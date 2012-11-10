@@ -75,11 +75,19 @@ function checkValid()
     var email1 = $("#email1").val();
     var mobile1 = $("#mobile1").val();
     var address = $("#address").val();
-    
+    var email = $("#email1").val();
+
     if(fullname == '' || birthday == '' || email1 == '' || mobile1 == '' || address == '') {
         $('.error').html('Please input into field required (*)');
         return false;
     }
+
+    var check = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    if(!check.test(email))
+    {
+    	$('.error').html('please enter a valid email address');
+    	return false;
+    } 
     return true;
 }   
 </script>
