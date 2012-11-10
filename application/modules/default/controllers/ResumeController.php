@@ -9,7 +9,6 @@ class ResumeController extends Zend_Controller_Action
 
 		/* Initialize action controller here */
 		$view = new Zend_View();
-		$view->headScript()->appendFile ( '/js/jquery-1.8.0.min.js' );
 		$view->headLink()->appendStylesheet ( '/js/themes/base/jquery.ui.all.css' );
 		$view->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );
 		$view->headScript()->appendFile ( '/js/jquery.ui.core.js' );
