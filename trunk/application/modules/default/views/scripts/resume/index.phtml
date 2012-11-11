@@ -1,16 +1,6 @@
 <!-- Add fancyBox main JS and CSS files -->
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<script>
-function checkLogin(){
-    $.ajax({
-        url: '/resume/check-login',
-        success: function(result){
-            if(!result) document.location.href = '/user/login';
-        }
-   });
-}
-</script>
 <form id="frmresume" action="/resume" method="post">
 <div class="block-search">
 	<label>Search</label>

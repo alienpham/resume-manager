@@ -5,6 +5,16 @@
 <title>Grey Finders | Resume Management System (RMS)</title>
 <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/stylesheet.css')?>" />
 <script type="text/javascript" src="<?php echo $this->baseUrl('js/jquery-1.8.0.min.js')?>"></script>
+<script>
+function checkLogin(){
+   $.ajax({
+        url: '/resume/check-login',
+        success: function(result){
+            if(!result) document.location.href = '/user/login';
+        }
+   });
+}
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -12,13 +22,16 @@
 		<h1>GREY FINDERS</h1>
 	</div>
 	<div class="header clearfix">
-	<?php $moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();  ?>
+	<?php 
+		$moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();  
+		$controllerName = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();  
+	?>
 		<ul class="main-menu">
-			<li <?php echo ($moduleName == 'default')? 'class="active"': '' ?>><a href="/resume">Resume</a></li>
+			<li <?php echo ($moduleName == 'default' && $controllerName != 'profile')? 'class="active"': '' ?>><a href="/resume">Resume</a></li>
 			<li <?php echo ($moduleName == 'company')? 'class="active"': '' ?>><a href="/company">Company</a></li>
 			<li <?php echo ($moduleName == 'vacancy')? 'class="active"': '' ?>><a href="/vacancy">Vacancy</a></li>
 			<?php if($this->isAdmin):?>
-			<li <?php echo ($moduleName == 'profile')? 'class="active"': '' ?>><a href="/user-management.html">User Management</a></li>
+			<li <?php echo ($controllerName == 'profile')? 'class="active"': '' ?>><a href="/profile">User Management</a></li>
 			<?php endif;?>
 		</ul>
 		<div class="user-login">
