@@ -7,14 +7,10 @@ class Company_Model_ContactPerson
 	protected $_full_name;
 	
 	protected $_job_title;
-	protected $_tel_1;
-	protected $_tel_2;
+	protected $_tel;
 	protected $_fax;
-	
-	protected $_mobile_1;
-	protected $_mobile_2;
-	protected $_email_1;
-	protected $_email_2;
+	protected $_mobile;
+	protected $_email;
 	protected $_address;
     
 	public function __construct(array $options = null)
@@ -89,20 +85,12 @@ class Company_Model_ContactPerson
 		$this->_job_title = $job_title;
 	}
 	
-	public function getTel1() {
-		return $this->_tel_1;
+	public function getTel() {
+		return $this->_tel;
 	}
-	public function setTel1($tel_1) {
-		$this->_tel_1 = $tel_1;
+	public function setTel($tel) {
+		$this->_tel = $tel;
 	}
-	
-	public function getTel2() {
-		return $this->_tel_2;
-	}
-	public function setTel2($tel_2) {
-		$this->_tel_2 = $tel_2;
-	}
-	
 	public function getFax() {
 		return $this->_fax;
 	}
@@ -110,34 +98,19 @@ class Company_Model_ContactPerson
 		$this->_fax = $fax;
 	}
 	
-	public function getMobile1() {
-		return $this->_mobile_1;
+	public function getMobile() {
+		return $this->_mobile;
 	}
-	public function setMobile1($mobile_1) {
-		$this->_mobile_1 = $mobile_1;
-	}
-	
-	public function getMobile2() {
-		return $this->_mobile_2;
-	}
-	public function setMobile2($mobile_2) {
-		$this->_mobile_2 = $mobile_2;
+	public function setMobile($mobile) {
+		$this->_mobile = $mobile;
 	}
 	
-	public function getEmail1() {
-		return $this->_email_1;
+	public function getEmail() {
+		return $this->_email;
 	}
-	public function setEmail1($email_1) {
-		$this->_email_1 = $email_1;
+	public function setEmail($email) {
+		$this->_email = $email;
 	}
-	
-	public function getEmail2() {
-		return $this->_email_2;
-	}
-	public function setEmail2($email_2) {
-		$this->_email_2 = $email_2;
-	}
-	
 	public function getAddress() {
 		return $this->_address;
 	}

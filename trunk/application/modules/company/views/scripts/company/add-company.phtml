@@ -229,8 +229,8 @@
 	</li>
 	<li>
 		 <label></label>
-		 <input type="submit" name="save" id="save" value="Save">&nbsp;&nbsp;&nbsp;
-         <input type="button" name="cancel" id="cancel" value="Cancel">
+		 <input class="button01" type="submit" name="save" id="save" value="Save">&nbsp;&nbsp;&nbsp;
+         <input class="button02" type="button" name="cancel" id="cancel" value="Cancel">
 	</li>
 </ul>
 </div>
@@ -252,7 +252,7 @@ function checkValid()
         return false;
     }
 
-    var check = /^([a-zA-Z0-9\_\.\-+])+\@([a-zA-Z0-9\-]+\.)+(a-z){2,4}$/;
+    var check = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     if(!check.test(email))
     {
     	$('.error').html('please enter a valid email address');
