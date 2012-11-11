@@ -6,3 +6,6 @@ ALTER TABLE `consultant`
 	
 ALTER TABLE `consultant`
 	ADD COLUMN `is_admin` TINYINT(1) UNSIGNED NULL DEFAULT '0' AFTER `username`;
+	
+	
+ALTER TABLE `res_expectation` ADD `note` TEXT NULL 
