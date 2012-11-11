@@ -1,6 +1,6 @@
 <?php
-//$contact= new Company_Model_ContactPersonMapper();
-//$listContact = $contact->getListContact ("company_id='".$this->company_id."'", "full_name ASC")
+$contact= new Company_Model_ContactPersonMapper();
+$listContact = $contact->getListContact ("company_id='".$this->company_id."'", "full_name ASC")
 ?>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -25,8 +25,7 @@
             <?php 
 			$num=1;
 			foreach($listContact as $rs){
-				
-				?>
+            ?>
               <tr>
                 <td valign="top" class="a-center"><?php echo $num;?></td>
                 <td valign="top" class="a-left"><strong><?php echo $rs['full_name'];?> (<?php echo $rs['title'];?>)</strong><br />
@@ -47,6 +46,6 @@
           <td height="10"></td>
         </tr>
         <tr>
-          <td align="center"><input type="submit" name="button3" id="button3" value="Close" onClick="window.location='/company'"/></td>
+          <td align="center"><input type="submit" name="close" class="button02" value="Close" onclick="event.preventDefault(); parent.$.fancybox.close();"/></td>
         </tr>
     </table>
