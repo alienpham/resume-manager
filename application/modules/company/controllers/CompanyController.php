@@ -139,13 +139,10 @@ class Company_CompanyController extends Zend_Controller_Action
 			$rscontact->setTitle($post['title']);
 			$rscontact->setFullName($post['full_name']);
 			$rscontact->setJobTitle($post['job_title']);
-			$rscontact->setTel1($post['tel_1']);
-			$rscontact->setTel2($post['tel_2']);
+			$rscontact->setTel($post['tel']);
 			$rscontact->setFax($post['fax']);
-			$rscontact->setMobile1($post['mobile_1']);
-			$rscontact->setMobile2($post['mobile_2']);
-			$rscontact->setEmail1($post['email_1']);
-			$rscontact->setEmail2($post['email_2']);
+			$rscontact->setMobile($post['mobile']);
+			$rscontact->setEmail($post['email']);
 			$rscontact->setAddress($post['address']);
 			$contactid=$contact->save ($rscontact);
 			if (isset($post['btAddmore']))
@@ -162,7 +159,7 @@ class Company_CompanyController extends Zend_Controller_Action
 		$this->view->contact_person_id = $contact_person_id;
 
 		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
-		$this->view->title = isset($contactinfo[0]['title'])?$contactinfo[0]['title']:"";
+/*		$this->view->title = isset($contactinfo[0]['title'])?$contactinfo[0]['title']:"";
 		$this->view->full_name = isset($contactinfo[0]['full_name'])?$contactinfo[0]['full_name']:"";
 		$this->view->job_title = isset($contactinfo[0]['job_title'])?$contactinfo[0]['job_title']:"";
 		$this->view->tel_1 = isset($contactinfo[0]['tel_1'])?$contactinfo[0]['tel_1']:"";
@@ -172,6 +169,8 @@ class Company_CompanyController extends Zend_Controller_Action
 		$this->view->mobile_2 = isset($contactinfo[0]['mobile_2'])?$contactinfo[0]['mobile_2']:"";
 		$this->view->email_1 = isset($contactinfo[0]['email_1'])?$contactinfo[0]['email_1']:"";
 		$this->view->email_2 = isset($contactinfo[0]['email_2'])?$contactinfo[0]['email_2']:"";
+		*/
+		$this->view->contactinfo = @$contactinfo[0];
 	}
 
 	public function viewCompanyAction()

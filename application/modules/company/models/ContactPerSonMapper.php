@@ -31,13 +31,10 @@ class Company_Model_ContactPersonMapper {
 			'title' 		=> $contactperson->getTitle(), 
 			'full_name' 	=> $contactperson->getFullName(),
         	'job_title' 	=> $contactperson->getJobTitle(), 
-			'tel_1' 		=> $contactperson->getTel1(), 
-			'tel_2' 		=> $contactperson->getTel2(),
+			'tel' 			=> $contactperson->getTel(),
         	'fax' 			=> $contactperson->getFax(), 
-			'mobile_1' 		=> $contactperson->getMobile1(), 
-			'mobile_2' 		=> $contactperson->getMobile2(),
-        	'email_1' 		=> $contactperson->getEmail1(), 
-			'email_2' 		=> $contactperson->getEmail2(), 
+			'mobile' 		=> $contactperson->getMobile(),
+			'email' 		=> $contactperson->getEmail(), 
 			'address' 		=> $contactperson->getAddress(),
 		);
 		
