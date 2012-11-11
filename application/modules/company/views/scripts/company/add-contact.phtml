@@ -1,4 +1,4 @@
-<form name="frmAddContact" method="post" action="">
+<form name="frmAddContact" method="post" action="" onsubmit="return checkValid()">
 <input type="hidden" name="company_id"  id="company_id" value="<?php echo $this->company_id; ?>"/>
 <input type="hidden" name="contact_person_id"  id="contact_person_id" value="<?php echo $this->contact_person_id; ?>"/>
 <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -170,8 +170,8 @@
 	<li>
 		<label></label>
 		<input class="button02" type="button" name="btCancel" id="btCancel" value="Cancel" onclick="window.location='/company'"><?php if($this->contact_person_id==""){?> &nbsp;&nbsp;&nbsp;
-		<input class="button01" type="submit" name="btAddmore" id="btAddmore" value="Save &amp; Add More" onclick="return checkValid()" ><?php }?> &nbsp;&nbsp;&nbsp;
-		<input class="button02" type="submit" name="btSave" id="btSave" value="Save" onclick="return checkValid()">
+		<input class="button01" type="submit" name="btAddmore" id="btAddmore" value="Save &amp; Add More" ><?php }?> &nbsp;&nbsp;&nbsp;
+		<input class="button02" type="submit" name="btSave" id="btSave" value="Save">
 	</li>
 </ul>
 </div>
@@ -182,7 +182,7 @@ function checkValid()
 	var full_name = $("#full_name").val();
 	var job_title = $("job_title").val();
     var email = $('#email').val();
-    alert(asad);return false;
+   
     if(full_name == '' ||  job_title == ''){
         $('.error').html('Please input into field required (*)');
         return false;
