@@ -1,6 +1,7 @@
+
 <div class="from-add-01">
 <h2>ADD USER</h2>
-	<form name="" action="" onsubmit="return checkValid()">
+	<form name="frmuser" action="/profile/save-user" method="post" onsubmit="return checkValid()">
 		<ul>
 			<li>
 			<label>&nbsp;</label>
@@ -8,33 +9,37 @@
 			</li>
 			<li>
 				<label>Full Name:<em>*</em></label>
-				<select style="width: 60px;" name="">
-					<option value="Mr">Mr.</option>
-					<option value="Mrs">Mrs.</option>
-					<option value="Ms">Ms.</option>
+				<select style="width: 60px;" name="title">
+					<option value="Mr.">Mr.</option>
+					<option value="Mrs.">Mrs.</option>
+					<option value="Ms.">Ms.</option>
 				</select>
-				<input id="full_name" type="text" name="full_name" value="<?php echo $this->full_name; ?>" style="width : 185px;">
+				<input id="full_name" type="text" name="full_name" value="<?php if(isset($_POST['full_name'])) echo $_POST['full_name']; ?>" style="width : 185px;">
 			</li>
 			<li>
-				<label>Job title:<em>*</em></label>
-				<input id="job_title" type="text" name="job_title" value="<?php echo $this->job_title; ?>">
+				<label>Job title:</label>
+				<input id="job_title" type="text" name="job_title" value="<?php if(isset($_POST['job_title'])) echo $_POST['job_title']; ?>">
 			</li>
 			<li>
 				<label>Tel:</label>
-				<input type="text" id="tel" name="tel" value="<?php echo $this->tel; ?>">
+				<input type="text" id="tel" name="tel" value="<?php if(isset($_POST['tel'])) echo $_POST['tel']; ?>">
 			</li>
 			<li>
 				<label>Username:<em>*</em></label>
-				<input type="text" id="username" name="username" value="<?php echo $this->username; ?>">
+				<input type="text" id="username" name="username" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>">
 			</li>
 			<li>
-				<label>Passwork:<em>*</em></label>
-				<input type="text" id="" name="" value="">
+				<label>Password:<em>*</em></label>
+				<input type="password" id="password" name="password">
+			</li>
+			<li>
+				<label>Email:</label>
+				<input type="text" id="email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>">
 			</li>
 			<li>
 				<label></label>
-				<input class="button01" type="submit" id="" name="" value="Add user"> &nbsp;&nbsp;&nbsp;&nbsp;
-				<input class="button02" type="submit" id="" name="" value="Cancel">
+				<input class="button01" type="submit" id="" name="add" value="Add user"> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/profile" style="text-decoration:none;"><input class="button02" type="button"  value="Cancel"></a>
 			</li>
 		</ul>
 	</form>
@@ -44,9 +49,9 @@
 	{
 		var full_name = $("#full_name").val();
 		var username = $("#username").val();
-		var passwork = $("#passwork").val();
+		var passwork = $("#password").val();
 
-		if(full_name == '' || username == '' || passwork == '')
+		if(full_name == '' || username == '' || password == '')
 		{
 			$(".error").html('Please input into field required (*)');
 			return false;

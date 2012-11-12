@@ -34,6 +34,17 @@ class ProfileController extends Zend_Controller_Action {
 	
 	public function addUserAction()
 	{
+
+	}
 	
+	public function saveUserAction() 
+	{
+		$data = $this->getRequest()->getPost();
+
+		
+		$user = new Default_Model_User();
+		$user->saveUser($data);
+		
+		$this->_redirect('/profile');		
 	}
 }

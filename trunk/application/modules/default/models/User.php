@@ -33,5 +33,27 @@ class Default_Model_User {
         $sql = "SELECT username FROM consultant WHERE consultant_id = " . $id;
         return $db->fetchRow($sql);
     }
+    
+ 	public function saveUser ($data)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        //print_r($data);
+        
+        $sql = "INSERT INTO consultant (`title`, `full_name`, `job_title`, `phone`, `username`, `email`, `password`, `created_date`, `updated_date`) VALUES (";
+		$sql .= "'" .$data['title'] . "',";
+		$sql .= "'" .$data['full_name'] . "',";
+		$sql .= "'" .$data['job_title'] . "',";
+		$sql .= "'" .$data['tel'] . "',";
+		$sql .= "'" .$data['username'] . "',";
+		$sql .= "'" .$data['email'] . "',";
+		$sql .= "'" .md5($data['password']) . "',";
+		$sql .= "now(),";
+		$sql .= "now()";	
+        $sql .= ")";
+        
+        //echo $sql;exit;
+        
+        return $db->query($sql);
+    }
 }
 ?>
