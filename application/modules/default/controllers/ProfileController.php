@@ -31,4 +31,9 @@ class ProfileController extends Zend_Controller_Action {
 
 		$this->view->rows = $rows;
 	}
+	
+	public function addUserAction()
+	{
+	
+	}
 }
