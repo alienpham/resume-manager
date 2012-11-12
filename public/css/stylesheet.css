@@ -98,6 +98,7 @@ a:hover{text-decoration:underline; }
 }
 .content select,
 .content input[type="text"],
+.content input[type="password"],
 .footer select,
 .footer .pages a,
 textarea,
@@ -111,6 +112,7 @@ textarea,
 	width:130px;
 }
 .content input[type="text"],
+.content input[type="password"],
 .form-login input[type="text"],
 .form-login input[type="password"]
 {
@@ -316,6 +318,7 @@ textarea,
 	color:#e60000;	
 }
 .content .from-add-01 ul li input[type="text"],
+.content .from-add-01 ul li input[type="password"],
 #adv-search ul li input[type="text"],
 .form-login ul li input[type="text"],
 .form-login ul li input[type="password"]
