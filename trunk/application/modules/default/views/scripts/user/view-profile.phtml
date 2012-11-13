@@ -1,10 +1,64 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-</head>
-<body>
-	<div></div>
-</body>
-</html>
+<div class="from-add-01" style="width : 400px; float : left;">
+
+<h2><?php echo $this->page_title; ?></h2>
+<ul>
+	<li>
+		<label>Full Name:</label>
+		<label><?php echo $this->userInfo['full_name']; ?></label>
+	</li>
+	<li>
+		<label>Job Title:</label>
+		<label><?php echo $this->userInfo['job_title']; ?></label>
+	</li>
+	<li>
+		<label>UserName:</label>
+		<label><?php echo $this->userInfo['username']; ?></label>
+		
+	</li>
+	<li>
+		<label>Phone</label>
+		<label><?php echo $this->userInfo['phone']; ?></label>
+	</li>
+	<li>
+		<label>Email:</label>
+		<label><?php echo $this->userInfo['email']; ?></label>
+		
+	</li>
+</ul>
+<div align="center">
+		<a href="/user"><input type="button" id="cancel" value="cancel" class="button02"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" id="edit" value="Edit" class="button01"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" id="change_password" value="Change Password" class="button01">
+</div>
+<div id="text" style="float : left; width : 500px; display : none;">
+	<ul>
+		<li>
+			<label>Full Name:</label>
+			<input type="text" id="full_name" name="full_name" value="<?php echo $this->userInfo['full_name']; ?>">
+		</li>
+		<li>
+			<label>Job Title:</label>
+			<input type="text" id="job_title" name="job_title" value="<?php echo $this->userInfo['job_title']; ?>">
+		</li>
+		<li>
+			<label>Username:</label>
+			<input type="text" id="username" name="username" value="<?php echo $this->userInfo['username']; ?>">
+		</li>
+		<li>
+			<label>Phone:</label>
+			<input type="text" id="tel" name="tel" value="<?php echo $this->userInfo['phone']; ?>">
+		</li>
+		<li>
+			<label>Email:</label>
+			<input type="text" id="email" name="email" value="<?php echo $this->userInfo['email']; ?>">
+		</li>
+ 	</ul>
+</div>
+</div>
+<script>
+	$(document).ready(function{
+	$('#cancel').click(function{
+		$('#text').show(3000);
+		});
+	});
+</script>

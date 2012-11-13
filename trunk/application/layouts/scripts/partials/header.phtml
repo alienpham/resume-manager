@@ -24,18 +24,19 @@ function checkLogin(){
 	<div class="header clearfix">
 	<?php 
 		$moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();  
-		$controllerName = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();  
+		$controllerName = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+		$sess = new Zend_Session_Namespace ( 'zs_User' );  
 	?>
 		<ul class="main-menu">
 			<li <?php echo ($moduleName == 'default' && $controllerName != 'profile')? 'class="active"': '' ?>><a href="/resume">Resume</a></li>
 			<li <?php echo ($moduleName == 'company')? 'class="active"': '' ?>><a href="/company">Company</a></li>
 			<li <?php echo ($moduleName == 'vacancy')? 'class="active"': '' ?>><a href="/vacancy">Vacancy</a></li>
-			<?php if($this->isAdmin):?>
+			<?php if($sess->isAdmin):?>
 			<li <?php echo ($controllerName == 'profile')? 'class="active"': '' ?>><a href="/profile">User Management</a></li>
 			<?php endif;?>
 		</ul>
 		<div class="user-login">
-			<p>Welcome <a href="/profile/view-profile"><?php echo trim($this->fullname)?></a></p>|  <a href="/user/logout"><strong>Logout</strong></a>
+			<p>Welcome <a href="/user/view-profile/id/<?php echo $sess->consultant_id; ?>"><?php echo trim($sess->fullname)?></a></p>|  <a href="/user/logout"><strong>Logout</strong></a>
 		</div>
 	</div>
 	<div class="content clearfix">
