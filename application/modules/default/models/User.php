@@ -83,6 +83,13 @@ class Default_Model_User {
     	$user = new Default_Model_User();
     	$db = $this->getDbTable()->getAdapter();
     	
+    	if($id != '')
+    	{
+    		$userInfo = $user->getUser($id);
+    		$this->view->page_title = "USER INFO";
+			$this->view->userInfo = $userInfo;	
+    	}
+    	
     }
 }
 ?>

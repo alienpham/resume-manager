@@ -56,5 +56,19 @@ class UserController extends Zend_Controller_Action
 
 		$this->_redirect('/user');
 	}
+	
+ 	public function viewProfileAction()
+    {
+		$id = $this-> _getParam('id',"");
+    	$user = new Default_Model_User();
+    	    	
+    	if($id != '')
+    	{
+    		$userInfo = $user->getUser($id);
+    		$this->view->page_title = "USER INFO";
+			$this->view->userInfo = $userInfo;	
+    	}
+    	
+    }
 }
 
