@@ -76,20 +76,6 @@ class Default_Model_User {
 	    return $result;	
     }
     
-    public function viewProfileAction()
-    {
-    	$data = $this->getRequest()->getPost();
-		$id = $this-> _getParam('id',"");
-    	$user = new Default_Model_User();
-    	$db = $this->getDbTable()->getAdapter();
-    	
-    	if($id != '')
-    	{
-    		$userInfo = $user->getUser($id);
-    		$this->view->page_title = "USER INFO";
-			$this->view->userInfo = $userInfo;	
-    	}
-    	
-    }
+   
 }
 ?>
