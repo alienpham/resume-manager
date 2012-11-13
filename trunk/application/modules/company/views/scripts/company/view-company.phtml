@@ -58,8 +58,8 @@ $listContact = $contact->getListContact ("company_id='".$this->company_id."'", "
 	</tr>
 </table> -->
 <div style="height :50px;color : #848484; ">
-<h2><?php echo $this->company_code; ?> - <?php echo $this->company_name; ?></h2>
-<?php if(isset($listContact['address'])) echo $listContact['address']; ?>
+<h2><?php echo $this->company_code; ?> - <?php echo $this->company_name; ?>
+Address :<?php if($rs['address']) echo $rs['address']; ?></h2>
 </div>
 <div class="list-company clearfix">
 	<div class="head">
