@@ -50,9 +50,7 @@ class Default_Model_User {
 		$sql .= "now(),";
 		$sql .= "now()";	
         $sql .= ")";
-        
-        //echo $sql;exit;
-        
+  
         return $db->query($sql);
     }
 }
