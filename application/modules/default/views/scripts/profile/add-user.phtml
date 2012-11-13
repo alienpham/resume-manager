@@ -1,7 +1,9 @@
 
 <div class="from-add-01">
-<h2>ADD USER</h2>
+<h2><?php  echo $this->page_title; ?></h2>
+
 	<form name="frmuser" action="/profile/save-user" method="post" onsubmit="return checkValid()">
+	<input type="hidden" name="consultant_id" value="<?php echo $this->userInfo['consultant_id']; ?>">
 		<ul>
 			<li>
 			<label>&nbsp;</label>
@@ -14,27 +16,29 @@
 					<option value="Mrs.">Mrs.</option>
 					<option value="Ms.">Ms.</option>
 				</select>
-				<input id="full_name" type="text" name="full_name" value="<?php echo $this->full_name; ?>" style="width : 185px;">
+				<input id="full_name" type="text" name="full_name" value="<?php echo $this->userInfo['full_name']; ?>" style="width : 185px;">
 			</li>
 			<li>
 				<label>Job title:</label>
-				<input id="job_title" type="text" name="job_title" value="<?php echo $this->job_title; ?>">
+				<input id="job_title" type="text" name="job_title" value="<?php echo $this->userInfo['job_title']; ?>">
 			</li>
 			<li>
 				<label>Tel:</label>
-				<input type="text" id="tel" name="tel" value="<?php echo $this->tel; ?>">
+				<input type="text" id="tel" name="tel" value="<?php echo $this->userInfo['phone']; ?>">
 			</li>
 			<li>
 				<label>Username:<em>*</em></label>
-				<input type="text" id="username" name="username" value="<?php echo $this->username; ?>">
+				<input type="text" id="username" name="username" value="<?php echo $this->userInfo['username']; ?>">
 			</li>
+			<?php if(!isset($this->userInfo['password'])) { ?>
 			<li>
 				<label>Password:<em>*</em></label>
 				<input type="password" id="password" name="password">
 			</li>
+			<?php } ?>
 			<li>
 				<label>Email:</label>
-				<input type="text" id="email" name="email" value="<?php $this->email; ?>">
+				<input type="text" id="email" name="email" value="<?php echo $this->userInfo['email']; ?>">
 			</li>
 			<li>
 				<label></label>
