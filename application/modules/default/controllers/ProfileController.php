@@ -34,7 +34,23 @@ class ProfileController extends Zend_Controller_Action {
 	
 	public function addUserAction()
 	{
-
+		$data = $this->getRequest()->getPost();
+		$user_id = $this-> _getParam('user_id',"");
+		$user = new Default_Model_User();
+		
+		if($user_id !="")
+		{
+			$this->view->title_page = "EDIT USER";
+			$this->view->full_name =  $data['full_name'];
+			$this->view->job_title = $data['title'];
+			$this->view->tel = $data['tel'];
+			$this->view->username = $data['username'];
+			$this->view->email = $data['email'];
+		}
+		else
+		{
+		
+		}
 	}
 	
 	public function saveUserAction() 

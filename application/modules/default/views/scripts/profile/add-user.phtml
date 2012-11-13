@@ -14,19 +14,19 @@
 					<option value="Mrs.">Mrs.</option>
 					<option value="Ms.">Ms.</option>
 				</select>
-				<input id="full_name" type="text" name="full_name" value="<?php if(isset($_POST['full_name'])) echo $_POST['full_name']; ?>" style="width : 185px;">
+				<input id="full_name" type="text" name="full_name" value="<?php echo $this->full_name; ?>" style="width : 185px;">
 			</li>
 			<li>
 				<label>Job title:</label>
-				<input id="job_title" type="text" name="job_title" value="<?php if(isset($_POST['job_title'])) echo $_POST['job_title']; ?>">
+				<input id="job_title" type="text" name="job_title" value="<?php echo $this->job_title; ?>">
 			</li>
 			<li>
 				<label>Tel:</label>
-				<input type="text" id="tel" name="tel" value="<?php if(isset($_POST['tel'])) echo $_POST['tel']; ?>">
+				<input type="text" id="tel" name="tel" value="<?php echo $this->tel; ?>">
 			</li>
 			<li>
 				<label>Username:<em>*</em></label>
-				<input type="text" id="username" name="username" value="<?php if(isset($_POST['username'])) echo $_POST['username']; ?>">
+				<input type="text" id="username" name="username" value="<?php echo $this->username; ?>">
 			</li>
 			<li>
 				<label>Password:<em>*</em></label>
@@ -34,7 +34,7 @@
 			</li>
 			<li>
 				<label>Email:</label>
-				<input type="text" id="email" name="email" value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>">
+				<input type="text" id="email" name="email" value="<?php $this->email; ?>">
 			</li>
 			<li>
 				<label></label>
