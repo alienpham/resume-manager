@@ -1,80 +1,103 @@
 <?php
 $contact= new Company_Model_ContactPersonMapper();
-$listContact = $contact->getListContact ("company_id='".$this->company_id."'", "full_name ASC")
+$listContact = $contact->getListContact ("company_id='".$this->company_id."'", "full_name ASC");
 ?>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td><h3><?php echo $this->company_code; ?> - <?php echo $this->company_name; ?></h3></td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td><table width="100%" class="datagrid" border="1">
-            <thead>
-              <tr>
-                <th width="27" class="a-center">No.</th>
-                <th width="300" class="a-left">Contact Person</th>
-                <th width="303" class="a-left">Contact Info</th>
-                <th width="320" class="a-left">Office Address</th>
-                <th width="320" class="a-left">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-            <?php 
-			$num=1;
+<!--<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+		<h3><?php echo $this->company_code; ?> - <?php echo $this->company_name; ?></h3>
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+		<table width="100%" class="datagrid" border="1">
+			<thead>
+				<tr>
+					<th width="27" class="a-center">No.</th>
+					<th width="300" class="a-left">Contact Person</th>
+					<th width="303" class="a-left">Contact Info</th>
+					<th width="320" class="a-left">Office Address</th>
+					<th width="320" class="a-left">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+            <?php
+            $num=1;
 			foreach($listContact as $rs){
             ?>
               <tr>
-                <td valign="top" class="a-center"><?php echo $num;?></td>
-                <td valign="top" class="a-left">
-                	<strong>(<?php echo $rs['title'];?>)<?php echo $rs['full_name'];?> </strong><br />
-                  	<strong><?php echo $rs['job_title'];?></strong>
-</td>
-                <td valign="top" class="a-left"><strong>[Tel]:</strong> <?php if ($rs['tel']!="") echo $rs['tel']; ?><br />
-                  <strong>[Fax]:</strong> <?php echo $rs['fax']; ?><br />
-                  <strong>[Mobile]:</strong> <?php if ($rs['mobile']!="") echo $rs['mobile']; ?><br />
-                  <strong>[Email]:</strong> <?php if ($rs['email']!="") echo $rs['email']; ?><br /></td>
-                <td valign="top" class="a-left"><?php echo $rs['address']?></td>
-                <td valign="top" class="a-left"><a href="/company/company/add-contact/company_id/<?php echo $rs['company_id'];?>/contact_person_id/<?php echo $rs['contact_person_id'];?>">Edit Contact</a></td>
-              </tr>
+					<td valign="top" class="a-center"><?php echo $num;?></td>
+					<td valign="top" class="a-left"><strong>(<?php echo $rs['title'];?>)<?php echo $rs['full_name'];?> </strong><br />
+					<strong><?php echo $rs['job_title'];?></strong></td>
+					<td valign="top" class="a-left"><strong>[Tel]:</strong> <?php if ($rs['tel']!="") echo $rs['tel']; ?><br />
+					<strong>[Fax]:</strong> <?php echo $rs['fax']; ?><br />
+					<strong>[Mobile]:</strong> <?php if ($rs['mobile']!="") echo $rs['mobile']; ?><br />
+					<strong>[Email]:</strong> <?php if ($rs['email']!="") echo $rs['email']; ?><br />
+					</td>
+					<td valign="top" class="a-left"><?php echo $rs['address']?></td>
+					<td valign="top" class="a-left"><a
+						href="/company/company/add-contact/company_id/<?php echo $rs['company_id'];?>/contact_person_id/<?php echo $rs['contact_person_id'];?>">Edit
+					Contact</a></td>
+				</tr>
               <?php $num++; }?>
             </tbody>
-          </table></td>
-        </tr>
-        <tr>
-          <td height="10"></td>
-        </tr>
-        <tr>
-          <td align="center"><input type="submit" name="close" class="button02" value="Close" onclick="event.preventDefault(); parent.$.fancybox.close();"/></td>
-        </tr>
-    </table>
-
-    <table>
-    	<tr>
-    		<td>STT</td>
-    		<td>Full Name</td>
-    		<td>Job Title</td>
-    		<td>Tel</td>
-    		<td>Fax</td>
-    		<td>Mobile</td>
-    		<td>Email</td>
-    		<td>Edit contact</td>
-    	</tr>
-    <?php 
-			$num=1;
-			foreach($listContact as $rs){
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td height="10"></td>
+	</tr>
+	<tr>
+		<td align="center"><input type="submit" name="close" class="button02"
+			value="Close"
+			onclick="event.preventDefault(); parent.$.fancybox.close();" /></td>
+	</tr>
+</table> -->
+<div style="height :50px;color : #848484; ">
+<h2><?php echo $this->company_code; ?> - <?php echo $this->company_name; ?></h2>
+<?php if(isset($listContact['address'])) echo $listContact['address']; ?>
+</div>
+<div class="list-company clearfix">
+	<div class="head">
+		<div class="status">
+			<h4>STT</h4>
+		</div>
+		<div class="name" style="width:145px;">
+			<h4>Full Name</h4>
+		</div>
+		<div class="name">
+			<h4>Job Title</h4>
+		</div>
+		<div class="name" style="width : 80px;">
+			<h4>Tel</h4>
+		</div>
+		<div class="name" style="width : 195px;">
+			<h4>Email</h4>
+		</div>
+		<div class="name" style="width : 50px;">
+			<h4>Edit</h4>
+		</div>
+	</div>
+	
+	<?php
+    $num=1;
+	foreach($listContact as $rs){
     ?>
-    	<tr>
-    		<td><?php echo $num; ?></td>
-    		<td><?php echo $rs['title']; echo $rs['full_name'];?></td>
-    		<td><?php echo $rs['job_title'];?></label>
-    		<td><?php if ($rs['tel']!="") echo $rs['tel']; ?></td>
-    		<td><?php echo $rs['fax']; ?></label>
-    		<td><?php if ($rs['mobile']!="") echo $rs['mobile']; ?></td>
-    		<td><?php if ($rs['email']!="") echo $rs['email']; ?></td>
-    		<td><a href="/company/company/add-contact/company_id/<?php echo $rs['company_id'];?>/contact_person_id/<?php echo $rs['contact_person_id'];?>">Edit</a></label>
-    	</tr>
-     <?php $num++; }?>
-     </ul>
+    <div class="status"><?php echo $num; ?></div>
+    <div class="name" style="width:145px;"><?php echo $rs['full_name'];?></div>
+    <div class="name"><?php echo $rs['job_title'];?></div>
+    <div class="name" style="width : 80px;"><?php echo $rs['tel']; ?></div>
+    <div class="name" style="width : 195px;"><?php echo $rs['email']; ?></div>
+    <div class="name" style="width : 50px;"><a href="/company/company/add-contact/company_id/<?php echo $rs['company_id'];?>/contact_person_id/<?php echo $rs['contact_person_id'];?>">Edit</a></div>
+    <?php $num++; }?>
+</div>
+<div align="center">
+	<input type="submit" name="close" class="button02"
+			value="Close"
+			onclick="event.preventDefault(); parent.$.fancybox.close();" />
+</div>
+
