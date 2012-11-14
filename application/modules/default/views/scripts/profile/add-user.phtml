@@ -26,16 +26,15 @@
 				<label>Tel:</label>
 				<input type="text" id="tel" name="tel" value="<?php echo $this->userInfo['phone']; ?>">
 			</li>
+			<?php if(!isset($this->userInfo['password'])) { ?>
 			<li>
 				<label>Username:<em>*</em></label>
 				<input type="text" id="username" name="username" value="<?php echo $this->userInfo['username']; ?>">
 			</li>
-			<?php if(!isset($this->userInfo['password'])) { ?>
 			<li>
 				<label>Password:<em>*</em></label>
 				<input type="password" id="password" name="password">
 			</li>
-			<?php } ?>
 			<li>
 				<label>Email:</label>
 				<input type="text" id="email" name="email" value="<?php echo $this->userInfo['email']; ?>">
@@ -43,6 +42,10 @@
 			<li>
 				<label></label>
 				<input class="button01" type="submit" id="" name="add" value="Add user"> &nbsp;&nbsp;&nbsp;&nbsp;
+				<?php } ?>
+			<li>
+				<label></label>
+				<input class="button01" type="submit" name="edit" value="Edit"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="/profile" style="text-decoration:none;"><input class="button02" type="button"  value="Cancel"></a>
 			</li>
 		</ul>
@@ -58,7 +61,7 @@
 		
 		if(full_name == '' || username == '' || password == '')
 		{
-			$(".error").html('Please input into field required (*)');
+			$('.error').html('Please input into field required (*)');
 			return false;
 		} 
 

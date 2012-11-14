@@ -54,9 +54,10 @@ class ProfileController extends Zend_Controller_Action {
 	{
 		$data = $this->getRequest()->getPost();
 
-		
+		$id = $this-> _getParam('id',"");
+		 print_r($id); exit;
 		$user = new Default_Model_User();
-		$user->saveUser($data);
+		$result = $user->saveUser($data, $id);
 		
 		$this->_redirect('/profile');		
 	}
