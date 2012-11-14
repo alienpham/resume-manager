@@ -34,11 +34,11 @@ class Default_Model_User {
         return $db->fetchRow($sql);
     }
     
- 	public function saveUser ($data)
+ 	public function saveUser ($data, $id)
     {
         $db = $this->getDbTable()->getAdapter();
         //print_r($data);
-        $sql = "SELECT * FROM consultant WHERE consultant_id = " .$data['consultant_id'];
+        $sql = "SELECT * FROM consultant WHERE consultant_id = " .$id;
         $result = $db->query($sql)->rowCount();
    
         if($result == 0)
@@ -61,7 +61,6 @@ class Default_Model_User {
         			full_name = " ."'" .$data['full_name'] ."',
         	 		job_title = " ."'" .$data['job_title'] ."',
         	 		phone = " .$data['tel'] .",
-        	 		username = " ."'" .$data['username'] ."',
         	 		email = " ."'" .$data['email'] ."'  
         			WHERE consultant_id = " .$data['consultant_id'];
         }
@@ -76,6 +75,14 @@ class Default_Model_User {
 	    return $result;	
     }
     
+  
+    
+    public function changePassword($password, $username)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "UPDATE consultant SET password = " . md5($password) ."WHERE username = " . $username;
+    	return $db->query($sql);
+    }
    
 }
 ?>

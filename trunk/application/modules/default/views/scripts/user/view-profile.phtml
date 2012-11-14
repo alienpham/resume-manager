@@ -1,5 +1,7 @@
+<form action="" method="post">
+<input type="hidden" id="consultant_id" name="id" value="<?php echo $this->userInfo['consultant_id']; ?>">
+</form>
 <div class="from-add-01" style="width : 400px; float : left;">
-
 <h2><?php echo $this->page_title; ?></h2>
 <ul>
 	<li>
@@ -26,14 +28,19 @@
 	</li>
 </ul>
 <div align="center">
-		<a href="/user"><input type="button" id="cancel" value="cancel" class="button02"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/user"><input type="button"  value="cancel" class="button02"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="button" id="edit" value="Edit" class="button01"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="button" id="change_password" value="Change Password" class="button01">
 </div>
-<div id="text" style="float : left; width : 500px; display : none;">
+<div id="hide1" style="float:left;width:500px;display:none; ">
+<form name="frm" action="/profile/save-user" method="post" onsubmit="return checkValid1()">
 	<ul>
 		<li>
-			<label>Full Name:</label>
+			<label></label>
+			<em class="error"></em>
+		</li>
+		<li>
+			<label>Full Name:<em>*</em></label>
 			<input type="text" id="full_name" name="full_name" value="<?php echo $this->userInfo['full_name']; ?>">
 		</li>
 		<li>
@@ -41,24 +48,115 @@
 			<input type="text" id="job_title" name="job_title" value="<?php echo $this->userInfo['job_title']; ?>">
 		</li>
 		<li>
-			<label>Username:</label>
-			<input type="text" id="username" name="username" value="<?php echo $this->userInfo['username']; ?>">
-		</li>
-		<li>
 			<label>Phone:</label>
 			<input type="text" id="tel" name="tel" value="<?php echo $this->userInfo['phone']; ?>">
 		</li>
 		<li>
 			<label>Email:</label>
-			<input type="text" id="email" name="email" value="<?php echo $this->userInfo['email']; ?>">
+			<input type="text" id="email"  name="email" value="<?php echo $this->userInfo['email']; ?>">
 		</li>
  	</ul>
+ 	<div align="center">
+ 		<input type="button" class="button02" value="cancel" id="cancel"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 		<input type="submit" class="button01" value="Edit" name="submit" >
+ 	</div>
+</form>	
+</div>
+<div id="hide2" style="float:left;width:500px;display:none;">
+	<form action="/user/check-password" method="post" onsubmit="return checkValid2()">
+		<ul>
+			<li>
+			<label></label>
+			<em class="error"></em>
+			</li>
+			<li>
+				<label>Old Password:<em>*</em> </label>
+				<input type="password" name="password" id="password">
+			</li>
+			<li>
+				<label>New Password:<em>*</em> </label>
+				<input type="password" name="password1" id="password1">
+			</li>
+			<li>
+				<label>Confirm Password:<em>*</em> </label>
+				<input type="password" name="password2" id="password2">
+			</li>
+		</ul>
+		<div align="center">
+			<input type="button" id="cancel1" class="button02" value="Cancel"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="submit" class="button01" name="submit" value="Change">
+		</div>
+	</form>
 </div>
 </div>
 <script>
-	$(document).ready(function{
-	$('#cancel').click(function{
-		$('#text').show(3000);
+	$(document).ready(function(){
+		$("#edit").click(function(){
+			$("#hide1").show(500);
+			$("#hide2").hide(500);
+		});
+		$("#cancel").click(function(){
+			$("#hide1").hide(500);
+		});
+		$("#change_password").click(function(){
+			$("#hide2").show(500);
+			$("#hide1").hide(500);
+		});
+		$("#cancel1").click(function(){
+			$("#hide2").hide(500);
 		});
 	});
+</script>
+<script>
+	function checkValid1()
+	{
+	var full_name = $("#full_name").val();
+	var email = $("#email").val();
+	
+	if(full_name == '')
+	{
+		$(".error").html("Please enter your name.");
+		return false;
+	}
+	
+	var check = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    if(!check.test(email))
+    {
+    	$('.error').html('please enter a valid email address');
+    	return false;
+    }
+    return true;
+	}
+	
+	function checkValid2()
+	{	
+		var password = $("#password").val();
+		var password1 = $("#password1").val();
+		var password2 = $("#password2").val();
+		
+		if(password == '')
+		{
+			$(".error").html("please enter your old password.");
+			$("#password").focus();
+			return false;
+		}
+		else
+		{
+		if (password1 != '')
+		{
+			if(password1 == password2){
+				return true;
+			}else{
+					$(".error").html("incorrect password validation.");
+					$("#password2").focus();
+					return false;
+				}
+		}else{
+				$(".error").html("Please enter your new password.");
+				$("#password1").focus();
+				return false;
+			}
+		}
+		return true;		
+	}
 </script>
