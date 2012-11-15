@@ -1,0 +1,48 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><h3><?php echo $this->job_title; ?> - <span class="text_green"><?php echo $this->status; ?></span></h3></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><hr /></td>
+      </tr>
+      <tr>
+        <td><table width="100%" border="0" cellpadding="0" cellspacing="0" class="datagrid">
+          <tr>
+            <td width="13%"><strong>Code:</strong></td>
+            <td width="30%"><?php echo $this->vacancy_code;?></td>
+            <td width="17%"><strong>Posted: </strong></td>
+            <td width="40%"><?php echo $this->created_date;?></td>
+          </tr>
+          <tr>
+            <td><strong>Salary:</strong></td>
+            <td colspan="3"><?php echo $this->salary;?></td>
+          </tr>
+          <tr>
+            <td><strong>Location:</strong></td>
+            <td colspan="3"><?php echo $this->province;?></td>
+          </tr>
+          <tr>
+            <td><strong>Function:</strong></td>
+            <td colspan="3"><?php echo $this->function;?></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><p><strong>COMPANY INFORMATION</strong></p>
+          <p>&nbsp;</p>
+          <p><?php echo $this->cominfomation;?></p>
+          <p>&nbsp;</p>
+          <p><strong>DESCRIPTION &amp; REQUIREMENTS</strong></p>
+          <p>&nbsp;</p>
+          <p><?php echo $this->job_desc;?></p></td>
+      </tr>
+      <tr>
+        <td height="15"></td>
+      </tr>
+    </table>

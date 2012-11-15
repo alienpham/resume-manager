@@ -85,7 +85,7 @@ class Vacancy_Model_ConsultantMapper {
 		}
 		$row = $result->current();
 
-		$consultant->setConsultantId($row->consultant_id)
+		$entry->setConsultantId($row->consultant_id)
 		->setTitle($row->title)
 		->setFullName($row->full_name)
 		->setAbbreviatedName($row->abbreviated_name)
@@ -159,8 +159,6 @@ class Vacancy_Model_ConsultantMapper {
 				'status'
 			)
 		)
-		->join('consultant_has_role AS cr', 'c.consultant_id=cr.consultant_id', array())
-		->join('role_lookup AS rl', 'cr.role_id=rl.role_id AND rl.role_type=\'' . Vacancy_Model_RoleLookup::ROLE_TYPE_CONSULTANT . '\'', array('role_type', 'department_id', 'name', 'level'))
 		->where('c.status=?', Vacancy_Model_Consultant::STATUS_ACTIVE)
 		->order('c.full_name ASC');
 
