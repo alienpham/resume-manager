@@ -12,7 +12,7 @@
 			<li>
 				<label>Full Name:<em>*</em></label>
 				<select style="width: 60px;" name="title">
-					<option value="Mr.">Mr.</option>
+					<option value="Mr." selected="selected">Mr.</option>
 					<option value="Mrs.">Mrs.</option>
 					<option value="Ms.">Ms.</option>
 				</select>
@@ -42,10 +42,11 @@
 			<li>
 				<label></label>
 				<input class="button01" type="submit" id="" name="add" value="Add user"> &nbsp;&nbsp;&nbsp;&nbsp;
-				<?php } ?>
+				<?php }else{ ?>
 			<li>
 				<label></label>
 				<input class="button01" type="submit" name="edit" value="Edit"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<?php } ?>
 				<a href="/profile" style="text-decoration:none;"><input class="button02" type="button"  value="Cancel"></a>
 			</li>
 		</ul>

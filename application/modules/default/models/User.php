@@ -34,15 +34,11 @@ class Default_Model_User {
         return $db->fetchRow($sql);
     }
     
- 	public function saveUser ($data, $id)
+ 	public function saveUser ($data)
     {
         $db = $this->getDbTable()->getAdapter();
         //print_r($data);
-        $sql = "SELECT * FROM consultant WHERE consultant_id = " .$id;
-        $result = $db->query($sql)->rowCount();
-   
-        if($result == 0)
-        {
+          
 	        $sql = "INSERT INTO consultant (`title`, `full_name`, `job_title`, `phone`, `username`, `email`, `password`, `created_date`, `updated_date`) VALUES (";
 			$sql .= "'" .$data['title'] . "',";
 			$sql .= "'" .$data['full_name'] . "',";
@@ -54,17 +50,20 @@ class Default_Model_User {
 			$sql .= "now(),";
 			$sql .= "now()";	
 	        $sql .= ")";
-        }
-        else
-        {
-        	$sql = "UPDATE consultant SET  
+       
+        return $db->query($sql);
+    }
+    
+    public function editUser($data, $id)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "UPDATE consultant SET  
         			full_name = " ."'" .$data['full_name'] ."',
         	 		job_title = " ."'" .$data['job_title'] ."',
         	 		phone = " .$data['tel'] .",
         	 		email = " ."'" .$data['email'] ."'  
-        			WHERE consultant_id = " .$data['consultant_id'];
-        }
-        return $db->query($sql);
+        			WHERE consultant_id = " .$id;
+    	return $db->query($sql);
     }
     
     public function getUser($id)
