@@ -53,12 +53,18 @@ class ProfileController extends Zend_Controller_Action {
 	public function saveUserAction() 
 	{
 		$data = $this->getRequest()->getPost();
-
 		$id = $this-> _getParam('id',"");
-		 print_r($id); exit;
 		$user = new Default_Model_User();
-		$result = $user->saveUser($data, $id);
 		
+		
+		if($id != '')
+		{
+		$result = $user->editUser($data, $id);
+		}
+		else 
+		{
+		$result = $user->saveUser($data);
+		}
 		$this->_redirect('/profile');		
 	}
 }

@@ -1,6 +1,4 @@
-<form action="" method="post">
-<input type="hidden" id="consultant_id" name="id" value="<?php echo $this->userInfo['consultant_id']; ?>">
-</form>
+
 <div class="from-add-01" style="width : 400px; float : left;">
 <h2><?php echo $this->page_title; ?></h2>
 <ul>
@@ -34,6 +32,7 @@
 </div>
 <div id="hide1" style="float:left;width:500px;display:none; ">
 <form name="frm" action="/profile/save-user" method="post" onsubmit="return checkValid1()">
+<input type="hidden" id="consultant_id" name="id" value="<?php echo $this->userInfo['consultant_id']; ?>">
 	<ul>
 		<li>
 			<label></label>
@@ -63,15 +62,17 @@
 </form>	
 </div>
 <div id="hide2" style="float:left;width:500px;display:none;">
-	<form action="/user/check-password" method="post" onsubmit="return checkValid2()">
+	<form action="/user/add-password" method="post" onsubmit="return checkValid2()">
+	<input type="hidden" id="consultant_id" name="id" value="<?php echo $this->userInfo['consultant_id']; ?>">
 		<ul>
 			<li>
 			<label></label>
-			<em class="error"></em>
+			<em class="false"></em>
 			</li>
 			<li>
 				<label>Old Password:<em>*</em> </label>
 				<input type="password" name="password" id="password">
+				<em id="check"></em>
 			</li>
 			<li>
 				<label>New Password:<em>*</em> </label>
@@ -84,7 +85,7 @@
 		</ul>
 		<div align="center">
 			<input type="button" id="cancel1" class="button02" value="Cancel"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="submit" class="button01" name="submit" value="Change">
+			<input type="submit" class="button01" value="Change">
 		</div>
 	</form>
 </div>
@@ -127,36 +128,44 @@
     }
     return true;
 	}
-	
+</script>
+<script>
 	function checkValid2()
 	{	
+		alert(2222); return false;
 		var password = $("#password").val();
 		var password1 = $("#password1").val();
 		var password2 = $("#password2").val();
-		
-		if(password == '')
-		{
-			$(".error").html("please enter your old password.");
-			$("#password").focus();
-			return false;
-		}
-		else
-		{
-		if (password1 != '')
-		{
-			if(password1 == password2){
-				return true;
-			}else{
-					$(".error").html("incorrect password validation.");
-					$("#password2").focus();
+	
+				if(password.length == 0)
+				{
+					$("#check").html("please enter old password.");
+					$("#password").focus();
 					return false;
-				}
-		}else{
-				$(".error").html("Please enter your new password.");
-				$("#password1").focus();
-				return false;
-			}
-		}
-		return true;		
+				}else{
+					$.ajax({
+						type : "POST";
+						url  : "/user/check-password";
+						success : function(result){
+							if(result == 0){
+								$("#check").html("sai mat khau");
+								return false;
+								}
+							}
+					});
+				
+					if(password1 == ''){
+						$(".false").html("please enter new password.");
+						$("#password1").focus();
+						return false;
+						}else{
+							if(password1 != password2){
+								$(".false").html("mat khau xac nhan khong dung.");
+								$("#password2").focus();
+								return false;
+								}else{return true;}
+							}
+					}
+			return true;
 	}
 </script>
