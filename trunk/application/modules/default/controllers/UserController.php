@@ -73,17 +73,19 @@ class UserController extends Zend_Controller_Action
     
     public function checkPasswordAction()
     {
-    	$data = $this->getRequest()->getPost();
+    	//$data = $this->getRequest()->getPost();
     	$user = new Default_Model_User();
+    	$pass = $this-> _getParam('password',"");
     	$id = $this-> _getParam('id',"");
     	$check = $user->getUser($id);
     	
-    	if($check['password'] == md5($data['password']))
+    	if($check['password'] == md5($pass))
     	{
-    		return 1;
-    	}else{
-    		return 0;
+    		echo 1;
+    	} else{
+    		echo 0;
     	}
+    	exit;
     }
     
     
@@ -96,9 +98,9 @@ class UserController extends Zend_Controller_Action
     	
     	if($check['password'] == md5($data['password']))
     	{
-    	$user->changePassword($data['password1'], $check['username']);
+    	$user->changePassword($data['password1'], $id);
     	}
-    	$this->_redirect('/user/view-profile');
+    	$this->_redirect('/resume');
     }
 }
 

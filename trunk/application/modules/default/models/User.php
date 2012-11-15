@@ -76,10 +76,10 @@ class Default_Model_User {
     
   
     
-    public function changePassword($password, $username)
+    public function changePassword($password, $id)
     {
     	$db = $this->getDbTable()->getAdapter();
-    	$sql = "UPDATE consultant SET password = " . md5($password) ."WHERE username = " . $username;
+    	$sql = "UPDATE consultant SET password = " ."'" .md5($password)."' WHERE consultant_id = " . $id;
     	return $db->query($sql);
     }
    
