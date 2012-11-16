@@ -23,7 +23,10 @@ class Default_Model_User {
     public function checkLogin($username, $pass)
 	{
 	    $db = $this->getDbTable()->getAdapter();
-        $sql = "SELECT * FROM consultant WHERE (username = '" .$username. "' or email = '" .$username. "') and password = '" . md5($pass) . "'";
+        $sql = "SELECT * FROM consultant WHERE ";
+        $sql .= "(username = '" .$username. "' or email = '" .$username. "') ";
+        $sql .= "and password = '" . md5($pass) . "'";
+        $sql .= "and status = 'Active'";
 		return $db->fetchRow($sql);
 	}
 
