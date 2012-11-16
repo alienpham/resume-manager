@@ -96,6 +96,7 @@ a:hover{text-decoration:underline; }
 }
 .content select,
 .content input[type="text"],
+.content input[type="password"],
 .footer select,
 .footer .pages a,
 textarea,
@@ -162,40 +163,46 @@ textarea,
 .list-resumes .head .name,
 .list-resumes .head .experience,
 .list-resumes .head .salary,
-.list-resumes .head .comments{	
+.list-resumes .head .comments,
+.list-resumes .head .sent
+{	
 	background:url(../images/bg-header.jpg) no-repeat top right;
 }
 .list-resumes .checkbox,
 .list-resumes .name,
 .list-resumes .experience,
 .list-resumes .salary,
-.list-resumes .comments{
-	padding:6px 1.5% 7px;
+.list-resumes .comments,
+.list-resumes .sent
+{
+	padding:6px 1% 7px;
 	float:left;	
 }
 .list-resumes .checkbox{
 	padding:10px 1%;
 	width:1%;
 }
-.list-resumes .name,
+.list-resumes .name{
+	width:15%;
+}
 .list-resumes .salary{
-	width:14%;	
+	width:13%;	
 }
 .list-resumes .experience{
 	width:32%;
 }
-.list-resumes .salary{
-	
-}
+
 .list-resumes .comments{
-	width:25%;
-	background:none !important;
+	width:19%;
 }
 .list-resumes .head h4{
 	text-transform:uppercase;
 	color:#fff;	
 }
-
+.list-resumes .sent{
+	width:8%;
+	background:none !important;
+}
 .info-content{
 	margin-top: 5px;
 	border-bottom:1px solid #bcbcbc;
@@ -227,7 +234,7 @@ textarea,
 .info-content .export-word{
 	background:url(../images/icon-export.png) no-repeat left 1px;
 	color:#1b7cbd;
-	margin-left:20px;
+	margin-left:10px;
 }
 .info-content .info-comment .update-date{
 	float:left;	
@@ -520,6 +527,106 @@ textarea,
 color:red;
 }
 
+/* USER MANAGEMENT */
+.clear {
+	clear: both;
+}
+#userManagement .head .checkbox,
+#userManagement .head .username,
+#userManagement .head .fullname,
+#userManagement .head .title,
+#userManagement .head .email,
+#userManagement .head .job-title,
+#userManagement .head .join-date,
+#userManagement .head .status,
+#userManagement .head .admin,
+#userManagement .head .action,
+#userManagement .head .created-date,
+#userManagement .head .modified-date
+ {background: url("../images/bg-header.jpg") no-repeat scroll right top transparent !important;}
+ 
+#userManagement .checkbox,
+#userManagement .username,
+#userManagement .fullname,
+#userManagement .title,
+#userManagement .email,
+#userManagement .job-title,
+#userManagement .join-date,
+#userManagement .status,
+#userManagement .admin,
+#userManagement .action,
+#userManagement .created-date,
+#userManagement .modified-date
+{
+	padding:2px 1% 2px;
+	float:left;	
+}
+
+#userManagement .checkbox{
+	padding:3px 1%;
+	width:1%;
+}
+
+
+#userManagement .username {
+	width: 9%;
+}
+
+#userManagement .fullname {
+	width: 13%;
+}
+
+#userManagement .email {width: 16%;}
+#userManagement .job-title {width: 7%;}
+#userManagement .join-date {width: 6%;}
+#userManagement .status {width: 4%;text-align: center;}
+#userManagement .admin {width: 3%;text-align: center;}
+#userManagement .action {width: 10%;text-align: center;}
+#userManagement .created-date {width: 8%;}
+#userManagement .modified-date {width: 11%;}
+
+/*=========== img-steps ===========*/
+.content .img-steps{
+	float: left;
+    margin: 0 0 40px 10%;
+}
+.img-steps ul li{
+	float:left;
+	display:inline;
+	margin-right: 15px;
+}	
+.img-steps ul li a{
+	display:block;
+	text-indent:-9999px;	
+	height: 75px;
+    width: 110px;
+}
+.img-steps ul li .step-01{
+	background:url(../images/img-step-a-01.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li .step-02{
+	background:url(../images/img-step-a-02.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li .step-03{
+	background:url(../images/img-step-a-03.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li .step-04{
+	background:url(../images/img-step-a-04.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li .step-05{
+	background:url(../images/img-step-a-05.png) no-repeat 0 17px;	
+	
+}
+.img-steps ul li a:hover,
+.img-steps ul li.active a{
+	background-position:bottom;
+}
+
+/*company*/
 .list-company,
 .info-content{
 	float: left;
