@@ -24,11 +24,7 @@ class ProfileController extends Zend_Controller_Action {
 	public function indexAction() 
 	{
 		$consultantClass = new Vacancy_Model_ConsultantMapper();
-		$db = $consultantClass->getDbTable();
-
-		$select = $db->select()->from('consultant');
-		$rows = $db->fetchAll($select);
-
+		$rows = $consultantClass->fetchAll();
 		$this->view->rows = $rows;
 	}
 	
@@ -55,16 +51,21 @@ class ProfileController extends Zend_Controller_Action {
 		$data = $this->getRequest()->getPost();
 		$id = $this-> _getParam('id',"");
 		$user = new Default_Model_User();
-		
-		
-		if($id != '')
-		{
-		$result = $user->editUser($data, $id);
-		}
-		else 
-		{
-		$result = $user->saveUser($data);
+
+		if($id != ''){
+		    $result = $user->editUser($data, $id);
+		} else {
+		    $result = $user->saveUser($data);
 		}
 		$this->_redirect('/profile');		
+	}
+	
+	public function deleteUserAction()
+	{
+	    $id = $this-> _getParam('id',"");
+	    $userObj = new Default_Model_User();
+	    $userObj->delete(array('consultant_id' => $id));
+	    
+	    $this->_redirect('/profile');	
 	}
 }

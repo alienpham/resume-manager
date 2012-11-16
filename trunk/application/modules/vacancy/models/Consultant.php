@@ -11,13 +11,11 @@ class Vacancy_Model_Consultant {
 	protected $_consultant_id;
 	protected $_title;
 	protected $_full_name;
-	protected $_abbreviated_name;
+	protected $_user_name;
 	protected $_job_title;
-	protected $_office_phone;
 	protected $_email;
+	protected $_phone;
 	protected $_password;
-	protected $_join_date;
-	protected $_resign_date;
 	protected $_status;
 	protected $_created_date;
 	protected $_updated_date;
@@ -46,6 +44,14 @@ class Vacancy_Model_Consultant {
 	public function getTitle() {
 		return $this->_title;
 	}
+	
+    public function setPhone($phone) {
+		$this->_phone = $phone;
+	}
+
+	public function getPhone() {
+		return $this->_phone;
+	}
 
 	public function setFullName($fullName) {
 		$this->_full_name = $fullName;
@@ -55,31 +61,23 @@ class Vacancy_Model_Consultant {
 		return $this->_full_name;
 	}
 
-	public function setAbbreviatedName($abbreviatedName) {
-		$this->_abbreviated_name = $abbreviatedName;
-	}
-
-	public function getAbbreviatedName() {
-		return $this->_abbreviated_name;
-	}
-
 	public function setJobTitle($jobTitle) {
 		$this->_job_title = $jobTitle;
 	}
-
-	public function getJobTitle() {
+    
+    public function getJobTitle() {
 		return $this->_job_title;
 	}
-
-	public function setOfficePhone($officePhone) {
-		$this->_office_phone = $officePhone;
+	
+    public function getUserName() {
+		return $this->_user_name;
 	}
 
-	public function getOfficePhone() {
-		return $this->_office_phone;
+	public function setUserName($username) {
+		$this->_user_name = $username;
 	}
 
-	public function setEmail($email) {
+    public function setEmail($email) {
 		$this->_email = $email;
 	}
 
@@ -93,22 +91,6 @@ class Vacancy_Model_Consultant {
 
 	public function getPassword() {
 		return $this->_password;
-	}
-
-	public function setJoinDate($joinDate) {
-		$this->_join_date = $joinDate;
-	}
-
-	public function getJoinDate() {
-		return $this->_join_date;
-	}
-
-	public function setResignDate($resignDate) {
-		$this->_resign_date = $resignDate;
-	}
-
-	public function getResignDate() {
-		return $this->_resign_date;
 	}
 
 	public function setStatus($status) {

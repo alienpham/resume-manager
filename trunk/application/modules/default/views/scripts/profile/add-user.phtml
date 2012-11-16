@@ -1,9 +1,8 @@
 
 <div class="from-add-01">
 <h2><?php  echo $this->page_title; ?></h2>
-
 	<form name="frmuser" action="/profile/save-user" method="post" onsubmit="return checkValid()">
-	<input type="hidden" name="consultant_id" value="<?php echo $this->userInfo['consultant_id']; ?>">
+	<input type="hidden" name="id" value="<?php echo $this->userInfo['consultant_id']; ?>">
 		<ul>
 			<li>
 			<label>&nbsp;</label>
@@ -26,27 +25,23 @@
 				<label>Tel:</label>
 				<input type="text" id="tel" name="tel" value="<?php echo $this->userInfo['phone']; ?>">
 			</li>
-			<?php if(!isset($this->userInfo['password'])) { ?>
 			<li>
 				<label>Username:<em>*</em></label>
 				<input type="text" id="username" name="username" value="<?php echo $this->userInfo['username']; ?>">
 			</li>
+            <?php if( !$this->userInfo['consultant_id']): ?>
 			<li>
 				<label>Password:<em>*</em></label>
 				<input type="password" id="password" name="password">
 			</li>
+            <?php endif;?>
 			<li>
 				<label>Email:</label>
 				<input type="text" id="email" name="email" value="<?php echo $this->userInfo['email']; ?>">
 			</li>
 			<li>
 				<label></label>
-				<input class="button01" type="submit" id="" name="add" value="Add user"> &nbsp;&nbsp;&nbsp;&nbsp;
-				<?php }else{ ?>
-			<li>
-				<label></label>
-				<input class="button01" type="submit" name="edit" value="Edit"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<?php } ?>
+				<input class="button01" type="submit" name="edit" value="Save"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="/profile" style="text-decoration:none;"><input class="button02" type="button"  value="Cancel"></a>
 			</li>
 		</ul>
@@ -57,7 +52,7 @@
 	{
 		var full_name = $("#full_name").val();
 		var username = $("#username").val();
-		var passwork = $("#password").val();
+		var password = $("#password").val();
 		var email = $('#email').val();
 		
 		if(full_name == '' || username == '' || password == '')

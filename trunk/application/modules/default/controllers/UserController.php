@@ -98,8 +98,9 @@ class UserController extends Zend_Controller_Action
     	
     	if($check['password'] == md5($data['password']))
     	{
-    	$user->changePassword($data['password1'], $id);
+    	    $user->changePassword($data['password1'], $id);
     	}
+    	
     	$this->_redirect('/resume');
     }
 }

@@ -3,7 +3,6 @@ class Vacancy_Model_ConsultantMapper {
 	protected $_dbTable;
 
 	/**
-	 *
 	 * Set table object
 	 * @param object $dbTable
 	 * @throws Exception
@@ -55,13 +54,11 @@ class Vacancy_Model_ConsultantMapper {
 			'consultant_id' => $obj->getConsultantId(),
 			'title' => $obj->getTitle(),
 			'full_name' => $obj->getFullName(),
-			'abbreviated_name' => $obj->getAbbreviatedName(),
+			'username' => $obj->getUserName(),
 			'job_title' => $obj->getJobTitle(),
-			'office_phone' => $obj->getOfficePhone(),
 			'email' => $obj->getEmail(),
+			'phone' => $obj->getPhone(),
 			'password' => $obj->getPassword(),
-			'join_date' => $obj->getJoinDate(),
-			'resign_date' => $obj->getResignDate(),
 			'status' => $obj->getStatus(),
 			'created_date' => $obj->getCreateDate(),
 			'updated_date' => $obj->getUpdateDate(),
@@ -85,19 +82,17 @@ class Vacancy_Model_ConsultantMapper {
 		}
 		$row = $result->current();
 
-		$entry->setConsultantId($row->consultant_id)
-		->setTitle($row->title)
-		->setFullName($row->full_name)
-		->setAbbreviatedName($row->abbreviated_name)
-		->setJobTitle($row->job_title)
-		->setOfficePhone($row->office_phone)
-		->setEmail($row->email)
-		->setPassword($row->password)
-		->setJoinDate($row->join_date)
-		->setResignDate($row->resign_date)
-		->setStatus($row->status)
-		->setCreateDate($row->created_date)
-		->setUpdateDate($row->updated_date);
+		$consultant->setConsultantId($row->consultant_id);
+		$consultant->setTitle($row->title);
+		$consultant->setFullName($row->full_name);
+		$consultant->setUserName($row->username);
+		$consultant->setJobTitle($row->job_title);
+		$consultant->setEmail($row->email);
+		$consultant->setPhone($row->phone);
+		$consultant->setPassword($row->password);
+		$consultant->setStatus($row->status);
+		$consultant->setCreateDate($row->created_date);
+		$consultant->setUpdateDate($row->updated_date);
 	}
 
 	/**
@@ -111,63 +106,22 @@ class Vacancy_Model_ConsultantMapper {
 		$resultSet = $this->getDbTable()->fetchAll($where, $orderby);
 
 		$entries = array();
-
 		foreach ($resultSet as $row) {
 			$entry = new Vacancy_Model_Consultant();
-			$entry->setConsultantId($row->consultant_id)
-			->setTitle($row->title)
-			->setFullName($row->full_name)
-			->setAbbreviatedName($row->abbreviated_name)
-			->setJobTitle($row->job_title)
-			->setOfficePhone($row->office_phone)
-			->setEmail($row->email)
-			->setPassword($row->password)
-			->setJoinDate($row->join_date)
-			->setResignDate($row->resign_date)
-			->setStatus($row->status)
-			->setCreateDate($row->created_date)
-			->setUpdateDate($row->updated_date);
+			$entry->setConsultantId($row->consultant_id);
+			$entry->setTitle($row->title);
+			$entry->setFullName($row->full_name);
+			$entry->setUserName($row->username);
+			$entry->setJobTitle($row->job_title);
+			$entry->setEmail($row->email);
+			$entry->setPhone($row->phone);
+			$entry->setPassword($row->password);
+			$entry->setStatus($row->status);
+			$entry->setCreateDate($row->created_date);
+			$entry->setUpdateDate($row->updated_date);
 
 			$entries[] = $entry;
 		}
 		return $entries;
-	}
-
-	/**
-	 *
-	 * To fetch all active consultants
-	 *
-	 * @return array objects
-	 */
-	public function getColsultants() {
-		$db = $this->getDbTable();
-
-		//$db->getAdapter()->getProfiler()->setEnabled(true);
-
-		$select = $db->select()->setIntegrityCheck(false)->from(
-			'consultant AS c',
-			array(
-				'consultant_id',
-				'title',
-				'full_name',
-				'abbreviated_name',
-				'job_title',
-				'office_phone',
-				'email',
-				'join_date',
-				'resign_date',
-				'status'
-			)
-		)
-		->where('c.status=?', Vacancy_Model_Consultant::STATUS_ACTIVE)
-		->order('c.full_name ASC');
-
-		$rows = $db->fetchAll($select);
-
-		//print_r($db->getAdapter()->getProfiler()->getLastQueryProfile()->getQuery());
-		//$db->getAdapter()->getProfiler()->setEnabled(false);
-		//exit;
-
-		return $rows;
 	}
 }
