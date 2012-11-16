@@ -1,29 +1,29 @@
-<div class="from-add-01" style="width:900px;">
+<div class="from-add-01" style="">
 <form method="post" action="<?php echo $this->url(array('module' => 'vacancy', 'controller' => 'index', 'action' => 'add-vacancy'), 'vacancy-add-router', true)?>">
-	<h2>ADD VACANCY</h2>
+	<h2>ADD VACANCYadad</h2>
 	<div id="head" style="background-color:#8DC54C;width:900px;"><h2>VACANCY DETAILS</h2></div>
 	<div id="left" style="float:left;width:550px;">
 		<ul>
 			<li>
 				<label>Consultant:<em>*</em></label>
 				<select name="vacancy[va_has_consultant][consultant_id]" id="consultant_id">
-											<option value="0">--Select Consultant--</option>
-											<?php if($this->consultants):?>
-											<?php foreach ($this->consultants as $consultant):?>
-											<option value="<?php echo $consultant->consultant_id?>"><?php echo $consultant->full_name?></option>
-											<?php endforeach;?>
-											<?php endif;?>
+					<option value="0">--Select Consultant--</option>
+					<?php if($this->consultants):?>
+					<?php foreach ($this->consultants as $consultant):?>
+					<option value="<?php echo $consultant->consultant_id?>"><?php echo $consultant->full_name?></option>
+					<?php endforeach;?>
+					<?php endif;?>
 				</select>
 			</li>
 			<li>
 				<label>Company:<em>*</em></label>
 				<select name="vacancy[company_id]" id="company_id">
-											<option value="0">--Select Company--</option>
-											<?php if($this->companies):?>
-											<?php foreach ($this->companies as $company):?>
-											<option value="<?php echo $company->company_id?>"><?php echo $company->full_name_en?></option>
-											<?php endforeach;?>
-											<?php endif;?>
+					<option value="0">--Select Company--</option>
+					<?php if($this->companies):?>
+					<?php foreach ($this->companies as $company):?>
+					<option value="<?php echo $company->company_id?>"><?php echo $company->full_name_en?></option>
+					<?php endforeach;?>
+					<?php endif;?>
 				</select>
 			</li>
 			<li>
@@ -39,9 +39,9 @@
 			<li>
 				<label>Salary:<em>*</em></label>
 				<select name="vacancy[displayed_salary]" id="displayed_salary">
-											<?php foreach ($this->displaySalaryConfig as $dSC):?>
-											<option value="<?php echo $dSC?>"><?php echo $dSC?></option>
-											<?php endforeach;?>
+					<?php foreach ($this->displaySalaryConfig as $dSC):?>
+					<option value="<?php echo $dSC?>"><?php echo $dSC?></option>
+					<?php endforeach;?>
 				</select>
 				<input name="vacancy[estimated_salary" type="text" id="estimated_salary" value="1"> USD		
 			</li>
@@ -97,7 +97,7 @@
 				<label>
 					<textarea name="textfield6" cols="60" rows="5" id="textfield6">
 						Company is an Executive Search &amp; Recruitment agency in four main industries: consumer goods &amp; services, finance &amp; banking, ICT, and industrial; a division of Grey Finders and a partner of Glasford International, a global collaboration of independent executive search firms, operating successfully over 30 countries throughout Europe, the Americas, Middle East, Far-East &amp; Africa. Our client is
-						 INSERT DESCRIPTION ABOUT THE COMPANY HERE: 
+						INSERT DESCRIPTION ABOUT THE COMPANY HERE: 
 					</textarea>
 				</label>
 				<label>
