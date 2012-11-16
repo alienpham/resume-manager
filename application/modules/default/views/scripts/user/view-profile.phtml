@@ -30,7 +30,7 @@
 		<input type="button" id="change_password" value="Change Password" class="button01">
 </div>
 <div id="hide1" style="float:left;width:500px;display:none; ">
-<form name="frm" action="/profile/save-user" method="post" onsubmit="return checkValid1()">
+<form name="frm" action="/user/edit-user" method="post" onsubmit="return checkValid1()">
 <input type="hidden" id="consultant_id" name="id" value="<?php echo $this->userInfo['consultant_id']; ?>">
 	<ul>
 		<li>

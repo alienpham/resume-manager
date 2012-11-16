@@ -88,7 +88,20 @@ class UserController extends Zend_Controller_Action
     	exit;
     }
     
-    
+    public function editUserAction() 
+	{
+		$data = $this->getRequest()->getPost();
+		$id = $this-> _getParam('id',"");
+		$user = new Default_Model_User();
+
+		if($id != ''){
+		    $result = $user->editUser($data, $id);
+		} else {
+		    $result = $user->saveUser($data);
+		}
+		$this->_redirect('/resume');		
+	}
+	
     public function changePasswordAction()
     {
     	$data = $this->getRequest()->getPost();

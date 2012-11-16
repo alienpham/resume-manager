@@ -65,7 +65,13 @@
                 <?php echo $row->getUpdateDate()?>&nbsp;
             </div>
              <div class="action">
-                <a href="/profile/add-user/id/<?php echo $row->getConsultantId() ?>" title="Edit <?php echo $row->getUserName()?>">Edit</a> | <a href="" title="Inactive <?php echo $row->getUserName()?>">Inactive</a> | <a href="/profile/delete-user/id/<?php echo $row->getConsultantId()?>" title="Delete <?php echo $row->getUserName()?>">Delete</a>
+                <a href="/profile/add-user/id/<?php echo $row->getConsultantId() ?>" title="Edit <?php echo $row->getUserName()?>">Edit</a> | 
+                <?php if($row->getStatus() == 'Active'):?>
+                    <a href="/profile/inactive-user/id/<?php echo $row->getConsultantId() ?>" title="Inactive <?php echo $row->getUserName()?>">Inactive</a> | 
+                <?php else :?>
+                    <a href="/profile/active-user/id/<?php echo $row->getConsultantId() ?>" title="Active <?php echo $row->getUserName()?>">Active</a> |
+                <?php endif;?>
+                <a href="/profile/delete-user/id/<?php echo $row->getConsultantId()?>" title="Delete <?php echo $row->getUserName()?>">Delete</a>
             </div>
             <br class="clear"/>
 	        <?php endforeach;?>
