@@ -315,6 +315,7 @@ textarea,
 	color:#e60000;	
 }
 .content .from-add-01 ul li input[type="text"],
+.content .from-add-01 ul li input[type="password"],
 #adv-search ul li input[type="text"],
 .form-login ul li input[type="text"],
 .form-login ul li input[type="password"]
@@ -537,9 +538,8 @@ color:red;
 #userManagement .head .title,
 #userManagement .head .email,
 #userManagement .head .job-title,
-#userManagement .head .join-date,
 #userManagement .head .status,
-#userManagement .head .admin,
+#userManagement .head .phone,
 #userManagement .head .action,
 #userManagement .head .created-date,
 #userManagement .head .modified-date
@@ -551,9 +551,8 @@ color:red;
 #userManagement .title,
 #userManagement .email,
 #userManagement .job-title,
-#userManagement .join-date,
 #userManagement .status,
-#userManagement .admin,
+#userManagement .phone,
 #userManagement .action,
 #userManagement .created-date,
 #userManagement .modified-date
@@ -573,14 +572,13 @@ color:red;
 }
 
 #userManagement .fullname {
-	width: 13%;
+	width: 14%;
 }
 
 #userManagement .email {width: 16%;}
-#userManagement .job-title {width: 7%;}
-#userManagement .join-date {width: 6%;}
+#userManagement .job-title {width: 9%;}
 #userManagement .status {width: 4%;text-align: center;}
-#userManagement .admin {width: 3%;text-align: center;}
+#userManagement .phone {width: 8%;text-align: left;}
 #userManagement .action {width: 10%;text-align: center;}
 #userManagement .created-date {width: 8%;}
 #userManagement .modified-date {width: 11%;}
