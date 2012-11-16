@@ -579,7 +579,7 @@ color:red;
 #userManagement .job-title {width: 10%;}
 #userManagement .status {width: 4%;text-align: center;}
 #userManagement .phone {width: 8%;text-align: left;}
-#userManagement .action {width: 10%;text-align: center;}
+#userManagement .action {width: 10%;text-align: left;}
 #userManagement .created-date {width: 8%;}
 #userManagement .modified-date {width: 11%;}
 

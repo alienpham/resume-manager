@@ -82,8 +82,11 @@ class Default_Model_User {
     	return $db->query($sql);
     }
    
-    public function delete($where) {
-		$this->getDbTable ()->delete($where);
+    public function updateStatusUser($status, $id) {
+		$db = $this->getDbTable()->getAdapter();
+        $sql = 'UPDATE consultant SET status = "'. $status .'" WHERE consultant_id = '. $id;
+       // echo $sql;exit;
+        $db->query($sql);
 	}
 }
 ?>

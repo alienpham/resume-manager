@@ -24,7 +24,7 @@ class ProfileController extends Zend_Controller_Action {
 	public function indexAction() 
 	{
 		$consultantClass = new Vacancy_Model_ConsultantMapper();
-		$rows = $consultantClass->fetchAll();
+		$rows = $consultantClass->fetchAll('status <> "Deleted"');
 		$this->view->rows = $rows;
 	}
 	
@@ -64,7 +64,25 @@ class ProfileController extends Zend_Controller_Action {
 	{
 	    $id = $this-> _getParam('id',"");
 	    $userObj = new Default_Model_User();
-	    $userObj->delete(array('consultant_id' => $id));
+	    $userObj->updateStatusUser('Deleted', $id);
+	    
+	    $this->_redirect('/profile');	
+	}
+	
+    public function inactiveUserAction()
+	{
+	    $id = $this-> _getParam('id',"");
+	    $userObj = new Default_Model_User();
+	    $userObj->updateStatusUser('Inactive', $id);
+	    
+	    $this->_redirect('/profile');	
+	}
+	
+    public function activeUserAction()
+	{
+	    $id = $this-> _getParam('id',"");
+	    $userObj = new Default_Model_User();
+	    $userObj->updateStatusUser('Active', $id);
 	    
 	    $this->_redirect('/profile');	
 	}
