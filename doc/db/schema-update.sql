@@ -9,3 +9,6 @@ ALTER TABLE `consultant`
 	
 	
 ALTER TABLE `res_expectation` ADD `note` TEXT NULL 
+
+ALTER TABLE  `resume` CHANGE  `email_2`  `email_2` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL ,
+CHANGE  `mobile_2`  `mobile_2` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL
