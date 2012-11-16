@@ -23,49 +23,49 @@
 	            <div class="email">
 	                <h4>Email</h4>
 	            </div>
+                <div class="phone">
+                    <h4>Phone</h4>
+                </div>
 	            <div class="job-title">
 	                <h4>Job Title</h4>
 	            </div>
 	            <div class="status">
 	                <h4>Status</h4>
 	            </div>
-	            <div class="admin">
-	                <h4>Admin</h4>
-	            </div>
-				<div class="action">
-	                <h4>Action</h4>
-	            </div>
 	            <div class="modified-date">
 	                <h4>Modified Date</h4>
 	            </div>
+                <div class="action">
+                    <h4>Action</h4>
+                </div>
 	        </div>
 	        <div class="info-content">
 	        <?php if($this->rows):?>
 	        <?php foreach ($this->rows as $row):?>
 	        <div class="checkbox">
-	        	<input type="checkbox" name="cid[]" value="<?php echo $row->consultant_id?>" />
+	        	<input type="checkbox" name="cid[]" value="<?php echo $row->getConsultantId()?>" />
 	        </div>
 	        <div class="username">
-	        	<a href="#" title="Edit <?php echo $row->username?>"><?php echo $row->username?></a>
+	        	<?php echo $row->getUserName()?>
 	        </div>
-	        <div class="fullname"><?php echo $row->full_name?> (<?php echo $row->title?>)</div>
+	        <div class="fullname"><?php echo $row->getFullName()?> (<?php echo $row->getTitle()?>)&nbsp;</div>
 	        <div class="email">
-	        	<?php echo $row->email?>
+	        	<?php echo $row->getEmail()?>&nbsp;
 	        </div>
+            <div class="phone">
+                <?php echo $row->getPhone()?>&nbsp;
+            </div>
 	        <div class="job-title">
-	        	<?php echo $row->job_title?>
+	        	<?php echo $row->getJobTitle()?>&nbsp;
 	        </div>
 	        <div class="status">
-	        	<?php echo $row->status?>
-	        </div>
-	        <div class="admin">
-	        	<?php echo $row->is_admin ? 'Yes' : 'No'?>
-	        </div>
-	        <div class="action">
-	        	<a href="/profile/add-user/id/<?php echo $row->consultant_id?>" title="Edit <?php echo $row->username?>">Edit</a> | <a href="" title="Inactive <?php echo $row->username?>">Inactive</a> | <a href="#" title="Delete <?php echo $row->username?>">Delete</a>
+	        	<?php echo $row->getStatus()?>&nbsp;
 	        </div>
             <div class="modified-date">
-                <?php echo $row->updated_date?>
+                <?php echo $row->getUpdateDate()?>&nbsp;
+            </div>
+             <div class="action">
+                <a href="/profile/add-user/id/<?php echo $row->getConsultantId() ?>" title="Edit <?php echo $row->getUserName()?>">Edit</a> | <a href="" title="Inactive <?php echo $row->getUserName()?>">Inactive</a> | <a href="/profile/delete-user/id/<?php echo $row->getConsultantId()?>" title="Delete <?php echo $row->getUserName()?>">Delete</a>
             </div>
             <br class="clear"/>
 	        <?php endforeach;?>

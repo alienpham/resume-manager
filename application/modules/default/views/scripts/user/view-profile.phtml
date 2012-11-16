@@ -4,25 +4,24 @@
 <ul>
 	<li>
 		<label>Full Name:</label>
-		<label><?php echo $this->userInfo['full_name']; ?></label>
+		<?php echo $this->userInfo['full_name']; ?>
 	</li>
 	<li>
 		<label>Job Title:</label>
-		<label><?php echo $this->userInfo['job_title']; ?></label>
+		<?php echo $this->userInfo['job_title']; ?>
 	</li>
 	<li>
 		<label>UserName:</label>
-		<label><?php echo $this->userInfo['username']; ?></label>
+		<?php echo $this->userInfo['username']; ?>
 		
 	</li>
 	<li>
 		<label>Phone</label>
-		<label><?php echo $this->userInfo['phone']; ?></label>
+		<?php echo $this->userInfo['phone']; ?>
 	</li>
 	<li>
 		<label>Email:</label>
-		<label><?php echo $this->userInfo['email']; ?></label>
-		
+		<?php echo $this->userInfo['email']; ?>
 	</li>
 </ul>
 <div align="center">
@@ -38,6 +37,10 @@
 			<label></label>
 			<em class="error"></em>
 		</li>
+        <li>
+            <label>User Name:<em>*</em></label>
+            <input type="text" id="username" name="username" value="<?php echo $this->userInfo['username']; ?>">
+        </li>
 		<li>
 			<label>Full Name:<em>*</em></label>
 			<input type="text" id="full_name" name="full_name" value="<?php echo $this->userInfo['full_name']; ?>">
@@ -70,7 +73,7 @@
 			<em class="false" style="color:red"></em>
 			</li>
 			<li>
-				<label>Old Password:<em>*</em> </label>
+				<label>Current Password:<em>*</em> </label>
 				<input type="password" name="password" id="password">
 			</li>
 			<li>
@@ -82,7 +85,7 @@
 				<input type="password" name="password2" id="password2">
 			</li>
 		</ul>
-		<div align="center">
+		<div align="center"  style="clear:both">
 			<input type="button" id="cancel1" class="button02" value="Cancel"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="submit" class="button01" value="Change">
 		</div>
@@ -108,11 +111,18 @@
 	});
 </script>
 <script>
-	function checkValid1()
-	{
+function checkValid1()
+{
+	var username = $("#username").val();
 	var full_name = $("#full_name").val();
 	var email = $("#email").val();
-	
+
+	if(username == '')
+	{
+		$(".error").html("Please enter username.");
+		return false;
+	}
+    
 	if(full_name == '')
 	{
 		$(".error").html("Please enter your name.");
@@ -126,7 +136,7 @@
     	return false;
     }
     return true;
-	}
+}
 </script>
 <script>
 	function checkValid2()
@@ -139,8 +149,7 @@
 		var id = $("#id").val();
 		if(password == '')
 		{
-			
-			$(".false").html("please enter old password.");
+			$(".false").html("please enter current password.");
 			$("#password").focus();
 			return false;
 		}else{
@@ -151,7 +160,7 @@
 				success : function(result){
 					if(result == 0){
 						
-						$(".false").html("wrong password.");
+						$(".false").html("Current password incorrect.");
 						$("password").focus();
 						return false;
 					}

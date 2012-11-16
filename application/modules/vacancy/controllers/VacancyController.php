@@ -12,7 +12,7 @@ class Vacancy_VacancyController extends Zend_Controller_Action
         $view->headScript()->appendFile ( '/js/jquery.mousewheel-3.0.6.pack.js' );
         $view->headScript()->appendFile ( '/js/jquery.fancybox.js?v=2.1.0' );
         $view->headLink()->appendStylesheet ( '/js/jquery.fancybox.css?v=2.1.0' );
-        date_default_timezone_set('Asia/Krasnoyarsk');
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
 	}
 	
 /**

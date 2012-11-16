@@ -57,12 +57,13 @@ class Default_Model_User {
     public function editUser($data, $id)
     {
     	$db = $this->getDbTable()->getAdapter();
-    	$sql = "UPDATE consultant SET  
-        			full_name = " ."'" .$data['full_name'] ."',
-        	 		job_title = " ."'" .$data['job_title'] ."',
-        	 		phone = " .$data['tel'] .",
-        	 		email = " ."'" .$data['email'] ."'  
-        			WHERE consultant_id = " .$id;
+    	$sql = "UPDATE consultant SET ";
+        $sql .= "full_name = '" .$data['full_name'] ."',";
+        $sql .= "username = '" .$data['username'] ."',";
+        $sql .= "job_title = '" .$data['job_title'] ."',";
+        $sql .= "phone = '" .$data['tel'] ."',";
+        $sql .= "email = '" .$data['email'] ."' ";
+        $sql .= "WHERE consultant_id = " .$id;
     	return $db->query($sql);
     }
     
@@ -74,8 +75,6 @@ class Default_Model_User {
 	    return $result;	
     }
     
-  
-    
     public function changePassword($password, $id)
     {
     	$db = $this->getDbTable()->getAdapter();
@@ -83,5 +82,8 @@ class Default_Model_User {
     	return $db->query($sql);
     }
    
+    public function delete($where) {
+		$this->getDbTable ()->delete($where);
+	}
 }
 ?>
