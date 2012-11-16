@@ -89,7 +89,7 @@ class UserController extends Zend_Controller_Action
     }
     
     
-    public function addPasswordAction()
+    public function changePasswordAction()
     {
     	$data = $this->getRequest()->getPost();
     	$user = new Default_Model_User();
