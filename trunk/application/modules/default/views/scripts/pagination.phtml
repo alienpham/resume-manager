@@ -8,7 +8,7 @@ $params = array(
 <div class="pagination" style="width:100%" align="center">
         <!-- First page link -->
         <?php if (isset($this->previous)): ?>
-              <a href="<?php echo $this->url(array_merge(array('page' => $this->first), $params));?>">Start</a> 
+              <a href="<?php echo $this->url(array_merge(array('controller' => 'resume','action' => 'index','page' => $this->first), $params));?>">Start</a> 
         <?php else: ?>
                 <span class="disabled">Start</span> 
         <?php endif; ?>
@@ -16,27 +16,27 @@ $params = array(
         <!-- Previous page link -->
     
         <?php if (isset($this->previous)): ?>
-              <a href="<?php echo $this->url(array_merge(array('page' => $this->previous), $params));?>">&lt; Previous</a> 
+              <a href="<?php echo $this->url(array_merge(array('controller' => 'resume','action' => 'index','page' => $this->previous), $params));?>">&lt; Previous</a> 
         <?php else: ?>
             <span class="disabled">&lt; Previous</span> 
         <?php endif; ?>
         <!-- Numbered page links -->
         <?php foreach ($this->pagesInRange as $page): ?>
             <?php if ($page != $this->current): ?>
-                <a href="<?php echo $this->url(array_merge(array('page' => $page), $params)); ?>"><?php echo $page; ?></a>
+                <a href="<?php echo $this->url(array_merge(array('controller' => 'resume','action' => 'index','page' => $page), $params)); ?>"><?php echo $page; ?></a>
             <?php else: ?>
                 <span><?php echo $page; ?></span>
             <?php endif; ?>
         <?php endforeach; ?>
         <!-- Next page link -->
         <?php if (isset($this->next)): ?>
-               <a href="<?php echo $this->url(array_merge(array('page' => $this->next), $params)); ?>">Next &gt;</a> 
+               <a href="<?php echo $this->url(array_merge(array('controller' => 'resume','action' => 'index', 'page' => $this->next), $params)); ?>">Next &gt;</a> 
         <?php else: ?>
              <span class="disabled">Next &gt;</span> 
         <?php endif; ?>
         <!-- Last page link -->
         <?php if (isset($this->next)): ?>
-              <a href="<?php echo $this->url(array_merge(array('page' => $this->last), $params)); ?>">End</a>
+              <a href="<?php echo $this->url(array_merge(array('controller' => 'resume','action' => 'index', 'page' => $this->last), $params)); ?>">End</a>
         <?php else: ?>
             <span class="disabled">End</span>
         <?php endif; ?>
