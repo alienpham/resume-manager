@@ -42,21 +42,20 @@ class Company_CompanyController extends Zend_Controller_Action
 			$this->view->website = $cominfo[0]['website'];
 			$industry_id=$cominfo[0]['industry_id'];
 			$busines_type_id=$cominfo[0]['busines_type_id'];
-			$consultant_id=$company->getFieldValue ("com_has_consultant_incharge", "company_id = '$company_id'", "consultant_id");
+			//$consultant_id=$company->getFieldValue ("com_has_consultant_incharge", "company_id = '$company_id'", "consultant_id");
 		}
-		else
-			$this->view->title_page = "ADD COMPANY";
+		else $this->view->title_page = "ADD COMPANY";
+		
 		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","name",$industry_id);
 		$list_busines_type=$company->getLookup("busines_type_lookup","1","busines_type_id","name",$busines_type_id);
 		$list_consultant=$company->getLookup("consultant","status='Active'","consultant_id","full_name",$consultant_id);
+		
 		if (isset($post['save']))
 		{
 			if (isset($post['company_id']))
 			{
-				$rs=$company->getListCompany("1", "company_id DESC", 0, 1);
 				$rscompany= new Company_Model_Company();
 				$rscompany->setCompanyId($post['company_id']);
-				$rscompany->setCompanyCode("C".($rs[0]['company_id']+1));
 				$rscompany->setFullNameEn($post['full_name_en']);
 				$rscompany->setShortNameEn($post['short_name_en']);
 				$rscompany->setFullNameVn($post['full_name_vn']);
@@ -72,44 +71,6 @@ class Company_CompanyController extends Zend_Controller_Action
 				$rscompany->setCreatedDate(date('Y-m-d H:i:s'));
 				$rscompany->setUpdatedDate(date('Y-m-d H:i:s'));
 				$ComapnyId=$company->save ($rscompany);
-
-				$consultantincharge= new Company_Model_ComHasConsultantIncharge();
-				$consultantincharge->setConsultantId($post['consultant_id']);
-				$consultantincharge->setCompanyId($ComapnyId);
-				$consultantincharge->setStatus("Active");
-				$consultantincharge->setActionDate(date('Y-m-d H:i:s'));
-				$conincharge = new Company_Model_ComHasConsultantInchargeMapper();
-
-				if ($post['company_id']=="")
-				{
-					$conincharge->save($consultantincharge);
-				}
-				else
-				{
-					$consultant_id=$company->getFieldValue ("com_has_consultant_incharge", "company_id = '$ComapnyId'", "com_consultant_incharge_id");
-					if ($consultant_id=="" && $post['consultant_id']!="")
-						$conincharge->save($consultantincharge);
-					else
-						$conincharge->updateComIncharge($post['consultant_id'], $ComapnyId);
-				}
-				$rscominfomation= new Company_Model_ComInformation();
-				$rscominfomation->setCompanyId($ComapnyId);
-				$rscominfomation->setApplyTo("Internal");
-				$rscominfomation->setCompanyId($ComapnyId);
-				$rscominfomation->setContent($post['contents']);
-				$cominfomation = new Company_Model_ComInformationMapper();
-				if ($post['company_id']=="")
-				{
-					$cominfomation->save($rscominfomation);
-				}
-				else
-				{
-					$com_information_id=$company->getFieldValue ("com_information", "company_id = '$ComapnyId'", "com_information_id");
-					if ($com_information_id=="" && $post['contents']!="")
-						$cominfomation->save($rscominfomation);
-					else
-						$cominfomation->updateComInformation($ComapnyId,$post['contents']);
-				}
 
 				$this->_redirect('/company');
 			}
@@ -159,23 +120,11 @@ class Company_CompanyController extends Zend_Controller_Action
 		$this->view->contact_person_id = $contact_person_id;
 
 		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
-/*		$this->view->title = isset($contactinfo[0]['title'])?$contactinfo[0]['title']:"";
-		$this->view->full_name = isset($contactinfo[0]['full_name'])?$contactinfo[0]['full_name']:"";
-		$this->view->job_title = isset($contactinfo[0]['job_title'])?$contactinfo[0]['job_title']:"";
-		$this->view->tel_1 = isset($contactinfo[0]['tel_1'])?$contactinfo[0]['tel_1']:"";
-		$this->view->tel_2 = isset($contactinfo[0]['tel_2'])?$contactinfo[0]['tel_2']:"";
-		$this->view->fax = isset($contactinfo[0]['fax'])?$contactinfo[0]['fax']:"";
-		$this->view->mobile_1 = isset($contactinfo[0]['mobile_1'])?$contactinfo[0]['mobile_1']:"";
-		$this->view->mobile_2 = isset($contactinfo[0]['mobile_2'])?$contactinfo[0]['mobile_2']:"";
-		$this->view->email_1 = isset($contactinfo[0]['email_1'])?$contactinfo[0]['email_1']:"";
-		$this->view->email_2 = isset($contactinfo[0]['email_2'])?$contactinfo[0]['email_2']:"";
-		*/
 		$this->view->contactinfo = @$contactinfo[0];
 	}
 
 	public function viewCompanyAction()
 	{
-	    //echo 222;exit;
 	    $this->_helper->layout->disableLayout();
 	    
 		$post = $this->getRequest()->getPost();

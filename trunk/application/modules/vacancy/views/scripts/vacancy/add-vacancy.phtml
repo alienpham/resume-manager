@@ -1,7 +1,6 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
 <script language="javascript">
-
 function trim(str, chars) {
 	return ltrim(rtrim(str, chars), chars);
 }
@@ -15,173 +14,61 @@ function rtrim(str, chars) {
 	chars = chars || "\\s";
 	return str.replace(new RegExp("[" + chars + "]+$", "g"), "");
 }
-function uncheckAllCheckbox(cbname,txtName,hdField){
-	$(txtName).val('Please select...');
-	$(hdField).val('');
-	$("input[name='"+cbname+"']").each(function(i,val) {
-             this.checked = false;
-    });
-	$('#lb'+trim(hdField,'#')).html('');
-}
-function countCheck(cbname,txtName,hdField){
-	num=0;
-	$("input[name='"+cbname+"']:checked").each(function(i,val) {
-		  if (num==0)
-		  {
-		  	str=$(this).val();
-			strname=$(this).next().text();
-		  }
-		 else
-		 {
-		 	str=str+","+$(this).val();
-			strname=strname+", "+$(this).next().text();
-		 }
-		
-		num++;
-    });
-	if (num>0)
-	{
-		$(txtName).val(num+' items selected');
-		$(hdField).val(str);
-		$('#lb'+trim(hdField,'#')).html('Selected: '+strname);
-		
-	}
-	else
-	{
-		$(txtName).val('Please select...');
-		$(hdField).val();
-		$('#lb'+trim(hdField,'#')).html('');
-	}
-}
 </script>
-
-
-<div class="from-add-01" style="width:1050px;">
-<form name="frmAddVacancy" action="/vacancy/vacancy/add-vacancy" method="post" onsubmit="return checkValid()">
+<div class="from-add-01">
+<form name="frmAddVacancy" action="/vacancy/vacancy/add-vacancy" method="post">
 <input type="hidden" name="vacancy_id" id="vacancy_id" value="<?php echo $this->vacancy_id;?>"> 
-	<h1 style="color:#848484;margin-left:20px;">ADD VACANCY</h1>
-	<br />
-	<div id="head" style="background-color:#8DC54C;width:992px;padding-left:20px;"><h2> VACANCY DETAILS</h2></div>
-	<div id="left" style="float:left;width:600px;">
+	<h2 style="color:#848484;margin-left:20px;">ADD VACANCY</h2>
 		<ul>
 			<li>
 				<label></label>
 				<em class="error"></em>
 			</li>
 			<li>
-				<label>Consultant:<em>*</em></label>
-					<select name="consultant_id" id="consultant_id" style="width:230px;">
-                    	<option value="" selected="selected">Please select</option>
-                     	<?php echo $this->list_consultant; ?>
-                	</select>
+				<label>Company:</label>
+				<input type="text" name="company_id" id="company_id">
 			</li>
 			<li>
-				<label>Company:<em>*</em></label>
-					<select name="company_id" id="company_id" style="width:230px;">
-                    	<option value="">Please select</option>
-                    	<?php echo $this->list_company; ?>
-                    </select>
+				<label>Job Title:</label>
+				<input type="text" name="job_title" id="job_title" value="<?php echo $this->job_title; ?>">
 			</li>
 			<li>
-				<label>Job Title:<em>*</em></label>
-				<input type="text" name="job_title" id="job_title" style="width:210px;" value="<?php echo $this->job_title; ?>">
-			</li>
-			<li>
-				<label># of Vacancies:<em>*</em></label>
-				<input name="no_of_vacancies" type="text" id="no_of_vacancies" style="width:210px;" value="<?php echo $this->no_of_vacancies; ?>">
-			</li>
-			<li>
-				<label>Salary:<em>*</em></label>
+				<label>Salary:</label>
 				<input name="min_salary" type="text" id="min_salary" style="width:93px;" value="<?php echo $this->min_salary; ?>">
                 <input name="max_salary" type="text" id="max_salary" style="width:93px;" value="<?php echo $this->max_salary; ?>"> USD		
 			</li>
+			
 			<li>
-				<label>Estimated Salary:<em>*</em></label>
-				<input name="estimated_salary" type="text" id="estimated_salary" style="width:210px;" value="<?php echo $this->estimated_salary; ?>"> USD (for internal reference only)
+				<label>Location:</label>
+		        <input type="text" name="province" id="province">
 			</li>
 			<li>
-				<label>Location:<em>*</em></label>
-					<div class="comboxtemplate_n" id="comboProvince" style="cursor:pointer;z-index:2" onclick="$('#subcontentadvprovince').attr('style','z-index:2; position:absolute;  border: 1px solid #C3DAF9;  width:750px; height: 300px; background-color:#ffffff; margin-top:21px; margin-left:-1px');">	
-		                <input type="text" readonly="readonly" name="targetProvince" id="targetProvince" style="padding-left:4px;border:0px; width:200px; cursor:pointer;" value="<?php echo $this->numprovince; ?>"  >
-		                <input type="hidden" name="hdProvince" value="<?php echo $this->listProvinceId; ?>" id="hdProvince">
-	                </div>
-                	<div  id="subcontentadvprovince" style="position:absolute; display:none; border: 1px solid #C3DAF9; width:750px; height: 250px; background-color:#ffffff; margin-top:21px; ">
-		                <div  style="overflow:auto;width:750px; height:300px; padding: 10px 10px 10px 10px;"><?php echo $this->listProvince; ?></div>	
-		                <div style="width: 750px;">
-		                <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:-23px; margin-left:-1px"><tr><td bgcolor="#c3daf9" >
-		                <span style="float:left;">&nbsp;&nbsp;<a href="#" onclick="uncheckAllCheckbox('province_id','#targetProvince','#hdProvince');" style="text-decoration:none"><strong>Unselect All</strong></a></span>
-		                <span style="float:right;"><a href="#" onclick="$('#subcontentadvprovince').hide();" style="text-decoration:none"><strong>Close</strong></a>&nbsp;&nbsp;</span>
-		                </td></tr></table>
-		                </div>
-                	</div>
-                	<label id="lbhdProvince" ><?php echo $this->location;?></label>
-			</li>
-			<li>
-				<label>Work Level:<em>*</em></label>
-				<select name="work_level_id" id="work_level_id" style="width:233px;">
+				<label>Work Level:</label>
+				<select name="work_level_id">
                 	<option value="">Please select</option>
                     <?php echo $this->listWorkLevel;?>
                 </select>
 			</li>
 			<li>
-				<label>Function:<em>*</em></label>
-				<div class="comboxtemplate_n" id="comboFunction" style="cursor:pointer;z-index:1" onclick="$('#subcontentadvfunction').attr('style','position:absolute;  border: 1px solid #C3DAF9;  width:750px; height: 300px; background-color:#ffffff; margin-top:21px; margin-left:-1px');">	
-                	<input type="text" readonly="readonly" name="targetFunction" id="targetFunction" style="padding-left:4px;border:0px; width: 200px;cursor:pointer;" value="<?php echo $this->numfunction;?>"  >
-                    <input type="hidden" name="hdFunction" value="<?php echo $this->listFunctionId;?>" id="hdFunction">
-                </div>
-                <div  id="subcontentadvfunction" style="position:absolute; display:none; border: 1px solid #C3DAF9; width:750px; height: 250px; background-color:#ffffff; margin-top:21px; ">
-                	<div  style="overflow:auto;width:750px; height:300px; padding: 10px 10px 10px 10px;"><?php echo $this->listfunction;?></div>	
-                    <div style="width: 750px;">
-                    	<table width="100%" cellpadding="0" cellspacing="0" style="margin-top:-23px; margin-left:-1px"><tr><td bgcolor="#c3daf9" >
-                        <span style="float:left;">&nbsp;&nbsp;<a href="#" onclick="uncheckAllCheckbox('function_id','#targetFunction','#hdFunction');" style="text-decoration:none"><strong>Unselect All</strong></a></span>
-                        <span style="float:right;"><a href="#" onclick="$('#subcontentadvfunction').hide();" style="text-decoration:none"><strong>Close</strong></a>&nbsp;&nbsp;</span>
-                        </td></tr></table>
-                    </div>
-                 </div>   
+				<label>Function:</label>
+                <input type="text" name="function" id="function" value="">
+
 			</li>
 			<li>
-				<label>Public:<em>*</em></label>
-				<label>
-					<input type="radio" name="p" id="p" value="Yes" <?php if ($this->p=='Yes') echo 'checked'; ?> style="margin:0;padding:0;"> Yes, Public
-				</label>
-				<label>
-					<input type="radio" name="p" id="p" value="No" <?php if ($this->p=='No') echo 'checked'; ?> style="margin:0;padding:0;"> No, Confidential
-				</label>
-			</li>
-			<li>
-				<label>Status:<em>*</em></label>
+				<label>Status:</label>
 				<select name="status" id="status" style="width:235px">
                 	<option value="">Please select</option>
                     <option value="Open" <?php if ($this->status=='Open') echo 'selected' ?> >Open</option>
                     <option value="Close" <?php if ($this->status=='Close') echo 'selected' ?> >Close</option>
                 </select>
 			</li>
+            <li>
+                <label>Job Description &amp; Requirements:</label>
+                <textarea name="desc_reqs" cols="40" rows="20" id="desc_reqs"><?php echo $this->desc_reqs;?></textarea>
+            </li>
 		</ul>
-	</div>
-	<div style="float:left;width:400px;">
-		Job Description &amp; Requirements:
-		<textarea name="desc_reqs" cols="40" rows="20" id="desc_reqs"><?php echo $this->desc_reqs;?></textarea>
-	</div>
-	<div style="clear:both;width:992px;background-color:#8DC54C;padding-left:20px;">
-		<h2>COMPANY INFORMATION</h2>
-	</div>
-	<div style="width:600px;float:left;">
-		<ul>
-			<li>
-				<label>Company Information <br />
-                  (will be shown with job postings):
-				</label>
-				<label>
-					<textarea name="textfield6" cols="60" rows="5" id="textfield6">Company is an Executive Search & Recruitment agency in four main industries: consumer goods & services, finance & banking, ICT, and industrial; a division of NhanViet Management Group (NVM Group) and a partner of Glasford International, a global collaboration of independent executive search firms, operating successfully over 30 countries throughout Europe, the Americas, Middle East, Far-East & Africa.
-					Our client is <INSERT DESCRIPTION ABOUT THE COMPANY HERE>
-                	</textarea>
-				</label>
-			</li>
-		</ul>
-	</div>
-	<div style="width:392px;float:left;margin-top:25px;">
-		Notice:<strong> Updated information will be shown in all job postings of the same company.</strong>
-	</div>
+
+        
 	<div align="center" style="width:992px;clear:both;">
 		<input type="submit" name="btSave" id="btSave" value="Save" class="button01">&nbsp;&nbsp;&nbsp;
         <input type="submit" class="button01" name="btAdd" id="btAdd" value="Save &amp; Add"> &nbsp;&nbsp;&nbsp;
@@ -190,54 +77,3 @@ function countCheck(cbname,txtName,hdField){
 </form>
 </div>
 
-<script>
-	function checkValid()
-	{
-		var consultant_id = $("#consultant_id").val();
-		var company_id = $("#company_id").val();
-		var work_level_id = $("#work_level_id").val();
-		var job_title = $("#job_title").val();
-		var min_salary = $("#min_salary").val();
-		var max_salary = $("#max_salary").val();
-		var estimated_salary = $("#estimated_salary").val();
-		var status = $("#status").val();
-		var p = $("#p").val();
-		var targetFunction = $("#targetFunction").val();
-		var targetProvince = $("#targetProvince").val();
-		var no_of_vacancies = $("#no_of_vacancies").val();
-		
-		if(consultant_id == '' || company_id == '' || work_level_id == '' || job_title == '' || estimated_salary == '' || status == '' || p == '' || min_salary == '' || max_salary == '' || no_of_vacancies == '')
-		{
-		$(".error").html('Please input into field required (*)');
-		return false;
-		}else{
-			if(isNaN(min_salary) || isNaN(max_salary))
-			{
-			$(".error").html('Please enter the salary is one string zero characters.');
-			return false;
-			}else{
-				if(min_salary < 0 || max_salary < 0 || min_salary > max_salary)
-				{
-				$(".error").html('Please review the lowest and highest salary.');
-				return false;
-				}
-			}
-			if(targetProvince == 'Please select ...')
-			{
-			$(".error").html('Please select the value of Location.');
-			return false;
-			}
-			if(targetFunction == 'Please select ...')
-			{
-			$(".error").html('Please select the value of Function.');
-			return false;
-			}
-			if(isNaN(no_of_vacancies))
-			{
-			$(".error").html('please enter the vacancy is number.');
-			return false;
-			}
-		}
-		
-	}
-</script>

@@ -17,19 +17,12 @@
     <input type="hidden" name="page" id="page" value="1" />
     
 </form>
-</div>  <br />
-<p class="today-entry" id="report">Public: <strong><?php echo $this->totalPublic; ?></strong> | Confidential: <strong><?php echo $this->totalConfidential; ?></strong> | Total Open: <strong><?php echo $this->totalOpen; ?></strong></p>
-	<br />
+</div>  
+<br />
 	<a href="/vacancy/vacancy/add-vacancy" style="text-decoration:none;">
 		<input class="button01" type="button" value="Add Vacancy" />
 	</a>
-        <input class="button01" type="button" value="Close" id="btClose"/>
-        <input class="button01" type="button" value="Delete" />
-        <a href="/vacancy/vacancy/manage-candidate" style="text-decoration:none;">
-		<input class="button01" type="button" value="Manage Candidates" />
-	</a>
-    <br />
-<br />
+<br /><br />
 <?php
 $vacancy = new Vacancy_Model_VacancyMapper();
 $company = new Company_Model_CompanyMapper();
@@ -58,9 +51,6 @@ $listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($thi
             <div class="location">
                 <h4>Location</h4>
             </div>
-            <div class="process">
-                <h4>Process</h4>
-            </div>
             <div class="posted">
                 <h4>Posted</h4>
             </div>           
@@ -83,11 +73,8 @@ $listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($thi
 			if ($companyname=="")
 				$companyname = $company->getFieldValue("company","company_id='".$rs['company_id']."'","full_name_vn");
 			$consultantname = $company->getFieldValue("consultant","consultant_id IN (SELECT consultant_id FROM va_has_consultant WHERE vacancy_id='".$rs['vacancy_id']."' AND inchange_type='Main')","abbreviated_name");
-			//$status = $company->getFieldValue("va_has_consultant"," vacancy_id='".$rs['vacancy_id']."' AND inchange_type='Main'","status");
 			$location =  $company->getFieldValue("province_lookup","province_id IN(SELECT province_id FROM va_has_location WHERE vacancy_id='".$rs['vacancy_id']."')","name", 0, 1);
 			$arr=explode("|",$location);
-			$resume_process_id = $company->getFieldValue("candidate_has_process","candidate_process_id IN (SELECT max(cp.candidate_process_id ) FROM candidate_has_process cp WHERE cp.candidate_id IN (SELECT c.candidate_id FROM candidate c WHERE vacancy_id = '".$rs['vacancy_id']."'))","resume_process_id", 0, 1);
-			$process =  $company->getFieldValue("resume_process_lookup","resume_process_id ='$resume_process_id'","name", 0, 1);
 			?>
         	
             <div class="company">
@@ -97,7 +84,7 @@ $listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($thi
                 <input name="vacancy_id" id="vacancy_id" type="checkbox" value="<?php echo $rs['vacancy_id'];?>" />
             </div>
             <div class="code">
-            <?php echo $rs['vacancy_code'];?>
+            
             </div>
             <div class="vacancy">
             <h4><a href="/vacancy/vacancy/view-vacancy/vacancy_id/<?php echo $rs['vacancy_id'];?>"><?php echo $rs['job_title'];?></a></h4>
@@ -108,9 +95,6 @@ $listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($thi
             <div class="location">
             <?php if (count($arr)==1) echo trim($arr[0]); else
 			echo trim($arr[0])." ..." ;?>
-            </div>
-            <div class="process">
-            <?php echo $process;?>
             </div>
             <div class="posted">
             <?php echo date("d-m-Y",strtotime($rs['created_date']));?>
