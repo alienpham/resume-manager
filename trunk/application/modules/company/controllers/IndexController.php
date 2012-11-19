@@ -30,14 +30,14 @@ class Company_IndexController extends Zend_Controller_Action
             $currentPage = $page;
         }
 		$condition="1";
-		if (isset($post['txtSearch']) && trim($post['txtSearch'])!="")
-		{
-			if ($post['ccode_id']==1)
-				$condition = "company_code LIKE '%".$post['txtSearch']."%'";
-			else
-			if ($post['ccode_id']==2)
-				$condition = "full_name_en LIKE '%".$post['txtSearch']."%' OR short_name_en LIKE '%".$post['txtSearch']."%' OR full_name_vn LIKE '%".$post['txtSearch']."%' OR short_name_vn LIKE '%".$post['txtSearch']."%'";
-		}
+//		if (isset($post['txtSearch']) && trim($post['txtSearch'])!="")
+//		{
+//			if ($post['ccode_id']==1)
+//				$condition = "company_code LIKE '%".$post['txtSearch']."%'";
+//			else
+//			if ($post['ccode_id']==2)
+//				$condition = "full_name_en LIKE '%".$post['txtSearch']."%' OR short_name_en LIKE '%".$post['txtSearch']."%' OR full_name_vn LIKE '%".$post['txtSearch']."%' OR short_name_vn LIKE '%".$post['txtSearch']."%'";
+//		}
 
 		if (isset($post['industry_id']) && $post['industry_id']!="" && $post['industry_id']!="0")
 		{
