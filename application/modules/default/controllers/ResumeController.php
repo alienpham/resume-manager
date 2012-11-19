@@ -51,7 +51,7 @@ class ResumeController extends Zend_Controller_Action
 
 		$this->view->choice = $choice;
 		$this->view->search = $search;
-		//http://zendgeek.blogspot.com
+
 		$rows = $resume->getListResume($where, array($choice));
 		$paginator = Zend_Paginator::factory($rows);
 		$paginator->setItemCountPerPage($rowPerPage);

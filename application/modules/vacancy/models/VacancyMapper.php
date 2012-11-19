@@ -54,9 +54,12 @@ class Vacancy_Model_VacancyMapper {
     {
     	$db = $this->getDbTable()->getAdapter();
     	if ($limit=="")
-       		$sql = "SELECT * FROM vacancy WHERE $where ORDER BY $orderby";
+       		//$sql = "SELECT * FROM vacancy WHERE $where ORDER BY $orderby";
+       		$sql = "SELECT * FROM vacancy ORDER BY $orderby";
        	else 
-       		$sql = "SELECT * FROM vacancy WHERE $where ORDER BY $orderby LIMIT $offset,$limit";
+       		//$sql = "SELECT * FROM vacancy WHERE $where ORDER BY $orderby LIMIT $offset,$limit";
+       		$sql = "SELECT * FROM vacancy ORDER BY $orderby LIMIT $offset,$limit";
+//echo $sql;exit;
         $result = $db->fetchAll($sql);
         
         return $result;
