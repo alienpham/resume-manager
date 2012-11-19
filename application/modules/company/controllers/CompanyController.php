@@ -40,14 +40,14 @@ class Company_CompanyController extends Zend_Controller_Action
 			$this->view->email = $cominfo[0]['email'];
 			$this->view->address = $cominfo[0]['address'];
 			$this->view->website = $cominfo[0]['website'];
-			$industry_id=$cominfo[0]['industry_id'];
-			$busines_type_id=$cominfo[0]['busines_type_id'];
+			$industry=$cominfo[0]['industry'];
+			$busines_type=$cominfo[0]['busines_type'];
 			//$consultant_id=$company->getFieldValue ("com_has_consultant_incharge", "company_id = '$company_id'", "consultant_id");
 		}
 		else $this->view->title_page = "ADD COMPANY";
 		
-		$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","name",$industry_id);
-		$list_busines_type=$company->getLookup("busines_type_lookup","1","busines_type_id","name",$busines_type_id);
+		//$list_industry=$company->getLookup("industry_lookup","parent_industry_id IS NULL","industry_id","name",$industry);
+		//$list_busines_type=$company->getLookup("busines_type_lookup","1","busines_type_id","name",$busines_type);
 		$list_consultant=$company->getLookup("consultant","status='Active'","consultant_id","full_name",$consultant_id);
 		
 		if (isset($post['save']))
@@ -60,8 +60,8 @@ class Company_CompanyController extends Zend_Controller_Action
 				$rscompany->setShortNameEn($post['short_name_en']);
 				$rscompany->setFullNameVn($post['full_name_vn']);
 				$rscompany->setShortNameVn($post['short_name_vn']);
-				$rscompany->setBusinesTypeId($post['busines_type_id']);
-				$rscompany->setIndustryId($post['industry_id']);
+				$rscompany->setBusinesTypeId($post['busines_type']);
+				$rscompany->setIndustryId($post['industry']);
 				$rscompany->setTel($post['tel']);
 				$rscompany->setFax($post['fax']);
 				$rscompany->setEmail($post['email']);
@@ -77,8 +77,8 @@ class Company_CompanyController extends Zend_Controller_Action
 
 		}
 		$this->view->company_id = $company_id;
-		$this->view->list_industry = $list_industry;
-		$this->view->list_busines_type = $list_busines_type;
+		//$this->view->list_industry = $list_industry;
+		//$this->view->list_busines_type = $list_busines_type;
 		$this->view->list_consultant = $list_consultant;
 	}
 
@@ -133,7 +133,7 @@ class Company_CompanyController extends Zend_Controller_Action
 
 		$cominfo = $company->getListCompany("company_id = '$company_id'", "company_id DESC", 0, 1);
 		$this->view->company_id = $company_id;
-		$this->view->company_code = $cominfo[0]['company_code'];
+		//$this->view->company_code = $cominfo[0]['company_code'];
 		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
 		$this->view->company_address = $cominfo[0]['address'];
 		

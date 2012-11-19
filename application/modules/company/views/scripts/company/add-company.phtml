@@ -28,22 +28,12 @@
 		<label><input type="text" name="short_name_vn" id="short_name_vn" value="<?php  echo $this->short_name_vn;?>"></label>
 	</li>
 	<li>
-		<label>Business Type:<em>*</em></label>
-		<label>
-			<select name="busines_type_id" id="busines_type_id">
-				<option value="">Please Select</option>
-				<?php echo $this->list_industry;?>
-			</select>
-		</label>
+		<label>Business Type:</label>		
+		<input type="text" name="busines_type" id="busines_type" value="<?php echo $this->busines_type; ?>">						
 	</li>
 	<li>
-		<label>Industry:<em>*</em></label>
-		<label>
-			<select name="industry_id" id="industry_id">
-				<option value="">Please Select</option>
-				<?php echo $this->list_industry;?>
-			</select>
-		</label>
+		<label>Industry:</label>		
+		<input type="text" name="industry" id="industry">						
 	</li>
 	<li>
 		<label>Telephone:</label>
@@ -78,18 +68,9 @@
 		</label>
 	</li>
 	<li>
-		<label>Asigned To:<em>*</em></label>
-		<label>
-			<select name="consultant_id" id="consultant_id" style="width:200px">
-				<option value="">Please Select</option>
-				<?php echo $this->list_consultant;?>
-			</select>
-		</label>
-	</li>
-	<li>
 		 <label></label>
-		 <input class="button01" type="submit" name="save" id="save" value="Save">&nbsp;&nbsp;&nbsp;
-         <a href="/company" style="text-decoration:none;"><input class="button02" type="button" name="cancel" id="cancel" value="Cancel"></a>
+         <a href="/company" style="text-decoration:none;"><input class="button02" type="button" name="cancel" id="cancel" value="Cancel"></a> &nbsp;&nbsp;&nbsp;
+         <input class="button01" type="submit" name="save" id="save" value="Save">
 	</li>
 </ul>
 </div>
@@ -100,13 +81,10 @@ function checkValid()
 	var full_name_en = $("#full_name_en").val();
 	var full_name_vn = $("#full_name_vn").val();
 	var short_name_en = $("#short_name_en").val();
-	var short_name_vn = $("#short_name_vn").val();
-	var busines_type_id = $("#busines_type_id").val();
-	var industry_id = $("#industry_id").val();
-    var consultant_id = $("#consultant_id").val();
+	var short_name_vn = $("#short_name_vn").val();		
     var email = $('#email').val();
 
-    if(full_name_en == '' || full_name_vn == '' || short_name_en == '' || short_name_vn == '' || busines_type_id == '' || industry_id == '' || consultant_id == '') {
+    if(full_name_en == '' || full_name_vn == '' || short_name_en == '' || short_name_vn == '' ||  consultant_id == '') {
         $('.error').html('Please input into field required (*)');
         return false;
     }

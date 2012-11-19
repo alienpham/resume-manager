@@ -27,13 +27,13 @@ class Company_Model_CompanyMapper {
 	public function save (Company_Model_Company $company)
     {
         $data = array(
-			'company_code' 		=> $company->getCompanyCode(), 
+			//'company_code' 		=> $company->getCompanyCode(), 
 			'full_name_en' 		=> $company->getFullNameEn(), 
 			'short_name_en' 	=> $company->getShortNameEn(), 
 			'full_name_vn' 		=> $company->getFullNameVn(),
          	'short_name_vn'		=> $company->getShortNameVn(),
-         	'busines_type_id' 	=> $company->getBusinesTypeId(),
-			'industry_id' 		=> $company->getIndustryId(),
+         	'busines_type' 	=> $company->getBusinesTypeId(),
+			'industry' 		=> $company->getIndustryId(),
 			'tel' 				=> $company->getTel(),
 			'fax' 				=> $company->getFax(),
 			'email' 			=> $company->getEmail(),
@@ -46,7 +46,7 @@ class Company_Model_CompanyMapper {
 		if (null == ($id = $company->getCompanyId())) {
             return $this->getDbTable()->insert($data);
         } else {
-        	unset($data['company_code']);
+        	//unset($data['company_code']);
         	unset($data['created_date']);
         	$this->getDbTable()->update($data, array('company_id = ?' => $id));
             return $id;

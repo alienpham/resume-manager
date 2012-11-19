@@ -57,3 +57,11 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
   `updated_date` datetime NOT NULL,
   PRIMARY KEY (`vacancy_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8  ;
+
+ALTER TABLE  `company` DROP FOREIGN KEY  `FK_busines_type_lookup_1` ;
+
+ALTER TABLE  `company` DROP FOREIGN KEY  `FK_industry_lookup_1` ;
+
+ALTER TABLE  `company` CHANGE  `busines_type_id`  `busines_type` VARCHAR( 255 ) NULL
+
+ALTER TABLE  `company` CHANGE  `industry_id`  `industry` VARCHAR( 255 ) NULL
