@@ -60,37 +60,6 @@ function checkLogin(){
             <div class="name">
                 <h4>Company</h4>
             </div>
-            <div class="ind">
-                <h4>Ind</h4>
-            </div>
-            <div class="act">
-                <h4>Act</h4>
-            </div>
-            <div class="newva">
-                <h4>New Vac</h4>
-            </div>
-            <div class="openva">
-                <h4>Open Vac</h4>
-            </div>
-            <div class="ressent">
-                <h4>Res Sent</h4>
-            </div>
-            <div class="inter">
-                <h4>Interview</h4>
-            </div>
-            
-            <div class="offer">
-                <h4>Off Made</h4>
-            </div>
-            <div class="accept">
-                <h4>Off Acpt</h4>
-            </div>
-            <div class="joined">
-                <h4>Joined</h4>
-            </div>
-            <div class="status">
-                <h4>Status</h4>
-            </div>
             <div class="cons">
                 <h4>Cons</h4>
             </div>
@@ -99,7 +68,7 @@ function checkLogin(){
             </div>
         </div>
         <div class="info-content">
-        <?php echo $this->partial('index/list-company.phtml', array('company' => $this->company, 'list' => $this->list)); ?>
+        <?php echo $this->partial('index/list-company.phtml', array('paginator' => $this->paginator)); ?>
         </div>
     </div>
 </div>
@@ -129,32 +98,9 @@ function checkLogin(){
  <input type="hidden" name="hdcompany_id" id="hdcompany_id" /> 
  </form>
  <div id="view_company" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
- <script language="javascript">
- function getValueListCheckBox(list,id)
-{	
-	if(list!=undefined){
-    	var num=list.length;
-    	if (num==undefined){
-    		if (list.checked) id.value=list.value;
-    		else id.value="";
-    	} else {
-    		count=0;
-    		str="";
-    		for (i=0;i<num;i++)	{
-    			if (list[i].checked)
-    			{
-    				if (count==0) str=list[i].value;
-    				else str = str + ", " + list[i].value;
-                    
-    				count++;
-    			}
-    		}
-    		id.value=str;
-    	}
-	}
-	//alert(id.value);
-}
  
+<script language="javascript">
+
  function addContact()
  {
 	 if ($("#hdcompany_id").val()=="")
@@ -186,4 +132,4 @@ function checkLogin(){
      //End View detail candidate
  });
 
- </script>
+</script>

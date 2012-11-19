@@ -10,7 +10,7 @@ class Vacancy_IndexController extends Zend_Controller_Action
 		
         /* Initialize action controller here */
         $view = new Zend_View();
-        $view->headScript()->appendFile ( '/js/jquery-1.8.0.min.js' );
+        #$view->headScript()->appendFile ( '/js/jquery-1.8.0.min.js' );
         $view->headLink()->appendStylesheet ( '/js/themes/base/jquery.ui.all.css' );
         $view->headScript()->appendFile ( '/js/jquery.ui.datepicker.js' );
         $view->headScript()->appendFile ( '/js/jquery.ui.core.js' );
@@ -35,7 +35,8 @@ class Vacancy_IndexController extends Zend_Controller_Action
         if(!empty($page)) {
             $currentPage = $page;
         }
-		$condition="company_id IN (SELECT company_id FROM com_has_consultant_incharge WHERE consultant_id='".$aNamespace->consultant_id."')";
+		//$condition="company_id IN (SELECT company_id FROM com_has_consultant_incharge WHERE consultant_id='".$aNamespace->consultant_id."')";
+		$condition="";
 		if (isset($post['txtSearch']) && trim($post['txtSearch'])!="")
 		{
 			if ($post['ccode_id']==1)
@@ -47,9 +48,9 @@ class Vacancy_IndexController extends Zend_Controller_Action
 		
 		if (isset($post['status']) && $post['status']!="" && $post['status']!="0")
 		{
-			$condition .= " AND status = '".$post['status']."'";
+			$condition .= " status = '".$post['status']."'";
 		}
-		$order_by="company_id ASC, updated_date DESC";
+		$order_by=" company_id ASC, updated_date DESC";
 		$vacancy = new Vacancy_Model_VacancyMapper();
 		$rows = $vacancy->getListVacancy ($condition, $order_by);
 		$paginator = Zend_Paginator::factory($rows);
