@@ -53,6 +53,7 @@ class Company_Model_ContactPersonMapper {
        		$sql = "SELECT * FROM contact_person WHERE $where ORDER BY $orderby";
        	else 
        		$sql = "SELECT * FROM contact_person WHERE $where ORDER BY $orderby LIMIT $offset,$limit";
+       		
         $result = $db->fetchAll($sql);
         
         return $result;

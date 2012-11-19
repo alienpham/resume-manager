@@ -61,9 +61,6 @@ class Vacancy_IndexController extends Zend_Controller_Action
 		$this->view->condition = $condition;
 		$this->view->currentPage = $currentPage;
 		$this->view->paginator = $paginator;
-		$this->view->totalOpen = $vacancy->countOpenVacancy();
-		$this->view->totalPublic = $vacancy->countPublicVacancy();
-		$this->view->totalConfidential = $vacancy->countConfidentialVacancy();
 	}
 
 	
