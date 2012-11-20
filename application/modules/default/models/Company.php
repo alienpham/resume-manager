@@ -1,5 +1,5 @@
 <?php
-class Company_Model_Company
+class Default_Model_Company
 {
 	protected $_company_id;
 	protected $_company_code;
@@ -7,8 +7,7 @@ class Company_Model_Company
 	protected $_short_name_en;
 	protected $_full_name_vn;
 	protected $_short_name_vn;
-	protected $_busines_type_id;
-	protected $_industry_id;
+	protected $_busines_type;
 	protected $_tel;
 	protected $_fax;
 	protected $_email;
@@ -98,17 +97,10 @@ class Company_Model_Company
 	}
 	
 	public function getBusinesTypeId() {
-		return $this->_busines_type_id;
+		return $this->_busines_type;
 	}
-	public function setBusinesTypeId($busines_type_id) {
-		$this->_busines_type_id = $busines_type_id;
-	}
-	
-	public function getIndustryId() {
-		return $this->_industry_id;
-	}
-	public function setIndustryId($industry_id) {
-		$this->_industry_id = $industry_id;
+	public function setBusinesTypeId($busines_type) {
+		$this->_busines_type = $busines_type;
 	}
 	
 	public function getTel() {

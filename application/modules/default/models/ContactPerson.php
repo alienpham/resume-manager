@@ -1,5 +1,5 @@
 <?php
-class Company_Model_ContactPerson
+class Default_Model_ContactPerson
 {
 	protected $_contact_person_id;
 	protected $_company_id;
