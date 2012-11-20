@@ -4,7 +4,7 @@ class Default_Model_CompanyMapper {
     public function setDbTable ($dbTable)
     {
         if (is_string($dbTable)) {
-            $dbTable = new $dbTable();
+            $dbTable = new Default_Model_DbTable_Company();
         }
         if (! $dbTable instanceof Zend_Db_Table_Abstract) {
             throw new Exception('Invalid table data gateway provided');
@@ -15,7 +15,7 @@ class Default_Model_CompanyMapper {
     public function getDbTable ()
     {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Company_Model_DbTable_Company');
+            $this->setDbTable('Default_Model_DbTable_Company');
         }
         return $this->_dbTable;
     }
@@ -24,7 +24,7 @@ class Default_Model_CompanyMapper {
 		$this->getDbTable ()->update ( $data, $where );
 	}
 	
-	public function save (Company_Model_Company $company)
+	public function save (Default_Model_Company $company)
     {
         $data = array(
 			//'company_code' 		=> $company->getCompanyCode(), 
@@ -45,7 +45,6 @@ class Default_Model_CompanyMapper {
 		if (null == ($id = $company->getCompanyId())) {
             return $this->getDbTable()->insert($data);
         } else {
-        	//unset($data['company_code']);
         	unset($data['created_date']);
         	$this->getDbTable()->update($data, array('company_id = ?' => $id));
             return $id;
@@ -53,7 +52,7 @@ class Default_Model_CompanyMapper {
 		
     }
 	
-	public function find ($id, Company_Model_Company $company)
+	public function find ($id, Default_Model_Company $company)
     {
         $result = $this->getDbTable()->find($id);        
         if (0 == count($result)) {
@@ -83,7 +82,7 @@ class Default_Model_CompanyMapper {
         $resultSet = $this->getDbTable()->fetchAll($where, $orderby);
         
         $entries = array();
-        $entry = new Company_Model_Company();
+        $entry = new Default_Model_Company();
         foreach ($resultSet as $row) {
             $entry->setCompanyId($row->company_id);
 			$entry->setCompanyCode($row->company_code);
@@ -103,5 +102,35 @@ class Default_Model_CompanyMapper {
             $entries[] = $entry;
         }
         return $entries;
+    }
+    
+    public function getListCompany()
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT * FROM company";
+    	$rows = $db->fetchAll($sql);
+    	return $rows;
+    }
+    
+    public function saveCompany($data)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "INSERT INTO company(full_name_en, short_name_en, full_name_vn, short_name_vn, busines_type, tel, fax, email, address, website, status, information, created_date, updated_date)
+    	VALUES (";
+    	$sql .= "'" .$data['full_name_en'] ."',";
+    	$sql .= "'" .$data['short_name_en'] ."',";
+    	$sql .= "'" .$data['full_name_vn'] ."',";
+    	$sql .= "'" .$data['short_name_vn'] ."',";
+    	$sql .= "'" .$data['busines_type'] ."',";
+    	$sql .= "'" .$data['tel'] ."',";
+    	$sql .= "'" .$data['fax'] ."',";
+    	$sql .= "'" .$data['email'] ."',";
+    	$sql .= "'" .$data['address'] ."',";
+    	$sql .= "'" .$data['website'] ."',";
+    	$sql .= "'" .$data['status'] ."',";
+    	$sql .= "'" .$data['information'] ."',";
+    	$sql .=  NOW();
+    	$sql .= NOW() .")";
+    	return $db->$query($sql);
     }
 }

@@ -1,4 +1,4 @@
-<form name="frmAddCompany" method="post" action="<?php echo $this->baseUrl; ?>/company/company/add-company" onsubmit="return checkValid()">
+<form name="frmAddCompany" method="post" action="<?php echo $this->baseUrl; ?>/company/add-company" onsubmit="return checkValid()">
 <input type="hidden" name="company_id" id="company_id" value="<?php echo $this->company_id;?>"/>
 <div class="from-add-01">
 <ul>
@@ -22,7 +22,7 @@
 		<label><input type="text" name="full_name_vn" id="full_name_vn" value="<?php  echo $this->full_name_vn;?>"></label>
 	</li>
 	<li>
-		<label>Short Name:<em>*</em></label>
+		<label>Short Name:</label>
 		<label><input type="text" name="short_name_en" id="short_name_en" value="<?php  echo $this->short_name_en;?>"></label>
 		<label></label>
 		<label><input type="text" name="short_name_vn" id="short_name_vn" value="<?php  echo $this->short_name_vn;?>"></label>
@@ -30,10 +30,6 @@
 	<li>
 		<label>Business Type:</label>		
 		<input type="text" name="busines_type" id="busines_type" value="<?php echo $this->busines_type; ?>">						
-	</li>
-	<li>
-		<label>Industry:</label>		
-		<input type="text" name="industry" id="industry">						
 	</li>
 	<li>
 		<label>Telephone:</label>
@@ -80,11 +76,10 @@ function checkValid()
 {
 	var full_name_en = $("#full_name_en").val();
 	var full_name_vn = $("#full_name_vn").val();
-	var short_name_en = $("#short_name_en").val();
-	var short_name_vn = $("#short_name_vn").val();		
+	
     var email = $('#email').val();
 
-    if(full_name_en == '' || full_name_vn == '' || short_name_en == '' || short_name_vn == '' ||  consultant_id == '') {
+    if(full_name_en == '' || full_name_vn == '' ||  consultant_id == '') {
         $('.error').html('Please input into field required (*)');
         return false;
     }
