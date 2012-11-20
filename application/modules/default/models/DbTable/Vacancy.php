@@ -1,6 +1,6 @@
 <?php
 require_once 'Zend/Db/Table/Abstract.php';
-class Vacancy_Model_DbTable_Vacancy extends Zend_Db_Table_Abstract {
+class Default_Model_DbTable_Vacancy extends Zend_Db_Table_Abstract {
 	/**
 	 * The default table name
 	 */

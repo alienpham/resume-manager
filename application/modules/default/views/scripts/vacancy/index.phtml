@@ -3,19 +3,9 @@
 <div class="block-search">
 <form id="frmsearch" action="/vacancy" method="post">
 	<label>Search</label>
-	<select name="ccode_id" id="ccode_id" style="width:125px">
-				<option value="1" <?php if ($this->ccode_id==1) echo "selected";?> >Vacancy Code</option>
-                <option value="2" <?php if ($this->ccode_id==2) echo "selected";?>>Job Title</option>
-			</select>
-	<input name="txtSearch" id="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/>
-	<select name="status" id="status" style="width:80px">
-    		  <option value="0">Status</option>
-			  <option value="Open">Open</option>
-              <option value="Close">Close</option>
-	</select>
-    <input id="btSearch" name="btSearch" type="submit" value="Search" style="margin-right:420px"/>
-    <input type="hidden" name="page" id="page" value="1" />
-    
+	<input name="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/>
+
+    <input class="button1" name="btSearch" type="submit" value="Search"/>
 </form>
 </div>  
 <br />
@@ -24,9 +14,9 @@
 	</a>
 <br /><br />
 <?php
-$vacancy = new Vacancy_Model_VacancyMapper();
-$company = new Company_Model_CompanyMapper();
-$listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($this->currentPage-1)*20,20);
+//$vacancy = new Vacancy_Model_VacancyMapper();
+//$company = new Company_Model_CompanyMapper();
+//$listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($this->currentPage-1)*20,20);
 ?>
 <form name="frmVacancyList">
 <input type="hidden" name="listVaId" id="listVaId" value="" />
@@ -112,62 +102,9 @@ $listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($thi
         </div>
     </div>
 </div>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<?php if(count($this->paginator)) :?>
-	<tr>
-		<td align="center"><div id="box">
-            <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
-		</div></td>
-	</tr>
-	<?php endif;?>
-  </table>
- </form>
- <script language="javascript">
- function getValueListCheckBox(list,id)
-{	
-	if(list!=undefined){
-	var num=list.length;
-	if (num==undefined)
-	{
-		if (list.checked)
-			id.value=list.value;
-		else
-			id.value="";
-	}
-	else
-		{
-			count=0;
-			str="";
-			for (i=0;i<num;i++)
-			{
-				if (list[i].checked)
-				{
-					if (count==0)
-						str=list[i].value;
-					else
-						str = str + ", " + list[i].value;
-					count++;
-				}
-			}
-		id.value=str;
-       }
-	}
-	alert(id.value);
-}
-$(document).ready(function() {
-	 $("#btClose").click(function(){
-			getValueListCheckBox(document.frmVacancyList.vacancy_id,document.frmVacancyList.listVaId);
-
-			$.ajax({
-				url: '/vacancy/vacancy/close-vacancy',
-				type: "POST",
-				data: { 
-					listvacancyid: document.frmVacancyList.listVaId
-				},
-				success: function(result) {
-					location.reload();
-				}
-			});
-		});
- });
- </script>
+<?php if(count($this->paginator)) :?>
+<div id="box">
+	<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
+</div>
+<?php endif;?>
+ </form> 

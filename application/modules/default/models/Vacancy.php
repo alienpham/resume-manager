@@ -1,19 +1,14 @@
 <?php
-class Vacancy_Model_Vacancy
+class Default_Model_Vacancy
 {
 	protected $_vacancy_id;
 	protected $_company_id;
 	protected $_vacancy_code;
 	protected $_job_title;
-	
-	protected $_no_of_vacancies;
 	protected $_min_salary;
 	protected $_max_salary;
-	
-	protected $_estimated_salary;
-	protected $_work_level_id;
+	protected $_work_level;
 	protected $_public;
-	
 	protected $_status;
 	protected $_created_date;
 	protected $_updated_date;
@@ -69,25 +64,11 @@ class Vacancy_Model_Vacancy
 		$this->_company_id = $id;
 	}
 	
-	public function getVacancyCode() {
-		return $this->_vacancy_code;
-	}
-	public function setVacancyCode($vacancy_code) {
-		$this->_vacancy_code = $vacancy_code;
-	}
-	
 	public function getJobTitle() {
 		return $this->_job_title;
 	}
 	public function setJobTitle($job_title) {
 		$this->_job_title = $job_title;
-	}
-	
-public function getNoOfVacancies() {
-		return $this->_no_of_vacancies;
-	}
-	public function setNoOfVacancies($no_of_vacancies) {
-		$this->_no_of_vacancies = $no_of_vacancies;
 	}
 	
 	public function getMinSalary() {
@@ -104,18 +85,11 @@ public function getNoOfVacancies() {
 		$this->_max_salary = $max_salary;
 	}
 	
-	public function getEstimatedSalary() {
-			return $this->_estimated_salary;
-	}
-	public function setEstimatedSalary($estimated_salary) {
-	    $this->_estimated_salary = $estimated_salary;
-	}
-	
-    public function getWorkLevelId() {
-            return $this->_work_level_id;
+    public function getWorkLevel() {
+            return $this->_work_level;
     }
-    public function setWorkLevelId($work_level_id) {
-        $this->_work_level_id = $work_level_id;
+    public function setWorkLevel($work_level) {
+        $this->_work_level = $work_level;
     }
     
     public function getPublic() {
