@@ -8,12 +8,20 @@
 	<div class="name">
 		<h4><a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>"><?php echo $rs['full_name_en'] ?></a></h4>
 	</div>
-	
+	<div class="name">
+		<h4><a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>"><?php echo $rs['full_name_vn'] ?></a></h4>
+	</div>	
+	<div class="name">
+		<?php echo $rs['address'] ?>
+	</div>
+	<div class="name" style="width:100px">
+		<?php echo $rs['tel'] ?>
+	</div>
+	<div class="name">
+		<?php echo $rs['email'] ?>
+	</div>
 	<div class="status">
 		<?php echo $rs['status'] ?>
-	</div>
-	<div class="cons">
-		
 	</div>
 	<div class="action">
 		<a href="company/company/add-company/company_id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>

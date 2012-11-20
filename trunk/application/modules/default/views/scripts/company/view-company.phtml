@@ -1,5 +1,5 @@
 <?php
-$contact= new Company_Model_ContactPersonMapper();
+$contact= new Default_Model_CompanyMapper();
 $listContact = $contact->getListContact ("company_id='".$this->company_id."'", "full_name ASC");
 ?>
 <div style="height :50px;color : #848484; ">

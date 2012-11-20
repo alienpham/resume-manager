@@ -42,14 +42,23 @@ function checkLogin(){
             <div class="checkbox">
                 &nbsp;
             </div>
-            <div class="code">
-                <h4>Code</h4>
+            <div class="name">
+                <h4>Company Name VN</h4>
             </div>
             <div class="name">
-                <h4>Company</h4>
+                <h4>Company Name EN</h4>
             </div>
-            <div class="cons">
-                <h4>Cons</h4>
+            <div class="name">
+                <h4>address</h4>
+            </div>
+            <div class="name" style="width:100px;">
+                <h4>tel</h4>
+            </div>
+            <div class="name" style="width:100px;">
+                <h4>tel</h4>
+            </div>
+            <div class="name">
+                <h4>email</h4>
             </div>
             <div class="action">
                 <h4>action</h4>
@@ -78,13 +87,13 @@ function checkLogin(){
 	<?php if(count($this->paginator)) :?>
 	<tr>
 		<td align="center">
-		<div id="box">
+		<div>
             <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
 		</div></td>
 	</tr>
 	<?php endif;?>
   </table>
-<input type="radio" name="hdcompany_id" id="hdcompany_id" /> 
+<input type="hidden" name="hdcompany_id" id="hdcompany_id" /> 
  </form>
  <div id="view_company" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
  
@@ -108,7 +117,7 @@ function checkLogin(){
          $('#view_company').html('');
          var company_id = $(this).attr('id');
          $.ajax({
-             url: '/company/company/view-company',
+             url: '/company/view-company',
              type: "POST",
              data: { 
             	 company_id: company_id, 
