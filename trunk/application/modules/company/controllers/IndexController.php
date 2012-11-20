@@ -56,8 +56,8 @@ class Company_IndexController extends Zend_Controller_Action
 		$paginator->setCurrentPageNumber($currentPage);
 		
 		$this->view->ccode_id=$this->_getParam('ccode_id',"");
-		$this->view->sort_name_id=$this->_getParam('sort_name_id',"");
-		$this->view->sort_type_id=$this->_getParam('sort_type_id',"");
+		$this->view->short_name_id=$this->_getParam('short_name_id',"");
+		$this->view->short_type_id=$this->_getParam('short_type_id',"");
 		$this->view->txtSearch=$this->_getParam('txtSearch',"");
 		$this->view->paginator = $paginator;
 	}

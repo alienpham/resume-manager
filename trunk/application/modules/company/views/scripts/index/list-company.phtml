@@ -2,8 +2,8 @@
 	<div class="checkbox">
 	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']?>" onclick="getValueListCheckBox(this,document.frmCompanyList.hdcompany_id)"/>
 	</div>
-	<div class="code">
-		<?php echo $rs['company_code'] ?>
+	<div class="code" >
+		<?php // echo $rs['company_code'] ?>
 	</div>
 	<div class="name">
 		<h4><a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>"><?php echo $rs['full_name_en'] ?></a></h4>

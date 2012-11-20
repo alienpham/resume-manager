@@ -119,7 +119,8 @@ class Company_CompanyController extends Zend_Controller_Action
 		$this->view->company_id = $company_id;
 		$this->view->contact_person_id = $contact_person_id;
 
-		$this->view->company_name = $cominfo[0]['full_name_en']==""?$cominfo[0]['short_name_en']:$cominfo[0]['full_name_en'];
+		$this->view->company_name_vn = $cominfo[0]['short_name_vn'];
+		$this->view->company_name_en = $cominfo[0]['short_name_en'];
 		$this->view->contactinfo = @$contactinfo[0];
 	}
 
