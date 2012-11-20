@@ -26,9 +26,9 @@ function checkLogin(){
               <input type="hidden" name="page" id="page" value="1" />
               
               <label for="choice">Sort : </label>
-              <select name="sort_name_id" id="sort_name_id" style="width:80px">
-			  <option value="full_name_en" <?php if ($this->sort_name_id=="full_name_en") echo "selected";?>>Name</option>
-              <option value="created_date" <?php if ($this->sort_name_id=="created_date") echo "selected";?>>Created Date</option>
+              <select name="short_name_id" id="short_name_id" style="width:80px">
+			  <option value="full_name_en" <?php if ($this->short_name_id=="full_name_en") echo "selected";?>>Name</option>
+              <option value="created_date" <?php if ($this->short_name_id=="created_date") echo "selected";?>>Created Date</option>
 			</select>
             <select name="sort_type_id" id="sort_type_id" style="width:60px">
 			  <option value="ASC" <?php if ($this->sort_type_id=="ASC") echo "selected";?>>ASC</option>
@@ -89,13 +89,14 @@ function checkLogin(){
 	</tr>
 	<?php if(count($this->paginator)) :?>
 	<tr>
-		<td align="center"><div id="box">
+		<td align="center">
+		<div id="box">
             <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
 		</div></td>
 	</tr>
 	<?php endif;?>
   </table>
- <input type="hidden" name="hdcompany_id" id="hdcompany_id" /> 
+<input type="radio" name="hdcompany_id" id="hdcompany_id" /> 
  </form>
  <div id="view_company" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
  
