@@ -23,14 +23,14 @@ function checkLogin(){
 	</div>
 	<div class="header clearfix">
 	<?php 
-		$moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();  
+		//$moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();  
 		$controllerName = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
 		$sess = new Zend_Session_Namespace ( 'zs_User' );  
 	?>
 		<ul class="main-menu">
-			<li <?php echo ($moduleName == 'default' && $controllerName != 'profile')? 'class="active"': '' ?>><a href="/resume">Resume</a></li>
-			<li <?php echo ($moduleName == 'company')? 'class="active"': '' ?>><a href="/company">Company</a></li>
-			<li <?php echo ($moduleName == 'vacancy')? 'class="active"': '' ?>><a href="/vacancy">Vacancy</a></li>
+			<li <?php echo ($controllerName == 'resume')? 'class="active"': '' ?>><a href="/resume">Resume</a></li>
+			<li <?php echo ($controllerName == 'company')? 'class="active"': '' ?>><a href="/company">Company</a></li>
+			<li <?php echo ($controllerName == 'vacancy')? 'class="active"': '' ?>><a href="/vacancy">Vacancy</a></li>
 			<?php if($sess->isAdmin):?>
 			<li <?php echo ($controllerName == 'profile')? 'class="active"': '' ?>><a href="/profile">User Management</a></li>
 			<?php endif;?>

@@ -1,5 +1,5 @@
 <?php
-class Company_Model_ContactPersonMapper {
+class Default_Model_ContactPersonMapper {
 	protected $_dbTable;
     public function setDbTable ($dbTable)
     {
