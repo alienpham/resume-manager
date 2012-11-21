@@ -1,9 +1,6 @@
 <?php foreach($this->paginator as $rs) :?>
-	<div class="checkbox">
-	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']?>" onclick="getValueListCheckBox(this,document.frmCompanyList.hdcompany_id)"/>
-	</div>
-	<div class="code" >
-		<?php // echo $rs['company_code'] ?>
+	<div class="checkbox" style="margin-top:4px">
+	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']?>" onclick="getValueListCheckBox(this,document.frmCompanyList.company_id)"/>
 	</div>
 	<div class="name">
 		<h4><a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>"><?php echo $rs['full_name_en'] ?></a></h4>
@@ -20,11 +17,11 @@
 	<div class="name">
 		<?php echo $rs['email'] ?>
 	</div>
-	<div class="status">
-		<?php echo $rs['status'] ?>
-	</div>
-	<div class="action">
+	<div class="name" style="width:100px">
 		<a href="company/company/add-company/company_id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>
 	</div>
-	<div style="clear:both">&nbsp;</div>
+	<div class="name" style="width:103px;">
+		<?php echo $rs['status'] ?>
+	</div>
+	<div style="clear:both"></div>
 <?php endforeach; ?>

@@ -48,8 +48,7 @@ class Default_Model_CompanyMapper {
         	unset($data['created_date']);
         	$this->getDbTable()->update($data, array('company_id = ?' => $id));
             return $id;
-        }
-		
+        }		
     }
 	
 	public function find ($id, Default_Model_Company $company)
@@ -112,25 +111,26 @@ class Default_Model_CompanyMapper {
     	return $rows;
     }
     
-    public function saveCompany($data)
+    public function addCompany($data)
     {
     	$db = $this->getDbTable()->getAdapter();
-    	$sql = "INSERT INTO company(full_name_en, short_name_en, full_name_vn, short_name_vn, busines_type, tel, fax, email, address, website, status, information, created_date, updated_date)
-    	VALUES (";
+    	$sql = "INSERT INTO company(full_name_en, short_name_en, full_name_vn, short_name_vn, busines_type, tel, fax, email, address, website, status, information, created_date, updated_date) VALUES (";
     	$sql .= "'" .$data['full_name_en'] ."',";
     	$sql .= "'" .$data['short_name_en'] ."',";
     	$sql .= "'" .$data['full_name_vn'] ."',";
     	$sql .= "'" .$data['short_name_vn'] ."',";
     	$sql .= "'" .$data['busines_type'] ."',";
-    	$sql .= "'" .$data['tel'] ."',";
+  	 	$sql .= "'" .$data['tel'] ."',";
     	$sql .= "'" .$data['fax'] ."',";
     	$sql .= "'" .$data['email'] ."',";
     	$sql .= "'" .$data['address'] ."',";
     	$sql .= "'" .$data['website'] ."',";
     	$sql .= "'" .$data['status'] ."',";
     	$sql .= "'" .$data['information'] ."',";
-    	$sql .=  NOW();
-    	$sql .= NOW() .")";
+    	$sql .=  NOW() .",";
+    	$sql .=  NOW() .")";
+    	print_r($sql); exit;
     	return $db->$query($sql);
     }
 }
+
