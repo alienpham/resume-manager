@@ -27,20 +27,19 @@ class Default_Model_CompanyMapper {
 	public function save (Default_Model_Company $company)
     {
         $data = array(
-			//'company_code' 		=> $company->getCompanyCode(), 
-			'full_name_en' 		=> $company->getFullNameEn(), 
-			'short_name_en' 	=> $company->getShortNameEn(), 
-			'full_name_vn' 		=> $company->getFullNameVn(),
-         	'short_name_vn'		=> $company->getShortNameVn(),
-         	'busines_type' 	    => $company->getBusinesType(),
-			'tel' 				=> $company->getTel(),
-			'fax' 				=> $company->getFax(),
-			'email' 			=> $company->getEmail(),
-			'address' 			=> $company->getAddress(),
-			'website' 			=> $company->getWebsite(),
-			'status'			=> $company->getStatus(),
-			'created_date' 		=> $company->getCreatedDate(),
-			'updated_date' 		=> $company->getUpdatedDate()
+            'full_name_en' 		=> $company->getFullNameEn(), 
+            'short_name_en' 	=> $company->getShortNameEn(), 
+            'full_name_vn' 		=> $company->getFullNameVn(),
+            'short_name_vn'		=> $company->getShortNameVn(),
+            'busines_type' 	    => $company->getBusinesType(),
+            'tel' 				=> $company->getTel(),
+            'fax' 				=> $company->getFax(),
+            'email' 			=> $company->getEmail(),
+            'address' 			=> $company->getAddress(),
+            'website' 			=> $company->getWebsite(),
+            'information'	    => $company->getInformation(),
+            'created_date' 		=> $company->getCreatedDate(),
+            'updated_date' 		=> $company->getUpdatedDate()
 		);
 		if (null == ($id = $company->getCompanyId())) {
             return $this->getDbTable()->insert($data);
@@ -57,22 +56,22 @@ class Default_Model_CompanyMapper {
         if (0 == count($result)) {
             return;
         }
+        
         $row = $result->current();
-        $company ->setCompanyId($row->company_id)
-				 ->setCompanyCode($row->company_code)
-				 ->setFullNameEn($row->full_name_en)
-				 ->setShortNameEn($row->short_name_en)
-				 ->setFullNameVn($row->full_name_vn)
-				 ->setShortNameVn($row->short_name_vn)
-				 ->setBusinesType($row->busines_type)
-				 ->setTel($row->tel)
-				 ->setFax($row->fax)
-				 ->setEmail($row->email)
-				 ->setAddress($row->address)
-				 ->setWebsite($row->website)
-				 ->setStatus($row->status)
-				 ->setCreatedDate($row->created_date)
-				 ->setUpdatedDate($row->updated_date);
+        $company->setCompanyId($row->company_id);
+        $company->setFullNameEn($row->full_name_en);
+        $company->setShortNameEn($row->short_name_en);
+        $company->setFullNameVn($row->full_name_vn);
+        $company->setShortNameVn($row->short_name_vn);
+        $company->setBusinesType($row->busines_type);
+        $company->setTel($row->tel);
+        $company->setFax($row->fax);
+        $company->setEmail($row->email);
+        $company->setAddress($row->address);
+        $company->setWebsite($row->website);
+        $company->setInfoRmation($row->information);
+        $company->setCreatedDate($row->created_date);
+        $company->setUpdatedDate($row->updated_date);
     }
 
 
@@ -95,7 +94,7 @@ class Default_Model_CompanyMapper {
 			$entry->setEmail($row->email);
 			$entry->setAddress($row->address);
 			$entry->setWebsite($row->website);
-			$entry->setStatus($row->status);
+			$entry->setInformation($row->information);
 			$entry->setCreatedDate($row->created_date);
 			$entry->setUpdatedDate($row->updated_date);
             $entries[] = $entry;
@@ -109,28 +108,6 @@ class Default_Model_CompanyMapper {
     	$sql = "SELECT * FROM company";
     	$rows = $db->fetchAll($sql);
     	return $rows;
-    }
-    
-    public function addCompany($data)
-    {
-    	$db = $this->getDbTable()->getAdapter();
-    	$sql = "INSERT INTO company(full_name_en, short_name_en, full_name_vn, short_name_vn, busines_type, tel, fax, email, address, website, status, information, created_date, updated_date) VALUES (";
-    	$sql .= "'" .$data['full_name_en'] ."',";
-    	$sql .= "'" .$data['short_name_en'] ."',";
-    	$sql .= "'" .$data['full_name_vn'] ."',";
-    	$sql .= "'" .$data['short_name_vn'] ."',";
-    	$sql .= "'" .$data['busines_type'] ."',";
-  	 	$sql .= "'" .$data['tel'] ."',";
-    	$sql .= "'" .$data['fax'] ."',";
-    	$sql .= "'" .$data['email'] ."',";
-    	$sql .= "'" .$data['address'] ."',";
-    	$sql .= "'" .$data['website'] ."',";
-    	$sql .= "'" .$data['status'] ."',";
-    	$sql .= "'" .$data['information'] ."',";
-    	$sql .=  NOW() .",";
-    	$sql .=  NOW() .")";
-    	print_r($sql); exit;
-    	return $db->$query($sql);
     }
 }
 
