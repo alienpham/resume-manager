@@ -45,15 +45,44 @@ class CompanyController extends Zend_Controller_Action
 	
 	public function addCompanyAction()
 	{
-		$company_id = $this-> _getParam('company_id','');
-		$data = $this->getRequest()->getPost();
-		$company = new Default_Model_CompanyMapper();
+	    $this->view->title = 'ADD COMPANY';
+		$company_id = $this->_getParam('company_id','');
+		$company = new Default_Model_Company();
 		
-		if($company_id == '')
-		{	
-			$company->addCompany($data);
-			$this->_redirect('/company/index/' );
+		if($company_id) {
+		    $this->view->title = 'EDIT COMPANY';
+		    $companyMapper = new Default_Model_CompanyMapper();
+		    $companyMapper->find($company_id, $company);		    
 		}
+		
+		$this->view->company = $company;
+		
+	}
+	
+	public function saveCompanyAction()
+	{
+	    $post = $this->getRequest()->getPost();
+//print_r($post);exit;
+	    $company = new Default_Model_Company();
+	    $company->setCompanyId($post['company_id']);
+		$company->setFullNameEn($post['full_name_en']);
+		$company->setShortNameEn($post['short_name_en']);
+		$company->setFullNameVn($post['full_name_vn']);
+		$company->setShortNameVn($post['short_name_vn']);
+		$company->setBusinesType($post['busines_type']);
+		$company->setTel($post['tel']);
+		$company->setFax($post['fax']);
+		$company->setEmail($post['email']);
+		$company->setAddress($post['address']);
+		$company->setWebsite($post['website']);
+		$company->setInformation($post['information']);
+		$company->setCreatedDate(date('Y-m-d'));
+		$company->setUpdatedDate(date('Y-m-d'));
+		
+		$companyMapper = new Default_Model_CompanyMapper();
+	    $row = $companyMapper->save($company);
+	    
+	    $this->_redirect('/company');
 	}
 	
 	public function viewCompanyAction()

@@ -1,9 +1,9 @@
-<form name="frmAddCompany" method="post" action="<?php echo $this->baseUrl; ?>/company/add-company" onsubmit="return checkValid()">
-<input type="hidden" name="company_id" id="company_id" value="<?php echo $this->company_id;?>"/>
+<form name="frmAddCompany" method="post" action="/company/save-company" onsubmit="return checkValid()">
+<input type="hidden" name="company_id" id="company_id" value="<?php echo $this->company->getCompanyId();?>"/>
 <div class="from-add-01">
 <ul>
 	<li>
-		<h2><label>ADD COMPANY</label></h2>
+		<h2><?php echo $this->title;?></h2>
 	</li>
 	<li>
 			<label>&nbsp;</label>
@@ -17,50 +17,50 @@
 	</li>
 	<li>
 		<label>Company Full Name:<em>*</em></label>
-		<label><input type="text" name="full_name_en" id="full_name_en" value="<?php  echo $this->full_name_en;?>"></label>
+		<label><input type="text" name="full_name_en" id="full_name_en" value="<?php echo $this->company->getFullNameEn();?>"></label>
 		<label></label>
-		<label><input type="text" name="full_name_vn" id="full_name_vn" value="<?php  echo $this->full_name_vn;?>"></label>
+		<label><input type="text" name="full_name_vn" id="full_name_vn" value="<?php echo $this->company->getFullNameVn();?>"></label>
 	</li>
 	<li>
 		<label>Short Name:</label>
-		<label><input type="text" name="short_name_en" id="short_name_en" value="<?php  echo $this->short_name_en;?>"></label>
+		<label><input type="text" name="short_name_en" id="short_name_en" value="<?php echo $this->company->getShortNameEn();?>"></label>
 		<label></label>
-		<label><input type="text" name="short_name_vn" id="short_name_vn" value="<?php  echo $this->short_name_vn;?>"></label>
+		<label><input type="text" name="short_name_vn" id="short_name_vn" value="<?php echo $this->company->getShortNameVn();?>"></label>
 	</li>
 	<li>
 		<label>Business Type:</label>		
-		<input type="text" name="busines_type" id="busines_type" value="<?php echo $this->busines_type; ?>">						
+		<input type="text" name="busines_type" id="busines_type" value="<?php echo $this->company->getBusinesType();?>">						
 	</li>
 	<li>
 		<label>Telephone:</label>
-		<input type="text" name="tel" id="tel" value="<?php  echo $this->tel;?>">
+		<input type="text" name="tel" id="tel" value="<?php echo $this->company->getTel();?>">
 		Ex: 848 38243 780 Ext. 123
 	</li>
 	<li>
 		<label>Fax:</label>
-		<input type="text" name="fax" id="fax" value="<?php  echo $this->tel;?>">
+		<input type="text" name="fax" id="fax" value="<?php echo $this->company->getFax();?>">
 		Ex: 848 38243 780
 	</li>
 	<li>
 		<label>Email:</label>
-		<label><input type="text" name="email" id="email" value="<?php  echo $this->email;?>"></label>
+		<label><input type="text" name="email" id="email" value="<?php echo $this->company->getEmail();?>"></label>
 	</li>
 	<li>
 		<label>Address:</label>
 		<label>
-			<textarea name="address" rows="2" id="address" style="width:500px"><?php  echo $this->address;?></textarea>
+			<input type="text" name="address" id="address" value="<?php echo $this->company->getAddress();?>">
 		</label>
 	</li>
 	<li>
 		<label>Website:</label>
-		<label><input type="text" name="website" id="website" value="<?php  echo $this->website;?>"></label>
+		<label><input type="text" name="website" id="website" value="<?php echo $this->company->getWebsite();?>"></label>
 	</li>
 	<li>
 		<label>Company information<br />
 		(for internal reference)
 		</label>
 		<label>
-			<textarea name="contents" rows="6" id="contents" style="width:500px"><?php  echo $this->website;?></textarea>
+			<textarea name="information" rows="6" id="information" style="width:500px"><?php echo $this->company->getInformation();?></textarea>
 		</label>
 	</li>
 	<li>

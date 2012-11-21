@@ -1,21 +1,22 @@
 <?php
 class Default_Model_Company
 {
-	protected $_company_id;
-	protected $_company_code;
-	protected $_full_name_en;
-	protected $_short_name_en;
-	protected $_full_name_vn;
-	protected $_short_name_vn;
-	protected $_busines_type;
-	protected $_tel;
-	protected $_fax;
-	protected $_email;
-	protected $_address;
-	protected $_website;
-	protected $_status;
-	protected $_created_date;
-	protected $_updated_date;
+    protected $_company_id;
+    protected $_company_code;
+    protected $_full_name_en;
+    protected $_short_name_en;
+    protected $_full_name_vn;
+    protected $_short_name_vn;
+    protected $_busines_type;
+    protected $_tel;
+    protected $_fax;
+    protected $_email;
+    protected $_address;
+    protected $_website;
+    protected $_status;
+    protected $_information;
+    protected $_created_date;
+    protected $_updated_date;
     
 	public function __construct(array $options = null)
     {
@@ -96,10 +97,10 @@ class Default_Model_Company
 		$this->_short_name_vn = $short_name_vn;
 	}
 	
-	public function getBusinesTypeId() {
+	public function getBusinesType() {
 		return $this->_busines_type;
 	}
-	public function setBusinesTypeId($busines_type) {
+	public function setBusinesType($busines_type) {
 		$this->_busines_type = $busines_type;
 	}
 	
@@ -143,6 +144,13 @@ class Default_Model_Company
 	}
 	public function setStatus($status) {
 		$this->_status = $status;
+	}
+	
+    public function getInformation() {
+		return $this->_information;
+	}
+	public function setInformation($information) {
+		$this->_information = $information;
 	}
 	
 	public function getCreatedDate() {
