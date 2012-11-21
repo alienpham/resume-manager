@@ -50,8 +50,8 @@ class CompanyController extends Zend_Controller_Action
 		$company = new Default_Model_CompanyMapper();
 		
 		if($company_id == '')
-		{
-			$company->saveCompany($data);
+		{	
+			$company->addCompany($data);
 			$this->_redirect('/company/index/' );
 		}
 	}

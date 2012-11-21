@@ -42,25 +42,25 @@ function checkLogin(){
             <div class="checkbox">
                 &nbsp;
             </div>
-            <div class="name">
+            <div class="name" align="center">
                 <h4>Company Name VN</h4>
             </div>
-            <div class="name">
+            <div class="name" align="center">
                 <h4>Company Name EN</h4>
             </div>
-            <div class="name">
+            <div class="name" align="center">
                 <h4>address</h4>
             </div>
-            <div class="name" style="width:100px;">
+            <div class="name" style="width:100px;" align="center">
                 <h4>tel</h4>
             </div>
-            <div class="name" style="width:100px;">
-                <h4>tel</h4>
-            </div>
-            <div class="name">
+            <div class="name" align="center">
                 <h4>email</h4>
             </div>
-            <div class="action">
+            <div class="name" style="width:100px;" align="center">
+                <h4>Edit</h4>
+            </div>
+            <div class="name" style="width:103px;" align="center">
                 <h4>action</h4>
             </div>
         </div>
@@ -69,7 +69,7 @@ function checkLogin(){
         </div>
     </div>
 </div>
-<div style="clear:both">&nbsp;</div>
+<div style="clear:both"></div>
   
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -101,10 +101,10 @@ function checkLogin(){
 
  function addContact()
  {
-	 if ($("#hdcompany_id").val()=="")
+	 if ($("#company_id").val()=="")
 	 	alert("Please select company to add contact.")
 	else
-		window.location="/company/add-contact/company_id/"+$("#hdcompany_id").val();
+		window.location="/company/add-contact/company_id/"+$("#company_id").val();
 	
  }
 
