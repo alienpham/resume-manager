@@ -65,3 +65,7 @@ ALTER TABLE  `company` DROP FOREIGN KEY  `FK_industry_lookup_1` ;
 ALTER TABLE  `company` CHANGE  `busines_type_id`  `busines_type` VARCHAR( 255 ) NULL
 
 ALTER TABLE  `company` CHANGE  `industry_id`  `industry` VARCHAR( 255 ) NULL
+
+
+ALTER TABLE `company` CHANGE `updated_date` `updated_date` DATE NOT NULL 
+ALTER TABLE `company` CHANGE `created_date` `created_date` DATE NOT NULL 
