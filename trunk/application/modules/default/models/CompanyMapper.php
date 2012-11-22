@@ -117,5 +117,7 @@ class Default_Model_CompanyMapper {
     	$rows = $db->fetchAll($sql);
     	return $rows;
     }
+    
+  	
 }
 

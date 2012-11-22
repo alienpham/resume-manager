@@ -15,7 +15,7 @@ class Default_Model_ContactPersonMapper {
     public function getDbTable ()
     {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Company_Model_DbTable_ContactPerson');
+            $this->setDbTable('Default_Model_DbTable_ContactPerson');
         }
         return $this->_dbTable;
     }
@@ -24,7 +24,7 @@ class Default_Model_ContactPersonMapper {
 		$this->getDbTable ()->update ( $data, $where );
 	}
 	
-	public function save (Company_Model_ContactPerson $contactperson)
+	public function save (Default_Model_ContactPerson $contactperson)
     {
         $data = array(
 			'company_id' 	=> $contactperson->getCompanyId(), 
@@ -32,7 +32,6 @@ class Default_Model_ContactPersonMapper {
 			'full_name' 	=> $contactperson->getFullName(),
         	'job_title' 	=> $contactperson->getJobTitle(), 
 			'tel' 			=> $contactperson->getTel(),
-        	'fax' 			=> $contactperson->getFax(), 
 			'mobile' 		=> $contactperson->getMobile(),
 			'email' 		=> $contactperson->getEmail(), 
 			'address' 		=> $contactperson->getAddress(),
@@ -46,16 +45,20 @@ class Default_Model_ContactPersonMapper {
         }
     }
     
-	public function getListContact ($where = null, $orderby = null, $offset="", $limit="")
+	public function getContact($id)
+	{
+		$db = $this->getDbTable()->getAdapter();
+		$sql = "SELECT * FROM contact_person WHERE contact_person_id =" .$id;
+		$rows = $db->fetchAll($sql);
+    	return $rows;
+		
+	}
+	
+	public function getListContact($id)
     {
     	$db = $this->getDbTable()->getAdapter();
-    	if ($limit=="")
-       		$sql = "SELECT * FROM contact_person WHERE $where ORDER BY $orderby";
-       	else 
-       		$sql = "SELECT * FROM contact_person WHERE $where ORDER BY $orderby LIMIT $offset,$limit";
-       		
-        $result = $db->fetchAll($sql);
-        
-        return $result;
+    	$sql = "SELECT full_name,title,job_title,contact_person.tel,mobile,contact_person.email,contact_person.address FROM contact_person  INNER JOIN company ON company.company_id = contact_person.company_id WHERE contact_person.company_id = " .$id; 
+    	$rows = $db->fetchAll($sql);
+    	return $rows;
     }
 }

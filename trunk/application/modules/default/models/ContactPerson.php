@@ -8,7 +8,6 @@ class Default_Model_ContactPerson
 	
 	protected $_job_title;
 	protected $_tel;
-	protected $_fax;
 	protected $_mobile;
 	protected $_email;
 	protected $_address;
@@ -91,13 +90,7 @@ class Default_Model_ContactPerson
 	public function setTel($tel) {
 		$this->_tel = $tel;
 	}
-	public function getFax() {
-		return $this->_fax;
-	}
-	public function setFax($fax) {
-		$this->_fax = $fax;
-	}
-	
+
 	public function getMobile() {
 		return $this->_mobile;
 	}

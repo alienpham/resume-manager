@@ -1,6 +1,6 @@
-<form name="frmAddContact" method="post" action="" onsubmit="return checkValid()">
-<input type="hidden" name="company_id"  id="company_id" value="<?php echo $this->company_id; ?>"/>
-<input type="hidden" name="contact_person_id"  id="contact_person_id" value="<?php echo $this->contact_person_id; ?>"/>
+<form name="frmAddContact" method="post" action="/company/save-contact" onsubmit="return checkValid()">
+<input type="hidden" name="company_id"  id="company_id" value="<?php echo $this->cominfo['company_id']; ?>"/>
+<input type="hidden" name="contact_person_id"  id="contact_person_id" value="<?php echo $this->contactinfo['contact_person_id']; ?>"/>
 
 <div class="from-add-01">
 <h2><?php echo $this->title; ?></h2>
@@ -39,10 +39,6 @@
 	<li>
 		<label>Tel:</label>
 		<label><input type="text" name="tel" id="tel" value="<?php echo $this->contactinfo['tel']; ?>"></label>
-	</li>
-	<li>
-		<label>Fax:</label>
-		<label><input type="text" name="fax" id="fax" value="<?php echo $this->contactinfo['fax']; ?>"></label>
 	</li>
 	<li>
 		<label>Mobile:</label>
