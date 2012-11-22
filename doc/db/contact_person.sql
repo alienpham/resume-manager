@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 13, 2012 at 05:08 PM
+-- Generation Time: Nov 22, 2012 at 11:39 PM
 -- Server version: 5.1.45-community
 -- PHP Version: 5.3.17
 
@@ -33,28 +33,12 @@ CREATE TABLE IF NOT EXISTS `contact_person` (
   `full_name` varchar(50) NOT NULL,
   `job_title` varchar(100) NOT NULL,
   `tel` varchar(30) DEFAULT NULL,
-  `fax` varchar(30) DEFAULT NULL,
   `mobile` varchar(30) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `address` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`contact_person_id`),
   KEY `FK_company_3` (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
-
---
--- Dumping data for table `contact_person`
---
-
-INSERT INTO `contact_person` (`contact_person_id`, `company_id`, `title`, `full_name`, `job_title`, `tel`, `fax`, `mobile`, `email`, `address`) VALUES
-(1, 1, 'Mr.', '', '', '', '', '', '', ''),
-(2, 1, 'Mr.', 'eqeq', 'eqeqwe', '', '', '', '', ''),
-(3, 1, 'Mr.', 'dwadwa', 'dadwadwa', '', '', '', '', ''),
-(4, 1, 'Mr.', 'dawdwa', 'dwadwa', '', '', '', '', ''),
-(5, 1, 'Mr.', '', '', '', '', '', '', ''),
-(6, 1, 'Mr.', '', '', '', '', '', '', ''),
-(7, 1, 'Mr.', '', '', '', '', '', '', ''),
-(8, 1, 'Mr.', 'fesfesf', 'sefsfsfsef', '', '', '', 'thanhgiang_cm2005@yahoo.com', ''),
-(9, 1, 'Mr.', 'phan thanh giang', 'developer', '0939161966', 'khong co', '0939161966', 'thanhgiang_cm2005@yahoo.com', '');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables

@@ -1,10 +1,10 @@
 <?php
-$contact= new Default_Model_CompanyMapper();
-$listContact = $contact->getListContact ("company_id='".$this->company_id."'", "full_name ASC");
+$contact= new Default_Model_ContactPersonMapper();
+$listContact = $contact->getListContact ($this->cominfo['company_id']);
 ?>
 <div style="height :50px;color : #848484; ">
-<h2><?php echo $this->company_code; ?> - <?php echo $this->company_name; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Address : <?php echo $this->company_address; ?></h2>
+<h2><?php echo $this->cominfo['full_name_vn']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Address : <?php echo $this->cominfo['address']; ?></h2>
 </div>
 <div class="list-company clearfix">
 	<div class="head">
