@@ -30,14 +30,16 @@ $listFunction = $resume->getFunction();
 		</li>
 		<li>
 			<label>Gender</label>
+            <input type="radio" name="gender" value="male" /> <span>Male</span>
 			<input type="radio" name="gender" value="female" /> <span>Female</span>
-			<input type="radio" name="gender" value="male" /> <span>Male</span>
+            <input type="radio" name="gender" value="0" /> <span>Both</span>
 		</li>
 		<li>
 			<label>Marital Status</label>
 			<input type="radio" name="marital_status" value="single" /> <span>Single</span>
 			<input type="radio" name="marital_status" value="mrried" /> <span>Married</span>
 			<input type="radio" name="marital_status" value="divorced" /> <span>Divorced</span>
+            &nbsp;&nbsp;<input type="radio" name="marital_status" value="0" /> <span>All</span>
 		</li>
 
 	</ul>
@@ -95,6 +97,18 @@ $listFunction = $resume->getFunction();
 			<input type="text" name="experother" id="experother" value="" />
 		</li>
 	</ul>
+    
+    <h2>SEARCH EDUCATION</h2>
+    <ul>
+        <li>
+            <label>School Name</label>
+            <input type="text" name="school_name" id="school_name" value="" />
+        </li>
+        <li>
+            <label>Program Name</label>
+            <input type="text" name="program_name" id="program_name" value="" />
+        </li>
+    </ul>
 	<div class="actions">
 		<input type="button" class="button02" name="cancel" id="cancel" value="Cancel"  onclick="event.preventDefault(); parent.$.fancybox.close();">
 		<input type="button" class="button01" name="avansearch" id="avansearch" value="Search">

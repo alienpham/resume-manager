@@ -1,3 +1,4 @@
+<?php if($this->search) echo $this->headScript();?>
 <div class="list-resumes clearfix">
     <div class="head">
         <div class="name">
@@ -13,7 +14,7 @@
             <h4>Commentd</h4>
         </div>
         <div class="sent">
-            <h4>Sent</h4>
+            <h4>History</h4>
         </div>
     </div>
     <?php 
@@ -31,6 +32,7 @@
         $comment = $resumeMapper->getComments($row['resume_id'], 1);
         $date = new DateTime($comment['created_date']);
         $createdComment = $date->format('M-d');
+        $historys = $resumeMapper->getHistory($row['resume_id'], 3);
     ?>
     <div class="info-content">
         <div class="name">
@@ -54,11 +56,6 @@
             $i = 1;
             foreach ( $experienceList as $experience ) :
                 if($i > 3) break;
-                //$date = new DateTime($experience->getStartDate());
-                //$startDate = $date->format('M Y');
-    
-                //$date = new DateTime($experience->getEndDate());
-                //$endDate = $date->format('M Y');
             ?>
                 <li>
                     <div style="width:30%;float:left"><?php echo $experience->getStartDate();?><?php echo ($experience->getEndDate())? ' - ' . $experience->getEndDate():'&nbsp;';?></div>
@@ -116,7 +113,15 @@
             </div>
         </div>
         <div class="sent">
-            test
+            <a href="#history" class="addhistory" id="<?php echo $row['resume_id']?>">Add History</a>
+            <div class="info-comment" id="viewhistory<?php echo $row['resume_id']?>">
+            <?php if(count($historys) > 1):?>
+            <?php foreach($historys as $history):?>
+                <p> - <?php echo substr($history['content'], 0, 90);?></p>
+            <?php endforeach;?>
+            <a href="#allhistory"  class="allhistory" id="<?php echo $row['resume_id'] ?>">View all</a>
+            <?php endif;?>
+            </div>
         </div>
         
     </div>
@@ -136,92 +141,3 @@
         <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml', array('rowperpage' => $this->paginator->getItemCountPerPage(), 'choice' => $this->choice, 'search' => $this->search)); ?>
     <?php endif;?>
 </div>
-<script type="text/javascript">
-$(document).ready(function() {
-    //Begin Comment for candidate
-    $(".addcomment").fancybox();
-    $(".addcomment").click(function(){
-        $('#contentcomment').val(''); 
-        $('input[name=resume_id]').val($(this).attr('id'));
-    });
-
-    $("#insertcomment").click(function(){
-    	checkLogin();
-        if(!$('#contentcomment').val()) {
-            $('#msgcomment').html('Content is not null'); 
-            return;
-        }
-        var resume_id = $('input[name=resume_id]').val();
-        $.ajax({
-            url: '/resume/save-comment',
-            type: "POST",
-            data: { 
-                resume_id: resume_id, 
-                consultant_id: $('input[name=consultant_id]').val(), 
-                content: $('#contentcomment').val()
-            },
-            success: function(result) {
-                $('#viewcomment' + resume_id).html(result);
-                $.fancybox.close();
-            }
-        });
-    });
-    
-    $(".allcomment").fancybox();
-    $(".allcomment").click(function(){
-    	checkLogin();
-        var resume_id = $(this).attr('id');
-        $.ajax({
-            url: '/resume/all-comment',
-            type: "POST",
-            data: { 
-                resume_id: resume_id, 
-            },
-            success: function(result) {
-                $('#allcomment').html(result);
-            }
-        });
-    });
-    //End Comment for candidate
-
-    //Begin View detail candidate
-    $(".detail_resume").fancybox();
-    $(".detail_resume").click(function(){
-    	checkLogin();
-        $('#detail_resume').html('');
-        var resume_id = $(this).attr('id');
-        $.ajax({
-            url: '/resume/detail-resume',
-            type: "POST",
-            data: { 
-                resume_id: resume_id, 
-            },
-            success: function(result) {
-                $('#detail_resume').html(result);
-            }
-        });
-    });
-    //End View detail candidate
-
-    $('#rowperpage').change(function(){
-        $('#frmresume').submit();
-    });
-
-    $('.pagination a');
-});
-
-function allComment(resume_id){
-	checkLogin();
-    $.ajax({
-        url: '/resume/all-comment',
-        type: "POST",
-        data: { 
-            resume_id: resume_id, 
-        },
-        success: function(result) {
-            $('#allcomment').html(result);
-        }
-    });	    
-}
-
-</script>

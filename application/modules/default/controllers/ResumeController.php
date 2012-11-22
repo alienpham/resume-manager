@@ -29,6 +29,8 @@ class ResumeController extends Zend_Controller_Action
 	{
 		$_SESSION['export-email'] = '';
 		$view = new Zend_View();
+		$view->headScript()->appendFile ( '/js/resume.js' );
+		
 		$view->headScript()->appendFile ( '/js/jquery.mousewheel-3.0.6.pack.js' );
 		$view->headScript()->appendFile ( '/js/jquery.fancybox.js?v=2.1.0' );
 		$view->headLink()->appendStylesheet ( '/js/jquery.fancybox.css?v=2.1.0' );
@@ -309,12 +311,6 @@ class ResumeController extends Zend_Controller_Action
 		//$this->_redirect('resume/expectation/id/' . $post['resume_id']);
 	}
 
-	public function commentAction()
-	{
-		$this->_helper->layout->disableLayout();
-		$post = $this->getRequest()->getPost();
-	}
-
 	public function saveCommentAction()
 	{
 		$post = $this->getRequest()->getPost();
@@ -348,8 +344,55 @@ class ResumeController extends Zend_Controller_Action
 
 			$html .= '<div>';
 			$html .= substr($comment['content'], 0, 90);
-			$html .= '<div align="right"><strong class="text_green">Comment '. $createdComment .'</strong> ';
-			$html .= '<strong>by ' . $comment['username'] . '</strong></div>';
+			$html .= '<div align="right"><span>Comment '. $createdComment .'</span> ';
+			$html .= '<span style="color: #70B4E2;">by ' . $comment['username'] . '</span></div>';
+			$html .= '</div>';
+			$html .= '<div style="border-top: 1px solid #BCBCBC; margin-top:10px">&nbsp;</div>';
+		}
+
+		echo $html;
+		exit;
+		//$this->_helper->layout->disableLayout();
+		//$this->view->html = $html;
+		//$this->render('comment-all');
+	}
+	
+    public function saveHistoryAction()
+	{
+		$post = $this->getRequest()->getPost();
+
+		$resume = new Default_Model_ResumeMapper();
+		$resume->insertHistory($post);
+
+		$historys = $resume->getHistory($post['resume_id'], 3);
+
+		$html = '';
+		foreach($historys as $history) {
+    		$html .= '<p> - ' . substr($history['content'], 0, 90) . '</p>';
+		}
+		
+		$html .= '<a href="#allhistory" class="allhistory" id="'.  $post['resume_id'] .'" onClick="allHistory('.  $post['resume_id'] .')">view all</a>';
+		echo $html;
+		exit;
+	}
+
+	public function allHistoryAction()
+	{
+		$post = $this->getRequest()->getPost();
+
+		$resume = new Default_Model_ResumeMapper();
+		$historys = $resume->getHistory($post['resume_id']);
+		$html = '';
+		$html .= '<div style="color:#1B7CBD;background-color:#CCC;padding:5px 0px"><b>ALL HISTORY</b></div><br />';
+		foreach($historys as $history) {
+
+			$date = new DateTime($history['created_date']);
+			$createdHistory = $date->format('M-d');
+
+			$html .= '<div>';
+			$html .= substr($history['content'], 0, 90);
+			$html .= '<div align="right"><span>Comment '. $createdHistory .'</span> ';
+			$html .= '<span style="color: #70B4E2;">by ' . $history['username'] . '</span></div>';
 			$html .= '</div>';
 			$html .= '<div style="border-top: 1px solid #BCBCBC; margin-top:10px">&nbsp;</div>';
 		}
@@ -363,9 +406,12 @@ class ResumeController extends Zend_Controller_Action
 
 	public function avandceSearchAction()
 	{
+	    $view = new Zend_View();
+		$view->headScript()->appendFile ( '/js/resume.js' );
+		
 		$cond = array();
 		$post = $this->getRequest()->getPost();
-		//print_r($post);
+//print_r($post);exit;
 		if(@$post['full_name']) $cond[] = 'full_name like "%' . $post['full_name'] . '%" ';
 		if(@$post['email']) $cond[] = '(email_1 like "%' . $post['email'] . '%" OR email_2 like "%' . $post['email'] . '%")';
 		if(@$post['phone']) $cond[] = '(mobile_1 like "%' . $post['phone'] . '%" OR mobile_2 like "%' . $post['phone'] . '%") ';
@@ -395,8 +441,18 @@ class ResumeController extends Zend_Controller_Action
 		}
 
 		if(@$post['functions']) {
-			$choice[] = 'functions';
+			$choice[] = 'education';
 			$cond[] = 'function_id in ('. $post['functions'] .')';
+		}
+		
+	    if(@$post['school_name']) {
+			$choice[] = 'education';
+			$cond[] = 'school_name like "%'. $post['school_name'] .'%"';
+		}
+		
+	    if(@$post['program_name']) {
+			$choice[] = 'education';
+			$cond[] = 'program_name like "%'. $post['program_name'] .'%"';
 		}
 
 		if(@$post['keyword']) {
@@ -409,7 +465,7 @@ class ResumeController extends Zend_Controller_Action
 
 			$cond[] = $where;
 		}
-
+//print_r($cond);exit;
 		$resume = new Default_Model_ResumeMapper();
 		$rows = $resume->getListResume($cond, $choice);
 		$paginator = Zend_Paginator::factory($rows);
@@ -418,7 +474,8 @@ class ResumeController extends Zend_Controller_Action
 
 		$this->view->paginator = $paginator;
 		//$this->view->rows = $rows;
-
+		
+        $this->view->search = 1;
 		$this->_helper->layout->disableLayout();
 		$this->render('list-resume');
 
@@ -696,15 +753,7 @@ class ResumeController extends Zend_Controller_Action
 			'filesize' => $file_resume["size"]
 		);
 
-		//$file_tmp = $file_resume["tmp_name"];
-		//$fp = fopen($file_tmp, 'r');
-		//$content = fread($fp, $file_resume["size"]);
-		//fclose($fp);
-		//$content = addslashes($content);
-		//$data['bin_data'] = $content;
-		//$data['bin_data'] = '';
-
-		//if they DID upload a file...
+        //if they DID upload a file...
 		if($file_resume["name"])
 		{
 			//if no errors...
@@ -760,27 +809,11 @@ class ResumeController extends Zend_Controller_Action
 				header('Expires: 0');
 				header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 				header('Pragma: public');
-				//header('Content-Length: ' . filesize($file)); //Remove
-
-				//Send the content in chunks
 				readfile($file);
 			}
 		}
-		
 		exit;
-		/*if($row['resume_id']) {
-			$data = stripcslashes($row["bin_data"]);
-			$name = $row["filename"];
-			$size = $row["filesize"];
-			$type = $row["filetype"];
 
-			header("Content-type: $type");
-			header("Content-length: $size");
-			header("Content-Disposition: attachment; filename=$name");
-			header("Content-Description: PHP Generator");
-			echo $data;
-			exit;
-		}*/
 	}
 }
 

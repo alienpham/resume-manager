@@ -31,7 +31,9 @@
 </form>
 <?php echo $this->partial ( '/resume/avandced-search.phtml' )?>
 <?php echo $this->partial ( '/resume/comment.phtml' )?>
+<?php echo $this->partial ( '/resume/history.phtml' )?>
 <div id="allcomment" style="width:500px;height:200px; overflow-y:scroll; display: none;">&nbsp;</div>
+<div id="allhistory" style="width:500px;height:200px; overflow-y:scroll; display: none;">&nbsp;</div>
 <div id="detail_resume" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -50,6 +52,8 @@ $(document).ready(function() {
         var salary = $('#salary').val();
         var experother = $('#experother').val();
         var keyword = $('#keyword').val();
+        var school_name = $('#school_name').val();
+        var program_name = $('#program_name').val();
         
         var functions = '';
         var checkboxes = $('input[name="option[]"]:checkbox:checked');
@@ -70,6 +74,8 @@ $(document).ready(function() {
             ',salary: ' + salary +
             ',experother: ' + experother +
             ',keyword: ' + keyword +
+            ',school_name: ' + school_name +
+            ',program_name: ' + program_name
             
         $.ajax({
       	  	url: '/resume/avandce-search',
@@ -86,7 +92,9 @@ $(document).ready(function() {
                 functions: functions,
                 salary: salary,
                 experother: experother,
-                keyword: keyword
+                keyword: keyword,
+                school_name: school_name,
+                program_name: program_name
             },
       	  	success: function(result) {
       	    	$('#box').html(result);

@@ -226,6 +226,7 @@ textarea,
 	margin-top:10px;
 }	
 .info-content .addcomment,
+.info-content .addhistory,
 .info-content .export-word{
 	font-weight: bold;
 	background:url(../images/icon-add.png) no-repeat left 1px;
@@ -345,7 +346,8 @@ textarea,
 	margin:15px 0 0 0;
 }
 .content .button02,
-#comment .button02
+#comment .button02,
+#history .button02
 {
 	background: none repeat scroll 0 0 #f3f3f3;
     border: 1px solid #dddddd;

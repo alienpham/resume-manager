@@ -136,12 +136,16 @@ class Default_Model_ResumeMapper {
             $join .= ' INNER JOIN res_expectation as expec ON r.resume_id = expec.resume_id ';
         }
         
+        if(in_array('education', $choice)) {
+            $join .= ' INNER JOIN res_education as edu ON r.resume_id = edu.resume_id ';
+        }
+        
         if($orderby) $orderby = ' ORDER BY ' .$orderby;
         $sql = 'SELECT r.*, f.id as file_resume FROM resume as r ';
 		$sql .= 'LEFT JOIN res_file as f ON r.resume_id = f.resume_id ';
 		$sql .= $join . $where . $orderby;
 
-        //echo $sql;//exit;
+        echo $sql;//exit;
         $_SESSION['export-email'] = $sql;
         
         return $db->fetchAll($sql);
@@ -195,6 +199,31 @@ class Default_Model_ResumeMapper {
 		} 
 		
 		
+        return $db->fetchAll($sql);
+    }
+    
+    public function insertHistory($data)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "INSERT INTO res_history(resume_id, consultant_id, content) VALUES (";
+		$sql .= $data['resume_id'] . ",";
+		$sql .= "1,";
+		$sql .= "'" . @$data['content'] . "');";
+		
+        $db->query($sql);
+    }
+    
+    public function getHistory($resumeId, $limit=null)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT rc.*, c.full_name, c.username FROM res_history AS rc ";
+        $sql .= "INNER JOIN consultant AS c ON c.consultant_id = rc.consultant_id";
+        $sql .= " WHERE resume_id = " . $resumeId;
+        $sql .= " ORDER BY rc.res_history_id DESC ";
+		if($limit) {
+		    $sql .= "LIMIT $limit";
+		} 
+			
         return $db->fetchAll($sql);
     }
 }
