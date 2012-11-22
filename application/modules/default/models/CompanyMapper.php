@@ -109,5 +109,13 @@ class Default_Model_CompanyMapper {
     	$rows = $db->fetchAll($sql);
     	return $rows;
     }
+    
+    public function getCompany($id)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT * FROM company WHERE company_id =" .$id;
+    	$rows = $db->fetchAll($sql);
+    	return $rows;
+    }
 }
 

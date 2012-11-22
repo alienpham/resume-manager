@@ -1,28 +1,60 @@
-<?php foreach($this->paginator as $rs) :?>
-	<div class="checkbox" style="margin-top:4px">
-	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']?>" onclick="getValueListCheckBox(this,document.frmCompanyList.company_id)"/>
+<!--  bat dau list_company -->
+<?php $num = 1; foreach($this->paginator as $rs) { ?>
+<div style="width:1320px">
+	<div class="checkbox" style="margin-top:4px;width:20px">
+	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']; ?>" onclick="getvalue()" >
 	</div>
-	<div class="name">
+	<div class="name" align="center" style="width:205px">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
 		    <?php echo $rs['full_name_en'] ?>
         </a>
 	</div>
-	<div class="name">
+	<div class="name" align="center" style="width:203px">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
 		    <?php echo $rs['full_name_vn'] ?>
         </a>
 	</div>	
-	<div class="name">
+	<div class="name" align="center" style="width:190px">
 		<?php echo $rs['address'] ?>&nbsp;
 	</div>
-	<div class="name" style="width:100px">
+	<div class="name" style="width:100px" align="center">
 		<?php echo $rs['tel'] ?>&nbsp;
 	</div>
-	<div class="name">
+	<div class="name" align="center" style="width:190px">
 		<?php echo $rs['email'] ?>&nbsp;
 	</div>
-	<div class="name" style="width:100px">
+	<div class="name" style="width:100px" align="center">
 		<a href="/company/add-company/company_id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>
 	</div>
-	<div style="clear:both"></div>
-<?php endforeach; ?>
+	<div class="name" style="width:100px;" align="center">
+        <?php echo $rs['status'] ?>
+    </div>
+</div>
+<?php $num++; } ?>
+<script language="javascript">
+check = 0;
+function getvalue()
+{	
+	for(var i=0;i<100;i++)
+	{	
+		
+		if(document.frmCompanyList.company_id[i].checked == true)
+		{
+			check = document.frmCompanyList.company_id[i].value;
+			break;
+		}
+	}
+	return check;
+}
+function addContact()
+ {	
+	if(check == 0)
+	{
+		alert("Please select company to add contact.");
+	 	exit;
+	}else{		
+		window.location="/company/add-contact/company_id/"+check;
+ 	}
+ }	
+ </script>
+ <!-- ket thuc list_company -->

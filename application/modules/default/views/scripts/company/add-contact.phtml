@@ -3,16 +3,19 @@
 <input type="hidden" name="contact_person_id"  id="contact_person_id" value="<?php echo $this->contact_person_id; ?>"/>
 
 <div class="from-add-01">
-<h3><?php echo $this->title_page; ?></h3>
+<h2><?php echo $this->title; ?></h2>
 <ul>
 	<li>
 		<label></label>
 		<em class="error"></em>
 	</li>
 	<li>
-		<label>Company Name:</label>
-		<label><?php echo $this->cominfo['company_name_vn']; ?></label>
-		<label><?php echo $this->cominfo['company_name_en']; ?></label>
+		<label>Company Name VN:</label>
+		<label><?php echo $this->cominfo['full_name_vn']; ?></label>
+	</li>
+	<li>
+		<label>Company Name EN:</label>
+		<label><?php echo $this->cominfo['full_name_en']; ?></label>
 	</li>
 	<li>
 		<label>Full Name:
