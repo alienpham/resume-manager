@@ -91,9 +91,33 @@ class CompanyController extends Zend_Controller_Action
 	}
 	
 	public function addContactAction()
-	{
-		
+	{	
+		$this->view->title = 'ADD CONTACT';
+		$company = new Default_Model_CompanyMapper();
+		$company_id = $this->_getParam('company_id','');
+		$contact_id = $this->_getParam('contact_person_id','');
+		 
+		if($contact_id)
+		{
+		$this->view->title = 'EDIT CONTACT';
+		}
+		 
+		$cominfo = $company->getCompany($company_id);
+		 
+		$this->view->cominfo = $cominfo[0];
+		 
 	}
 	
+	public function saveContactAction()
+	{
+		 $post = $this->getRequest()->getPost();
+		 $contact = new Default_Model_ContactPersonMapper();
+		 
+		 $contact->setContactPersonId['contact_person_id'];
+		 $contact->setCompanyId($_POST['company_id']);
+		 $contact->setTitle($_POST['title']);
+		 $contact->setFullName($_POST['full_name']);
+		 $contact->setJobTitle($_POST['job_title']);
+	}
 }
 
