@@ -7,7 +7,7 @@
 	<ul>
 		<li>
 			<label>&nbsp;</label>
-			<em class="error"></em>
+			<em class="error"><?php echo @$this->msg; ?></em>
 		</li>
 		<li>
 			<label>Full Name <em>*</em></label>
@@ -83,7 +83,6 @@ function checkValid()
         return false;
     }
     
-
    /* var checkfn = /^[\w-\.]{4,}?$/;
     if(!checkfn.test(fullname))
     {
@@ -97,6 +96,7 @@ function checkValid()
     	$('.error').html('please enter a valid email address');
     	return false;
     } 
+
     return true;
 }   
 </script>

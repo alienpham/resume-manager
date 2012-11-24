@@ -226,5 +226,13 @@ class Default_Model_ResumeMapper {
 			
         return $db->fetchAll($sql);
     }
+    
+    public function checkExists($fullname, $birthday, $email)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT * FROM resume WHERE (full_name = '". $fullname ."' AND birthday = '". $birthday ."') OR email_1 = '". $email ."'";
+//echo $sql;exit;
+        return $db->query($sql)->rowCount();
+    }
 }
 ?>
