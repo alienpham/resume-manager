@@ -25,6 +25,7 @@ class ResumeController extends Zend_Controller_Action
 		echo 1;
 		exit;
 	}
+	
 	public function indexAction()
 	{
 		$_SESSION['export-email'] = '';
@@ -91,42 +92,63 @@ class ResumeController extends Zend_Controller_Action
 
 	public function saveResumeAction()
 	{
+	    
 		$aNamespace = new Zend_Session_Namespace ( 'zs_User' );
 		$post = $this->getRequest()->getPost();
 
-		//$date = new DateTime($post['birthday']);
-		//$birthday = $date->format('Y-m-d');
-
 		$resumeRowset = new Default_Model_Resume();
-		if($post['resume_id']) $resumeCode = 'R' . $post['resume_id'];
-		else $resumeCode = 'R';
-		$resumeRowset->setResumeId($post['resume_id']);
-		$resumeRowset->setResumeCode($resumeCode);
-		$resumeRowset->setFullName($post['full_name']);
-		$resumeRowset->setBirthday($post['birthday']);
-		$resumeRowset->setGender($post['gender']);
-		$resumeRowset->setMaritalStatus($post['marital_status']);
-		$resumeRowset->setStatus('Active');
-		$resumeRowset->setEmail1($post['email1']);
-		$resumeRowset->setEmail2($post['email2']);
-		$resumeRowset->setMobile1($post['mobile1']);
-		$resumeRowset->setMobile2($post['mobile2']);
-		$resumeRowset->setTel($post['tel']);
-		$resumeRowset->setAddress($post['address']);
-		$resumeRowset->setCreatedDate(date('Y-m-d'));
-		$resumeRowset->setCreatedConsultantId($aNamespace->consultant_id);
-		$resumeRowset->setUpdatedConsultantId($aNamespace->consultant_id);
-
 		$resume = new Default_Model_ResumeMapper();
-		$resumeId = $resume->save($resumeRowset);
-		if(!$post['resume_id']) $resume->updateResumCode('R' . $resumeId, $resumeId);
-
-		//upload file resume
-		if ($_FILES['file_resume']['name']) {
-			$this->saveResumeFile($_FILES['file_resume'], $resumeId);
+		$result = $resume->checkExists($post['full_name'], $post['birthday'], $post['email1']);
+		if($result) {
+    		$resumeRowset->setFullName($post['full_name']);
+    		$resumeRowset->setBirthday($post['birthday']);
+    		$resumeRowset->setGender($post['gender']);
+    		$resumeRowset->setMaritalStatus($post['marital_status']);
+    		$resumeRowset->setEmail1($post['email1']);
+    		$resumeRowset->setEmail2($post['email2']);
+    		$resumeRowset->setMobile1($post['mobile1']);
+    		$resumeRowset->setMobile2($post['mobile2']);
+    		$resumeRowset->setTel($post['tel']);
+    		$resumeRowset->setAddress($post['address']);
+    		
+    	    $this->view->resumeRowset = $resumeRowset;
+    	    $this->view->msg = 'Resume has exists in Database';
+    	    $this->render('personal-info');
+		} else {
+    		//$date = new DateTime($post['birthday']);
+    		//$birthday = $date->format('Y-m-d');
+    
+    		
+    		if($post['resume_id']) $resumeCode = 'R' . $post['resume_id'];
+    		else $resumeCode = 'R';
+    		$resumeRowset->setResumeId($post['resume_id']);
+    		$resumeRowset->setResumeCode($resumeCode);
+    		$resumeRowset->setFullName($post['full_name']);
+    		$resumeRowset->setBirthday($post['birthday']);
+    		$resumeRowset->setGender($post['gender']);
+    		$resumeRowset->setMaritalStatus($post['marital_status']);
+    		$resumeRowset->setStatus('Active');
+    		$resumeRowset->setEmail1($post['email1']);
+    		$resumeRowset->setEmail2($post['email2']);
+    		$resumeRowset->setMobile1($post['mobile1']);
+    		$resumeRowset->setMobile2($post['mobile2']);
+    		$resumeRowset->setTel($post['tel']);
+    		$resumeRowset->setAddress($post['address']);
+    		$resumeRowset->setCreatedDate(date('Y-m-d'));
+    		$resumeRowset->setCreatedConsultantId($aNamespace->consultant_id);
+    		$resumeRowset->setUpdatedConsultantId($aNamespace->consultant_id);
+    
+    		$resume = new Default_Model_ResumeMapper();
+    		$resumeId = $resume->save($resumeRowset);
+    		if(!$post['resume_id']) $resume->updateResumCode('R' . $resumeId, $resumeId);
+    
+    		//upload file resume
+    		if ($_FILES['file_resume']['name']) {
+    			$this->saveResumeFile($_FILES['file_resume'], $resumeId);
+    		}
+    
+    		$this->_redirect('/resume/education/id/' . $resumeId);
 		}
-
-		$this->_redirect('/resume/education/id/' . $resumeId);
 	}
 
 	public function educationAction()
