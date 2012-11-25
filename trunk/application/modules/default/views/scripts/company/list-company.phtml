@@ -1,23 +1,28 @@
 <!--  bat dau list_company -->
-<?php $num = 1; foreach($this->paginator as $rs) { ?>
-<div style="width:1320px">
+<?php 
+$num = 1; 
+$companyMapper = new Default_Model_CompanyMapper();
+foreach($this->paginator as $rs) { 
+    $comment = $companyMapper->getComments($rs['company_id'], 1);
+?>
+<div style="width:1320px; clear:both">
 	<div class="checkbox" style="margin-top:4px;width:10px">
 	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']; ?>" onclick="getvalue()" >
 	</div>
 	<div class="name" align="left" style="width:205px">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
-		    <?php echo $rs['full_name_en'] ?>
+            <?php echo $rs['full_name_vn'] ?>&nbsp;		    
         </a>
 	</div>
-	<div class="name" align="left" style="width:203px">
+	<div class="name" align="left" style="width:190px">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
-		    <?php echo $rs['full_name_vn'] ?>
+		    <?php echo $rs['full_name_en'] ?>&nbsp;
         </a>
 	</div>	
 	<div class="name" align="left" style="width:190px">
 		<?php echo $rs['address'] ?>&nbsp;
 	</div>
-	<div class="name" style="width:80px" align="left">
+	<div class="name" style="width:93px" align="left">
 		<?php echo $rs['tel'] ?>&nbsp;
 	</div>
 	<div class="name" align="left" style="width:170px">
@@ -27,7 +32,13 @@
 		<a href="/company/add-company/company_id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>
 	</div>
 	<div class="name" style="width:210px;" align="left">
-        <a href="#" class="editcom">Add Comment</a>
+        <a href="#comment" class="addcomment" id="<?php echo $rs['company_id']?>">Add Comment</a>
+        <div class="info-comment" id="viewcomment<?php echo $rs['company_id']?>">
+            <?php if($comment):?>
+            <p>- <?php echo substr($comment['content'], 0, 90);?></p>
+            <a href="#allcomment"  class="allcomment" id="<?php echo $rs['company_id']?>">View all</a>
+            <?php endif;?>
+        </div>
     </div>
 </div>
 <?php $num++; } ?>

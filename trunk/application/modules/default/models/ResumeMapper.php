@@ -177,10 +177,11 @@ class Default_Model_ResumeMapper {
 	
 	public function insertComment($data)
     {
+        $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
         $db = $this->getDbTable()->getAdapter();
         $sql = "INSERT INTO res_comment(resume_id, consultant_id, content) VALUES (";
 		$sql .= $data['resume_id'] . ",";
-		$sql .= "1,";
+		$sql .= $aNamespace->consultant_id . ",";
 		$sql .= "'" . @$data['content'] . "');";
 		
         $db->query($sql);
@@ -204,10 +205,11 @@ class Default_Model_ResumeMapper {
     
     public function insertHistory($data)
     {
+        $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
         $db = $this->getDbTable()->getAdapter();
         $sql = "INSERT INTO res_history(resume_id, consultant_id, content) VALUES (";
 		$sql .= $data['resume_id'] . ",";
-		$sql .= "1,";
+		$sql .= $aNamespace->consultant_id . ",";
 		$sql .= "'" . @$data['content'] . "');";
 		
         $db->query($sql);

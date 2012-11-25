@@ -102,10 +102,13 @@ class Default_Model_CompanyMapper {
         return $entries;
     }
     
-    public function getListCompany()
+    public function getListCompany($where='', $order='')
     {
     	$db = $this->getDbTable()->getAdapter();
-    	$sql = "SELECT * FROM company";
+    	$sql = "SELECT * FROM company ";
+    	if($where!='') $sql .= 'WHERE ' . $where;
+    	$sql .= ' ' . $order;
+//echo $sql;exit;
     	$rows = $db->fetchAll($sql);
     	return $rows;
     }
@@ -118,6 +121,31 @@ class Default_Model_CompanyMapper {
     	return $rows;
     }
     
-  	
+    public function getComments($companyId, $limit=null)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT cc.*, c.full_name, c.username FROM company_comment AS cc ";
+        $sql .= "INNER JOIN consultant AS c ON c.consultant_id = cc.consultant_id";
+        $sql .= " WHERE cc.company_id = " . $companyId;
+        $sql .= " ORDER BY cc.id DESC ";
+		if($limit) {
+		    $sql .= "LIMIT 1";
+		    return $db->fetchRow($sql);
+		} 
+		
+        return $db->fetchAll($sql);
+    }
+    
+    public function insertComment($data)
+    {
+        $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "INSERT INTO company_comment(company_id, consultant_id, content) VALUES (";
+		$sql .= $data['company_id'] . ",";
+		$sql .= $aNamespace->consultant_id . ",";
+		$sql .= "'" . @$data['content'] . "');";
+		
+        $db->query($sql);
+    }
 }
 
