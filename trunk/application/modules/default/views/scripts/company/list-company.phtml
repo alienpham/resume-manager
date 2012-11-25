@@ -1,33 +1,33 @@
 <!--  bat dau list_company -->
 <?php $num = 1; foreach($this->paginator as $rs) { ?>
 <div style="width:1320px">
-	<div class="checkbox" style="margin-top:4px;width:20px">
+	<div class="checkbox" style="margin-top:4px;width:10px">
 	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']; ?>" onclick="getvalue()" >
 	</div>
-	<div class="name" align="center" style="width:205px">
+	<div class="name" align="left" style="width:205px">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
 		    <?php echo $rs['full_name_en'] ?>
         </a>
 	</div>
-	<div class="name" align="center" style="width:203px">
+	<div class="name" align="left" style="width:203px">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
 		    <?php echo $rs['full_name_vn'] ?>
         </a>
 	</div>	
-	<div class="name" align="center" style="width:190px">
+	<div class="name" align="left" style="width:190px">
 		<?php echo $rs['address'] ?>&nbsp;
 	</div>
-	<div class="name" style="width:100px" align="center">
+	<div class="name" style="width:80px" align="left">
 		<?php echo $rs['tel'] ?>&nbsp;
 	</div>
-	<div class="name" align="center" style="width:190px">
+	<div class="name" align="left" style="width:170px">
 		<?php echo $rs['email'] ?>&nbsp;
 	</div>
-	<div class="name" style="width:100px" align="center">
+	<div class="name" style="width:40px" align="left">
 		<a href="/company/add-company/company_id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>
 	</div>
-	<div class="name" style="width:100px;" align="center">
-        <?php echo $rs['status'] ?>
+	<div class="name" style="width:210px;" align="left">
+        <a href="#" class="editcom">Add Comment</a>
     </div>
 </div>
 <?php $num++; } ?>

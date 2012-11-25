@@ -2,14 +2,14 @@
 class Default_Model_Vacancy
 {
 	protected $_vacancy_id;
-	protected $_company_id;
-	protected $_vacancy_code;
 	protected $_job_title;
 	protected $_min_salary;
 	protected $_max_salary;
+	protected $__priority;
 	protected $_work_level;
-	protected $_public;
-	protected $_status;
+	protected $_function;
+	protected $_location;
+	protected $_desc_reqs;
 	protected $_created_date;
 	protected $_updated_date;
     
@@ -56,14 +56,7 @@ class Default_Model_Vacancy
 	public function setVacancyId($id) {
 		$this->_vacancy_id = $id;
 	}
-	
-    public function getCompanyId() {
-		return $this->_company_id;
-	}
-	public function setCompanyId($id) {
-		$this->_company_id = $id;
-	}
-	
+		
 	public function getJobTitle() {
 		return $this->_job_title;
 	}
@@ -85,6 +78,14 @@ class Default_Model_Vacancy
 		$this->_max_salary = $max_salary;
 	}
 	
+ 	public function setPriority($priority) {
+        $this->_priority = $priority;
+    }
+    
+	public function getPriority() {
+        return $this->_max_salary;
+    }
+	
     public function getWorkLevel() {
             return $this->_work_level;
     }
@@ -92,18 +93,28 @@ class Default_Model_Vacancy
         $this->_work_level = $work_level;
     }
     
-    public function getPublic() {
-            return $this->_public;
-    }
-    public function setPublic($public) {
-        $this->_public = $public;
+	public function getFunction() {
+            return $this->_function;
     }
     
-	public function getStatus() {
-            return $this->_status;
+    public function setFunction($function) {
+        $this->_function = $function;
     }
-    public function setStatus($status) {
-        $this->_status = $status;
+    
+	public function getLocation() {
+            return $this->_location;
+    }
+    
+    public function setLocation($location) {
+        $this->_location = $location;
+    }
+    
+	public function getDescReqs() {
+            return $this->_desc_reqs;
+    }
+    
+    public function setDescReqs($desc_reqs) {
+        $this->_desc_reqs = $desc_reqs;
     }
     
     public function getCreatedDate() {

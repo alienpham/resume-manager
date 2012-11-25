@@ -9,14 +9,14 @@
 </form>
 </div>  
 <br />
-	<a href="/vacancy/vacancy/add-vacancy" style="text-decoration:none;">
+	<a href="/default/vacancy/add-vacancy" style="text-decoration:none;">
 		<input class="button01" type="button" value="Add Vacancy" />
 	</a>
 <br /><br />
 <?php
-//$vacancy = new Vacancy_Model_VacancyMapper();
-//$company = new Company_Model_CompanyMapper();
-//$listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($this->currentPage-1)*20,20);
+$vacancy = new Default_Model_VacancyMapper();
+$company = new Default_Model_CompanyMapper();
+$listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($this->currentPage-1)*20,20);
 ?>
 <form name="frmVacancyList">
 <input type="hidden" name="listVaId" id="listVaId" value="" />

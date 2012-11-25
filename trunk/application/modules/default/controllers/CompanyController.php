@@ -104,11 +104,13 @@ class CompanyController extends Zend_Controller_Action
 		$contact_id = $this->_getParam('contact_person_id','');
 		 
 		if($contact_id)
-		{
+		{	
 			$this->view->title = 'EDIT CONTACT';
 			$contact = new Default_Model_ContactPersonMapper();
 			$row = $contact->getContact($contact_id);
+			$cominfo = $company->getCompany($company_id);
 			$this->view->contactinfo = $row[0];
+			$this->view->cominfo = $cominfo[0];
 		}
 		 
 		$cominfo = $company->getCompany($company_id);

@@ -2,6 +2,8 @@
 $contact= new Default_Model_ContactPersonMapper();
 $listContact = $contact->getListContact ($this->cominfo['company_id']);
 ?>
+<input type="hidden" id="company_id" value="<?php echo $this->cominfo['company_id']; ?>">
+<input type="hidden" id="contact_person_id" value="<?php echo $listContact['contact_person_id']; ?>">
 <div style="height :50px;color : #848484; ">
 <h2><?php echo $this->cominfo['full_name_vn']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Address : <?php echo $this->cominfo['address']; ?></h2>
@@ -37,7 +39,7 @@ Address : <?php echo $this->cominfo['address']; ?></h2>
     <div class="name"><?php echo $rs['job_title'];?></div>
     <div class="name" style="width : 80px;"><?php echo $rs['tel']; ?></div>
     <div class="name" style="width : 195px;"><?php echo $rs['email']; ?></div>
-    <div class="name" style="width : 50px;"><a href="/company/company/add-contact/company_id/<?php echo $rs['company_id'];?>/contact_person_id/<?php echo $rs['contact_person_id'];?>">Edit</a></div>
+    <div class="name" style="width : 50px;"><a href="/company/add-contact/contact_person_id/<?php echo $rs['contact_person_id']; ?>">Edit</a></div>
     <?php $num++; }?>
 </div>
 <div align="center">
