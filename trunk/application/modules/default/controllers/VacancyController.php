@@ -23,7 +23,9 @@ class VacancyController extends Zend_Controller_Action
     
 	public function indexAction()
 	{
-	    
+	    $vacancy = new Default_Model_VacancyMapper();
+	    $listVacancy = $vacancy->getListVacancy();
+	    $this->view->vacancy = $listVacancy;
 	}
 	
 	public function addVacancyAction()
@@ -33,8 +35,11 @@ class VacancyController extends Zend_Controller_Action
 		$vacancy_id = $this->_getParam('vacancy_id','');
 		
 		if($vacancy_id)
-		{
+		{	
+			
 			$this->view->title = 'EDIT VACANCY';
+			$vacancy->find($vacancy_id, $vacancy);
+			
 		}
 		
 		$this->view->vacancy = $vacancy;

@@ -833,48 +833,40 @@ color:red;
 	padding:2px 1% 2px;
 	float:left;	
 }
-.list-vacancy .checkbox{
-	padding:7px 1%;
-	line-height:25px;
-	width:1%;
-}
-.list-vacancy .code
+
+
+.list-vacancy .headVacancy .company
 {
-	width:2%;	
+	width:11%;	
 	line-height:25px;
 }
-.list-vacancy .company
-{
-	width:15%;	
-	line-height:25px;
-}
-.list-vacancy .vacancy
-{
-	width:17%;	
-	line-height:25px;
-}
-.list-vacancy .salary
+.list-vacancy .headVacancy .vacancy
 {
 	width:7%;	
 	line-height:25px;
 }
-.list-vacancy .location
+.list-vacancy .headVacancy .salary
 {
 	width:7%;	
 	line-height:25px;
 }
-.list-vacancy .process
+.list-vacancy .headVacancy .location
+{
+	width:7%;	
+	line-height:25px;
+}
+.list-vacancy .headVacancy .process
 {
 	width:8%;	
 	line-height:25px;
 }
-.list-vacancy .posted
+.list-vacancy .headVacancy .posted
 {
 	width:5%;	
 	line-height:25px;
 }
 .list-vacancy .public
-.list-vacancy .status,
+.list-vacancy .headVacancy .status,
 {
 	width:2%;	
 	line-height:25px;
@@ -885,7 +877,7 @@ color:red;
 	width:6%;	
 	line-height:25px;
 }
-.list-vacancy .action{
+.list-vacancy .headVacancy .action{
 	background:none !important;
 	line-height:25px;
 }
@@ -900,31 +892,20 @@ color:red;
 	color:#8AB036;	
 }
 
-.list-vacancy .contentVacancy .checkbox{
-	padding:7px 1%;
-	line-height:25px;
-}
-
-.list-vacancy .contentVacancy .code
-{
-	width:2%;	
-	line-height:25px;
-}
-
 .list-vacancy .contentVacancy .vacancy
 {
-	width:17%;
+	width:8%;
 	line-height:25px;
 }
 .list-vacancy .contentVacancy .company
 {
-	width:15%;
+	width:12%;
 	line-height:25px;
 }
 
 .list-vacancy .contentVacancy .salary
 {
-	width:7%;	
+	width:6%;	
 	line-height:25px;
 }
 
