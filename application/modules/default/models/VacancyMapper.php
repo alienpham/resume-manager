@@ -28,14 +28,15 @@ class Default_Model_VacancyMapper {
 	public function save (Default_Model_Vacancy $vacancy)
     {
         $data = array(
-			'company_id' 		=> $vacancy->getCompanyId(), 
-			'vacancy_code' 		=> $vacancy->getVacancyCode(), 
+			'vacancy_id' 		=> $vacancy->getVacancyId(), 
         	'job_title' 		=> $vacancy->getJobTitle(), 
 			'min_salary' 		=> $vacancy->getMinSalary(),
-        	'max_salary' 		=> $vacancy->getMaxSalary(), 
+        	'max_salary' 		=> $vacancy->getMaxSalary(),
+            'priority'			=> $vacancy->getPriority(), 
         	'work_level' 	    => $vacancy->getWorkLevel(), 
-			'public' 			=> $vacancy->getPublic(), 
-			'status' 			=> $vacancy->getStatus(),
+			'function' 			=> $vacancy->getFunction(),
+        	'localtion' 		=> $vacancy->getLocation(), 
+        	'desc_reqs'			=> $vacancy->getDescReqs(),
         	'created_date' 		=> $vacancy->getCreatedDate(), 
 			'updated_date' 		=> $vacancy->getUpdatedDate()
 		);
@@ -55,14 +56,15 @@ class Default_Model_VacancyMapper {
             return;
         }
         $row = $result->current();
-            $vacancy ->setCompanyId($row->company_id);
-            $vacancy->SetCompanyId(company_id);
+            
+            $vacancy->getPriority('priority');
             $vacancy->setJobTitle('job_title');
             $vacancy->setMinSalary('min_salary');
             $vacancy->setMaxSalary('max_salary');
             $vacancy->setWorkLevel('work_level');
-            $vacancy->setPublic('public');
-            $vacancy->setStatus('status');
+            $vacancy->setFunction('function');
+            $vacancy->setLocation('location');
+            $vacancy->setDescReqs('desc_reqs');
             $vacancy->setCreatedDate('created_date');
             $vacancy->setUpdatedDate('updated_date');
     }
@@ -75,18 +77,27 @@ class Default_Model_VacancyMapper {
         $entries = array();
         $entry = new Default_Model_Vacancy();
         foreach ($resultSet as $row) {
-            $entry ->setCompanyId($row->company_id);
-            $entry->SetCompanyId(company_id);
+            $entry->setVacancyId('vacancy_id');
             $entry->setJobTitle('job_title');
             $entry->setMinSalary('min_salary');
             $entry->setMaxSalary('max_salary');
+            $entry->setPriority('priority');
             $entry->setWorkLevel('work_level');
-            $entry->setPublic('public');
-            $entry->setStatus('status');
+            $entry->setLocation('location');
+            $entry->setFunction('fuction');
+            $entry->setDescReqs('desc_reqs');
             $entry->setCreatedDate('created_date');
             $entry->setUpdatedDate('updated_date');
             $entries[] = $entry;
         }
         return $entries;
+    }
+    
+    public function getListVacancy()
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT * FROM vacancy";
+    	$rows = $rows = $db->fetchAll($sql);
+    	return $rows;
     }
 }

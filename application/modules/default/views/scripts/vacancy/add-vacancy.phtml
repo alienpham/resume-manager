@@ -16,9 +16,9 @@ function rtrim(str, chars) {
 }
 </script>
 <div class="from-add-01">
-<form name="frmAddVacancy" action="/vacancy/vacancy/add-vacancy" method="post">
+<form name="frmAddVacancy" action="/default/vacancy/save-vacancy" method="post">
 <input type="hidden" name="vacancy_id" id="vacancy_id" value="<?php echo $this->vacancy_id;?>"> 
-	<h2 style="color:#848484;margin-left:20px;">ADD VACANCY</h2>
+	<h2 style="color:#848484;margin-left:20px;"><?php echo $this->title; ?></h2>
 		<ul>
 			<li>
 				<label></label>
@@ -31,6 +31,15 @@ function rtrim(str, chars) {
 			<li>
 				<label>Job Title:</label>
 				<input type="text" name="job_title" id="job_title" value="<?php echo $this->job_title; ?>">
+			</li>
+			<li>
+				<label>Priority:</label>
+				<select name ="priority" id ="priority">
+					<option value="4">Low</option>
+					<option value="3">Medium</option>
+					<option value="2">High</option>
+					<option value="1">Urgent</option>
+				</select>
 			</li>
 			<li>
 				<label>Salary:</label>
@@ -53,27 +62,23 @@ function rtrim(str, chars) {
 				<label>Function:</label>
                 <input type="text" name="function" id="function" value="">
 
-			</li>
-			<li>
-				<label>Status:</label>
-				<select name="status" id="status" style="width:235px">
-                	<option value="">Please select</option>
-                    <option value="Open" <?php if ($this->status=='Open') echo 'selected' ?> >Open</option>
-                    <option value="Close" <?php if ($this->status=='Close') echo 'selected' ?> >Close</option>
-                </select>
-			</li>
+			</li>	
             <li>
                 <label>Job Description &amp; Requirements:</label>
                 <textarea name="desc_reqs" cols="40" rows="20" id="desc_reqs"><?php echo $this->desc_reqs;?></textarea>
             </li>
-		</ul>
+		
 
         
-	<div align="center" style="width:992px;clear:both;">
-		<input type="submit" name="btSave" id="btSave" value="Save" class="button01">&nbsp;&nbsp;&nbsp;
-        <input type="submit" class="button01" name="btAdd" id="btAdd" value="Save &amp; Add"> &nbsp;&nbsp;&nbsp;
-        <a href="/vacancy"><input type="button" name="button3" id="button3" value="Cancel" class="button02"></a>
-	</div>
+<!--	<div align="center" style="width:992px;clear:both;">-->
+			<li>
+				<label></label>
+	 			<a href="/vacancy"><input type="button" name="button3" id="button3" value="Cancel" class="button02"></a>
+				<input type="submit" name="btSave" id="btSave" value="Save" class="button01">&nbsp;&nbsp;&nbsp;
+        		<input type="submit" class="button01" name="btAdd" id="btAdd" value="Save &amp; Add"> &nbsp;&nbsp;&nbsp;
+        	</li>
+       </ul>
+	
 </form>
 </div>
 
