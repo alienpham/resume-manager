@@ -34,13 +34,24 @@ class CompanyController extends Zend_Controller_Action
 		
 		$company = new Default_Model_CompanyMapper();
 		$rowPerPage = $this->_getParam('rowperpage', 20);
+		$txtSearch = $this->_getParam('txtSearch','');
+		$sort = $this->_getParam('sort','created_date');
+		$order = $this->_getParam('order','DESC');
+		
+		$where = '';
+		if($txtSearch) $where = ' full_name_en like "%'. $txtSearch .'%" OR full_name_vn like "%'. $txtSearch .'%"';
+		$order1 = ' ORDER BY ' . $sort . ' ' .$order;
+				
 		$currentPage = 1;
-		$rows = $company->getListCompany();	
+		$rows = $company->getListCompany($where, $order1);	
 		$paginator = Zend_Paginator::factory($rows);
 		$paginator->setItemCountPerPage($rowPerPage);
 		$paginator->setCurrentPageNumber($currentPage);
 
 		$this->view->paginator = $paginator;
+		$this->view->txtSearch = $txtSearch;
+		$this->view->sort = $sort;
+		$this->view->order = $order;
 	}	
 	
 	public function addCompanyAction()
@@ -138,5 +149,52 @@ class CompanyController extends Zend_Controller_Action
 		 $row = $addContact->save($contact);
 
 		 $this->_redirect('/company/index');
+	}
+	
+    public function saveCommentAction()
+	{
+		$post = $this->getRequest()->getPost();
+
+		$companyMapper = new Default_Model_CompanyMapper();
+		$companyMapper->insertComment($post);
+
+		$comment = $companyMapper->getComments($post['company_id'], 1);
+		$date = new DateTime($comment['created_date']);
+		$createdComment = $date->format('M-d');
+
+		$html = '<p class="update-date">Comment '. $createdComment .'</p> <span>by</span> <span class="user-name">'. $comment['username'] . '</span>';
+		$html .= '<p>' . substr($comment['content'], 0, 90) . '</p>';
+		$html .= '<a href="#allcomment" class="allcomment" id="'.  $post['company_id'] .'" onClick="allComment('.  $post['company_id'] .')">view all</a>';
+		echo $html;
+		exit;
+	}
+
+	public function allCommentAction()
+	{
+	    $post = $this->getRequest()->getPost();
+
+		$companyMapper = new Default_Model_CompanyMapper();
+		$comments = $companyMapper->getComments($post['company_id']);
+
+		$html = '';
+		$html .= '<div style="color:#1B7CBD;background-color:#CCC;padding:5px 0px"><b>ALL COMMENT</b></div><br />';
+		foreach($comments as $comment) {
+
+			$date = new DateTime($comment['created_date']);
+			$createdComment = $date->format('M-d');
+
+			$html .= '<div>';
+			$html .= substr($comment['content'], 0, 90);
+			$html .= '<div align="right"><span>Comment '. $createdComment .'</span> ';
+			$html .= '<span style="color: #70B4E2;">by ' . $comment['username'] . '</span></div>';
+			$html .= '</div>';
+			$html .= '<div style="border-top: 1px solid #BCBCBC; margin-top:10px">&nbsp;</div>';
+		}
+
+		echo $html;
+		exit;
+		//$this->_helper->layout->disableLayout();
+		//$this->view->html = $html;
+		//$this->render('comment-all');
 	}
 }

@@ -10,14 +10,13 @@ function checkLogin(){
    });
 }
 </script>
-<div class="block-search">
 <form id="frmsearch" action="/company" method="post">
+<div class="block-search">
 	<label>Search</label>
 	<input name="txtSearch" id="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/>
     <input class="button01" name="btSearch" type="submit" value="Search"/>
-</form>
 </div>
-<div style="height:40px"> </div>
+<div style="height:20px"> </div>
 <div style="clear:both;width:1330px">	
 	<div style="width:300px;float:left">
 	<a href="/company/add-company" style="text-decoration:none;">
@@ -25,19 +24,20 @@ function checkLogin(){
 	</a>
         <input class="button01" type="button" value="Add Contact" onclick="addContact()"/>
 	</div>
-  	<div style="width:250px;float:right">          
+  	<div style="width:270px;float:right">          
 	    <label for="choice">Sort : </label>
-	    <select name="short_name_id" id="short_name_id" style="width:80px">
-	        <option value="full_name_en" <?php if ($this->short_name_id=="full_name_en") echo "selected";?>>Name</option>
-	        <option value="created_date" <?php if ($this->short_name_id=="created_date") echo "selected";?>>Created Date</option>
+	    <select name="sort" id="sort" style="width:110px">
+	        <option value="created_date" <?php if ($this->sort=="created_date") echo "selected";?>>Created Date</option>
+            <option value="full_name_en" <?php if ($this->sort=="full_name_en") echo "selected";?>>Name</option>
 	    </select>
-	    <select name="sort_type_id" id="sort_type_id" style="width:60px">
-	    	<option value="ASC" <?php if ($this->sort_type_id=="ASC") echo "selected";?>>ASC</option>
-	    	<option value="DESC" <?php if ($this->sort_type_id=="DESC") echo "selected";?>>DESC</option>
+	    <select name="order" id="order" style="width:60px">
+	    	<option value="DESC" <?php if ($this->order=="DESC") echo "selected";?>>DESC</option>
+            <option value="ASC" <?php if ($this->order=="ASC") echo "selected";?>>ASC</option>
 	    </select>
 	    <input type="submit" value="Sort" />
     </div>
 </div>
+</form>
 <div style="height:20px;clear:both;"> </div>
 <form name="frmCompanyList">
 <div id="box">   
@@ -49,13 +49,13 @@ function checkLogin(){
             <div class="name" align="center" style="width:205px">
                 <h4>Company Name VN</h4>
             </div>
-            <div class="name" align="center" style="width:203px">
+            <div class="name" align="center" style="width:190px">
                 <h4>Company Name EN</h4>
             </div>
             <div class="name" align="center" style="width:190px">
                 <h4>address</h4>
             </div>
-            <div class="name" style="width:80px;" align="center">
+            <div class="name" style="width:93px;" align="center">
                 <h4>tel</h4>
             </div>
             <div class="name" align="center" style="width:170px">
@@ -98,15 +98,12 @@ function checkLogin(){
 	<?php endif;?>
   </table>
 <input type="hidden" name="hdcompany_id" id="hdcompany_id" /> 
- </form>
- <div id="view_company" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
- 
+</form>
+<div id="view_company" style="width:700px;height: 350px; overflow-y:scroll; display: none;">&nbsp;</div>
+<?php echo $this->partial ( '/company/comment.phtml' )?> 
+<div id="allcomment" style="width:500px;height:200px; overflow-y:scroll; display: none;">&nbsp;</div>
 <script language="javascript">
-
-
-
-
- $(document).ready(function() {
+$(document).ready(function() {
      //Begin View detail candidate
      $(".view_company").fancybox();
      $(".view_company").click(function(){
@@ -127,4 +124,51 @@ function checkLogin(){
      //End View detail candidate
  });
 
+$(document).ready(function() {
+    //Begin Comment for resume
+    $(".addcomment").fancybox();
+    $(".addcomment").click(function(){
+        $('#contentcomment').val(''); 
+        $('input[name=company_id]').val($(this).attr('id'));
+    });
+
+    $("#insertcomment").click(function(){
+        checkLogin();
+        if(!$('#contentcomment').val()) {
+            $('#msgcomment').html('Content is not null'); 
+            return;
+        }
+        var company_id = $('input[name=company_id]').val();
+        $.ajax({
+            url: '/company/save-comment',
+            type: "POST",
+            data: { 
+            	company_id: company_id, 
+                consultant_id: $('input[name=consultant_id]').val(), 
+                content: $('#contentcomment').val()
+            },
+            success: function(result) {
+                $('#viewcomment' + company_id).html(result);
+                $.fancybox.close();
+            }
+        });
+    });
+    
+    $(".allcomment").fancybox();
+    $(".allcomment").click(function(){
+        checkLogin();
+        var company_id = $(this).attr('id');
+        $.ajax({
+            url: '/company/all-comment',
+            type: "POST",
+            data: { 
+            	company_id: company_id, 
+            },
+            success: function(result) {
+                $('#allcomment').html(result);
+            }
+        });
+    });
+});
+    //End Comment for resume
 </script>

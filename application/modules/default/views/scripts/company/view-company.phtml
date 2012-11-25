@@ -42,9 +42,9 @@ Address : <?php echo $this->cominfo['address']; ?></h2>
     <div class="name" style="width : 50px;"><a href="/company/add-contact/contact_person_id/<?php echo $rs['contact_person_id']; ?>">Edit</a></div>
     <?php $num++; }?>
 </div>
-<div align="center">
-	<input type="submit" name="close" class="button01"
-			value="Close"
+<div style="clear:both">&nbsp;</div>
+<div align="center" style="clear:both">
+	<input type="submit" name="close" class="button01"value="Close"
 			onclick="event.preventDefault(); parent.$.fancybox.close();" />
 </div>
 
