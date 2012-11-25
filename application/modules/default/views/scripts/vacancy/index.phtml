@@ -15,78 +15,75 @@
 <br /><br />
 
 <form name="frmVacancyList">
-<input type="hidden" name="listVaId" id="listVaId" value="" />
+<input type="hidden" name="vacancy_id" id="vacancy_id" value="<?php echo $this->$vacancy['vacancy_id'] ?>" />
 <div id="box">   
-    <div class="list-vacancy clearfix">
-        <div class="headVacancy">
-            <div class="company">
+    <div class="list-vacancy clearfix" >
+        <div class="headVacancy" style="width:100%;align:left">
+            <div class="company" style="width:13%;align:left">
                 <h4>Company</h4>
             </div>
-            <div class="checkbox">
-                <input name="" type="checkbox" value="" />
+            <div class="vacancy" style="width:6%;align:left">
+                <h4>Job_title</h4>
             </div>
-            <div class="code">
-                <h4>Code</h4>
+            <div class="vacancy" style="width:7%;align:left">
+                <h4>Work Level</h4>
             </div>
-            <div class="vacancy">
-                <h4>Vacancy</h4>
+            <div class="salary" style="width:7%;align:left">
+                <h4>Min Salary</h4>
             </div>
-            <div class="salary">
-                <h4>Salary</h4>
+            <div class="salary" style="width:7%;align:left">
+                <h4>Max Salary</h4>
             </div>
-            <div class="location">
+            <div class="salary" style="width:6%;align:left">
+                <h4>priority</h4>
+            </div>
+            <div class="location" style="width:10%;align:left">
                 <h4>Location</h4>
             </div>
-            <div class="posted">
-                <h4>Posted</h4>
+            <div class="posted" style="width:7%;align:left">
+            	<h4>Posted</h4>
+            </div>
+            <div class="salary" style="width:8%;align:left">
+                <h4>Function</h4>
             </div>           
-            <div class="status">
-                <h4>Status</h4>
-            </div>
-            <div class="cons">
-                <h4>Consultant</h4>
-            </div>
-            <div class="action">
+            <div class="action" style="width:8%;align:left">
                 <h4>Action</h4>
             </div>
         </div>
         <div class="contentVacancy">
         <?php 
-			$com_id="";
-			foreach ($listVacancy as $rs) {
-		
-			?>
+			foreach ($this->vacancy as $rs) {
+		?>
         	
-            <div class="company">
-            <strong><?php if ($com_id=="" || $com_id!=$rs['company_id']) echo $companycode." - ".$companyname; $com_id=$rs['company_id'];?> </strong>
+            <div class="company" style="width:13%;align:left">
+            	<strong><?php echo $rs['company_name'] ;?> </strong>
             </div>
-            <div class="checkbox">
-                <input name="vacancy_id" id="vacancy_id" type="checkbox" value="<?php echo $rs['vacancy_id'];?>" />
+            <div class="vacancy" style="width:6%;align:left">
+            	<?php echo $rs['job_title'];?>
             </div>
-            <div class="code">
-            
+            <div class="vacancy" style="width:7%;align:left">
+                <h4>Work Level</h4>
             </div>
-            <div class="vacancy">
-            <h4><a href="/vacancy/vacancy/view-vacancy/vacancy_id/<?php echo $rs['vacancy_id'];?>"><?php echo $rs['job_title'];?></a></h4>
+            <div class="salary" style="width:7%;align:left">
+            	<?php echo $rs['min_salary'] ?>
             </div>
-            <div class="salary">
-            <?php echo $vacancy->getSalaryValue($rs['min_salary'],$rs['max_salary']);?>
+             <div class="salary" style="width:7%;align:left">
+            	<?php echo $rs['max_salary'] ?>
             </div>
-            <div class="location">
-            <?php if (count($arr)==1) echo trim($arr[0]); else
-			echo trim($arr[0])." ..." ;?>
+            <div class="salary" style="width:6%;align:left">
+               <?php echo $rs['priority'] ?>
             </div>
-            <div class="posted">
-            <?php echo date("d-m-Y",strtotime($rs['created_date']));?>
+            <div class="location" style="width:10%;align:left">
+            	<?php echo $rs['location']  ?>
             </div>
-            <div class="status">
-            <?php echo $rs['status'];?>
+            <div class="posted" style="width:7%;align:left">
+            	<?php echo date("d-m-Y",strtotime($rs['created_date']));?>
             </div>
-            <div class="cons">
-            <?php echo $consultantname;?>
+            <div class="salary" style="width:8%;align:left">
+            	<?php echo $rs['function'];?>
             </div>
-            <div class="action">
-            <a href="/vacancy/vacancy/add-vacancy/vacancy_id/<?php echo $rs['vacancy_id'];?>">Edit</a>
+            <div class="action" style="width:8%;align:left">
+            	<a href="/default/vacancy/add-vacancy/vacancy_id/<?php echo $rs['vacancy_id'];?>">Edit</a>
             </div>
             <?php }?>
         </div>

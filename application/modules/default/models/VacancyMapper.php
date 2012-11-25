@@ -57,8 +57,8 @@ class Default_Model_VacancyMapper {
         }
         $row = $result->current();
             
-        	$vacancy->getCompanyName('company_name');
-            $vacancy->getPriority('priority');
+        	$vacancy->setCompanyName('company_name');
+            $vacancy->setPriority('priority');
             $vacancy->setJobTitle('job_title');
             $vacancy->setMinSalary('min_salary');
             $vacancy->setMaxSalary('max_salary');
@@ -99,7 +99,15 @@ class Default_Model_VacancyMapper {
     {
     	$db = $this->getDbTable()->getAdapter();
     	$sql = "SELECT * FROM vacancy";
-    	$rows = $rows = $db->fetchAll($sql);
+    	$rows =  $db->fetchAll($sql);
+    	return $rows;
+    }
+    
+    public function getVacancy($id)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT * FROM vacancy WHERE vacancy_id =" .$id;
+    	$rows = $db->fetchAll($sql);
     	return $rows;
     }
 }
