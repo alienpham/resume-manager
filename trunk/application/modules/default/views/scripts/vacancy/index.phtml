@@ -13,11 +13,7 @@
 		<input class="button01" type="button" value="Add Vacancy" />
 	</a>
 <br /><br />
-<?php
-$vacancy = new Default_Model_VacancyMapper();
-$company = new Default_Model_CompanyMapper();
-$listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($this->currentPage-1)*20,20);
-?>
+
 <form name="frmVacancyList">
 <input type="hidden" name="listVaId" id="listVaId" value="" />
 <div id="box">   
@@ -58,13 +54,7 @@ $listVacancy = $vacancy->getListVacancy ($this->condition, $this->order_by,($thi
         <?php 
 			$com_id="";
 			foreach ($listVacancy as $rs) {
-			$companyname = $company->getFieldValue("company","company_id='".$rs['company_id']."'","full_name_en");
-			$companycode = $company->getFieldValue("company","company_id='".$rs['company_id']."'","company_code");
-			if ($companyname=="")
-				$companyname = $company->getFieldValue("company","company_id='".$rs['company_id']."'","full_name_vn");
-			$consultantname = $company->getFieldValue("consultant","consultant_id IN (SELECT consultant_id FROM va_has_consultant WHERE vacancy_id='".$rs['vacancy_id']."' AND inchange_type='Main')","abbreviated_name");
-			$location =  $company->getFieldValue("province_lookup","province_id IN(SELECT province_id FROM va_has_location WHERE vacancy_id='".$rs['vacancy_id']."')","name", 0, 1);
-			$arr=explode("|",$location);
+		
 			?>
         	
             <div class="company">

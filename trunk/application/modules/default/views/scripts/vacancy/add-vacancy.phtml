@@ -26,7 +26,7 @@ function rtrim(str, chars) {
 			</li>
 			<li>
 				<label>Company:</label>
-				<input type="text" name="company_id" id="company_id">
+				<input type="text" name="company_name" id="company_name">
 			</li>
 			<li>
 				<label>Job Title:</label>
@@ -35,7 +35,7 @@ function rtrim(str, chars) {
 			<li>
 				<label>Priority:</label>
 				<select name ="priority" id ="priority">
-					<option value="4">Low</option>
+					<option value="4" selected="selected">Low</option>
 					<option value="3">Medium</option>
 					<option value="2">High</option>
 					<option value="1">Urgent</option>
@@ -53,10 +53,7 @@ function rtrim(str, chars) {
 			</li>
 			<li>
 				<label>Work Level:</label>
-				<select name="work_level_id">
-                	<option value="">Please select</option>
-                    <?php echo $this->listWorkLevel;?>
-                </select>
+				<input type="text" name="work_level" id="work_level">
 			</li>
 			<li>
 				<label>Function:</label>

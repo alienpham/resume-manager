@@ -42,19 +42,28 @@ class VacancyController extends Zend_Controller_Action
 	
 	public function saveVacancyAction()
 	{
-		 $data = $this->getRequest()->getPost();
+		 $post = $this->getRequest()->getPost();
+		 
 		 $vacancy = new Default_Model_Vacancy();
 		 $vacancy_id = $this->_getParam('vacancy_id','');
 		 
-		 $vacancy->setVacancyId($_POST['vacancy_id']);
-		 $vacancy->setJobTitle($_POST['job_title']);
-		 $vacancy->setMinSalary($_POST['min_salary']);
-		 $vacancy->setMaxSalary($_POST['max_salary']);
-		 $vacancy->setPriority($_POST['priority']);
-		 $vacancy->setWorkLevel($_POST['work_level']);
-		 $vacancy->setFunction($_POST['function']);
-		 $vacancy->setLocation($_POST['location']);
-		 $vacancy->setDescReqs($_POST['desc_reqs']);
+		 $vacancy->setVacancyId($post['vacancy_id']);
+		 $vacancy->setCompanyName($post['company_name']);
+		 $vacancy->setJobTitle($post['job_title']);
+		 $vacancy->setMinSalary(doubleval($post['min_salary']));
+		 $vacancy->setMaxSalary(doubleval($post['max_salary']));
+		 switch ($post['priority'])
+		 {
+		 	case '1': $priority = 'Urgent'; break;
+		 	case '2': $priority = 'High'; break;
+		 	case '3': $priority = 'Medium'; break;
+		 	case '4': $priority = 'Low'; break;
+		 }
+		 $vacancy->setPriority($priority);
+		 $vacancy->setWorkLevel($post['work_level']);
+		 $vacancy->setFunction($post['function']);
+		 $vacancy->setLocation($post['location']);
+		 $vacancy->setDescReqs($post['desc_reqs']);
 		 $vacancy->setCreatedDate(date('Y-m-d'));
 		 $vacancy->setUpdatedDate(date('Y-m-d'));
 		 
