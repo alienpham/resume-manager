@@ -2,10 +2,11 @@
 class Default_Model_Vacancy
 {
 	protected $_vacancy_id;
+	protected $_company_name;
 	protected $_job_title;
 	protected $_min_salary;
 	protected $_max_salary;
-	protected $__priority;
+	protected $_priority;
 	protected $_work_level;
 	protected $_function;
 	protected $_location;
@@ -55,6 +56,13 @@ class Default_Model_Vacancy
 	}
 	public function setVacancyId($id) {
 		$this->_vacancy_id = $id;
+	}
+	
+	public function getCompanyName() {
+		return $this->_company_name;
+	}
+	public function setCompanyName($company_name) {
+		$this->_company_name = $company_name;
 	}
 		
 	public function getJobTitle() {

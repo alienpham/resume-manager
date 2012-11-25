@@ -20,6 +20,15 @@ class Default_Model_User {
         return $this->_dbTable;
     }
 
+    public function fetchAll($where)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT * FROM consultant WHERE ";
+        $sql .= "$where";
+		return $db->fetchAll($sql);
+    	
+    }
+    
     public function checkLogin($username, $pass)
 	{
 	    $db = $this->getDbTable()->getAdapter();

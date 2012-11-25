@@ -1,7 +1,6 @@
 <?php
 class Default_Model_VacancyMapper {
 	protected $_dbTable;
-	var $htmlstr;
     public function setDbTable ($dbTable)
     {
         if (is_string($dbTable)) {
@@ -29,13 +28,14 @@ class Default_Model_VacancyMapper {
     {
         $data = array(
 			'vacancy_id' 		=> $vacancy->getVacancyId(), 
+        	'company_name' 		=> $vacancy->getCompanyName(), 
         	'job_title' 		=> $vacancy->getJobTitle(), 
 			'min_salary' 		=> $vacancy->getMinSalary(),
         	'max_salary' 		=> $vacancy->getMaxSalary(),
             'priority'			=> $vacancy->getPriority(), 
         	'work_level' 	    => $vacancy->getWorkLevel(), 
 			'function' 			=> $vacancy->getFunction(),
-        	'localtion' 		=> $vacancy->getLocation(), 
+        	'location' 			=> $vacancy->getLocation(), 
         	'desc_reqs'			=> $vacancy->getDescReqs(),
         	'created_date' 		=> $vacancy->getCreatedDate(), 
 			'updated_date' 		=> $vacancy->getUpdatedDate()
@@ -57,6 +57,7 @@ class Default_Model_VacancyMapper {
         }
         $row = $result->current();
             
+        	$vacancy->getCompanyName('company_name');
             $vacancy->getPriority('priority');
             $vacancy->setJobTitle('job_title');
             $vacancy->setMinSalary('min_salary');
@@ -78,6 +79,7 @@ class Default_Model_VacancyMapper {
         $entry = new Default_Model_Vacancy();
         foreach ($resultSet as $row) {
             $entry->setVacancyId('vacancy_id');
+            $entry->setCompanyName('company_name');
             $entry->setJobTitle('job_title');
             $entry->setMinSalary('min_salary');
             $entry->setMaxSalary('max_salary');

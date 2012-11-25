@@ -23,7 +23,7 @@ class ProfileController extends Zend_Controller_Action {
 
 	public function indexAction() 
 	{
-		$consultantClass = new Vacancy_Model_ConsultantMapper();
+		$consultantClass = new Default_Model_User();
 		$rows = $consultantClass->fetchAll('status <> "Deleted"');
 		$this->view->rows = $rows;
 	}

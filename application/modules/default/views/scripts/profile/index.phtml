@@ -43,35 +43,35 @@
 	        <?php if($this->rows):?>
 	        <?php foreach ($this->rows as $row):?>
 	        <div class="checkbox">
-	        	<input type="checkbox" name="cid[]" value="<?php echo $row->getConsultantId()?>" />
+	        	<input type="checkbox" name="cid[]" value="<?php echo $row['consultant_id']?>" />
 	        </div>
 	        <div class="username">
-	        	<?php echo $row->getUserName()?>
+	        	<?php echo $row['username']?>
 	        </div>
-	        <div class="fullname"><?php echo $row->getFullName()?> (<?php echo $row->getTitle()?>)&nbsp;</div>
+	        <div class="fullname"><?php echo $row['full_name']?> (<?php echo $row['title']?>)&nbsp;</div>
 	        <div class="email">
-	        	<?php echo $row->getEmail()?>&nbsp;
+	        	<?php echo $row['email']?>&nbsp;
 	        </div>
             <div class="phone">
-                <?php echo $row->getPhone()?>&nbsp;
+                <?php echo $row['phone']?>&nbsp;
             </div>
 	        <div class="job-title">
-	        	<?php echo $row->getJobTitle()?>&nbsp;
+	        	<?php echo $row['job_title']?>&nbsp;
 	        </div>
 	        <div class="status">
-	        	<?php echo $row->getStatus()?>&nbsp;
+	        	<?php echo $row['status']?>&nbsp;
 	        </div>
             <div class="modified-date">
-                <?php echo $row->getUpdateDate()?>&nbsp;
+                <?php echo $row['updated_date']?>&nbsp;
             </div>
              <div class="action">
-                <a href="/profile/add-user/id/<?php echo $row->getConsultantId() ?>" title="Edit <?php echo $row->getUserName()?>">Edit</a> | 
-                <?php if($row->getStatus() == 'Active'):?>
-                    <a href="/profile/inactive-user/id/<?php echo $row->getConsultantId() ?>" title="Inactive <?php echo $row->getUserName()?>">Inactive</a> | 
+                <a href="/profile/add-user/id/<?php echo $row['consultant_id'] ?>" title="Edit <?php echo $row['username']?>">Edit</a> | 
+                <?php if($row['status'] == 'Active'):?>
+                    <a href="/profile/inactive-user/id/<?php echo $row['consultant_id'] ?>" title="Inactive <?php echo $row['username']?>">Inactive</a> | 
                 <?php else :?>
-                    <a href="/profile/active-user/id/<?php echo $row->getConsultantId() ?>" title="Active <?php echo $row->getUserName()?>">Active</a> |
+                    <a href="/profile/active-user/id/<?php echo $row['consultant_id'] ?>" title="Active <?php echo $row['username']?>">Active</a> |
                 <?php endif;?>
-                <a href="/profile/delete-user/id/<?php echo $row->getConsultantId()?>" title="Delete <?php echo $row->getUserName()?>">Delete</a>
+                <a href="/profile/delete-user/id/<?php echo $row['consultant_id']?>" title="Delete <?php echo $row['username']?>">Delete</a>
             </div>
             <br class="clear"/>
 	        <?php endforeach;?>
