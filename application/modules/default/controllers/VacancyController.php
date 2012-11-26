@@ -39,6 +39,7 @@ class VacancyController extends Zend_Controller_Action
 		{	
 			$this->view->title = 'EDIT VACANCY';		
 			$vacancyMapper->find($vacancy_id, $vacancy);
+
 		}
 		
 		$this->view->vacancy = $vacancy;
@@ -49,21 +50,13 @@ class VacancyController extends Zend_Controller_Action
 		 $post = $this->getRequest()->getPost();
 		 
 		 $vacancy = new Default_Model_Vacancy();
-		 $vacancy_id = $this->_getParam('vacancy_id','');
-		 
+
 		 $vacancy->setVacancyId($post['vacancy_id']);
 		 $vacancy->setCompanyName($post['company_name']);
 		 $vacancy->setJobTitle($post['job_title']);
 		 $vacancy->setMinSalary(doubleval($post['min_salary']));
 		 $vacancy->setMaxSalary(doubleval($post['max_salary']));
-		 switch ($post['priority'])
-		 {
-		 	case '1': $priority = 'Urgent'; break;
-		 	case '2': $priority = 'High'; break;
-		 	case '3': $priority = 'Medium'; break;
-		 	case '4': $priority = 'Low'; break;
-		 }
-		 $vacancy->setPriority($priority);
+		 $vacancy->setPriority($post['priority']);
 		 $vacancy->setWorkLevel($post['work_level']);
 		 $vacancy->setFunction($post['function']);
 		 $vacancy->setLocation($post['location']);

@@ -57,17 +57,18 @@ class Default_Model_VacancyMapper {
         }
         $row = $result->current();
             
-        	$vacancy->setCompanyName('company_name');
-            $vacancy->setPriority('priority');
-            $vacancy->setJobTitle('job_title');
-            $vacancy->setMinSalary('min_salary');
-            $vacancy->setMaxSalary('max_salary');
-            $vacancy->setWorkLevel('work_level');
-            $vacancy->setFunction('function');
-            $vacancy->setLocation('location');
-            $vacancy->setDescReqs('desc_reqs');
-            $vacancy->setCreatedDate('created_date');
-            $vacancy->setUpdatedDate('updated_date');
+            $vacancy->setCompanyName($row['company_name']);
+            $vacancy->setVacancyId($row['vacancy_id']);
+            $vacancy->setPriority($row['priority']);
+            $vacancy->setJobTitle($row['job_title']);
+            $vacancy->setMinSalary($row['min_salary']);
+            $vacancy->setMaxSalary($row['max_salary']);
+            $vacancy->setWorkLevel($row['work_level']);
+            $vacancy->setFunction($row['function']);
+            $vacancy->setLocation($row['location']);
+            $vacancy->setDescReqs($row['desc_reqs']);
+            $vacancy->setCreatedDate($row['created_date']);
+            $vacancy->setUpdatedDate($row['updated_date']);
     }
 
 
