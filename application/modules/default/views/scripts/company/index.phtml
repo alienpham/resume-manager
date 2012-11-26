@@ -41,33 +41,33 @@ function checkLogin(){
 <div style="height:20px;clear:both;"> </div>
 <form name="frmCompanyList">
 <div id="box">   
-    <div class="list-company clearfix">
-        <div class="head" style="width:1320px">
-            <div class="checkbox" style="width:10px">
+    <div class="list-company clearFix">
+        <div class="head">
+            <div class="checkbox">
                 &nbsp;
             </div>
-            <div class="name" align="center" style="width:205px">
+            <div class="name" align="center">
                 <h4>Company Name VN</h4>
             </div>
-            <div class="name" align="center" style="width:190px">
+            <div class="name" align="center">
                 <h4>Company Name EN</h4>
             </div>
-            <div class="name" align="center" style="width:190px">
+            <div class="address" align="center">
                 <h4>address</h4>
             </div>
-            <div class="name" style="width:93px;" align="center">
+            <div class="tel" align="center">
                 <h4>tel</h4>
             </div>
-            <div class="name" align="center" style="width:170px">
+            <div class="email" align="center">
                 <h4>email</h4>
             </div>
-            <div class="name" style="width:40px;" align="center">
+            <div class="edit" align="center">
                 <h4>Edit</h4>
             </div>
-            <div class="name" style="width:210px;" align="center">
+            <div class="action" align="center">
                 <h4>Comment</h4>
             </div>
-        </div>
+       	</div>
         <div class="info-content">
         <?php echo $this->partial('company/list-company.phtml', array('paginator' => $this->paginator)); ?>
         </div>

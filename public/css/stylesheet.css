@@ -641,6 +641,10 @@ color:red;
 .list-company .head .checkbox,
 .list-company .head .code,
 .list-company .head .name,
+.list-company .head .address,
+.list-company .head .tel,
+.list-company .head .email,
+.list-company .head .edit,
 .list-company .head .ind,
 .list-company .head .act,
 .list-company .head .newva,
@@ -658,6 +662,10 @@ color:red;
 .list-company .checkbox,
 .list-company .code,
 .list-company .name,
+.list-company .address,
+.list-company .tel,
+.list-company .email,
+.list-company .edit,
 .list-company .ind,
 .list-company .act,
 .list-company .newva,
@@ -670,6 +678,11 @@ color:red;
 .list-company .status,
 .list-company .cons,
 .list-company .action{
+	padding:2px 1% 2px;
+	float:left;	
+}
+.list-company .head .tel{
+	width:10%;	
 	padding:2px 1% 2px;
 	float:left;	
 }
@@ -708,13 +721,26 @@ color:red;
 }
 .list-company .joined,
 .list-company .status,
-.list-company .cons
+.list-company .cons,
+.list-company .tel
 {
 	width:4%;	
 	line-height:25px;
 }
 .list-company .name{
 	width:15%;
+	line-height:25px;
+}
+.list-company .edit{
+	width:15%;
+	line-height:25px;
+}
+.list-company .address{
+	width:10%;
+	line-height:25px;
+}
+.list-company .email{
+	width:10%;
 	line-height:25px;
 }
 .list-company .action{
