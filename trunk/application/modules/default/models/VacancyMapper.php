@@ -96,10 +96,11 @@ class Default_Model_VacancyMapper {
         return $entries;
     }
     
-    public function getListVacancy()
+    public function getListVacancy($where='')
     {
     	$db = $this->getDbTable()->getAdapter();
-    	$sql = "SELECT * FROM vacancy";
+    	$sql = "SELECT * FROM vacancy ";
+    	if($where!='') $sql .= "WHERE " . $where;
     	$rows =  $db->fetchAll($sql);
     	return $rows;
     }

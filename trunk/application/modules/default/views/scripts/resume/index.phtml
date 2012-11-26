@@ -24,7 +24,7 @@
         <input class="button01" id="export_email" type="button" value="Export Email" style="display: none"/>
     </a>
 </div>  
-<p class="today-entry" id="report">&nbsp;</p>
+<div style="clear:both"></div>
 <div id="box">
     <?php echo $this->partial ( '/resume/list-resume.phtml', array('paginator' => $this->paginator, 'choice' => $this->choice, 'search' => $this->search) )?>
 </div>
