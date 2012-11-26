@@ -1,20 +1,6 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-<script language="javascript">
-function trim(str, chars) {
-	return ltrim(rtrim(str, chars), chars);
-}
- 
-function ltrim(str, chars) {
-	chars = chars || "\\s";
-	return str.replace(new RegExp("^[" + chars + "]+", "g"), "");
-}
- 
-function rtrim(str, chars) {
-	chars = chars || "\\s";
-	return str.replace(new RegExp("[" + chars + "]+$", "g"), "");
-}
-</script>
+
 <div class="from-add-01">
 <form name="frmAddVacancy" action="/default/vacancy/save-vacancy" method="post">
 <input type="hidden" name="vacancy_id" id="vacancy_id" value="<?php echo $this->vacancy->getVacancyId();?>"> 
@@ -30,7 +16,7 @@ function rtrim(str, chars) {
 			</li>
 			<li>
 				<label>Job Title:</label>
-				<input type="text" name="job_title" id="job_title" value="<?php echo $this->vacancy->getJobTitle; ?>">
+				<input type="text" name="job_title" id="job_title" value="<?php echo $this->vacancy->getJobTitle(); ?>">
 			</li>
 			<li>
 				<label>Priority:</label>
@@ -43,26 +29,26 @@ function rtrim(str, chars) {
 			</li>
 			<li>
 				<label>Salary:</label>
-				<input name="min_salary" type="text" id="min_salary" style="width:93px;" value="<?php echo $this->vacancy->getMinSalary; ?>">
-                <input name="max_salary" type="text" id="max_salary" style="width:93px;" value="<?php echo $this->vacancy->getMaxSalary; ?>"> USD		
+				<input name="min_salary" type="text" id="min_salary" style="width:93px;" value="<?php echo $this->vacancy->getMinSalary(); ?>">
+                <input name="max_salary" type="text" id="max_salary" style="width:93px;" value="<?php echo $this->vacancy->getMaxSalary(); ?>"> USD		
 			</li>
 			
 			<li>
 				<label>Location:</label>
-		        <input type="text" name="province" id="province" value="<?php echo $this->vacancy->getLocation; ?>">
+		        <input type="text" name="province" id="province" value="<?php echo $this->vacancy->getLocation(); ?>">
 			</li>
 			<li>
 				<label>Work Level:</label>
-				<input type="text" name="work_level" id="work_level" value="<?php echo $this->vacancy->getWorkLevel; ?>">
+				<input type="text" name="work_level" id="work_level" value="<?php echo $this->vacancy->getWorkLevel(); ?>">
 			</li>
 			<li>
 				<label>Function:</label>
-                <input type="text" name="function" id="function" value="<?php echo $this->vacancy->getFunction; ?>">
+                <input type="text" name="function" id="function" value="<?php echo $this->vacancy->getFunction(); ?>">
 
 			</li>	
             <li>
                 <label>Job Description &amp; Requirements:</label>
-                <textarea name="desc_reqs" cols="40" rows="20" id="desc_reqs"><?php echo $this->vacancy->getDescReqs;?></textarea>
+                <textarea name="desc_reqs" cols="40" rows="20" id="desc_reqs"><?php echo $this->vacancy->getDescReqs();?></textarea>
             </li>		       	
 			<li>
 				<label></label>
