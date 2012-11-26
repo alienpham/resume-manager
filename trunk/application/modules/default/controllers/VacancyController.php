@@ -36,8 +36,8 @@ class VacancyController extends Zend_Controller_Action
 		
 		if($vacancy_id)
 		{	
-			
 			$this->view->title = 'EDIT VACANCY';
+			$vacancy = new Default_Model_Vacancy();
 			$vacancy->find($vacancy_id, $vacancy);
 			
 		}
