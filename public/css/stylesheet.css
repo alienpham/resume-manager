@@ -804,31 +804,27 @@ color:red;
 	float: left;
 }
 
-.list-vacancy .headVacancy .checkbox,
-.list-vacancy .headVacancy .code,
 .list-vacancy .headVacancy .company,
-.list-vacancy .headVacancy .vacancy,
+.list-vacancy .headVacancy .job_title,
 .list-vacancy .headVacancy .salary,
 .list-vacancy .headVacancy .location,
-.list-vacancy .headVacancy .process,
+.list-vacancy .headVacancy .work_level,
 .list-vacancy .headVacancy .posted,
-.list-vacancy .headVacancy .public,
+.list-vacancy .headVacancy .priority,
 .list-vacancy .headVacancy .status,
-.list-vacancy .headVacancy .cons,
+.list-vacancy .headVacancy .function,
 .list-vacancy .headVacancy .action{	
 	background:url(../images/bg-header.jpg) no-repeat top right;
 }
-.list-vacancy .checkbox,
-.list-vacancy .code,
 .list-vacancy .company,
-.list-vacancy .vacancy,
+.list-vacancy .job_title,
 .list-vacancy .salary,
 .list-vacancy .location,
-.list-vacancy .process,
+.list-vacancy .work_level,
 .list-vacancy .posted,
-.list-vacancy .public,
+.list-vacancy .priority,
 .list-vacancy .status,
-.list-vacancy .cons,
+.list-vacancy .function,
 .list-vacancy .action{
 	padding:2px 1% 2px;
 	float:left;	
@@ -837,44 +833,42 @@ color:red;
 
 .list-vacancy .headVacancy .company
 {
-	width:11%;	
+	width:15%;	
 	line-height:25px;
 }
-.list-vacancy .headVacancy .vacancy
+.list-vacancy .headVacancy .job_title
 {
-	width:7%;	
+	width:10%;	
 	line-height:25px;
 }
 .list-vacancy .headVacancy .salary
 {
-	width:7%;	
+	width:11%;	
 	line-height:25px;
 }
 .list-vacancy .headVacancy .location
 {
-	width:7%;	
+	width:10%;	
 	line-height:25px;
 }
-.list-vacancy .headVacancy .process
+.list-vacancy .headVacancy .function
 {
-	width:8%;	
+	width:10%;	
+	line-height:25px;
+}
+.list-vacancy .headVacancy .work_level
+{
+	width:11%;	
 	line-height:25px;
 }
 .list-vacancy .headVacancy .posted
 {
-	width:5%;	
+	width:10%;	
 	line-height:25px;
 }
-.list-vacancy .public
-.list-vacancy .headVacancy .status,
+.list-vacancy .headVacancy .priority
 {
-	width:2%;	
-	line-height:25px;
-}
-
-.list-vacancy .cons
-{
-	width:6%;	
+	width:10%;	
 	line-height:25px;
 }
 .list-vacancy .headVacancy .action{
@@ -892,50 +886,47 @@ color:red;
 	color:#8AB036;	
 }
 
-.list-vacancy .contentVacancy .vacancy
+.list-vacancy .contentVacancy .job_title
 {
-	width:8%;
+	width:10%;
 	line-height:25px;
 }
 .list-vacancy .contentVacancy .company
 {
-	width:12%;
+	width:15%;
 	line-height:25px;
 }
 
 .list-vacancy .contentVacancy .salary
 {
-	width:6%;	
+	width:11%;	
 	line-height:25px;
 }
 
 .list-vacancy .contentVacancy .location
 {
-	width:7%;	
+	width:10%;	
 	line-height:25px;
 }
-.list-vacancy .contentVacancy .process
+.list-vacancy .contentVacancy .function
 {
-	width:8%;	
+	width:10%;	
+	line-height:25px;
+}
+.list-vacancy .contentVacancy .work_level
+{
+	width:11%;	
 	line-height:25px;
 }
 .list-vacancy .contentVacancy .posted
 {
-	width:5%;	
+	width:10%;	
 	line-height:25px;
 }
-.list-vacancy .contentVacancy .public,
-.list-vacancy .contentVacancy .status
+.list-vacancy .contentVacancy .priority
 {
-	width:3%;	
+	width:10%;	
 	line-height:25px;
-}
-
-.list-vacancy .contentVacancy .cons
-{
-	width:6%;	
-	line-height:25px;
-	margin-left:7px;
 }
 .list-vacancy .contentVacancy .action{
 	background:none !important;

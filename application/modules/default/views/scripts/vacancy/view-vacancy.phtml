@@ -1,46 +1,31 @@
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td><h3><?php echo $this->job_title; ?> - <span class="text_green"><?php echo $this->status; ?></span></h3></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td><hr /></td>
-      </tr>
-      <tr>
-        <td><table width="100%" border="0" cellpadding="0" cellspacing="0" class="datagrid">
-          <tr>
-            <td width="17%"><strong>Posted: </strong></td>
-            <td width="40%"><?php echo $this->created_date;?></td>
-          </tr>
-          <tr>
-            <td><strong>Salary:</strong></td>
-            <td colspan="3"><?php echo $this->salary;?></td>
-          </tr>
-          <tr>
-            <td><strong>Location:</strong></td>
-            <td colspan="3"><?php echo $this->province;?></td>
-          </tr>
-          <tr>
-            <td><strong>Function:</strong></td>
-            <td colspan="3"><?php echo $this->function;?></td>
-          </tr>
-        </table></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td><p><strong>COMPANY INFORMATION</strong></p>
-          <p>&nbsp;</p>
-          <p><?php echo $this->cominfomation;?></p>
-          <p>&nbsp;</p>
-          <p><strong>DESCRIPTION &amp; REQUIREMENTS</strong></p>
-          <p>&nbsp;</p>
-          <p><?php echo $this->job_desc;?></p></td>
-      </tr>
-      <tr>
-        <td height="15"></td>
-      </tr>
-    </table>
+<input type="hidden" name="vacancy_id" id="vacancy_id" value="">
+<div class="list-vacancy">
+	<div class="headVacancy">
+		<div class="company">
+			<h4>Company</h4>
+		</div>
+		<div class="function">
+			<h4>Function</h4>
+		</div>
+		<div class="location">
+			<h4>Location</h4>
+		</div>
+		<div class="action">
+			<h4>Action</h4>
+		</div>
+	</div>
+	<div class="contentVacancy">
+		<div class="company">
+			<?php echo $this->vacancy['company_name'];?>
+		</div>
+		<div class="function">
+			<?php echo $this->vacancy['function']; ?>
+		</div>
+		<div class="location">
+			<?php echo $this->vacancy['location']; ?>
+		</div>
+		<div class="action">
+			<a href="/default/vacancy/add-vacancy/vacancy_id/<?php $this->vacancy['vacancy_id']; ?>">Edit</a>
+		</div>
+	</div>
+</div> 

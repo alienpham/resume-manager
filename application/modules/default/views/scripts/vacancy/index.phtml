@@ -14,39 +14,31 @@
 	</a>
 <br /><br />
 
-<form name="frmVacancyList">
-<input type="hidden" name="vacancy_id" id="vacancy_id" value="<?php echo $this->$vacancy['vacancy_id'] ?>" />
 <div id="box">   
-    <div class="list-vacancy clearfix" >
-        <div class="headVacancy" style="width:100%;align:left">
-            <div class="company" style="width:13%;align:left">
+    <div class="list-vacancy" >
+        <div class="headVacancy">
+            <div class="company">
                 <h4>Company</h4>
             </div>
-            <div class="vacancy" style="width:6%;align:left">
-                <h4>Job_title</h4>
+            <div class="job_title" >
+                <h4>Job title</h4>
             </div>
-            <div class="vacancy" style="width:8%;align:left">
+            <div class="work_level">
                 <h4>Work Level</h4>
             </div>
-            <div class="salary" style="width:8%;align:left">
+            <div class="salary">
                 <h4>Min Salary</h4>
             </div>
-            <div class="salary" style="width:8%;align:left">
+            <div class="salary">
                 <h4>Max Salary</h4>
             </div>
-            <div class="salary" style="width:6%;align:left">
+            <div class="priority">
                 <h4>priority</h4>
             </div>
-            <div class="location" style="width:10%;align:left">
-                <h4>Location</h4>
-            </div>
-            <div class="posted" style="width:7%;align:left">
+            <div class="posted">
             	<h4>Posted</h4>
-            </div>
-            <div class="salary" style="width:8%;align:left">
-                <h4>Function</h4>
-            </div>           
-            <div class="action" style="width:5%;align:left">
+            </div>                    
+            <div class="action">
                 <h4>Action</h4>
             </div>
         </div>
@@ -54,35 +46,28 @@
         <?php 
 			foreach ($this->vacancy as $rs) {
 		?>
-        	
-            <div class="company" style="width:13%;align:left">
-            	<strong><?php echo $rs['company_name'] ;?> </strong>
+            <div class="company">
+            	<a href="/vacancy/view-vacancy/vacancy_id/<?php echo $rs['vacancy_id'] ?>"><strong><?php echo $rs['company_name'] ;?> </strong></a>
             </div>
-            <div class="vacancy" style="width:6%;align:left">
+            <div class="job_title">
             	<?php echo $rs['job_title'];?>
             </div>
-            <div class="vacancy" style="width:8%;align:left">
+            <div class="work_level">
                <?php echo $rs['work_level'] ?>
             </div>
-            <div class="salary" style="width:8%;align:left">
+            <div class="salary">
             	<?php echo $rs['min_salary'] ?>
             </div>
-             <div class="salary" style="width:8%;align:left">
+             <div class="salary">
             	<?php echo $rs['max_salary'] ?>
             </div>
-            <div class="salary" style="width:6%;align:left">
+            <div class="priority">
                <?php echo $rs['priority'] ?>
             </div>
-            <div class="location" style="width:10%;align:left">
-            	<?php echo $rs['location']  ?>
-            </div>
-            <div class="posted" style="width:7%;align:left">
+            <div class="posted">
             	<?php echo date("d-m-Y",strtotime($rs['created_date']));?>
             </div>
-            <div class="salary" style="width:8%;align:left">
-            	<?php echo $rs['function'];?>
-            </div>
-            <div class="action" style="width:5%;align:left">
+            <div class="action">
             	<a href="/default/vacancy/add-vacancy/vacancy_id/<?php echo $rs['vacancy_id'];?>">Edit</a>
             </div>
             <?php }?>
@@ -94,4 +79,8 @@
 	<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
 </div>
 <?php endif;?>
- </form> 
+<script>
+	$(document).ready(function(){
+
+	});
+</script>
