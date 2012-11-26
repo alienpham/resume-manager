@@ -1,31 +1,30 @@
-<input type="hidden" name="vacancy_id" id="vacancy_id" value="">
-<div class="list-vacancy">
-	<div class="headVacancy">
-		<div class="company">
-			<h4>Company</h4>
-		</div>
-		<div class="function">
-			<h4>Function</h4>
-		</div>
-		<div class="location">
-			<h4>Location</h4>
-		</div>
-		<div class="action">
-			<h4>Action</h4>
-		</div>
-	</div>
-	<div class="contentVacancy">
-		<div class="company">
-			<?php echo $this->vacancy['company_name'];?>
-		</div>
-		<div class="function">
-			<?php echo $this->vacancy['function']; ?>
-		</div>
-		<div class="location">
-			<?php echo $this->vacancy['location']; ?>
-		</div>
-		<div class="action">
-			<a href="/default/vacancy/add-vacancy/vacancy_id/<?php $this->vacancy['vacancy_id']; ?>">Edit</a>
-		</div>
-	</div>
-</div> 
+<div id="adv-search">
+<h2>Vacancy Details</h2>
+<ul>
+    <li>
+        <label>Company</label>
+        <?php echo $this->vacancy->getCompanyName();?>
+    </li>
+    <li>
+        <label>Company</label>
+        <?php echo $this->vacancy->getCompanyName();?>
+    </li>
+    <li>
+        <label>Company</label>
+        <?php echo $this->vacancy->getCompanyName();?>
+    </li>
+    
+    <li>
+        <label>Company</label>
+        <?php echo $this->vacancy->getCompanyName();?>
+    </li>
+    <li>
+        <label>Company</label>
+        <?php echo $this->vacancy->getCompanyName();?>
+    </li>
+    <li>
+        <label>Company</label>
+        <?php echo $this->vacancy->getCompanyName();?>
+    </li>
+</ul>
+</div>
