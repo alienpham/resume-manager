@@ -23,10 +23,23 @@ class VacancyController extends Zend_Controller_Action
     
 	public function indexAction()
 	{
+	    $txtSearch = $this->_getParam('txtSearch','');
+		$where = '';
+		if($txtSearch) $where = ' job_title like "%'. $txtSearch .'%"';
 		
+		$rowPerPage = $this->_getParam('rowperpage', 20);
+	    $currentPage = 1;
+		$page = $this->_getParam('page', 1);
+		if(!empty($page)) {
+			$currentPage = $page;
+		}
 	    $vacancy = new Default_Model_VacancyMapper();
-	    $listVacancy = $vacancy->getListVacancy();
-	    $this->view->vacancy = $listVacancy;
+	    $listVacancy = $vacancy->getListVacancy($where);	
+		$paginator = Zend_Paginator::factory($listVacancy);
+		$paginator->setItemCountPerPage($rowPerPage);
+		$paginator->setCurrentPageNumber($currentPage);
+	    
+	    $this->view->paginator = $paginator;
 	}
 	
 	public function addVacancyAction()

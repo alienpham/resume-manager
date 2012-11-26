@@ -162,8 +162,8 @@ class CompanyController extends Zend_Controller_Action
 		$date = new DateTime($comment['created_date']);
 		$createdComment = $date->format('M-d');
 
-		$html = '<p class="update-date">Comment '. $createdComment .'</p> <span>by</span> <span class="user-name">'. $comment['username'] . '</span>';
-		$html .= '<p>' . substr($comment['content'], 0, 90) . '</p>';
+		//$html = '<p class="update-date">Comment '. $createdComment .'</p> <span>by</span> <span class="user-name">'. $comment['username'] . '</span>';
+		$html = '<p>' . substr($comment['content'], 0, 90) . '</p>';
 		$html .= '<a href="#allcomment" class="allcomment" id="'.  $post['company_id'] .'" onClick="allComment('.  $post['company_id'] .')">view all</a>';
 		echo $html;
 		exit;
