@@ -40,6 +40,7 @@ class VacancyController extends Zend_Controller_Action
 		$paginator->setCurrentPageNumber($currentPage);
 	    
 	    $this->view->paginator = $paginator;
+	    $this->view->txtSearch =$txtSearch;
 	}
 	
 	public function addVacancyAction()
@@ -72,7 +73,7 @@ class VacancyController extends Zend_Controller_Action
 	public function saveVacancyAction()
 	{
 		 $post = $this->getRequest()->getPost();
-		 
+//print_r($post);	 exit;
 		 $vacancy = new Default_Model_Vacancy();
 
 		 $vacancy->setVacancyId($post['vacancy_id']);

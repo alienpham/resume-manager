@@ -110,7 +110,7 @@ class Default_Model_Vacancy
     }
     
 	public function getLocation() {
-            return $this->_location;
+        return $this->_location;
     }
     
     public function setLocation($location) {

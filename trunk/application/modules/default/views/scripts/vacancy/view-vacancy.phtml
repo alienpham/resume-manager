@@ -1,30 +1,52 @@
-<div id="adv-search">
-<h2>Vacancy Details</h2>
-<ul>
-    <li>
-        <label>Company</label>
-        <?php echo $this->vacancy->getCompanyName();?>
-    </li>
-    <li>
-        <label>Company</label>
-        <?php echo $this->vacancy->getCompanyName();?>
-    </li>
-    <li>
-        <label>Company</label>
-        <?php echo $this->vacancy->getCompanyName();?>
-    </li>
-    
-    <li>
-        <label>Company</label>
-        <?php echo $this->vacancy->getCompanyName();?>
-    </li>
-    <li>
-        <label>Company</label>
-        <?php echo $this->vacancy->getCompanyName();?>
-    </li>
-    <li>
-        <label>Company</label>
-        <?php echo $this->vacancy->getCompanyName();?>
-    </li>
-</ul>
+<div align="center" style="color:#1B7CBD;font-size:16px"><b>VACANCY DETAIL</b></div>
+<table cellpadding="5" cellspacing="6">
+	<tr>
+		<td style="width:115px">Company Name</td>
+		<td><b><?php echo $this->vacancy->getCompanyName();?></b></td>
+	</tr>
+	<tr>
+		<td>Job Title</td>
+		<td><?php echo $this->vacancy->getJobTitle();?></td>
+	</tr>                    
+	<tr>
+		<td>Min Salary</td>
+		<td><?php echo $this->vacancy->getMinSalary();?></td>
+	</tr>
+	<tr>
+		<td>Max Salary</td>
+		<td><?php echo $this->vacancy->getMaxSalary();?></td>
+	</tr>
+	<tr>
+		<td>Priority</td>
+		<td><?php echo $this->vacancy->getPriority();?></td>
+	</tr>
+	<tr>
+		<td>Work Level</td>
+		<td><?php echo $this->vacancy->getWorkLevel();?></td>
+	</tr>
+	<tr>
+		<td>Function</td>
+		<td><?php echo $this->vacancy->getFunction();?></td>
+	</tr>
+    <tr>
+        <td>Location</td>
+        <td><?php echo $this->vacancy->getLocation();?></td>
+    </tr>
+    <tr>
+        <td>Desc &amp; Reqs</td>
+        <td><?php echo $this->vacancy->getDescReqs();?></td>
+    </tr>
+    <tr>
+        <td>Created Date</td>
+        <td><?php echo $this->vacancy->getCreatedDate();?></td>
+    </tr>
+    <tr>
+        <td>Updated Date</td>
+        <td><?php echo $this->vacancy->getUpdatedDate();?></td>
+    </tr>
+</table>
+<div style="clear:both">&nbsp;</div>
+<div align="center" style="clear:both">
+    <input type="button" name="close" class="button01"value="Close"
+            onclick="event.preventDefault(); parent.$.fancybox.close();" />
 </div>
