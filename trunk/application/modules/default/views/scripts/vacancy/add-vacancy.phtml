@@ -2,7 +2,7 @@
 <?php echo $this->headLink();?>
 
 <div class="from-add-01">
-<form name="frmAddVacancy" action="/default/vacancy/save-vacancy" method="post">
+<form name="frmAddVacancy" action="/default/vacancy/save-vacancy" method="post" onclick="return checkValid()">
 <input type="hidden" name="vacancy_id" id="vacancy_id" value="<?php echo $this->vacancy->getVacancyId();?>"> 
 	<h2 style="color:#848484;margin-left:20px;"><?php echo $this->title; ?></h2>
 		<ul>
@@ -11,7 +11,7 @@
 				<em class="error"></em>
 			</li>
 			<li>
-				<label>Company:</label>
+				<label>Company:<em>*</em></label>
 				<input type="text" name="company_name" id="company_name" value="<?php echo $this->vacancy->getCompanyName();  ?>">
 			</li>
 			<li>
@@ -21,10 +21,10 @@
 			<li>
 				<label>Priority:</label>
 				<select name ="priority" id ="priority">
-					<option value="4" selected="selected">Low</option>
-					<option value="3">Medium</option>
-					<option value="2">High</option>
-					<option value="1">Urgent</option>
+					<option value="Low" selected="selected">Low</option>
+					<option value="Medium">Medium</option>
+					<option value="High">High</option>
+					<option value="Urgent">Urgent</option>
 				</select>
 			</li>
 			<li>
@@ -57,7 +57,18 @@
         		<input type="submit" class="button01" name="btAdd" id="btAdd" value="Save &amp; Add"> &nbsp;&nbsp;&nbsp;
         	</li>
        </ul>
-	
 </form>
 </div>
+<script>
+	function checkValid()
+	{
+		var company_name = $('#company_name').val();
+		if(company_name == '')
+		{
+			$('.error').html('Please input into field required (*)');
+			return false
+		}
+	}
+
+</script>
 
