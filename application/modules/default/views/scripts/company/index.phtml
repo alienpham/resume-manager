@@ -76,7 +76,9 @@ function checkLogin(){
 <div style="clear:both"></div>
 <!-- pagging -->
 <div class="footer clearfix">
+<?php if(count($this->paginator)) :?>
     <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
+<?php endif;?>
 </div>
 </form>
 <div id="view_company" style="width:700px;height: 350px; overflow-y:scroll; display: none;">&nbsp;</div>
