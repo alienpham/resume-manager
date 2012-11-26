@@ -23,6 +23,7 @@ class VacancyController extends Zend_Controller_Action
     
 	public function indexAction()
 	{
+		
 	    $vacancy = new Default_Model_VacancyMapper();
 	    $listVacancy = $vacancy->getListVacancy();
 	    $this->view->vacancy = $listVacancy;
@@ -43,6 +44,15 @@ class VacancyController extends Zend_Controller_Action
 		}
 		
 		$this->view->vacancy = $vacancy;
+	}
+	
+	public function viewVacancyAction()
+	{
+		$this->_helper->layout->disableLayout();
+		$vacancy_id = $this->_getParam('vacancy_id','');
+		$vacancyMapper = new Default_Model_VacancyMapper();
+		$vacancy = $vacancyMapper->getVacancy($vacancy_id);
+		$this->view->vacancy = $vacancy[0];
 	}
 	
 	public function saveVacancyAction()
