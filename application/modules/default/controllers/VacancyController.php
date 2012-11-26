@@ -64,8 +64,9 @@ class VacancyController extends Zend_Controller_Action
 		$this->_helper->layout->disableLayout();
 		$vacancy_id = $this->_getParam('vacancy_id','');
 		$vacancyMapper = new Default_Model_VacancyMapper();
-		$vacancy = $vacancyMapper->getVacancy($vacancy_id);
-		$this->view->vacancy = $vacancy[0];
+		$vacancyMapper->find($vacancy_id, $vacancy = new Default_Model_Vacancy());
+		$this->view->vacancy = $vacancy;
+		$this->render('view-vacancy');
 	}
 	
 	public function saveVacancyAction()

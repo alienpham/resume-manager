@@ -104,12 +104,5 @@ class Default_Model_VacancyMapper {
     	$rows =  $db->fetchAll($sql);
     	return $rows;
     }
-    
-    public function getVacancy($id)
-    {
-    	$db = $this->getDbTable()->getAdapter();
-    	$sql = "SELECT * FROM vacancy WHERE vacancy_id =" .$id;
-    	$rows = $db->fetchAll($sql);
-    	return $rows;
-    }
+
 }

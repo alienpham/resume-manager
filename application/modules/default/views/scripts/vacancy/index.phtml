@@ -46,7 +46,7 @@
 			foreach ($this->paginator as $rs) {
 		?>
             <div class="company">
-            	<a href="/vacancy/view-vacancy/vacancy_id/<?php echo $rs['vacancy_id'] ?>"><strong><?php echo $rs['company_name'] ;?> </strong></a>
+            	<a href="#view_vacancy" class="view_vacancy" id="<?php echo $rs['vacancy_id'] ?>"><strong><?php echo $rs['company_name'] ;?> </strong></a>
             </div>
             <div class="job_title">
             	<?php echo $rs['job_title'];?>
@@ -80,4 +80,26 @@
 	<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
 </div>
 <?php endif;?>
-
+<div id="view_vacancy" style="width:700px;height: 350px; overflow-y:scroll; display: none;">&nbsp;</div>
+<script language="javascript">
+$(document).ready(function() {
+     //Begin View detail candidate
+     $(".view_vacancy").fancybox();
+     $(".view_vacancy").click(function(){
+         checkLogin();
+         $('#view_vacancy').html('');
+         var vacancy_id = $(this).attr('id');
+         $.ajax({
+             url: '/vacancy/view-vacancy',
+             type: "POST",
+             data: { 
+                 vacancy_id: vacancy_id, 
+             },
+             success: function(result) {
+                 $('#view_vacancy').html(result);
+             }
+         });
+     });
+     //End View detail candidate
+});
+</script>
