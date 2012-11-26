@@ -79,18 +79,18 @@ class Default_Model_VacancyMapper {
         $entries = array();
         $entry = new Default_Model_Vacancy();
         foreach ($resultSet as $row) {
-            $entry->setVacancyId('vacancy_id');
-            $entry->setCompanyName('company_name');
-            $entry->setJobTitle('job_title');
-            $entry->setMinSalary('min_salary');
-            $entry->setMaxSalary('max_salary');
-            $entry->setPriority('priority');
-            $entry->setWorkLevel('work_level');
-            $entry->setLocation('location');
-            $entry->setFunction('fuction');
-            $entry->setDescReqs('desc_reqs');
-            $entry->setCreatedDate('created_date');
-            $entry->setUpdatedDate('updated_date');
+            $entry->setVacancyId($row['vacancy_id']);
+            $entry->setCompanyName($row['company_name']);
+            $entry->setJobTitle($row['job_title']);
+            $entry->setMinSalary($row['min_salary']);
+            $entry->setMaxSalary($row['max_salary']);
+            $entry->setPriority($row['priority']);
+            $entry->setWorkLevel($row['work_level']);
+            $entry->setLocation($row['location']);
+            $entry->setFunction($row['fuction']);
+            $entry->setDescReqs($row['desc_reqs']);
+            $entry->setCreatedDate($row['created_date']);
+            $entry->setUpdatedDate($row['updated_date']);
             $entries[] = $entry;
         }
         return $entries;
