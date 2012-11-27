@@ -20,11 +20,14 @@
 	<a href="/resume/personal-info" style="text-decoration:none;">
 		<input class="button01" type="button" value="Add Resume" />
 	</a>
+    <a href="/resume/delete-resume" style="text-decoration:none;">
+        <input class="button01" type="button" value="Delete" />
+    </a>
     <a href="/resume/export-email" style="text-decoration:none;">
         <input class="button01" id="export_email" type="button" value="Export Email" style="display: none"/>
     </a>
 </div>  
-<br />
+<p class="today-entry" id="report">&nbsp;</p>
 <div style="clear:both"></div>
 <div id="box">
     <?php echo $this->partial ( '/resume/list-resume.phtml', array('paginator' => $this->paginator, 'choice' => $this->choice, 'search' => $this->search) )?>
@@ -122,12 +125,22 @@ $(document).ready(function(){
     	checkLogin();
         if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');
     });
+
+    $("#province").click(function(){
+    	checkLogin();
+        if(($(".multiselect1").css('display')) == 'none') $(".multiselect1").show('slow');
+    });
 });
 
 $("body").click(function(e){
 	var $parentClass = $(e.target).parents('.multiselect');
     if(e.target.className !== "function" && $parentClass.length < 1) {
     	$(".multiselect").hide('slow');
+    } 
+
+    var $parentClass = $(e.target).parents('.multiselect1');
+    if(e.target.className !== "province" && $parentClass.length < 1) {
+    	$(".multiselect1").hide('slow');
     }       
 });
 

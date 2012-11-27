@@ -114,5 +114,14 @@ class Default_Model_ExpectationMapper {
         $rows = $this->getDbTable()->getAdapter()->query($sql)->fetchAll();
         return $rows;
     }
+    
+    public function getFunction() 
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'SELECT * FROM province_lookup ';
+        $result = $db->fetchAll($sql);
+        
+        return $db->fetchAll($sql);
+    }
 }
 ?>

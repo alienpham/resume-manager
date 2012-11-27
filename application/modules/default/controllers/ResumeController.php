@@ -461,7 +461,7 @@ class ResumeController extends Zend_Controller_Action
 		}
 
 		if(@$post['functions']) {
-			$choice[] = 'education';
+			$choice[] = 'functions';
 			$cond[] = 'function_id in ('. $post['functions'] .')';
 		}
 		

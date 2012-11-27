@@ -32,7 +32,7 @@ class Default_Model_VacancyMapper {
         	'job_title' 		=> $vacancy->getJobTitle(), 
 			'min_salary' 		=> $vacancy->getMinSalary(),
         	'max_salary' 		=> $vacancy->getMaxSalary(),
-            'priority'			=> $vacancy->getPriority(), 
+            //'priority'			=> $vacancy->getPriority(), 
         	'work_level' 	    => $vacancy->getWorkLevel(), 
 			'function' 			=> $vacancy->getFunction(),
         	'location' 			=> $vacancy->getLocation(), 
@@ -59,7 +59,7 @@ class Default_Model_VacancyMapper {
             
             $vacancy->setCompanyName($row['company_name']);
             $vacancy->setVacancyId($row['vacancy_id']);
-            $vacancy->setPriority($row['priority']);
+            //$vacancy->setPriority($row['priority']);
             $vacancy->setJobTitle($row['job_title']);
             $vacancy->setMinSalary($row['min_salary']);
             $vacancy->setMaxSalary($row['max_salary']);
@@ -84,7 +84,7 @@ class Default_Model_VacancyMapper {
             $entry->setJobTitle($row['job_title']);
             $entry->setMinSalary($row['min_salary']);
             $entry->setMaxSalary($row['max_salary']);
-            $entry->setPriority($row['priority']);
+            //$entry->setPriority($row['priority']);
             $entry->setWorkLevel($row['work_level']);
             $entry->setLocation($row['location']);
             $entry->setFunction($row['fuction']);

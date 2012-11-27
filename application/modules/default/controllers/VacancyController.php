@@ -79,9 +79,9 @@ class VacancyController extends Zend_Controller_Action
 		 $vacancy->setVacancyId($post['vacancy_id']);
 		 $vacancy->setCompanyName($post['company_name']);
 		 $vacancy->setJobTitle($post['job_title']);
-		 $vacancy->setMinSalary(doubleval($post['min_salary']));
-		 $vacancy->setMaxSalary(doubleval($post['max_salary']));
-		 $vacancy->setPriority($post['priority']);
+		 $vacancy->setMinSalary(intval($post['min_salary']));
+		 $vacancy->setMaxSalary(intval($post['max_salary']));
+		 //$vacancy->setPriority($post['priority']);
 		 $vacancy->setWorkLevel($post['work_level']);
 		 $vacancy->setFunction($post['function']);
 		 $vacancy->setLocation($post['location']);

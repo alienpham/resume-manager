@@ -412,6 +412,25 @@ textarea,
     display: none;
     margin-right: 0px;
 }
+
+.multiselect1 {
+    width:500px;
+    height:15em;
+    border:solid 1px #c0c0c0;
+    overflow:auto;
+    background-color:#ffffff;
+    padding:10px;
+}
+ 
+.multiselect1 label {
+    display:block;
+}
+
+.multiselect1 ul li {
+    clear: none;
+    display: none;
+    margin-right: 0px;
+}
 .add-date{
 	margin-bottom: 0 !important;
 
