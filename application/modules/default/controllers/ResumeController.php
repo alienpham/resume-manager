@@ -98,26 +98,24 @@ class ResumeController extends Zend_Controller_Action
 
 		$resumeRowset = new Default_Model_Resume();
 		$resume = new Default_Model_ResumeMapper();
+		
 		$result = $resume->checkExists($post['full_name'], $post['birthday'], $post['email1']);
-		if($result) {
-    		$resumeRowset->setFullName($post['full_name']);
-    		$resumeRowset->setBirthday($post['birthday']);
-    		$resumeRowset->setGender($post['gender']);
-    		$resumeRowset->setMaritalStatus($post['marital_status']);
-    		$resumeRowset->setEmail1($post['email1']);
-    		$resumeRowset->setEmail2($post['email2']);
-    		$resumeRowset->setMobile1($post['mobile1']);
-    		$resumeRowset->setMobile2($post['mobile2']);
-    		$resumeRowset->setTel($post['tel']);
-    		$resumeRowset->setAddress($post['address']);
-    		
-    	    $this->view->resumeRowset = $resumeRowset;
-    	    $this->view->msg = 'Resume has exists in Database';
-    	    $this->render('personal-info');
+		if($result && !$post['resume_id']) {
+			$resumeRowset->setFullName($post['full_name']);
+			$resumeRowset->setBirthday($post['birthday']);
+			$resumeRowset->setGender($post['gender']);
+			$resumeRowset->setMaritalStatus($post['marital_status']);
+			$resumeRowset->setEmail1($post['email1']);
+			$resumeRowset->setEmail2($post['email2']);
+			$resumeRowset->setMobile1($post['mobile1']);
+			$resumeRowset->setMobile2($post['mobile2']);
+			$resumeRowset->setTel($post['tel']);
+			$resumeRowset->setAddress($post['address']);
+			
+			$this->view->resumeRowset = $resumeRowset;
+			$this->view->msg = 'Resume has exists in Database';
+			$this->render('personal-info');
 		} else {
-    		//$date = new DateTime($post['birthday']);
-    		//$birthday = $date->format('Y-m-d');
-    
     		
     		if($post['resume_id']) $resumeCode = 'R' . $post['resume_id'];
     		else $resumeCode = 'R';
