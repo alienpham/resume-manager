@@ -32,11 +32,11 @@ foreach($this->paginator as $rs) {
 		<a href="/company/add-company/company_id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>
 	</div>
 	<div class="action" align="left">
-        <a href="#comment" class="addcomment" id="<?php echo $rs['company_id']?>">Add Comment</a>
+        <a href="#comment" class="addcomment" id="<?php echo $rs['company_id']?>">Add Comment</a> &nbsp; &nbsp;
+        <a href="#allcomment"  class="allcomment" id="<?php echo $rs['company_id']?>">View all</a>
         <div class="info-comment" id="viewcomment<?php echo $rs['company_id']?>">
             <?php if($comment):?>
             <p>- <?php echo substr($comment['content'], 0, 90);?></p>
-            <a href="#allcomment"  class="allcomment" id="<?php echo $rs['company_id']?>">View all</a>
             <?php endif;?>
         </div>
     </div>
