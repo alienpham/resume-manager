@@ -31,9 +31,6 @@
             <div class="salary">
                 <h4>Max Salary</h4>
             </div>
-            <div class="priority">
-                <h4>priority</h4>
-            </div>
             <div class="posted">
             	<h4>Posted</h4>
             </div>                    
@@ -59,9 +56,6 @@
             </div>
              <div class="salary">
             	<?php echo $rs['max_salary'] ?>
-            </div>
-            <div class="priority">
-               <?php echo $rs['priority'] ?>
             </div>
             <div class="posted">
             	<?php echo date("d-m-Y",strtotime($rs['created_date']));?>

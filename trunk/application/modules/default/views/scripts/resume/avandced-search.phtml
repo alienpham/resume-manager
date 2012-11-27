@@ -1,6 +1,9 @@
 <?php 
 $resume = new Default_Model_ExperienceMapper();
 $listFunction = $resume->getFunction();
+
+$resume = new Default_Model_ResumeMapper();
+$listProvince = $resume->getProvince();
 ?>
 <div style="width:900px;height: 450px; overflow-y:scroll;display: none;" id="inline">
 <div id="adv-search" class="content">
@@ -64,8 +67,8 @@ $listFunction = $resume->getFunction();
 			<input type="text" name="company_name" id="company_name" value="" />
 		</li>                    
 		<li>
-			<label>Duties</label>
-			<input type="text" name="duties" id="duties" value="" />
+			<label>Experience Other</label>
+			<input type="text" name="experother" id="experother" value="" />
 		</li>
 		<li>
 			<label>Function</label>
@@ -93,8 +96,27 @@ $listFunction = $resume->getFunction();
 			</div>
 		</li>
 		<li>
-			<label>Other Experience</label>
-			<input type="text" name="experother" id="experother" value="" />
+			<label>Expected Location</label>
+			<input class="province" type="text" name="province" id="province"  value="" />
+            <div class="multiselect1" style="padding:10px;display:none; position:absolute">
+				<div style="width:33%; float:left">
+                <ul style="list-style-type:none;margin: 10px 0;">
+				<?php 
+				$i = 1;
+				$checked = '';
+				foreach($listProvince as $province) :
+					if($i % 22 == 0): echo '</ul></div><div style="width:33%; float:left"><ul style="list-style-type:none;margin: 10px 0;">';endif;
+					//if(in_array($province['province_id'], $this->resumeProvince, true)) $checked = "checked";
+					//else $checked = '';
+				?>
+                    <li style="float:none;display:block;"><input type="checkbox" name="option1[]" value="<?php echo $province['province_id']?>"/> <?php echo $province['name']?></li>
+						
+				<?php 
+				$i++;
+				endforeach;?>
+                </ul>
+            	</div>
+            </div>
 		</li>
 	</ul>
     
@@ -128,6 +150,18 @@ $(document).ready(function(){
 		});
 		str = str.slice(0, -1)
 		$('.function').val(str);
+	});
+
+	//click chekcbox in mutiselect
+	$('.multiselect1').bind('click', function() {
+		var str = '';
+		$(':checkbox[name^=option]').each(function(){
+			if($(this).attr('checked')){
+				str = str + $(this).parent().text() + ';';
+			} 
+		});
+		str = str.slice(0, -1)
+		$('.province').val(str);
 	});
 });
 </script>

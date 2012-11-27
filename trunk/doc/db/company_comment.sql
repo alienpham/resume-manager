@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `company_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(10) NOT NULL,
   `consultant_id` int(11) NOT NULL,
-  `comment` text,
+  `content` text,
   `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`)

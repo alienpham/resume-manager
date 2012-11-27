@@ -145,7 +145,7 @@ class Default_Model_ResumeMapper {
 		$sql .= 'LEFT JOIN res_file as f ON r.resume_id = f.resume_id ';
 		$sql .= $join . $where . $orderby;
 
-        //echo $sql;//exit;
+        //echo $sql;exit;
         $_SESSION['export-email'] = $sql;
         
         return $db->fetchAll($sql);
