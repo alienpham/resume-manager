@@ -5,7 +5,7 @@ $listContact = $contact->getListContact ($this->cominfo['company_id']);
 <input type="hidden" id="company_id" value="<?php echo $this->cominfo['company_id']; ?>">
 <input type="hidden" id="contact_person_id" value="<?php echo $listContact['contact_person_id']; ?>">
 <div style="height :50px;color : #848484; ">
-<h2><?php echo $this->cominfo['full_name_vn']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<h2><?php echo $this->cominfo['company_name']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Address : <?php echo $this->cominfo['address']; ?></h2>
 </div>
 <div class="list-company clearfix">

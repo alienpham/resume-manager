@@ -5,7 +5,6 @@ class Default_Model_ContactPerson
 	protected $_company_id;
 	protected $_title;
 	protected $_full_name;
-	
 	protected $_job_title;
 	protected $_tel;
 	protected $_mobile;

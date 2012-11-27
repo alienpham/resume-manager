@@ -60,5 +60,14 @@ class Default_Model_ContactPersonMapper {
     	$sql = "SELECT contact_person_id,contact_person.company_id,full_name,title,job_title,contact_person.tel,mobile,contact_person.email,contact_person.address FROM contact_person  INNER JOIN company ON company.company_id = contact_person.company_id WHERE contact_person.company_id = " .$id; 
     	$rows = $db->fetchAll($sql);
     	return $rows;
+    	
+    }
+	public function getLContact($id)
+    {
+    	$db = $this->getDbTable()->getAdapter();
+    	$sql = "SELECT * FROM contact_person WHERE company_id = " .$id; 
+    	$rows = $db->fetchAll($sql);
+    	return $rows;
+    	
     }
 }
