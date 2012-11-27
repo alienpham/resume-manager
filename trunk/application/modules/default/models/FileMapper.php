@@ -20,15 +20,15 @@ class Default_Model_FileMapper {
         return $this->_dbTable;
     }
 
-	public function insertResumeFile($data) {
-
+	public function insertResumeFile($data) 
+	{
 		$db = $this->getDbTable()->getAdapter();
 		$this->getDbTable()->insert($data);
 		return true;
 	}
 	
-	public function updateResumeFile($data) {
-
+	public function updateResumeFile($data) 
+	{
 		$db = $this->getDbTable()->getAdapter();
 		$resumeId = $data['resume_id'];
 		unset($data['resume_id']);
@@ -36,12 +36,12 @@ class Default_Model_FileMapper {
 		return true;
 	}
 	
-	public function getResumeFile($resumeId) {
-
-		$db = $this->getDbTable();
-		$select = $db->select();
-		$select->where(array('resume_id' => $resumeId)); 
-		return $db->fetchRow();
+	public function getResumeFile($resumeId) 
+	{
+		$db = $this->getDbTable()->getAdapter();
+        $sql = 'SELECT * FROM res_file WHERE resume_id = ' . $resumeId;
+		
+        return $db->fetchRow($sql);
 	}
 }
 ?>
