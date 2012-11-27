@@ -27,10 +27,7 @@ class Default_Model_CompanyMapper {
 	public function save (Default_Model_Company $company)
     {
         $data = array(
-            'full_name_en' 		=> $company->getFullNameEn(), 
-            'short_name_en' 	=> $company->getShortNameEn(), 
-            'full_name_vn' 		=> $company->getFullNameVn(),
-            'short_name_vn'		=> $company->getShortNameVn(),
+            'company_name' 		=> $company->getCompanyName(), 
             'busines_type' 	    => $company->getBusinesType(),
             'tel' 				=> $company->getTel(),
             'fax' 				=> $company->getFax(),
@@ -59,10 +56,7 @@ class Default_Model_CompanyMapper {
         
         $row = $result->current();
         $company->setCompanyId($row->company_id);
-        $company->setFullNameEn($row->full_name_en);
-        $company->setShortNameEn($row->short_name_en);
-        $company->setFullNameVn($row->full_name_vn);
-        $company->setShortNameVn($row->short_name_vn);
+        $company->setCompanyName($row->company_name);
         $company->setBusinesType($row->busines_type);
         $company->setTel($row->tel);
         $company->setFax($row->fax);
@@ -83,11 +77,7 @@ class Default_Model_CompanyMapper {
         $entry = new Default_Model_Company();
         foreach ($resultSet as $row) {
             $entry->setCompanyId($row->company_id);
-			$entry->setCompanyCode($row->company_code);
-			$entry->setFullNameEn($row->full_name_en);
-			$entry->setShortNameEn($row->short_name_en);
-			$entry->setFullNameVn($row->full_name_vn);
-			$entry->setShortNameVn($row->short_name_vn);
+			$entry->setCompanyName($row->company_name);
 			$entry->setBusinesType($row->busines_type);
 			$entry->setTel($row->tel);
 			$entry->setFax($row->fax);

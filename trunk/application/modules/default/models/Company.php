@@ -1,12 +1,8 @@
 <?php
 class Default_Model_Company
 {
-    protected $_company_id;
-    protected $_company_code;
-    protected $_full_name_en;
-    protected $_short_name_en;
-    protected $_full_name_vn;
-    protected $_short_name_vn;
+    protected $_company_id;  
+    protected $_company_name;
     protected $_busines_type;
     protected $_tel;
     protected $_fax;
@@ -62,39 +58,11 @@ class Default_Model_Company
 		$this->_company_id = $id;
 	}
 	
-    public function getCompanyCode() {
-		return $this->_company_code;
+    public function getCompanyName() {
+		return $this->_company_name;
 	}
-	public function setCompanyCode($code) {
-		$this->_company_code = $code;
-	}
-	
-	public function getFullNameEn() {
-		return $this->_full_name_en;
-	}
-	public function setFullNameEn($full_name_en) {
-		$this->_full_name_en = $full_name_en;
-	}
-	
-	public function getShortNameEn() {
-		return $this->_short_name_en;
-	}
-	public function setShortNameEn($short_name_en) {
-		$this->_short_name_en = $short_name_en;
-	}
-	
-	public function getFullNameVn() {
-		return $this->_full_name_vn;
-	}
-	public function setFullNameVn($full_name_vn) {
-		$this->_full_name_vn = $full_name_vn;
-	}
-	
-	public function getShortNameVn() {
-		return $this->_short_name_vn;
-	}
-	public function setShortNameVn($short_name_vn) {
-		$this->_short_name_vn = $short_name_vn;
+	public function setCompanyName($company_name) {
+		$this->_company_name = $company_name;
 	}
 	
 	public function getBusinesType() {

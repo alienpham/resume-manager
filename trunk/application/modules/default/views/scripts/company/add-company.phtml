@@ -1,7 +1,8 @@
 <form name="frmAddCompany" method="post" action="/company/save-company" onsubmit="return checkValid()">
 <input type="hidden" name="company_id" id="company_id" value="<?php echo $this->company->getCompanyId();?>"/>
-<div class="from-add-01">
-<ul>
+<div class="from-add-01" style="100%">
+<div style="width:50%;float:left;">
+<ul >
 	<li>
 		<h2><?php echo $this->title;?></h2>
 	</li>
@@ -10,22 +11,8 @@
 			<em class="error"></em>
 	</li>
 	<li>
-		<label> </label>
-		<label>English</label>
-		<label></label>
-		<label>VietNamese</label>
-	</li>
-	<li>
-		<label>Company Full Name:<em>*</em></label>
-		<label><input type="text" name="full_name_en" id="full_name_en" value="<?php echo $this->company->getFullNameEn();?>"></label>
-		<label></label>
-		<label><input type="text" name="full_name_vn" id="full_name_vn" value="<?php echo $this->company->getFullNameVn();?>"></label>
-	</li>
-	<li>
-		<label>Short Name:</label>
-		<label><input type="text" name="short_name_en" id="short_name_en" value="<?php echo $this->company->getShortNameEn();?>"></label>
-		<label></label>
-		<label><input type="text" name="short_name_vn" id="short_name_vn" value="<?php echo $this->company->getShortNameVn();?>"></label>
+		<label>Company Name:<em>*</em></label>
+		<label><input type="text" name="company_name" id="company_name" value="<?php echo $this->company->getCompanyName();?>"></label>
 	</li>
 	<li>
 		<label>Business Type:</label>		
@@ -60,7 +47,7 @@
 		(for internal reference)
 		</label>
 		<label>
-			<textarea name="information" rows="6" id="information" style="width:500px"><?php echo $this->company->getInformation();?></textarea>
+			<textarea name="information" rows="6" id="information" style="width:300px"><?php echo $this->company->getInformation();?></textarea>
 		</label>
 	</li>
 	<li>
@@ -70,16 +57,57 @@
 	</li>
 </ul>
 </div>
+<?php if($this->company->getCompanyId() ==''){ ?>
+<div style="width:40%; float:left;">
+<input type="hidden" name="contact_person_id"  id="contact_person_id" value="<?php echo $this->contactinfo['contact_person_id']; ?>"/>
+<ul >
+	<li>
+		<h2>ADD CONTACT</h2>
+	</li>
+		<li>
+			<label>&nbsp;</label>
+			<em></em>
+	</li>
+	<li>
+		<label>Full Name:
+			<em>*</em>
+		</label>
+		
+			<select name="title" id="title" style="width:60px;">
+				<option value="Mr.">Mr.</option>
+				<option value="Mrs.">Mrs.</option>
+				<option value="ms.">Ms.</option>
+			</select>
+			<input type="text" name="full_name" id="full_name" value="<?php echo $this->contactinfo['full_name']; ?>">
+		
+	</li>
+	<li>
+		<label>Job Title:
+			<em>*</em>
+		</label>
+		<label><input type="text" name="job_title" id="job_title" value="<?php echo $this->contactinfo['job_title']; ?>"></label>
+	</li>
+	<li>
+		<label>Tel:</label>
+		<label><input type="text" name="ct_tel" id="ct_tel" value="<?php echo $this->contactinfo['tel']; ?>"></label>
+	</li>
+	<li>
+		<label>Email:</label>
+		<label><input type="text" name="ct_email" id="ct_email" value="<?php echo $this->contactinfo['email']; ?>"></label>
+	</li>
+</ul>
+</div>
+<?php } ?>
+</div>
 </form>
 <script>
 function checkValid()
 {
-	var full_name_en = $("#full_name_en").val();
-	var full_name_vn = $("#full_name_vn").val();
+	var company_name = $("#company_name").val();
 	
     var email = $('#email').val();
 
-    if(full_name_en == '' || full_name_vn == '' ||  consultant_id == '') {
+    if(company_name == '' consultant_id == '') {
         $('.error').html('Please input into field required (*)');
         return false;
     }

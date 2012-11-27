@@ -73,13 +73,11 @@ class CompanyController extends Zend_Controller_Action
 	public function saveCompanyAction()
 	{
 	    $post = $this->getRequest()->getPost();
-//print_r($post);exit;
+	    $contact = new Default_Model_ContactPerson();
 	    $company = new Default_Model_Company();
+	    
 	    $company->setCompanyId($post['company_id']);
-		$company->setFullNameEn($post['full_name_en']);
-		$company->setShortNameEn($post['short_name_en']);
-		$company->setFullNameVn($post['full_name_vn']);
-		$company->setShortNameVn($post['short_name_vn']);
+		$company->setCompanyName($post['company_name']);
 		$company->setBusinesType($post['busines_type']);
 		$company->setTel($post['tel']);
 		$company->setFax($post['fax']);
@@ -89,6 +87,13 @@ class CompanyController extends Zend_Controller_Action
 		$company->setInformation($post['information']);
 		$company->setCreatedDate(date('Y-m-d'));
 		$company->setUpdatedDate(date('Y-m-d'));
+		
+		$contact->setContactPersonId($_POST['contact_person_id']);
+		$contact->setCompanyId($_POST['company_id']);
+		$contact->setFullName($_POST['full_name']);
+		$contact->setJobTitle($_POST['job_title']);
+		$contact->setTel($_POST['ct_tel']);
+		$contact->setEmail($_POST['ct_email']);
 		
 		$companyMapper = new Default_Model_CompanyMapper();
 	    $row = $companyMapper->save($company);
@@ -104,7 +109,6 @@ class CompanyController extends Zend_Controller_Action
 		$row = $company->getCompany($company_id);
 		$this->view->cominfo = $row[0];
 		
-	
 	}
 	
 	public function addContactAction()

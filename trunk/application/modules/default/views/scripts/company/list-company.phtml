@@ -2,23 +2,27 @@
 <?php 
 $num = 1; 
 $companyMapper = new Default_Model_CompanyMapper();
+$contact = new Default_Model_ContactPersonMapper();
 foreach($this->paginator as $rs) { 
     $comment = $companyMapper->getComments($rs['company_id'], 1);
 ?>
-<div >
+<div style="width:100%">
 	<div class="checkbox">
 	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']; ?>" onclick="getvalue()" >
 	</div>
 	<div class="name" align="left">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
-            <?php echo $rs['full_name_vn'] ?>&nbsp;		    
+            <?php echo $rs['company_name'] ?>&nbsp;		    
         </a>
 	</div>
 	<div class="name" align="left">
-		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
-		    <?php echo $rs['full_name_en'] ?>&nbsp;
-        </a>
-	</div>	
+			<?php $contactInfo = $contact->getLContact($rs['company_id']); ?>
+			<?php  foreach($contactInfo as $ct) { ?>
+            <?php echo $ct['full_name']; ?><br />	
+            <?php echo $ct['job_title']; ?> &nbsp; &nbsp;	
+            <?php echo $ct['tel']; ?> <br />
+            <?php } ?>
+	</div>
 	<div class="address" align="left">
 		<?php echo $rs['address'] ?>&nbsp;
 	</div>
@@ -40,7 +44,13 @@ foreach($this->paginator as $rs) {
             <?php endif;?>
         </div>
     </div>
+    <br />
+<br />
+<br />
+<br />
+
 </div>
+
 <?php $num++; } ?>
 <script language="javascript">
 check = 0;
