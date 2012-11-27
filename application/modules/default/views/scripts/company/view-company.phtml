@@ -10,37 +10,38 @@ Address : <?php echo $this->cominfo['address']; ?></h2>
 </div>
 <div class="list-company clearfix">
 	<div class="head">
-		<div class="status">
+		<div class="status" align="center">
 			<h4>STT</h4>
 		</div>
-		<div class="name" style="width:145px;">
+		<div class="fullName" align="center">
 			<h4>Full Name</h4>
 		</div>
-		<div class="name">
+		<div class="jobTitle" align="center">
 			<h4>Job Title</h4>
 		</div>
-		<div class="name" style="width : 80px;">
+		<div class="viewtel" align="center">
 			<h4>Tel</h4>
 		</div>
-		<div class="name" style="width : 195px;">
+		<div class="viewemail" align="center">
 			<h4>Email</h4>
 		</div>
-		<div class="name" style="width : 50px;">
+		<div class="edit" align="center">
 			<h4>Edit</h4>
 		</div>
 	</div>
-	
+	<div class="info-content">
 	<?php
     $num=1;
 	foreach($listContact as $rs){
     ?>
     <div class="status"><?php echo $num; ?></div>
-    <div class="name" style="width:145px;"><?php echo $rs['full_name'];?></div>
-    <div class="name"><?php echo $rs['job_title'];?></div>
-    <div class="name" style="width : 80px;"><?php echo $rs['tel']; ?></div>
-    <div class="name" style="width : 195px;"><?php echo $rs['email']; ?></div>
-    <div class="name" style="width : 50px;"><a href="/company/add-contact/contact_person_id/<?php echo $rs['contact_person_id']; ?>">Edit</a></div>
+    <div class="fullName" ><?php echo $rs['full_name'];?></div>
+    <div class="jobTitle"><?php echo $rs['job_title'];?></div>
+    <div class="viewtel" ><?php echo $rs['tel']; ?></div>
+    <div class="viewemail"><?php echo $rs['email']; ?></div>
+    <div class="edit"><a href="/company/add-contact/contact_person_id/<?php echo $rs['contact_person_id']; ?>">Edit</a></div>
     <?php $num++; }?>
+    </div>
 </div>
 <div style="clear:both">&nbsp;</div>
 <div align="center" style="clear:both">

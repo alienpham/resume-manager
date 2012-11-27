@@ -5,33 +5,33 @@ $companyMapper = new Default_Model_CompanyMapper();
 foreach($this->paginator as $rs) { 
     $comment = $companyMapper->getComments($rs['company_id'], 1);
 ?>
-<div style="width:1320px; clear:both">
-	<div class="checkbox" style="margin-top:4px;width:10px">
+<div >
+	<div class="checkbox">
 	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']; ?>" onclick="getvalue()" >
 	</div>
-	<div class="name" align="left" style="width:205px">
+	<div class="name" align="left">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
             <?php echo $rs['full_name_vn'] ?>&nbsp;		    
         </a>
 	</div>
-	<div class="name" align="left" style="width:190px">
+	<div class="name" align="left">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
 		    <?php echo $rs['full_name_en'] ?>&nbsp;
         </a>
 	</div>	
-	<div class="name" align="left" style="width:190px">
+	<div class="address" align="left">
 		<?php echo $rs['address'] ?>&nbsp;
 	</div>
-	<div class="name" style="width:93px" align="left">
+	<div class="tel" align="left">
 		<?php echo $rs['tel'] ?>&nbsp;
 	</div>
-	<div class="name" align="left" style="width:170px">
+	<div class="email" align="left">
 		<?php echo $rs['email'] ?>&nbsp;
 	</div>
-	<div class="name" style="width:40px" align="left">
+	<div class="edit" align="left">
 		<a href="/company/add-company/company_id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>
 	</div>
-	<div class="name" style="width:210px;" align="left">
+	<div class="action" align="left">
         <a href="#comment" class="addcomment" id="<?php echo $rs['company_id']?>">Add Comment</a>
         <div class="info-comment" id="viewcomment<?php echo $rs['company_id']?>">
             <?php if($comment):?>
@@ -46,7 +46,7 @@ foreach($this->paginator as $rs) {
 check = 0;
 function getvalue()
 {	
-	for(var i=0;i<100;i++)
+	for(var i=0;i<document.frmCompanyList.companyid.length;i++)
 	{	
 		
 		if(document.frmCompanyList.company_id[i].checked == true)
