@@ -764,7 +764,7 @@ color:red;
 	line-height:25px;
 }
 .list-company .head .address{
-	width:15%;
+	width:13%;
 	line-height:25px;
 }
 .list-company .head .email{
@@ -772,7 +772,7 @@ color:red;
 	line-height:25px;
 }
 .list-company .head .action{
-	width:12%;
+	width:14%;
 	background:none !important;
 	line-height:25px;
 }
@@ -839,14 +839,8 @@ color:red;
 	width:23%;
 	line-height:25px;
 }
-
-.list-company .info-content .action{
-	padding-left:20px;
-	float:left;	
-	line-height:25px;
-}
 .list-company .info-content .address{
-	width:15%;
+	width:13%;
 	line-height:25px;
 }
 .list-company .info-content .jobTitle{
@@ -874,7 +868,7 @@ color:red;
 	line-height:25px;
 }
 .list-company .info-content .action{
-	width:11%;
+	width:14%;
 	line-height:25px;
 }
 
