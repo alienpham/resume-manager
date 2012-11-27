@@ -643,7 +643,11 @@ color:red;
 .list-company .head .name,
 .list-company .head .address,
 .list-company .head .tel,
+.list-company .head .viewtel,
 .list-company .head .email,
+.list-company .head .viewemail,
+.list-company .head .fullName,
+.list-company .head .jobTitle,
 .list-company .head .edit,
 .list-company .head .ind,
 .list-company .head .act,
@@ -664,7 +668,11 @@ color:red;
 .list-company .name,
 .list-company .address,
 .list-company .tel,
+.list-company .viewtel,
+.list-company .fullName,
 .list-company .email,
+.list-company .viewemail,
+.list-company .jobTitle,
 .list-company .edit,
 .list-company .ind,
 .list-company .act,
@@ -682,7 +690,7 @@ color:red;
 	float:left;	
 }
 
-.list-company .checkbox{
+.list-company .head .checkbox{
 	padding:6px 1%;
 	width:1%;
 }
@@ -717,29 +725,54 @@ color:red;
 }
 .list-company .joined,
 .list-company .status,
-.list-company .cons,
-.list-company .tel
+.list-company .cons
 {
 	width:4%;	
+	line-height:25px;
+}
+.list-company .head .jobTitle
+{
+	width:14%;	
+	line-height:25px;
+}
+.list-company .head .fullName
+{
+	width:23%;	
+	line-height:25px;
+}
+.list-company .head .viewemail
+{
+	width:30%;	
+	line-height:25px;
+}
+.list-company .tel
+{
+	width:6%;	
+	line-height:25px;
+}
+.list-company .head .viewtel
+{
+	width:12%;	
 	line-height:25px;
 }
 .list-company .name{
 	width:15%;
 	line-height:25px;
 }
-.list-company .edit{
+.list-company .head .edit{
 	width:5%;
 	line-height:25px;
 }
-.list-company .address{
-	width:10%;
+.list-company .head .address{
+	width:15%;
 	line-height:25px;
 }
-.list-company .email{
+.list-company .head .email{
+	width:15%;
+	line-height:25px;
+}
+.list-company .head .action{
 	width:12%;
-	line-height:25px;
-}
-.list-company .action{
 	background:none !important;
 	line-height:25px;
 }
@@ -755,6 +788,7 @@ color:red;
 }
 
 .list-company .info-content .checkbox{
+	margin-top: 5px;
 	padding:3px 1%;
 	width:1%;
 	line-height:25px;
@@ -801,19 +835,59 @@ color:red;
 	width:15%;
 	line-height:25px;
 }
+.list-company .info-content .fullName{
+	width:23%;
+	line-height:25px;
+}
 
 .list-company .info-content .action{
 	padding-left:20px;
 	float:left;	
 	line-height:25px;
 }
+.list-company .info-content .address{
+	width:15%;
+	line-height:25px;
+}
+.list-company .info-content .jobTitle{
+	width:14%;
+	line-height:25px;
+}
+.list-company .info-content .email{
+	width:15%;
+	line-height:25px;
+}
+.list-company .info-content .viewemail{
+	width:30%;
+	line-height:25px;
+}
+.list-company .info-content .edit{
+	width:5%;
+	line-height:25px;
+}
+.list-company .info-content .tel{
+	width:6%;
+	line-height:25px;
+}
+.list-company .info-content .viewtel{
+	width:12%;
+	line-height:25px;
+}
+.list-company .info-content .action{
+	width:11%;
+	line-height:25px;
+}
 
-.list-company .info-content .action a.editcom{
+
+
+.list-company .info-content a.editcom{
 	font-weight: bold;
 	padding-left:28px;
 	background:url(../images/icon-add.png) no-repeat left 1px;
 	line-height:25px;
 }
+
+/* Vacancy */
 
 .list-vacancy,
 .contentVacancy{
