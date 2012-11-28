@@ -20,9 +20,8 @@
 	<a href="/resume/personal-info" style="text-decoration:none;">
 		<input class="button01" type="button" value="Add Resume" />
 	</a>
-    <a href="/resume/delete-resume" style="text-decoration:none;">
-        <input class="button01" type="button" value="Delete" />
-    </a>
+    
+    <input class="button01 delete" type="button" value="Delete" />
     <a href="/resume/export-email" style="text-decoration:none;">
         <input class="button01" id="export_email" type="button" value="Export Email" style="display: none"/>
     </a>
@@ -58,12 +57,20 @@ $(document).ready(function() {
         var keyword = $('#keyword').val();
         var school_name = $('#school_name').val();
         var program_name = $('#program_name').val();
+        var program_name = $('#program_name').val();
         
         var functions = '';
-        var checkboxes = $('input[name="option[]"]:checkbox:checked');
+        var checkboxes = $('input[name="function[]"]:checkbox:checked');
         checkboxes.each(function() {
         	if(functions) functions = functions + ',' + $(this).val();
         	else functions = $(this).val();
+        });
+
+        var provinces = '';
+        var checkboxes = $('input[name="province[]"]:checkbox:checked');
+        checkboxes.each(function() {
+        	if(provinces) provinces = provinces + ',' + $(this).val();
+        	else provinces = $(this).val();
         });
 
         var param = 'full_name: ' + name +
@@ -78,6 +85,7 @@ $(document).ready(function() {
             ',salary: ' + salary +
             ',experother: ' + experother +
             ',keyword: ' + keyword +
+            ',provinces: ' + provinces +
             ',school_name: ' + school_name +
             ',program_name: ' + program_name
             
@@ -97,6 +105,7 @@ $(document).ready(function() {
                 salary: salary,
                 experother: experother,
                 keyword: keyword,
+                provinces: provinces,
                 school_name: school_name,
                 program_name: program_name
             },
@@ -116,7 +125,33 @@ $(document).ready(function() {
   	    	$('#report').html(result);
   	  	}
   	});
-    
+
+    $('.delete').click(function(){
+        if($('input[name="resume_chk[]"]').is(':checked')) {
+            var answer = confirm('Are you sure you want to delete');
+            if (answer) {
+            	var listResume = '';
+                var checkboxes = $('input[name="resume_chk[]"]:checkbox:checked');
+                checkboxes.each(function() {
+                	if(listResume) listResume = listResume + ',' + $(this).val();
+                	else listResume = $(this).val();
+                });
+            	$.ajax({
+              	  	url: '/resume/delete-resume',
+                	type: "POST",
+        			data: { 
+                       listid: listResume
+                    },
+              	  	success: function(result) {
+                  	  	$('#box').html(result);
+              	  	}
+              	});
+            }
+        } else {
+            alert('Please select company to delete');
+            return false;
+        }
+  	});  
 });
 </script>
 <script>

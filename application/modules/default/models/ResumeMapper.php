@@ -130,10 +130,12 @@ class Default_Model_ResumeMapper {
         if(in_array('job_title', $choice) || in_array('company_name', $choice) || in_array('experother', $choice) || in_array('functions', $choice) || in_array('keyword', $choice)) {
             $join .= ' INNER JOIN res_experience as exper ON r.resume_id = exper.resume_id ';
             if(in_array('functions', $choice))
-				$join .= ' INNER JOIN res_experience_has_function as exper_fun ON exper.id = exper_fun.res_experience_id ';
+				$join .= ' INNER JOIN res_experience_has_function as exper_fun ON exper.res_experience_id = exper_fun.res_experience_id ';
         }
-        if(in_array('salary', $choice)) {
+        if(in_array('salary', $choice) || in_array('provinces', $choice)) {
             $join .= ' INNER JOIN res_expectation as expec ON r.resume_id = expec.resume_id ';
+            if(in_array('provinces', $choice))
+                $join .= ' INNER JOIN res_expectation_has_location as expec_loca ON expec.res_expectation_id = expec_loca.res_expectation_id ';
         }
         
         if(in_array('education', $choice)) {
@@ -145,10 +147,17 @@ class Default_Model_ResumeMapper {
 		$sql .= 'LEFT JOIN res_file as f ON r.resume_id = f.resume_id ';
 		$sql .= $join . $where . $orderby;
 
-        //echo $sql;exit;
+        //echo $sql;//exit;
         $_SESSION['export-email'] = $sql;
         
         return $db->fetchAll($sql);
+    }
+    
+    public function deleteListResume($listId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'DELETE FROM resume WHERE resume_id in ('. $listId .')';
+        $db->query($sql);
     }
     
     public function getExportEmail($sql=null)

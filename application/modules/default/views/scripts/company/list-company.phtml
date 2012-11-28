@@ -10,7 +10,7 @@ foreach($this->paginator as $rs) {
 	<div class="checkbox">
 	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']; ?>" onclick="getvalue()" >
 	</div>
-	<div class="name" align="left">
+	<div class="name">
 		<a href="#view_company" class="view_company" id="<?php echo $rs['company_id']?>">
             <?php echo $rs['company_name'] ?>&nbsp;		    
         </a>
@@ -23,19 +23,16 @@ foreach($this->paginator as $rs) {
             <?php echo $ct['tel']; ?> <br />
             <?php } ?>
 	</div>
-	<div class="address" align="left">
-		<?php echo $rs['address'] ?>&nbsp;
-	</div>
-	<div class="tel" align="left">
+	<div class="tel">
 		<?php echo $rs['tel'] ?>&nbsp;
 	</div>
-	<div class="email" align="left">
+	<div class="email">
 		<?php echo $rs['email'] ?>&nbsp;
 	</div>
-	<div class="edit" align="left">
+	<div class="edit">
 		<a href="/company/add-company/company_id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>
 	</div>
-	<div class="action" align="left">
+	<div class="action">
         <a href="#comment" class="addcomment" id="<?php echo $rs['company_id']?>">Add Comment</a> &nbsp; &nbsp;
         <a href="#allcomment"  class="allcomment" id="<?php echo $rs['company_id']?>">View all</a>
         <div class="info-comment" id="viewcomment<?php echo $rs['company_id']?>">
