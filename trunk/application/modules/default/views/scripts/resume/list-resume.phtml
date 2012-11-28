@@ -1,6 +1,9 @@
 <?php if($this->search) echo $this->headScript();?>
 <div class="list-resumes clearfix">
     <div class="head">
+        <div class="checkbox">
+            &nbsp;
+        </div>
         <div class="name">
             <h4>Name</h4>
         </div>
@@ -35,6 +38,9 @@
         $historys = $resumeMapper->getHistory($row['resume_id'], 3);
     ?>
     <div class="info-content">
+        <div class="checkbox">
+            <input type="checkbox" name="resume_chk[]" value="<?php echo $row['resume_id']?>">
+        </div>
         <div class="name">
             <h4>
                 <a href="#detail_resume" class="detail_resume" id="<?php echo $row['resume_id']?>"><?php echo $row['full_name'];?></a>

@@ -78,14 +78,13 @@ $listProvince = $resume->getProvince();
 					<ul style="list-style-type:none;margin: 10px 0;">
 					<?php 
 					$i = 1;
-					$checked = '';
 					foreach($listFunction as $function) :
 						if($i % 46 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;margin: 10px 0;">';endif;
 						if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
 						//if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
 						//else $checked = '';
 					?>
-						<li style="float:none;display:block;"><input type="checkbox" name="option[]" value="<?php echo $function['function_id']?>" <?php echo $checked;?>/>&nbsp; <?php echo $function['name']?></li>
+						<li style="float:none;display:block;"><input type="checkbox" name="function[]" value="<?php echo $function['function_id']?>" />&nbsp; <?php echo $function['name']?></li>
 							
 					<?php 
 					$i++;
@@ -103,13 +102,12 @@ $listProvince = $resume->getProvince();
                 <ul style="list-style-type:none;margin: 10px 0;">
 				<?php 
 				$i = 1;
-				$checked = '';
 				foreach($listProvince as $province) :
 					if($i % 22 == 0): echo '</ul></div><div style="width:33%; float:left"><ul style="list-style-type:none;margin: 10px 0;">';endif;
 					//if(in_array($province['province_id'], $this->resumeProvince, true)) $checked = "checked";
 					//else $checked = '';
 				?>
-                    <li style="float:none;display:block;"><input type="checkbox" name="option1[]" value="<?php echo $province['province_id']?>"/> <?php echo $province['name']?></li>
+                    <li style="float:none;display:block;"><input type="checkbox" name="province[]" value="<?php echo $province['province_id']?>"/>&nbsp; <?php echo $province['name']?></li>
 						
 				<?php 
 				$i++;
@@ -143,7 +141,7 @@ $(document).ready(function(){
 	//click chekcbox in mutiselect
 	$('.multiselect').bind('click', function() {
 		var str = '';
-		$(':checkbox[name^=option]').each(function(){
+		$(':checkbox[name^=function]').each(function(){
 			if($(this).attr('checked')){
 				str = str + $(this).parent().text() + ';';
 			} 
@@ -155,7 +153,7 @@ $(document).ready(function(){
 	//click chekcbox in mutiselect
 	$('.multiselect1').bind('click', function() {
 		var str = '';
-		$(':checkbox[name^=option]').each(function(){
+		$(':checkbox[name^=province]').each(function(){
 			if($(this).attr('checked')){
 				str = str + $(this).parent().text() + ';';
 			} 

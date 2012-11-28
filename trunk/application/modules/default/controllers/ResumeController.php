@@ -460,9 +460,14 @@ class ResumeController extends Zend_Controller_Action
 			$cond[] = 'experience_other like "%'. $post['experother'] .'%"';
 		}
 
-		if(@$post['functions']) {
+	    if(@$post['functions']) {
 			$choice[] = 'functions';
 			$cond[] = 'function_id in ('. $post['functions'] .')';
+		}
+		
+		if(@$post['provinces']) {
+			$choice[] = 'provinces';
+			$cond[] = 'province_id in ('. $post['provinces'] .')';
 		}
 		
 	    if(@$post['school_name']) {
@@ -512,6 +517,22 @@ class ResumeController extends Zend_Controller_Action
 		$this->view->resume = $resumeRowSet;
 		$this->_helper->layout->disableLayout();
 		$this->render('detail-resume');
+	}
+	
+	public function deleteResumeAction()
+	{
+	    $resumeMapper = new Default_Model_ResumeMapper();
+	    $listid = $this->getRequest()->getParam('listid', 0);
+        $resumeMapper->deleteListResume($listid);
+	    
+		$rows = $resumeMapper->getListResume();
+		$paginator = Zend_Paginator::factory($rows);
+		$paginator->setItemCountPerPage(20);
+		$paginator->setCurrentPageNumber(1);
+
+		$this->view->paginator = $paginator;
+        $this->_helper->layout->disableLayout();
+	    $this->render('list-resume');
 	}
 
 	public function exportEmailAction()

@@ -19,15 +19,6 @@
 				<input type="text" name="job_title" id="job_title" value="<?php echo $this->vacancy->getJobTitle(); ?>">
 			</li>
 			<li>
-				<label>Priority:</label>
-				<select name ="priority" id ="priority">
-					<option value="Low" selected="selected">Low</option>
-					<option value="Medium">Medium</option>
-					<option value="High">High</option>
-					<option value="Urgent">Urgent</option>
-				</select>
-			</li>
-			<li>
 				<label>Salary:</label>
 				<input name="min_salary" type="text" id="min_salary" style="width:93px;" value="<?php echo $this->vacancy->getMinSalary(); ?>">
                 <input name="max_salary" type="text" id="max_salary" style="width:93px;" value="<?php echo $this->vacancy->getMaxSalary(); ?>"> USD		
