@@ -31,10 +31,8 @@ class Default_Model_ContactPersonMapper {
 			'title' 		=> $contactperson->getTitle(), 
 			'full_name' 	=> $contactperson->getFullName(),
         	'job_title' 	=> $contactperson->getJobTitle(), 
-			'tel' 			=> $contactperson->getTel(),
 			'mobile' 		=> $contactperson->getMobile(),
 			'email' 		=> $contactperson->getEmail(), 
-			'address' 		=> $contactperson->getAddress(),
 		);
 		
     	if (null == ($id = $contactperson->getContactPersonId())) {
@@ -45,29 +43,41 @@ class Default_Model_ContactPersonMapper {
         }
     }
     
-	public function getContact($id)
-	{
-		$db = $this->getDbTable()->getAdapter();
-		$sql = "SELECT * FROM contact_person WHERE contact_person_id = " .$id;
-		$rows = $db->fetchAll($sql);
-    	return $rows;
-		
+	public function find ($id, Default_Model_ContactPerson $contactperson)
+    {
+        $result = $this->getDbTable()->find($id);        
+        if (0 == count($result)) {
+            return;
+        }
+        
+        $row = $result->current();
+		$contactperson->setContactPersonId($row['contact_person_id']);
+		$contactperson->setCompanyId($row['company_id']); 
+		$contactperson->setTitle($row['title']); 
+		$contactperson->setFullName($row['full_name']);
+		$contactperson->setJobTitle($row['job_title']); 
+		$contactperson->setMobile($row['mobile']);
+		$contactperson->setEmail($row['email']);
 	}
-	
-	public function getListContact($id)
+
+
+	public function fetchAll ($where = null, $orderby = null)
     {
-    	$db = $this->getDbTable()->getAdapter();
-    	$sql = "SELECT contact_person_id,contact_person.company_id,full_name,title,job_title,contact_person.tel,mobile,contact_person.email,contact_person.address FROM contact_person  INNER JOIN company ON company.company_id = contact_person.company_id WHERE contact_person.company_id = " .$id; 
-    	$rows = $db->fetchAll($sql);
-    	return $rows;
-    	
-    }
-	public function getLContact($id)
-    {
-    	$db = $this->getDbTable()->getAdapter();
-    	$sql = "SELECT * FROM contact_person WHERE company_id = " .$id; 
-    	$rows = $db->fetchAll($sql);
-    	return $rows;
-    	
+        $resultSet = $this->getDbTable()->fetchAll($where, $orderby);
+        
+        $entries = array();
+        $entry = new Default_Model_Company();
+        foreach ($resultSet as $row) {
+			$entry->getContactPersonId($row['contact_person_id']);
+            $entry->getCompanyId($row['company_id']); 
+			$entry->setTitle($row['title']); 
+			$entry->setFullName($row['full_name']);
+			$entry->setJobTitle($row['job_title']); 
+			$entry->setMobile($row['mobile']);
+			$entry->setEmail($row['email']);
+            $entries[] = $entry;
+        }
+		
+        return $entries;
     }
 }

@@ -30,7 +30,6 @@ class Default_Model_CompanyMapper {
             'company_name' 		=> $company->getCompanyName(), 
             'busines_type' 	    => $company->getBusinesType(),
             'tel' 				=> $company->getTel(),
-            'fax' 				=> $company->getFax(),
             'email' 			=> $company->getEmail(),
             'address' 			=> $company->getAddress(),
             'website' 			=> $company->getWebsite(),
@@ -59,11 +58,10 @@ class Default_Model_CompanyMapper {
         $company->setCompanyName($row->company_name);
         $company->setBusinesType($row->busines_type);
         $company->setTel($row->tel);
-        $company->setFax($row->fax);
         $company->setEmail($row->email);
         $company->setAddress($row->address);
         $company->setWebsite($row->website);
-        $company->setInfoRmation($row->information);
+        $company->setInformation($row->information);
         $company->setCreatedDate($row->created_date);
         $company->setUpdatedDate($row->updated_date);
     }
@@ -80,7 +78,6 @@ class Default_Model_CompanyMapper {
 			$entry->setCompanyName($row->company_name);
 			$entry->setBusinesType($row->busines_type);
 			$entry->setTel($row->tel);
-			$entry->setFax($row->fax);
 			$entry->setEmail($row->email);
 			$entry->setAddress($row->address);
 			$entry->setWebsite($row->website);
@@ -95,7 +92,8 @@ class Default_Model_CompanyMapper {
     public function getListCompany($where='', $order='')
     {
     	$db = $this->getDbTable()->getAdapter();
-    	$sql = "SELECT * FROM company ";
+    	$sql = "SELECT c.*, cp.contact_person_id, cp.title, cp.job_title, cp.full_name, cp.mobile, cp.email as ct_email FROM company as c ";
+		$sql .= "INNER JOIN contact_person as cp ON cp.company_id = c.company_id ";
     	if($where!='') $sql .= 'WHERE ' . $where;
     	$sql .= ' ' . $order;
 //echo $sql;exit;
@@ -106,8 +104,10 @@ class Default_Model_CompanyMapper {
     public function getCompany($id)
     {
     	$db = $this->getDbTable()->getAdapter();
-    	$sql = "SELECT * FROM company WHERE company_id =" .$id;
-    	$rows = $db->fetchAll($sql);
+    	$sql = "SELECT c.*, cp.contact_person_id, cp.title, cp.job_title, cp.full_name, cp.mobile, cp.email as ct_email FROM company as c ";
+		$sql .= "INNER JOIN contact_person as cp ON cp.company_id = c.company_id ";
+		$sql .= "WHERE c.company_id =" . $id;
+    	$rows = $db->fetchRow($sql);
     	return $rows;
     }
     

@@ -17,23 +17,23 @@ function checkLogin(){
     <input class="button01" name="btSearch" type="submit" value="Search"/>
 </div>
 <div style="height:20px"> </div>
-<div style="clear:both;width:1330px">	
+<div>	
 	<div style="width:300px;float:left">
 	<a href="/company/add-company" style="text-decoration:none;">
 		<input class="button01" type="button" value="Add Company" />
 	</a>
 	</div>
-  	<div style="width:270px;float:right">          
+  	<div style="width:310px;float:right">          
 	    <label for="choice">Sort : </label>
-	    <select name="sort" id="sort" style="width:110px">
+	    <select name="sort" id="sort" style="width:120px">
 	        <option value="created_date" <?php if ($this->sort=="created_date") echo "selected";?>>Created Date</option>
-            <option value="full_name_en" <?php if ($this->sort=="full_name_en") echo "selected";?>>Name</option>
+            <option value="company_name" <?php if ($this->sort=="company_name") echo "selected";?>>Name</option>
 	    </select>
-	    <select name="order" id="order" style="width:60px">
+	    <select name="order" id="order" style="width:80px">
 	    	<option value="DESC" <?php if ($this->order=="DESC") echo "selected";?>>DESC</option>
             <option value="ASC" <?php if ($this->order=="ASC") echo "selected";?>>ASC</option>
 	    </select>
-	    <input type="submit" value="Sort" />
+	    <input type="submit" class="button01" value="Sort" />
     </div>
 </div>
 </form>
@@ -49,7 +49,7 @@ function checkLogin(){
                 <h4>Company Name</h4>
             </div>
             <div class="name" align="center">
-                <h4>Contact</h4>
+                <h4>Contact Name</h4>
             </div>
             <div class="tel" align="center">
                 <h4>tel</h4>
@@ -64,10 +64,8 @@ function checkLogin(){
                 <h4>Comment</h4>
             </div>
        	</div>
-        <div class="info-content">
         <?php echo $this->partial('company/list-company.phtml', array('paginator' => $this->paginator)); ?>
-        </div>
-    </div>
+     </div>
 </div>
 <div style="clear:both"></div>
 <!-- pagging -->
@@ -77,7 +75,7 @@ function checkLogin(){
 <?php endif;?>
 </div>
 </form>
-<div id="view_company" style="width:700px;height: 350px; overflow-y:scroll; display: none;">&nbsp;</div>
+<div id="view_company" style="width:600px;height: 350px; overflow-y:scroll; display: none;">&nbsp;</div>
 <?php echo $this->partial ( '/company/comment.phtml' )?> 
 <div id="allcomment" style="width:500px;height:200px; overflow-y:scroll; display: none;">&nbsp;</div>
 <script language="javascript">

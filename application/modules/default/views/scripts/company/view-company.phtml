@@ -1,51 +1,39 @@
-<?php
-$contact= new Default_Model_ContactPersonMapper();
-$listContact = $contact->getListContact ($this->cominfo['company_id']);
-?>
-<input type="hidden" id="company_id" value="<?php echo $this->cominfo['company_id']; ?>">
-<input type="hidden" id="contact_person_id" value="<?php echo $listContact['contact_person_id']; ?>">
-<div style="height :50px;color : #848484; ">
-<h2><?php echo $this->cominfo['company_name']; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Address : <?php echo $this->cominfo['address']; ?></h2>
-</div>
-<div class="list-company clearfix">
-	<div class="head">
-		<div class="status" align="center">
-			<h4>STT</h4>
-		</div>
-		<div class="fullName" align="center">
-			<h4>Full Name</h4>
-		</div>
-		<div class="jobTitle" align="center">
-			<h4>Job Title</h4>
-		</div>
-		<div class="viewtel" align="center">
-			<h4>Tel</h4>
-		</div>
-		<div class="viewemail" align="center">
-			<h4>Email</h4>
-		</div>
-		<div class="edit" align="center">
-			<h4>Edit</h4>
-		</div>
-	</div>
-	<div class="info-content">
-	<?php
-    $num=1;
-	foreach($listContact as $rs){
-    ?>
-    <div class="status"><?php echo $num; ?></div>
-    <div class="fullName" ><?php echo $rs['full_name'];?></div>
-    <div class="jobTitle"><?php echo $rs['job_title'];?></div>
-    <div class="viewtel" ><?php echo $rs['tel']; ?></div>
-    <div class="viewemail"><?php echo $rs['email']; ?></div>
-    <div class="edit"><a href="/company/add-contact/contact_person_id/<?php echo $rs['contact_person_id']; ?>">Edit</a></div>
-    <?php $num++; }?>
-    </div>
-</div>
+<div align="center" style="color:#1B7CBD;font-size:16px"><b>COMPANY DETAIL</b></div>
+<table cellpadding="5" cellspacing="6">
+	<tr>
+		<td style="width:115px">Company Name</td>
+		<td><b><?php echo $this->company->getCompanyName();?></b></td>
+	</tr>
+	<tr>
+		<td>Busines Type</td>
+		<td><?php echo $this->company->getBusinesType();?></td>
+	</tr>                    
+	<tr>
+		<td>Tel</td>
+		<td><?php echo $this->company->getTel();?></td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td><?php echo $this->company->getEmail();?></td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td><?php echo $this->company->getAddress();?></td>
+	</tr>
+	<tr>
+		<td>Website</td>
+		<td><?php echo $this->company->getWebsite();?></td>
+	</tr>
+    <tr>
+        <td>Infomation</td>
+        <td><?php echo $this->company->getInformation();?></td>
+    </tr>
+</table>
 <div style="clear:both">&nbsp;</div>
-<div align="center" style="clear:both">
-	<input type="submit" name="close" class="button01"value="Close"
-			onclick="event.preventDefault(); parent.$.fancybox.close();" />
+<div align="center" style="position: absolute;bottom:0; padding-left:250px">
+	<a href="/company/add-company/id/<?php echo $this->company->getCompanyId()?>" >
+		<input type="button" name="edit" class="button01"value="Edit"/>
+	</a>
+    <input type="button" name="close" class="button01"value="Close"
+            onclick="event.preventDefault(); parent.$.fancybox.close();" />
 </div>
-
