@@ -1,5 +1,6 @@
 <form name="frmAddCompany" method="post" action="/company/save-company" onsubmit="return checkValid()">
-<input type="hidden" name="company_id" id="company_id" value="<?php echo $this->company->getCompanyId();?>"/>
+<input type="hidden" name="company_id" id="company_id" value="<?php echo @$this->company['company_id'];?>"/>
+<input type="hidden" name="contact_person_id" id="contact_person_id" value="<?php echo @$this->company['contact_person_id'];?>"/>
 <div class="from-add-01" style="100%">
 <div style="width:50%;float:left;">
 <ul >
@@ -12,42 +13,37 @@
 	</li>
 	<li>
 		<label>Company Name:<em>*</em></label>
-		<label><input type="text" name="company_name" id="company_name" value="<?php echo $this->company->getCompanyName();?>"></label>
+		<label><input type="text" name="company_name" id="company_name" value="<?php echo @$this->company['company_name'];?>"></label>
 	</li>
 	<li>
 		<label>Business Type:</label>		
-		<input type="text" name="busines_type" id="busines_type" value="<?php echo $this->company->getBusinesType();?>">						
+		<input type="text" name="busines_type" id="busines_type" value="<?php echo @$this->company['busines_type'];?>">						
 	</li>
 	<li>
 		<label>Telephone:</label>
-		<input type="text" name="tel" id="tel" value="<?php echo $this->company->getTel();?>">
+		<input type="text" name="tel" id="tel" value="<?php echo @$this->company['tel'];?>">
 		Ex: 848 38243 780 Ext. 123
 	</li>
 	<li>
-		<label>Fax:</label>
-		<input type="text" name="fax" id="fax" value="<?php echo $this->company->getFax();?>">
-		Ex: 848 38243 780
-	</li>
-	<li>
 		<label>Email:</label>
-		<label><input type="text" name="email" id="email" value="<?php echo $this->company->getEmail();?>"></label>
+		<label><input type="text" name="email" id="email" value="<?php echo @$this->company['email'];?>"></label>
 	</li>
 	<li>
 		<label>Address:</label>
 		<label>
-			<input type="text" name="address" id="address" value="<?php echo $this->company->getAddress();?>">
+			<input type="text" name="address" id="address" value="<?php echo @$this->company['address'];?>">
 		</label>
 	</li>
 	<li>
 		<label>Website:</label>
-		<label><input type="text" name="website" id="website" value="<?php echo $this->company->getWebsite();?>"></label>
+		<label><input type="text" name="website" id="website" value="<?php echo @$this->company['website'];?>"></label>
 	</li>
 	<li>
 		<label>Company information<br />
 		(for internal reference)
 		</label>
 		<label>
-			<textarea name="information" rows="6" id="information" style="width:300px"><?php echo $this->company->getInformation();?></textarea>
+			<textarea name="information" rows="6" id="information" style="width:300px"><?php echo @$this->company['information'];?></textarea>
 		</label>
 	</li>
 	<li>
@@ -57,9 +53,8 @@
 	</li>
 </ul>
 </div>
-<?php if($this->company->getCompanyId() ==''){ ?>
 <div style="width:40%; float:left;">
-<input type="hidden" name="contact_person_id"  id="contact_person_id" value="<?php echo $this->contactinfo['contact_person_id']; ?>"/>
+<input type="hidden" name="contact_person_id"  id="contact_person_id" value="<?php echo @$this->company['contact_person_id']; ?>"/>
 <ul >
 	<li>
 		<h2>ADD CONTACT</h2>
@@ -69,35 +64,29 @@
 			<em></em>
 	</li>
 	<li>
-		<label>Full Name:
-			<em>*</em>
-		</label>
-		
+		<label>Full Name:</label>
 			<select name="title" id="title" style="width:60px;">
 				<option value="Mr.">Mr.</option>
 				<option value="Mrs.">Mrs.</option>
 				<option value="ms.">Ms.</option>
 			</select>
-			<input type="text" name="full_name" id="full_name" value="<?php echo $this->contactinfo['full_name']; ?>">
+			<input type="text" name="full_name" id="full_name" value="<?php echo @$this->company['full_name']; ?>">
 		
 	</li>
 	<li>
-		<label>Job Title:
-			<em>*</em>
-		</label>
-		<label><input type="text" name="job_title" id="job_title" value="<?php echo $this->contactinfo['job_title']; ?>"></label>
+		<label>Job Title:</label>
+		<label><input type="text" name="job_title" id="job_title" value="<?php echo @$this->company['job_title']; ?>"></label>
 	</li>
 	<li>
-		<label>Tel:</label>
-		<label><input type="text" name="ct_tel" id="ct_tel" value="<?php echo $this->contactinfo['tel']; ?>"></label>
+		<label>Mobile:</label>
+		<label><input type="text" name="ct_mobile" id="ct_mobile" value="<?php echo @$this->company['mobile']; ?>"></label>
 	</li>
 	<li>
 		<label>Email:</label>
-		<label><input type="text" name="ct_email" id="ct_email" value="<?php echo $this->contactinfo['email']; ?>"></label>
+		<label><input type="text" name="ct_email" id="ct_email" value="<?php echo @$this->company['ct_email']; ?>"></label>
 	</li>
 </ul>
 </div>
-<?php } ?>
 </div>
 </form>
 <script>
@@ -107,7 +96,7 @@ function checkValid()
 	
     var email = $('#email').val();
 
-    if(company_name == '' consultant_id == '') {
+    if(company_name == '') {
         $('.error').html('Please input into field required (*)');
         return false;
     }

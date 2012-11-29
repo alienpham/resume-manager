@@ -2,11 +2,10 @@
 <?php 
 $num = 1; 
 $companyMapper = new Default_Model_CompanyMapper();
-$contact = new Default_Model_ContactPersonMapper();
 foreach($this->paginator as $rs) { 
     $comment = $companyMapper->getComments($rs['company_id'], 1);
 ?>
-<div style="width:100%">
+<div class="info-content" style="clear:both">
 	<div class="checkbox">
 	  <input type="radio" name="company_id" id="company_id" value="<?php echo $rs['company_id']; ?>" onclick="getvalue()" >
 	</div>
@@ -16,12 +15,10 @@ foreach($this->paginator as $rs) {
         </a>
 	</div>
 	<div class="name" align="left">
-			<?php $contactInfo = $contact->getLContact($rs['company_id']); ?>
-			<?php  foreach($contactInfo as $ct) { ?>
-            <?php echo $ct['full_name']; ?><br />	
-            <?php echo $ct['job_title']; ?> &nbsp; &nbsp;	
-            <?php echo $ct['tel']; ?> <br />
-            <?php } ?>
+		<?php echo $rs['full_name']; ?>(<?php echo $rs['title']; ?>)<br />	
+		<?php echo $rs['job_title']; ?><br />
+		<?php echo $rs['mobile']; ?><br />
+		<?php echo $rs['ct_email']; ?>
 	</div>
 	<div class="tel">
 		<?php echo $rs['tel'] ?>&nbsp;
@@ -30,7 +27,7 @@ foreach($this->paginator as $rs) {
 		<?php echo $rs['email'] ?>&nbsp;
 	</div>
 	<div class="edit">
-		<a href="/company/add-company/company_id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>
+		<a href="/company/add-company/id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>
 	</div>
 	<div class="action">
         <a href="#comment" class="addcomment" id="<?php echo $rs['company_id']?>">Add Comment</a> &nbsp; &nbsp;
@@ -41,11 +38,6 @@ foreach($this->paginator as $rs) {
             <?php endif;?>
         </div>
     </div>
-    <br />
-<br />
-<br />
-<br />
-
 </div>
 
 <?php $num++; } ?>

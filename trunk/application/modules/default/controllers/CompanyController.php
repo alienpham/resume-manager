@@ -39,7 +39,7 @@ class CompanyController extends Zend_Controller_Action
 		$order = $this->_getParam('order','DESC');
 		
 		$where = '';
-		if($txtSearch) $where = ' full_name_en like "%'. $txtSearch .'%" OR full_name_vn like "%'. $txtSearch .'%"';
+		if($txtSearch) $where = ' company_name like "%'. $txtSearch .'%"';
 		$order1 = ' ORDER BY ' . $sort . ' ' .$order;
 				
 		$currentPage = 1;
@@ -57,17 +57,16 @@ class CompanyController extends Zend_Controller_Action
 	public function addCompanyAction()
 	{
 	    $this->view->title = 'ADD COMPANY';
-		$company_id = $this->_getParam('company_id','');
-		$company = new Default_Model_Company();
+		$company_id = $this->_getParam('id','');
+		$company = array();
 		
 		if($company_id) {
 		    $this->view->title = 'EDIT COMPANY';
 		    $companyMapper = new Default_Model_CompanyMapper();
-		    $companyMapper->find($company_id, $company);		    
+		    $company = $companyMapper->getCompany($company_id);	
 		}
 		
 		$this->view->company = $company;
-		
 	}
 	
 	public function saveCompanyAction()
@@ -80,7 +79,6 @@ class CompanyController extends Zend_Controller_Action
 		$company->setCompanyName($post['company_name']);
 		$company->setBusinesType($post['busines_type']);
 		$company->setTel($post['tel']);
-		$company->setFax($post['fax']);
 		$company->setEmail($post['email']);
 		$company->setAddress($post['address']);
 		$company->setWebsite($post['website']);
@@ -88,71 +86,34 @@ class CompanyController extends Zend_Controller_Action
 		$company->setCreatedDate(date('Y-m-d'));
 		$company->setUpdatedDate(date('Y-m-d'));
 		
-		$contact->setContactPersonId($_POST['contact_person_id']);
-		$contact->setCompanyId($_POST['company_id']);
-		$contact->setFullName($_POST['full_name']);
-		$contact->setJobTitle($_POST['job_title']);
-		$contact->setTel($_POST['ct_tel']);
-		$contact->setEmail($_POST['ct_email']);
-		
 		$companyMapper = new Default_Model_CompanyMapper();
-	    $row = $companyMapper->save($company);
+	    $companyId = $companyMapper->save($company);
 	    
+		if($companyId){
+			$contactperson = new Default_Model_ContactPerson(); 
+			$contactperson->setContactPersonId($post['contact_person_id']);
+			$contactperson->setCompanyId($companyId); 
+			$contactperson->setTitle($post['title']); 
+			$contactperson->setFullName($post['full_name']);
+			$contactperson->setJobTitle($post['job_title']); 
+			$contactperson->setMobile($post['ct_mobile']);
+			$contactperson->setEmail($post['ct_email']);
+			
+			$contactPersonMapper = new Default_Model_ContactPersonMapper();
+			$contactPersonMapper->save($contactperson);
+		}
+		
 	    $this->_redirect('/company');
 	}
 	
 	public function viewCompanyAction()
 	{
 		$this->_helper->layout->disableLayout();
-		$company = new Default_Model_CompanyMapper();
+		$company = new Default_Model_Company();
+		$companyMapper = new Default_Model_CompanyMapper();
 		$company_id = $this->_getParam('company_id','');
-		$row = $company->getCompany($company_id);
-		$this->view->cominfo = $row[0];
-		
-	}
-	
-	public function addContactAction()
-	{	
-		$this->view->title = 'ADD CONTACT';
-		$company = new Default_Model_CompanyMapper();
-		$company_id = $this->_getParam('company_id','');
-		$contact_id = $this->_getParam('contact_person_id','');
-		 
-		if($contact_id)
-		{	
-			$this->view->title = 'EDIT CONTACT';
-			$contact = new Default_Model_ContactPersonMapper();
-			$row = $contact->getContact($contact_id);
-			$cominfo = $company->getCompany($company_id);
-			$this->view->contactinfo = $row[0];
-			$this->view->cominfo = $cominfo[0];
-		}
-		 
-		$cominfo = $company->getCompany($company_id);
-		 
-		$this->view->cominfo = $cominfo[0];
-		 
-	}
-	
-	public function saveContactAction()
-	{
-		 $post = $this->getRequest()->getPost();
-		 $contact = new Default_Model_ContactPerson();
-		 
-		 $contact->setContactPersonId($_POST['contact_person_id']);
-		 $contact->setCompanyId($_POST['company_id']);
-		 $contact->setTitle($_POST['title']);
-		 $contact->setFullName($_POST['full_name']);
-		 $contact->setJobTitle($_POST['job_title']);
-		 $contact->setTel($_POST['tel']);
-		 $contact->setMobile($_POST['mobile']);
-		 $contact->setEmail($_POST['email']);
-		 $contact->setAddress($_POST['address']);
-		 
-		 $addContact = new Default_Model_ContactPersonMapper();
-		 $row = $addContact->save($contact);
-
-		 $this->_redirect('/company/index');
+		$companyMapper->find($company_id, $company);
+		$this->view->company = $company;
 	}
 	
     public function saveCommentAction()
@@ -168,7 +129,7 @@ class CompanyController extends Zend_Controller_Action
 
 		//$html = '<p class="update-date">Comment '. $createdComment .'</p> <span>by</span> <span class="user-name">'. $comment['username'] . '</span>';
 		$html = '<p>- ' . substr($comment['content'], 0, 90) . '</p>';
-		$html .= '<a href="#allcomment" class="allcomment" id="'.  $post['company_id'] .'" onClick="allComment('.  $post['company_id'] .')">view all</a>';
+		//$html .= '<a href="#allcomment" class="allcomment" id="'.  $post['company_id'] .'" onClick="allComment('.  $post['company_id'] .')">view all</a>';
 		echo $html;
 		exit;
 	}

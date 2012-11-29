@@ -37,7 +37,7 @@
 					$i = 1;
 					$checked = '';
 					foreach($this->listFunction as $function) :
-						if($i % 46 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
+						if($i % 23 == 0): echo '</ul></div><div style="width: 33%; float: left"><ul style="list-style-type:none;">';endif;
 						if($function['parent_function_id'] == 0) echo '<div><strong>'. $function['name'] .'</strong></div>';
 						if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
 						else $checked = '';

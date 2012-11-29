@@ -32,10 +32,8 @@ CREATE TABLE IF NOT EXISTS `contact_person` (
   `title` enum('Mr.','Mrs.','Ms.') NOT NULL,
   `full_name` varchar(50) NOT NULL,
   `job_title` varchar(100) NOT NULL,
-  `tel` varchar(30) DEFAULT NULL,
   `mobile` varchar(30) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `address` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`contact_person_id`),
   KEY `FK_company_3` (`company_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
