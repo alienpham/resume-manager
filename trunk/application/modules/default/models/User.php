@@ -42,7 +42,7 @@ class Default_Model_User {
     public function getConsultantName ($id)
     {
         $db = $this->getDbTable()->getAdapter();
-        $sql = "SELECT username FROM consultant WHERE consultant_id = " . $id;
+        $sql = "SELECT username, full_name FROM consultant WHERE consultant_id = " . $id;
         return $db->fetchRow($sql);
     }
     

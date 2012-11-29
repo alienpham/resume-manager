@@ -741,7 +741,7 @@ color:red;
 
 /* Vacancy */
 .list-vacancy,
-.contentVacancy{
+.info-content{
 	float: left;
     width: 100%;
 }
@@ -751,6 +751,7 @@ color:red;
 	float: left;
 }
 
+.list-vacancy .headVacancy .checkbox,
 .list-vacancy .headVacancy .company,
 .list-vacancy .headVacancy .job_title,
 .list-vacancy .headVacancy .salary,
@@ -760,9 +761,12 @@ color:red;
 .list-vacancy .headVacancy .priority,
 .list-vacancy .headVacancy .status,
 .list-vacancy .headVacancy .function,
+.list-vacancy .headVacancy .edit,
 .list-vacancy .headVacancy .action{	
 	background:url(../images/bg-header.jpg) no-repeat top right;
 }
+
+.list-vacancy .checkbox,
 .list-vacancy .company,
 .list-vacancy .job_title,
 .list-vacancy .salary,
@@ -772,113 +776,55 @@ color:red;
 .list-vacancy .priority,
 .list-vacancy .status,
 .list-vacancy .function,
+.list-vacancy .edit,
 .list-vacancy .action{
-	padding:2px 1% 2px;
+	padding:7px 1% 2px;
 	float:left;	
 }
 
-.list-vacancy .headVacancy .company
+.list-vacancy .checkbox{
+	padding:6px 1%;
+	width:1%;
+}
+.list-vacancy .company
 {
 	width:15%;	
-	line-height:25px;
 }
-.list-vacancy .headVacancy .job_title
+.list-vacancy .job_title
 {
 	width:10%;	
-	line-height:25px;
 }
-.list-vacancy .headVacancy .salary
+.list-vacancy .salary
+{
+	width:10%;	
+}
+.list-vacancy .work_level
 {
 	width:11%;	
-	line-height:25px;
 }
-.list-vacancy .headVacancy .location
+.list-vacancy .posted
 {
 	width:10%;	
-	line-height:25px;
 }
-.list-vacancy .headVacancy .function
+.list-vacancy .priority
 {
 	width:10%;	
-	line-height:25px;
 }
-.list-vacancy .headVacancy .work_level
-{
-	width:11%;	
-	line-height:25px;
+.list-vacancy  .edit{
+	width:3%;
 }
-.list-vacancy .headVacancy .posted
-{
-	width:10%;	
-	line-height:25px;
-}
-.list-vacancy .headVacancy .priority
-{
-	width:10%;	
-	line-height:25px;
-}
-.list-vacancy .headVacancy .action{
+.list-vacancy .action{
 	background:none !important;
-	line-height:25px;
 }
 .list-vacancy .headVacancy h4{
 	text-transform:uppercase;
 	color:#fff;	
-	line-height:25px;
 }
 
-.list-vacancy .contentVacancy h4 a{
+.list-vacancy .info-content h4 a{
 	text-transform:uppercase;
 	color:#8AB036;	
 }
-
-.list-vacancy .contentVacancy .job_title
-{
-	width:10%;
-	line-height:25px;
-}
-.list-vacancy .contentVacancy .company
-{
-	width:15%;
-	line-height:25px;
-}
-
-.list-vacancy .contentVacancy .salary
-{
-	width:11%;	
-	line-height:25px;
-}
-
-.list-vacancy .contentVacancy .location
-{
-	width:10%;	
-	line-height:25px;
-}
-.list-vacancy .contentVacancy .function
-{
-	width:10%;	
-	line-height:25px;
-}
-.list-vacancy .contentVacancy .work_level
-{
-	width:11%;	
-	line-height:25px;
-}
-.list-vacancy .contentVacancy .posted
-{
-	width:10%;	
-	line-height:25px;
-}
-.list-vacancy .contentVacancy .priority
-{
-	width:10%;	
-	line-height:25px;
-}
-.list-vacancy .contentVacancy .action{
-	background:none !important;
-	line-height:25px;
-}
-
 
 .comboxtemplate_n {
 	float: left;

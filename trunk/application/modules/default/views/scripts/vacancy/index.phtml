@@ -16,6 +16,7 @@
 <div id="box">   
     <div class="list-vacancy clearfix" >
         <div class="headVacancy">
+			<div class="checkbox">&nbsp;</div>
             <div class="company">
                 <h4>Company</h4>
             </div>
@@ -26,22 +27,28 @@
                 <h4>Work Level</h4>
             </div>
             <div class="salary">
-                <h4>Min Salary</h4>
-            </div>
-            <div class="salary">
-                <h4>Max Salary</h4>
+                <h4>Salary</h4>
             </div>
             <div class="posted">
-            	<h4>Posted</h4>
-            </div>                    
+            	<h4>Date</h4>
+            </div> 
+			<div class="edit">
+                <h4>Edit</h4>
+            </div>			
             <div class="action">
                 <h4>Action</h4>
             </div>
         </div>
-        <div class="contentVacancy">
+        <div class="info-content">
         <?php 
-			foreach ($this->paginator as $rs) {
+		$userMapper = new Default_Model_User();
+		foreach ($this->paginator as $rs) {
+			$consultantCreated = $userMapper->getConsultantName($rs['created_consultant_id']);
+			$consultantUpdated = $userMapper->getConsultantName($rs['updated_consultant_id']);
 		?>
+			<div class="checkbox">
+            	<input type="checkbox" name="vacancy_chk[]" value="<?php echo $rs['vacancy_id'];?>">
+            </div>
             <div class="company">
             	<a href="#view_vacancy" class="view_vacancy" id="<?php echo $rs['vacancy_id'] ?>"><strong><?php echo $rs['company_name'] ;?> </strong></a>
             </div>
@@ -52,16 +59,22 @@
                <?php echo $rs['work_level'] ?>
             </div>
             <div class="salary">
-            	<?php echo $rs['min_salary'] ?>
-            </div>
-             <div class="salary">
-            	<?php echo $rs['max_salary'] ?>
+				<?php if($rs['min_salary']) echo '$'.$rs['min_salary']; ?><?php if($rs['max_salary']) echo ' - '.'$'.$rs['max_salary']; ?></p>
             </div>
             <div class="posted">
-            	<?php echo date("d-m-Y",strtotime($rs['created_date']));?>
+            	Post: <?php echo date("d M Y",strtotime($rs['created_date']));?><br />
+				<p style="color:#535353">
+					Update: <?php echo date("d M Y",strtotime($rs['updated_date']));?><br />
+					<?php if($consultantUpdated['username']) ?>Updated By: <?php echo $consultantUpdated['username']; ?><br />
+					Created By: <?php echo $consultantCreated['username']; ?><br />
+				</p>
             </div>
-            <div class="action">
+            <div class="edit">
             	<a href="/default/vacancy/add-vacancy/vacancy_id/<?php echo $rs['vacancy_id'];?>">Edit</a>
+            </div>
+			<div class="action">
+            	<a href="#comment" class="addcomment" id="<?php echo $rs['vacancy_id']?>">Add Comment</a> &nbsp; &nbsp;
+				<a href="#allcomment"  class="allcomment" id="<?php echo $rs['vacancy_id']?>">View all</a>
             </div>
             <?php }?>
         </div>
@@ -75,6 +88,8 @@
 </div>
 <?php endif;?>
 <div id="view_vacancy" style="width:700px;height: 350px; overflow-y:scroll; display: none;">&nbsp;</div>
+<?php echo $this->partial ( '/vacancy/comment.phtml' )?> 
+<div id="allcomment" style="width:500px;height:200px; overflow-y:scroll; display: none;">&nbsp;</div>
 <script language="javascript">
 $(document).ready(function() {
      //Begin View detail candidate
@@ -95,5 +110,52 @@ $(document).ready(function() {
          });
      });
      //End View detail candidate
+});
+
+$(document).ready(function() {
+    //Begin Comment for resume
+    $(".addcomment").fancybox();
+    $(".addcomment").click(function(){
+        $('#contentcomment').val(''); 
+        $('input[name=vacancy_id]').val($(this).attr('id'));
+    });
+
+    $("#insertcomment").click(function(){
+        checkLogin();
+        if(!$('#contentcomment').val()) {
+            $('#msgcomment').html('Content is not null'); 
+            return;
+        }
+        var vacancy_id = $('input[name=vacancy_id]').val();
+        $.ajax({
+            url: '/vacancy/save-comment',
+            type: "POST",
+            data: { 
+            	vacancy_id: vacancy_id, 
+                consultant_id: $('input[name=consultant_id]').val(), 
+                content: $('#contentcomment').val()
+            },
+            success: function(result) {
+                $('#viewcomment' + vacancy_id).html(result);
+                $.fancybox.close();
+            }
+        });
+    });
+    
+    $(".allcomment").fancybox();
+    $(".allcomment").click(function(){
+        checkLogin();
+        var company_id = $(this).attr('id');
+        $.ajax({
+            url: '/company/all-comment',
+            type: "POST",
+            data: { 
+            	company_id: company_id, 
+            },
+            success: function(result) {
+                $('#allcomment').html(result);
+            }
+        });
+    });
 });
 </script>

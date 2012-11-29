@@ -72,8 +72,9 @@ class VacancyController extends Zend_Controller_Action
 	
 	public function saveVacancyAction()
 	{
+		$aNamespace = new Zend_Session_Namespace ( 'zs_User' );
 		 $post = $this->getRequest()->getPost();
-//print_r($post);	 exit;
+
 		 $vacancy = new Default_Model_Vacancy();
 
 		 $vacancy->setVacancyId($post['vacancy_id']);
@@ -81,17 +82,17 @@ class VacancyController extends Zend_Controller_Action
 		 $vacancy->setJobTitle($post['job_title']);
 		 $vacancy->setMinSalary(intval($post['min_salary']));
 		 $vacancy->setMaxSalary(intval($post['max_salary']));
-		 //$vacancy->setPriority($post['priority']);
 		 $vacancy->setWorkLevel($post['work_level']);
 		 $vacancy->setFunction($post['function']);
 		 $vacancy->setLocation($post['location']);
 		 $vacancy->setDescReqs($post['desc_reqs']);
 		 $vacancy->setCreatedDate(date('Y-m-d'));
 		 $vacancy->setUpdatedDate(date('Y-m-d'));
+		 $vacancy->setCreatedConsultantId($aNamespace->consultant_id);
+		 $vacancy->setUpdatedConsultantId($aNamespace->consultant_id);
 		 
-		 $vacancy_md = new Default_Model_VacancyMapper();
-		 
-		 $vacancy_md->save($vacancy);
+		 $vacancyMapper = new Default_Model_VacancyMapper();
+		 $vacancyMapper->save($vacancy);
 		 
 		 $this->_redirect('/vacancy');
 	}

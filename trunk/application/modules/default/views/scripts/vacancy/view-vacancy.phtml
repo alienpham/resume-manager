@@ -1,4 +1,9 @@
 <div align="center" style="color:#1B7CBD;font-size:16px"><b>VACANCY DETAIL</b></div>
+<?php
+$userMapper = new Default_Model_User();
+$consultantCreated = $userMapper->getConsultantName($this->vacancy->getCreatedConsultantId());
+$consultantUpdated = $userMapper->getConsultantName($this->vacancy->getUpdatedConsultantId());
+?>
 <table cellpadding="5" cellspacing="6">
 	<tr>
 		<td style="width:115px">Company Name</td>
@@ -31,6 +36,14 @@
     <tr>
         <td>Desc &amp; Reqs</td>
         <td><?php echo $this->vacancy->getDescReqs();?></td>
+    </tr>
+	 <tr>
+        <td>Consultant Created</td>
+        <td><?php echo $consultantCreated['full_name'];?></td>
+    </tr>
+    <tr>
+        <td>Consultant Updated</td>
+        <td><?php echo $consultantUpdated['full_name'];?></td>
     </tr>
     <tr>
         <td>Created Date</td>

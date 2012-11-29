@@ -38,12 +38,16 @@ class Default_Model_VacancyMapper {
         	'location' 			=> $vacancy->getLocation(), 
         	'desc_reqs'			=> $vacancy->getDescReqs(),
         	'created_date' 		=> $vacancy->getCreatedDate(), 
-			'updated_date' 		=> $vacancy->getUpdatedDate()
+			'updated_date' 		=> $vacancy->getUpdatedDate(),
+			'created_consultant_id' => $vacancy->getCreatedConsultantId(),
+			'updated_consultant_id' => $vacancy->getUpdatedConsultantId()
 		);
 		
     	if (null == ($id = $vacancy->getVacancyId())) {
             return $this->getDbTable()->insert($data);
         } else {
+			unset($data['created_date']);
+			unset($data['created_consultant_id']);
         	$this->getDbTable()->update($data, array('vacancy_id = ?' => $id));
             return $id;
         }
@@ -69,6 +73,8 @@ class Default_Model_VacancyMapper {
             $vacancy->setDescReqs($row['desc_reqs']);
             $vacancy->setCreatedDate($row['created_date']);
             $vacancy->setUpdatedDate($row['updated_date']);
+			$vacancy->setCreatedConsultantId($row['created_consultant_id']);
+			$vacancy->setUpdatedConsultantId($row['updated_consultant_id']);
     }
 
 
@@ -91,6 +97,8 @@ class Default_Model_VacancyMapper {
             $entry->setDescReqs($row['desc_reqs']);
             $entry->setCreatedDate($row['created_date']);
             $entry->setUpdatedDate($row['updated_date']);
+			$entry->setCreatedConsultantId($row['created_consultant_id']);
+			$entry->setUpdatedConsultantId($row['updated_consultant_id']);
             $entries[] = $entry;
         }
         return $entries;
@@ -101,6 +109,7 @@ class Default_Model_VacancyMapper {
     	$db = $this->getDbTable()->getAdapter();
     	$sql = "SELECT * FROM vacancy ";
     	if($where!='') $sql .= "WHERE " . $where;
+
     	$rows =  $db->fetchAll($sql);
     	return $rows;
     }
