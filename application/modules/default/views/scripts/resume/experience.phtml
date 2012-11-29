@@ -42,8 +42,9 @@
 						if(in_array($function['function_id'], $this->experFunction, true)) $checked = "checked";
 						else $checked = '';
 					?>
+						<?php if($function['parent_function_id'] != 0):?>
 						<li style="float:none;display:block;"><input type="checkbox" name="option[]" value="<?php echo $function['function_id']?>" <?php echo $checked;?>/> <?php echo $function['name']?></li>
-							
+						<?php endif;?>	
 					<?php 
 					$i++;
 					endforeach;?>
