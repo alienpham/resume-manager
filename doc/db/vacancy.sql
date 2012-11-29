@@ -47,12 +47,6 @@ CREATE TABLE IF NOT EXISTS `vacancy` (
 -- Dumping data for table `vacancy`
 --
 
-INSERT INTO `vacancy` (`vacancy_id`, `company_name`, `job_title`, `min_salary`, `max_salary`, `priority`, `work_level`, `function`, `location`, `desc_reqs`, `created_date`, `updated_date`) VALUES
-(2, '123', 'developer', 0.00, 0.00, '', '', '', NULL, '', '2012-11-25 00:00:00', '2012-11-25 00:00:00');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
 ALTER TABLE  `vacancy` CHANGE  `priority`  `priority` CHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+
+ALTER TABLE `vacancy` ADD `consultant_id` INT NOT NULL AFTER `vacancy_id` 

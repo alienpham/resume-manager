@@ -2,6 +2,7 @@
 class Default_Model_Vacancy
 {
 	protected $_vacancy_id;
+	protected $_consultant_id;
 	protected $_company_name;
 	protected $_job_title;
 	protected $_min_salary;
@@ -13,6 +14,8 @@ class Default_Model_Vacancy
 	protected $_desc_reqs;
 	protected $_created_date;
 	protected $_updated_date;
+	protected $_created_consultant_id;
+	protected $_updated_consultant_id;
     
 	public function __construct(array $options = null)
     {
@@ -56,6 +59,20 @@ class Default_Model_Vacancy
 	}
 	public function setVacancyId($id) {
 		$this->_vacancy_id = $id;
+	}
+	
+	public function getCreatedConsultantId() {
+		return $this->_created_consultant_id;
+	}
+	public function setCreatedConsultantId($id) {
+		$this->_created_consultant_id = $id;
+	}
+	
+	public function getUpdatedConsultantId() {
+		return $this->_updated_consultant_id;
+	}
+	public function setUpdatedConsultantId($id) {
+		$this->_updated_consultant_id = $id;
 	}
 	
 	public function getCompanyName() {
