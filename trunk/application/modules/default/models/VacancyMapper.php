@@ -113,5 +113,38 @@ class Default_Model_VacancyMapper {
     	$rows =  $db->fetchAll($sql);
     	return $rows;
     }
-
+	
+	public function deleteListVacancy($listId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'DELETE FROM vacancy WHERE vacancy_id in ('. $listId .')';
+        $db->query($sql);
+    }
+	
+	public function getComments($vacancyId, $limit=null)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT cc.*, c.full_name, c.username FROM vacancy_comment AS cc ";
+        $sql .= "INNER JOIN consultant AS c ON c.consultant_id = cc.consultant_id";
+        $sql .= " WHERE cc.vacancy_id = " . $vacancyId;
+        $sql .= " ORDER BY cc.id DESC ";
+		if($limit) {
+		    $sql .= "LIMIT 1";
+		    return $db->fetchRow($sql);
+		} 
+		
+        return $db->fetchAll($sql);
+    }
+    
+    public function insertComment($data)
+    {
+        $aNamespace = new Zend_Session_Namespace ( 'zs_User' );
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "INSERT INTO vacancy_comment(vacancy_id, consultant_id, content) VALUES (";
+		$sql .= $data['vacancy_id'] . ",";
+		$sql .= $aNamespace->consultant_id . ",";
+		$sql .= "'" . @$data['content'] . "');";
+		
+        $db->query($sql);
+    }
 }

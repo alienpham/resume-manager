@@ -93,7 +93,7 @@ class Default_Model_CompanyMapper {
     {
     	$db = $this->getDbTable()->getAdapter();
     	$sql = "SELECT c.*, cp.contact_person_id, cp.title, cp.job_title, cp.full_name, cp.mobile, cp.email as ct_email FROM company as c ";
-		$sql .= "INNER JOIN contact_person as cp ON cp.company_id = c.company_id ";
+		$sql .= "LEFT JOIN contact_person as cp ON cp.company_id = c.company_id ";
     	if($where!='') $sql .= 'WHERE ' . $where;
     	$sql .= ' ' . $order;
 //echo $sql;exit;
@@ -105,12 +105,19 @@ class Default_Model_CompanyMapper {
     {
     	$db = $this->getDbTable()->getAdapter();
     	$sql = "SELECT c.*, cp.contact_person_id, cp.title, cp.job_title, cp.full_name, cp.mobile, cp.email as ct_email FROM company as c ";
-		$sql .= "INNER JOIN contact_person as cp ON cp.company_id = c.company_id ";
+		$sql .= "LEFT JOIN contact_person as cp ON cp.company_id = c.company_id ";
 		$sql .= "WHERE c.company_id =" . $id;
     	$rows = $db->fetchRow($sql);
     	return $rows;
     }
     
+	public function deleteListCompany($listId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'DELETE FROM company WHERE company_id in ('. $listId .')';
+        $db->query($sql);
+    }
+	
     public function getComments($companyId, $limit=null)
     {
         $db = $this->getDbTable()->getAdapter();

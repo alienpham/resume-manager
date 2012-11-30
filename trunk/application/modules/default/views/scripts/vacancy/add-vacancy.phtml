@@ -1,8 +1,7 @@
 <?php echo $this->headScript();?>
 <?php echo $this->headLink();?>
-
 <div class="from-add-01">
-<form name="frmAddVacancy" action="/default/vacancy/save-vacancy" method="post" onclick="return checkValid()">
+<form name="frmAddVacancy" action="/vacancy/save-vacancy" method="post" onsubmit="return checkValid()">
 <input type="hidden" name="vacancy_id" id="vacancy_id" value="<?php echo $this->vacancy->getVacancyId();?>"> 
 	<h2 style="color:#848484;margin-left:20px;"><?php echo $this->title; ?></h2>
 		<ul>
@@ -51,15 +50,16 @@
 </form>
 </div>
 <script>
-	function checkValid()
+function checkValid()
+{
+	var company_name = $('#company_name').val();
+	if(company_name == '')
 	{
-		var company_name = $('#company_name').val();
-		if(company_name == '')
-		{
-			$('.error').html('Please input into field required (*)');
-			return false
-		}
+		$('.error').html('Please input into field required (*)');
+		return false
 	}
-
+	
+	return true;
+}
 </script>
 
