@@ -96,4 +96,64 @@ class VacancyController extends Zend_Controller_Action
 		 
 		 $this->_redirect('/vacancy');
 	}
+	
+	public function deleteVacancyAction()
+	{
+	    $vacancyMapper = new Default_Model_VacancyMapper();
+	    $listid = $this->getRequest()->getParam('listid', 0);
+        $vacancyMapper->deleteListVacancy($listid);
+	    
+	    $listVacancy = $vacancyMapper->getListVacancy();	
+		$paginator = Zend_Paginator::factory($listVacancy);
+		$paginator->setItemCountPerPage(20);
+		$paginator->setCurrentPageNumber(1);
+	    
+		$this->view->paginator = $paginator;
+        $this->_helper->layout->disableLayout();
+	    $this->render('list-vacancy');
+	}
+	
+	public function saveCommentAction()
+	{
+		$post = $this->getRequest()->getPost();
+
+		$vacancyMapper = new Default_Model_VacancyMapper();
+		$vacancyMapper->insertComment($post);
+
+		$comment = $vacancyMapper->getComments($post['vacancy_id'], 1);
+		$date = new DateTime($comment['created_date']);
+		$createdComment = $date->format('M-d');
+
+		//$html = '<p class="update-date">Comment '. $createdComment .'</p> <span>by</span> <span class="user-name">'. $comment['username'] . '</span>';
+		$html = '<p>- ' . substr($comment['content'], 0, 90) . '</p>';
+		//$html .= '<a href="#allcomment" class="allcomment" id="'.  $post['company_id'] .'" onClick="allComment('.  $post['company_id'] .')">view all</a>';
+		echo $html;
+		exit;
+	}
+
+	public function allCommentAction()
+	{
+	    $post = $this->getRequest()->getPost();
+
+		$vacancyMapper = new Default_Model_VacancyMapper();
+		$comments = $vacancyMapper->getComments($post['vacancy_id']);
+
+		$html = '';
+		$html .= '<div style="color:#1B7CBD;background-color:#CCC;padding:5px 0px"><b>ALL COMMENT</b></div><br />';
+		foreach($comments as $comment) {
+
+			$date = new DateTime($comment['created_date']);
+			$createdComment = $date->format('M-d');
+
+			$html .= '<div>';
+			$html .= substr($comment['content'], 0, 90);
+			$html .= '<div align="right"><span>Comment '. $createdComment .'</span> ';
+			$html .= '<span style="color: #70B4E2;">by ' . $comment['username'] . '</span></div>';
+			$html .= '</div>';
+			$html .= '<div style="border-top: 1px solid #BCBCBC; margin-top:10px">&nbsp;</div>';
+		}
+
+		echo $html;
+		exit;
+	}
 }

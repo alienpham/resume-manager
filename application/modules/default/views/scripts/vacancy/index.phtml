@@ -11,74 +11,11 @@
 	<a href="/default/vacancy/add-vacancy" style="text-decoration:none;">
 		<input class="button01" type="button" value="Add Vacancy" />
 	</a>
+	<input class="button01 delete" type="button" value="Delete" />
 <br /><br />
 
 <div id="box">   
-    <div class="list-vacancy clearfix" >
-        <div class="headVacancy">
-			<div class="checkbox">&nbsp;</div>
-            <div class="company">
-                <h4>Company</h4>
-            </div>
-            <div class="job_title" >
-                <h4>Job title</h4>
-            </div>
-            <div class="work_level">
-                <h4>Work Level</h4>
-            </div>
-            <div class="salary">
-                <h4>Salary</h4>
-            </div>
-            <div class="posted">
-            	<h4>Date</h4>
-            </div> 
-			<div class="edit">
-                <h4>Edit</h4>
-            </div>			
-            <div class="action">
-                <h4>Action</h4>
-            </div>
-        </div>
-        <div class="info-content">
-        <?php 
-		$userMapper = new Default_Model_User();
-		foreach ($this->paginator as $rs) {
-			$consultantCreated = $userMapper->getConsultantName($rs['created_consultant_id']);
-			$consultantUpdated = $userMapper->getConsultantName($rs['updated_consultant_id']);
-		?>
-			<div class="checkbox">
-            	<input type="checkbox" name="vacancy_chk[]" value="<?php echo $rs['vacancy_id'];?>">
-            </div>
-            <div class="company">
-            	<a href="#view_vacancy" class="view_vacancy" id="<?php echo $rs['vacancy_id'] ?>"><strong><?php echo $rs['company_name'] ;?> </strong></a>
-            </div>
-            <div class="job_title">
-            	<?php echo $rs['job_title'];?>
-            </div>
-            <div class="work_level">
-               <?php echo $rs['work_level'] ?>
-            </div>
-            <div class="salary">
-				<?php if($rs['min_salary']) echo '$'.$rs['min_salary']; ?><?php if($rs['max_salary']) echo ' - '.'$'.$rs['max_salary']; ?></p>
-            </div>
-            <div class="posted">
-            	Post: <?php echo date("d M Y",strtotime($rs['created_date']));?><br />
-				<p style="color:#535353">
-					Update: <?php echo date("d M Y",strtotime($rs['updated_date']));?><br />
-					<?php if($consultantUpdated['username']) ?>Updated By: <?php echo $consultantUpdated['username']; ?><br />
-					Created By: <?php echo $consultantCreated['username']; ?><br />
-				</p>
-            </div>
-            <div class="edit">
-            	<a href="/default/vacancy/add-vacancy/vacancy_id/<?php echo $rs['vacancy_id'];?>">Edit</a>
-            </div>
-			<div class="action">
-            	<a href="#comment" class="addcomment" id="<?php echo $rs['vacancy_id']?>">Add Comment</a> &nbsp; &nbsp;
-				<a href="#allcomment"  class="allcomment" id="<?php echo $rs['vacancy_id']?>">View all</a>
-            </div>
-            <?php }?>
-        </div>
-    </div>
+    <?php echo $this->partial('vacancy/list-vacancy.phtml', array('paginator' => $this->paginator)); ?>
 </div>
 <?php if(count($this->paginator)) :?>
 <div style="clear:both">&nbsp;</div>
@@ -145,17 +82,44 @@ $(document).ready(function() {
     $(".allcomment").fancybox();
     $(".allcomment").click(function(){
         checkLogin();
-        var company_id = $(this).attr('id');
+        var vacancy_id = $(this).attr('id');
         $.ajax({
-            url: '/company/all-comment',
+            url: '/vacancy/all-comment',
             type: "POST",
             data: { 
-            	company_id: company_id, 
+            	vacancy_id: vacancy_id, 
             },
             success: function(result) {
                 $('#allcomment').html(result);
             }
         });
     });
+	
+	$('.delete').click(function(){
+        if($('input[name="vacancy_chk[]"]').is(':checked')) {
+            var answer = confirm('Are you sure you want to delete');
+            if (answer) {
+            	var listVacancy = '';
+                var checkboxes = $('input[name="vacancy_chk[]"]:checkbox:checked');
+                checkboxes.each(function() {
+                	if(listVacancy) listVacancy = listVacancy + ',' + $(this).val();
+                	else listVacancy = $(this).val();
+                });
+            	$.ajax({
+              	  	url: '/vacancy/delete-vacancy',
+                	type: "POST",
+        			data: { 
+                       listid: listVacancy
+                    },
+              	  	success: function(result) {
+                  	  	$('#box').html(result);
+              	  	}
+              	});
+            }
+        } else {
+            alert('Please select vacancy to delete');
+            return false;
+        }
+  	});  
 });
 </script>

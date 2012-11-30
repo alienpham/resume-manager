@@ -158,8 +158,21 @@ class CompanyController extends Zend_Controller_Action
 
 		echo $html;
 		exit;
-		//$this->_helper->layout->disableLayout();
-		//$this->view->html = $html;
-		//$this->render('comment-all');
+	}
+	
+	public function deleteCompanyAction()
+	{
+	    $companyMapper = new Default_Model_CompanyMapper();
+	    $listid = $this->getRequest()->getParam('listid', 0);
+        $companyMapper->deleteListCompany($listid);
+	    
+		$rows = $companyMapper->getListCompany();	
+		$paginator = Zend_Paginator::factory($rows);
+		$paginator->setItemCountPerPage(20);
+		$paginator->setCurrentPageNumber(1);
+
+		$this->view->paginator = $paginator;
+        $this->_helper->layout->disableLayout();
+	    $this->render('list-company');
 	}
 }
