@@ -39,8 +39,12 @@
 		<div class="posted">
 			Post: <?php echo $createdDate;?><br />
 			<p style="color:#535353">
-				<?php if($updatedDate != $createdDate) ?>Update: <?php echo $updatedDate;?><br />
-				<?php if($consultantUpdated['username'] != $consultantCreated['username']) ?>Updated By: <?php echo $consultantUpdated['username']; ?><br />
+				<?php if($updatedDate != $createdDate): ?>
+					Update: <?php echo $updatedDate;?><br />
+				<?php endif;?>
+				<?php if($consultantUpdated['username'] != $consultantCreated['username']): ?>
+					Updated By: <?php echo $consultantUpdated['username']; ?><br />
+				<?php endif;?>
 				Created By: <?php echo $consultantCreated['username']; ?><br />
 			</p>
 		</div>
