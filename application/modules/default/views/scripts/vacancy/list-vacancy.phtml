@@ -1,0 +1,62 @@
+<div class="list-vacancy clearfix" >
+	<div class="headVacancy">
+		<div class="checkbox">&nbsp;</div>
+		<div class="company"><h4>Company</h4></div>
+		<div class="job_title" ><h4>Job title</h4></div>
+		<div class="work_level"><h4>Work Level</h4></div>
+		<div class="salary"><h4>Salary</h4></div>
+		<div class="posted"><h4>Date</h4></div> 
+		<div class="edit"><h4>Edit</h4></div>			
+		<div class="action"><h4>Action</h4></div>
+	</div>
+	
+	<?php 
+	$userMapper = new Default_Model_User();
+	$vacancyMapper = new Default_Model_VacancyMapper();
+	foreach ($this->paginator as $rs) {
+		$consultantCreated = $userMapper->getConsultantName($rs['created_consultant_id']);
+		$consultantUpdated = $userMapper->getConsultantName($rs['updated_consultant_id']);
+		$updatedDate = date("d M Y",strtotime($rs['updated_date']));
+		$createdDate = date("d M Y",strtotime($rs['created_date']));
+		$comment = $vacancyMapper->getComments($rs['vacancy_id'], 1);
+	?>
+	<div class="info-content">
+		<div class="checkbox">
+			<input type="checkbox" name="vacancy_chk[]" value="<?php echo $rs['vacancy_id'];?>">
+		</div>
+		<div class="company">
+			<a href="#view_vacancy" class="view_vacancy" id="<?php echo $rs['vacancy_id'] ?>"><strong><?php echo $rs['company_name'] ;?> </strong></a>
+		</div>
+		<div class="job_title">
+			<?php echo $rs['job_title'];?>
+		</div>
+		<div class="work_level">
+		   <?php echo $rs['work_level'] ?>
+		</div>
+		<div class="salary">
+			<?php if($rs['min_salary']) echo '$'.$rs['min_salary']; ?><?php if($rs['max_salary']) echo ' - '.'$'.$rs['max_salary']; ?></p>
+		</div>
+		<div class="posted">
+			Post: <?php echo $createdDate;?><br />
+			<p style="color:#535353">
+				<?php if($updatedDate != $createdDate) ?>Update: <?php echo $updatedDate;?><br />
+				<?php if($consultantUpdated['username'] != $consultantCreated['username']) ?>Updated By: <?php echo $consultantUpdated['username']; ?><br />
+				Created By: <?php echo $consultantCreated['username']; ?><br />
+			</p>
+		</div>
+		<div class="edit">
+			<a href="/vacancy/add-vacancy/vacancy_id/<?php echo $rs['vacancy_id'];?>">Edit</a>
+		</div>
+		<div class="action">
+			<a href="#comment" class="addcomment" id="<?php echo $rs['vacancy_id']?>">Add Comment</a> &nbsp; &nbsp;
+			<a href="#allcomment"  class="allcomment" id="<?php echo $rs['vacancy_id']?>">View all</a>
+			<div class="info-comment" id="viewcomment<?php echo $rs['vacancy_id']?>">
+				<?php if($comment):?>
+				<p>- <?php echo substr($comment['content'], 0, 90);?></p>
+				<?php endif;?>
+			</div>
+		</div>
+	</div>
+	<?php }?>
+	
+</div>
