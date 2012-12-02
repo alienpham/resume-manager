@@ -26,6 +26,12 @@ class Default_Model_ResumeMapper {
         $db->query($sql);
 	}
 	
+    public function updateResumDate($resumeId) {
+		$db = $this->getDbTable()->getAdapter();
+        $sql = 'UPDATE resume SET updated_date = NOW() WHERE resume_id = '. $resumeId;
+        $db->query($sql);
+	}
+	
 	public function save (Default_Model_Resume $resume)
     {
         $data = array(

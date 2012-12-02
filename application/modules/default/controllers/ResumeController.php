@@ -181,6 +181,10 @@ class ResumeController extends Zend_Controller_Action
 
 		$educationMapper = new Default_Model_EducationMapper();
 		$educationId = $educationMapper->save($educationRowset);
+		if($educationId) {
+		    $resumeMapper = new Default_Model_ResumeMapper();
+            $resumeMapper->updateResumDate($post['resume_id']);
+		}
 
 		if($post['button'] == 'Next') $this->_redirect('resume/experience/id/' . $post['resume_id']);
 		else $this->_redirect('/resume/education/id/' . $post['resume_id']);
@@ -246,6 +250,11 @@ class ResumeController extends Zend_Controller_Action
 		$experienceMapper = new Default_Model_ExperienceMapper();
 		$experienceId = $experienceMapper->save($experienceRowset);
 
+	    if($experienceId) {
+		    $resumeMapper = new Default_Model_ResumeMapper();
+            $resumeMapper->updateResumDate($post['resume_id']);
+		}
+		
 		$experienceMapper->delExperFunction($experienceId);
 		foreach($post['option'] as $functionId ) {
 			$experienceMapper->saveExperFunction($experienceId, $functionId);
@@ -321,6 +330,11 @@ class ResumeController extends Zend_Controller_Action
 		$expectationMapper = new Default_Model_ExpectationMapper();
 		$expectationId = $expectationMapper->save($expectation);
 
+	    if($expectationId) {
+		    $resumeMapper = new Default_Model_ResumeMapper();
+            $resumeMapper->updateResumDate($post['resume_id']);
+		}
+		
 		$expectationMapper->delExProvince($expectationId);
 		foreach($post['option'] as $provinceId ) {
 			$expectationMapper->saveExProvince($expectationId, $provinceId);
@@ -753,7 +767,7 @@ class ResumeController extends Zend_Controller_Action
 			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
 			$table .= '</w:tr>';
 		}
-		
+/*
 		if(count($note)) {
 			$table .= '<w:tr>'; //new xml table row
 			$table .= '<w:tc><w:p><w:r><w:t>'; //start cell
@@ -764,10 +778,12 @@ class ResumeController extends Zend_Controller_Action
 			$table .= '</w:t></w:r></w:p></w:tc>'; //close cell
 			$table .= '</w:tr>';
 		}
-		
+*/
 		$table .= '</w:tbl>'; //close xml table
 		$document->setValue('expection', $table);
 
+		$document->setValue('note', $note);
+		
 		//rename and save file doc
 		$resumeName = str_replace(' ', '', $resumeRowSet->getFullName()) .'.docx';
 		$document->save('candidate/'. $resumeName);
@@ -775,7 +791,7 @@ class ResumeController extends Zend_Controller_Action
 		//header download file word
 		header("Cache-Control: public");
 		header("Content-Description: File Transfer");
-		header("Content-Disposition: attachment; filename=$resumeName");
+		header("Content-Disposition: attachment; filename=Greyfinders_$resumeName");
 		header("Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document");
 		header("Content-Transfer-Encoding: binary");
 

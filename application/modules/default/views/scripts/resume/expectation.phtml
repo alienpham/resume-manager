@@ -48,9 +48,9 @@
 			<div class="actions">
 				<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
 				<input type="hidden" name="expecid" value="<?php echo $this->expectationRowSet->getResExpectationId();?>" />
-				<a href="/resume/experience/id/<?php echo $this->resumeId; ?>"><input type="button" class="button02" name="button" value="Back" /></a>
+				<a style="text-decoration:none;" href="/resume/experience/id/<?php echo $this->resumeId; ?>"><input type="button" class="button02" name="button" value="Back" /></a>
 				<input type="submit" class="button01" name="button" value="Complete" />
-				<a href="#detail_resume" class="detail_resume" id="<?php echo $this->resumeId;?>">
+				<a href="#detail_resume" style="text-decoration:none;"  class="detail_resume" id="<?php echo $this->resumeId;?>">
                     <input type="button" class="button01" name="button" value="Review" />
                 </a>
 			</div>
