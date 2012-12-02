@@ -46,6 +46,13 @@ class Default_Model_User {
         return $db->fetchRow($sql);
     }
     
+    public function checkExists($username, $email)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = "SELECT * FROM consultant WHERE username = '". $username ."' OR email = '" .$email. "'";
+        return $db->query($sql)->rowCount();
+    }
+    
  	public function saveUser ($data)
     {
         $db = $this->getDbTable()->getAdapter();
@@ -55,7 +62,7 @@ class Default_Model_User {
 			$sql .= "'" .$data['title'] . "',";
 			$sql .= "'" .$data['full_name'] . "',";
 			$sql .= "'" .$data['job_title'] . "',";
-			$sql .= "'" .$data['tel'] . "',";
+			$sql .= "'" .$data['phone'] . "',";
 			$sql .= "'" .$data['username'] . "',";
 			$sql .= "'" .$data['email'] . "',";
 			$sql .= "'" .md5($data['password']) . "',";
@@ -73,7 +80,7 @@ class Default_Model_User {
         $sql .= "full_name = '" .$data['full_name'] ."',";
         $sql .= "username = '" .$data['username'] ."',";
         $sql .= "job_title = '" .$data['job_title'] ."',";
-        $sql .= "phone = '" .$data['tel'] ."',";
+        $sql .= "phone = '" .$data['phone'] ."',";
         $sql .= "email = '" .$data['email'] ."' ";
         $sql .= "WHERE consultant_id = " .$id;
     	return $db->query($sql);

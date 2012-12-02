@@ -54,10 +54,18 @@ class ProfileController extends Zend_Controller_Action {
 
 		if($id != ''){
 		    $result = $user->editUser($data, $id);
+		    $this->_redirect('/profile');
 		} else {
-		    $result = $user->saveUser($data);
+		    if($user->checkExists($data['username'], $data['email'])) {
+    			$this->view->msg = 'Username has exists';
+    			$data['consultant_id'] = $data['id'];
+    			$this->view->userInfo = $data;
+    			$this->render('add-user');
+		    } else {
+		        $result = $user->saveUser($data);
+		        $this->_redirect('/profile');
+		    }
 		}
-		$this->_redirect('/profile');		
 	}
 	
 	public function deleteUserAction()

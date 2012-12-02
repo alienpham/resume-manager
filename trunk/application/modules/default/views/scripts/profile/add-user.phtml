@@ -6,7 +6,7 @@
 		<ul>
 			<li>
 			<label>&nbsp;</label>
-			<em class="error"></em>
+			<em class="error"><?php echo @$this->msg;?></em>
 			</li>
 			<li>
 				<label>Full Name:<em>*</em></label>
@@ -23,7 +23,7 @@
 			</li>
 			<li>
 				<label>Tel:</label>
-				<input type="text" id="tel" name="tel" value="<?php echo $this->userInfo['phone']; ?>">
+				<input type="text" id="phone" name="phone" value="<?php echo $this->userInfo['phone']; ?>">
 			</li>
 			<li>
 				<label>Username:<em>*</em></label>
