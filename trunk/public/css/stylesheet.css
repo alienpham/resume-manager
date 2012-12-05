@@ -592,13 +592,13 @@ color:red;
 }
 
 #userManagement .fullname {
-	width: 13%;
+	width: 14%;
 }
 
 #userManagement .email {width: 16%;}
-#userManagement .job-title {width: 12%;}
+#userManagement .job-title {width: 13%;}
 #userManagement .status {width: 4%;text-align: center;}
-#userManagement .phone {width: 7%;text-align: left;}
+#userManagement .phone {width: 8%;text-align: left;}
 #userManagement .action {width: 10%;text-align: left;}
 #userManagement .created-date {width: 8%;}
 #userManagement .modified-date {width: 10%;}

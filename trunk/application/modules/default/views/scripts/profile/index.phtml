@@ -11,9 +11,6 @@
 	<div id="box">
 	    <div class="list-company clearfix">
 	        <div class="head">
-	            <div class="checkbox">
-	                <input type="checkbox" name="" />
-	            </div>
 	            <div class="username">
 	                <h4>Username</h4>
 	            </div>
@@ -42,9 +39,6 @@
 	        <div class="info-content">
 	        <?php if($this->rows):?>
 	        <?php foreach ($this->rows as $row):?>
-	        <div class="checkbox">
-	        	<input type="checkbox" name="cid[]" value="<?php echo $row['consultant_id']?>" />
-	        </div>
 	        <div class="username">
 	        	<?php echo $row['username']?>
 	        </div>
