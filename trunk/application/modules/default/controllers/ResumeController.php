@@ -322,9 +322,9 @@ class ResumeController extends Zend_Controller_Action
 		$expectation = new Default_Model_Expectation();
 		$expectation->setResExpectationId($post['expecid']);
 		$expectation->setResumeId($post['resume_id']);
-		$expectation->setEstimatedSalaryTo(floatval($post['estimated_salary_to']));
-		$expectation->setEstimatedSalaryFrom(floatval($post['estimated_salary_from']));
-		$expectation->setCurrentSalary(floatval($post['current_salary']));
+		$expectation->setEstimatedSalaryTo(intval($post['estimated_salary_to']));
+		$expectation->setEstimatedSalaryFrom(intval($post['estimated_salary_from']));
+		$expectation->setCurrentSalary(intval($post['current_salary']));
 		$expectation->setNote(($post['note']));
 
 		$expectationMapper = new Default_Model_ExpectationMapper();
@@ -341,6 +341,14 @@ class ResumeController extends Zend_Controller_Action
 		}
 
 		if($post['button'] == 'Complete') $this->_redirect('/resume');
+		else if($post['button'] == 'Review') {
+		    $resumeRowSet = new Default_Model_Resume();
+    		$resumeMapper = new Default_Model_ResumeMapper();
+    		$resumeMapper->find($post['resume_id'], $resumeRowSet);
+    		$this->view->resume = $resumeRowSet;
+    		$this->_helper->layout->disableLayout();
+		    $this->render('detail-resume');
+		}
 		else $this->_redirect('/resume/experience/id/' . $post['resume_id']);
 		//$this->_redirect('resume/expectation/id/' . $post['resume_id']);
 	}
