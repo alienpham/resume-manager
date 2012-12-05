@@ -48,7 +48,9 @@
 	</li>
 	<li>
 		 <label></label>
-         <a href="/company" style="text-decoration:none;"><input class="button02" type="button" name="cancel" id="cancel" value="Cancel"></a> &nbsp;&nbsp;&nbsp;
+         <a href="/company" style="text-decoration:none;">
+            <input class="button02" type="button" name="cancel" id="cancel" value="Cancel">
+        </a>
          <input class="button01" type="submit" name="save" id="save" value="Save">
 	</li>
 </ul>
@@ -104,10 +106,17 @@ function checkValid()
     var check = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     if(!check.test(email))
     {
-    	$('.error').html('please enter a valid email address');
+    	$('.error').html('Email company invalid');
     	return false;
     }
-   
+
+    var ct_email = $('#ct_email').val();
+    if(!check.test(ct_email))
+    {
+    	$('.error').html('Email contact invalid');
+    	return false;
+    }
+    
     return true;
 }   
 </script>
