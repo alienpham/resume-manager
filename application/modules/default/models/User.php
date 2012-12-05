@@ -56,14 +56,13 @@ class Default_Model_User {
  	public function saveUser ($data)
     {
         $db = $this->getDbTable()->getAdapter();
-        //print_r($data);
           
 	        $sql = "INSERT INTO consultant (`title`, `full_name`, `job_title`, `phone`, `username`, `email`, `password`, `created_date`, `updated_date`) VALUES (";
 			$sql .= "'" .$data['title'] . "',";
 			$sql .= "'" .$data['full_name'] . "',";
 			$sql .= "'" .$data['job_title'] . "',";
 			$sql .= "'" .$data['phone'] . "',";
-			$sql .= "'" .$data['username'] . "',";
+			$sql .= "'" .str_replace(' ', '', $data['username']) . "',";
 			$sql .= "'" .$data['email'] . "',";
 			$sql .= "'" .md5($data['password']) . "',";
 			$sql .= "now(),";
@@ -78,10 +77,10 @@ class Default_Model_User {
     	$db = $this->getDbTable()->getAdapter();
     	$sql = "UPDATE consultant SET ";
         $sql .= "full_name = '" .$data['full_name'] ."',";
-        $sql .= "username = '" .$data['username'] ."',";
+        //$sql .= "username = '" .$data['username'] ."',";
         $sql .= "job_title = '" .$data['job_title'] ."',";
-        $sql .= "phone = '" .$data['phone'] ."',";
-        $sql .= "email = '" .$data['email'] ."' ";
+        $sql .= "phone = '" .$data['phone'] ."' ";
+        //$sql .= "email = '" .$data['email'] ."' ";
         $sql .= "WHERE consultant_id = " .$id;
     	return $db->query($sql);
     }

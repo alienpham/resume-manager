@@ -25,20 +25,31 @@
 				<label>Tel:</label>
 				<input type="text" id="phone" name="phone" value="<?php echo $this->userInfo['phone']; ?>">
 			</li>
+            <?php if( !$this->userInfo['consultant_id']): ?>
 			<li>
 				<label>Username:<em>*</em></label>
 				<input type="text" id="username" name="username" value="<?php echo $this->userInfo['username']; ?>">
 			</li>
-            <?php if( !$this->userInfo['consultant_id']): ?>
 			<li>
 				<label>Password:<em>*</em></label>
 				<input type="password" id="password" name="password">
 			</li>
-            <?php endif;?>
+            
 			<li>
 				<label>Email:</label>
 				<input type="text" id="email" name="email" value="<?php echo $this->userInfo['email']; ?>">
 			</li>
+            <?php else :?>
+            <li>
+                <label>Username:<em>*</em></label>
+                <input type="text" id="username" name="username" value="<?php echo $this->userInfo['username']; ?>" disabled="disabled">
+            </li>
+            <li>
+                <label>Email:</label>
+                <input type="text" id="email" name="email" value="<?php echo $this->userInfo['email']; ?>" disabled="disabled">
+            </li>
+            <?php endif;?>
+            
 			<li>
 				<label></label>
 				<input class="button01" type="submit" name="edit" value="Save"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
