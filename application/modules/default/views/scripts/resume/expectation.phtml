@@ -7,12 +7,12 @@
 	<ul>
 		<li>
 			<label>Current Salary</label>
-			<input type="text" name="current_salary" value="<?php echo $this->expectationRowSet->getCurrentSalary();?>"/> USD
+			<input type="text" name="current_salary" id="current_salary" value="<?php echo $this->expectationRowSet->getCurrentSalary();?>"/> USD
 		</li>
 		<li>
 			<label>Expected Salary</label>
-			<input type="text" name="estimated_salary_from" value="<?php echo $this->expectationRowSet->getEstimatedSalaryFrom();?>"/> 
-            <input type="text" name="estimated_salary_to" value="<?php echo $this->expectationRowSet->getEstimatedSalaryTo();?>"/> USD
+			<input type="text" name="estimated_salary_from" id="estimated_salary_from" value="<?php echo $this->expectationRowSet->getEstimatedSalaryFrom();?>"/> 
+            <input type="text" name="estimated_salary_to" id="estimated_salary_to" value="<?php echo $this->expectationRowSet->getEstimatedSalaryTo();?>"/> USD
 		</li>
 		<li>
 			<label>Expected Location</label>
@@ -46,11 +46,11 @@
 		<li>
 			<label>&nbsp;</label>
 			<div class="actions">
-				<input type="hidden" name="resume_id" value="<?php echo $this->resumeId; ?>" />
-				<input type="hidden" name="expecid" value="<?php echo $this->expectationRowSet->getResExpectationId();?>" />
+				<input type="hidden" name="resume_id" id="resume_id" value="<?php echo $this->resumeId; ?>" />
+				<input type="hidden" name="expecid" id="expecid" value="<?php echo $this->expectationRowSet->getResExpectationId();?>" />
 				<a style="text-decoration:none;" href="/resume/experience/id/<?php echo $this->resumeId; ?>"><input type="button" class="button02" name="button" value="Back" /></a>
 				<input type="submit" class="button01" name="button" value="Complete" />
-				<a href="#detail_resume" style="text-decoration:none;"  class="detail_resume" id="<?php echo $this->resumeId;?>">
+				<a href="#review_resume" style="text-decoration:none;"  class="review_resume">
                     <input type="button" class="button01" name="button" value="Review" />
                 </a>
 			</div>
@@ -58,27 +58,53 @@
 	</ul>
 </div>
 </form>
-<div id="detail_resume" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
+<div id="review_resume" style="width:700px;height: 450px; overflow-y:scroll; display: none;">&nbsp;</div>
 <script>
 $(document).ready(function(){
     $(".province").click(function(){
         if(($(".multiselect").css('display')) == 'none') $(".multiselect").show('slow');
     });
 
+    
     //Begin View detail candidate
-    $(".detail_resume").fancybox();
-    $(".detail_resume").click(function(){
+    $(".review_resume").fancybox();
+    $(".review_resume").click(function(){
         //checkLogin();
-        $('#detail_resume').html('');
-        var resume_id = $(this).attr('id');
+        var estimated_salary_to = $('#estimated_salary_to').val();
+        var estimated_salary_from = $('#estimated_salary_from').val();
+        var current_salary = $('#current_salary').val();
+        var note = $('#note').val();
+        var resume_id  = $('#resume_id').val();
+        var expecid  = $('#expecid').val();
+        var button = 'Review';
+
+        var provinces = '';
+        var checkboxes = $('input[name="option[]"]:checkbox:checked');
+        var provinces = new Array();
+        var i=0;
+        checkboxes.each(function() {
+        	if(provinces) {
+                provinces[i] = $(this).val();
+                i=i+1;
+        	}
+        });
+        
+        $('#review_resume').html('');
         $.ajax({
-            url: '/resume/detail-resume',
+            url: '/resume/save-expectation',
             type: "POST",
             data: { 
-                resume_id: resume_id, 
+                resume_id: resume_id,
+                expecid: expecid,
+                estimated_salary_to: estimated_salary_to,
+                estimated_salary_from: estimated_salary_from,
+                current_salary: current_salary,
+                note: note,
+                option: provinces,
+                button: button
             },
             success: function(result) {
-                $('#detail_resume').html(result);
+                $('#review_resume').html(result);
             }
         });
     });
