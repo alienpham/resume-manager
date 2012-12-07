@@ -663,7 +663,7 @@ color:red;
 .list-company .head .viewtel,
 .list-company .head .email,
 .list-company .head .viewemail,
-.list-company .head .fullName,
+.list-company .head .contactname,
 .list-company .head .jobTitle,
 .list-company .head .edit,
 .list-company .head .status,
@@ -676,7 +676,7 @@ color:red;
 .list-company .address,
 .list-company .tel,
 .list-company .viewtel,
-.list-company .fullName,
+.list-company .contactname,
 .list-company .email,
 .list-company .viewemail,
 .list-company .jobTitle,
@@ -697,9 +697,9 @@ color:red;
 {
 	width:14%;	
 }
-.list-company .fullName
+.list-company .contactname
 {
-	width:23%;	
+	width:12%;	
 }
 .list-company .viewemail
 {
@@ -716,17 +716,17 @@ color:red;
 .list-company .name{
 	width:15%;
 }
-.list-company .edit{
-	width:5%;
+.list-company .cons{
+	width:9%;
 }
-.list-company .address{
-	width:13%;
+.list-company .edit{
+	width:2%;
 }
 .list-company .email{
-	width:15%;
+	width:12%;
 }
 .list-company .action{
-	width:14%;
+	width:10%;
 	background:none !important;
 }
 .list-company .head h4{

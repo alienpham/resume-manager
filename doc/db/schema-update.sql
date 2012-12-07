@@ -69,3 +69,5 @@ ALTER TABLE  `company` CHANGE  `industry_id`  `industry` VARCHAR( 255 ) NULL
 
 ALTER TABLE `company` CHANGE `updated_date` `updated_date` DATE NOT NULL 
 ALTER TABLE `company` CHANGE `created_date` `created_date` DATE NOT NULL 
+
+ALTER TABLE `company` ADD `assign_cons` VARCHAR( 100 ) NULL AFTER `information` 

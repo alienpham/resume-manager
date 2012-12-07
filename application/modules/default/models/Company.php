@@ -11,6 +11,7 @@ class Default_Model_Company
     protected $_website;
     protected $_status;
     protected $_information;
+	protected $_assign_cons;
     protected $_created_date;
     protected $_updated_date;
     
@@ -119,6 +120,13 @@ class Default_Model_Company
 	}
 	public function setInformation($information) {
 		$this->_information = $information;
+	}
+	
+	public function getAssignCons() {
+		return $this->_assign_cons;
+	}
+	public function setAssignCons($cons) {
+		$this->_assign_cons = $cons;
 	}
 	
 	public function getCreatedDate() {
