@@ -2,9 +2,10 @@
 	<div class="head">
 		<div class="checkbox">&nbsp;</div>
 		<div class="name" align="center"><h4>Company Name</h4></div>
-		<div class="name" align="center"><h4>Contact Name</h4></div>
+		<div class="contactname" align="center"><h4>Contact Name</h4></div>
 		<div class="tel" align="center"><h4>tel</h4></div>
 		<div class="email" align="center"><h4>email</h4></div>
+		<div class="cons" align="center"><h4>Consultant</h4></div>
 		<div class="edit" align="center"><h4>Edit</h4></div>
 		<div class="action" align="center"><h4>Comment</h4></div>
 	</div>
@@ -23,7 +24,7 @@
 				<?php echo $rs['company_name'] ?>&nbsp;		    
 			</a>
 		</div>
-		<div class="name" align="left">
+		<div class="contactname" align="left">
 			<?php echo $rs['full_name']; ?><?php echo ($rs['full_name'])?'('.$rs['title'].')<br />':''; ?>	
 			<?php echo ($rs['job_title'])?$rs['job_title']."<br />":''; ?>
 			<?php echo ($rs['mobile'])?$rs['mobile'] . "<br />":''; ?>
@@ -34,6 +35,9 @@
 		</div>
 		<div class="email">
 			<?php echo $rs['email'] ?>&nbsp;
+		</div>
+		<div class="cons">
+			<?php echo $rs['assign_cons'] ?>&nbsp;
 		</div>
 		<div class="edit">
 			<a href="/company/add-company/id/<?php echo $rs['company_id'] ?>" class="editcom">Edit</a>

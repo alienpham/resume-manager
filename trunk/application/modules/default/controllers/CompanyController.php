@@ -83,6 +83,7 @@ class CompanyController extends Zend_Controller_Action
 		$company->setAddress($post['address']);
 		$company->setWebsite($post['website']);
 		$company->setInformation($post['information']);
+		$company->setAssignCons($post['assign_cons']);
 		$company->setCreatedDate(date('Y-m-d'));
 		$company->setUpdatedDate(date('Y-m-d'));
 		

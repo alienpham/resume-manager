@@ -34,6 +34,7 @@ class Default_Model_CompanyMapper {
             'address' 			=> $company->getAddress(),
             'website' 			=> $company->getWebsite(),
             'information'	    => $company->getInformation(),
+			'assign_cons'	    => $company->getAssignCons(),
             'created_date' 		=> $company->getCreatedDate(),
             'updated_date' 		=> $company->getUpdatedDate()
 		);
@@ -62,6 +63,7 @@ class Default_Model_CompanyMapper {
         $company->setAddress($row->address);
         $company->setWebsite($row->website);
         $company->setInformation($row->information);
+		$company->setAssignCons($row->assign_cons);
         $company->setCreatedDate($row->created_date);
         $company->setUpdatedDate($row->updated_date);
     }
@@ -82,6 +84,7 @@ class Default_Model_CompanyMapper {
 			$entry->setAddress($row->address);
 			$entry->setWebsite($row->website);
 			$entry->setInformation($row->information);
+			$entry->setAssignCons($row->assign_cons);
 			$entry->setCreatedDate($row->created_date);
 			$entry->setUpdatedDate($row->updated_date);
             $entries[] = $entry;
