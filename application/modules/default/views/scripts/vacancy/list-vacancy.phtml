@@ -54,11 +54,11 @@
 		<div class="action">
 			<a href="#comment" class="addcomment" id="<?php echo $rs['vacancy_id']?>">Add Comment</a> &nbsp; &nbsp;
 			<a href="#allcomment"  class="allcomment" id="<?php echo $rs['vacancy_id']?>">View all</a>
-			<div class="info-comment" id="viewcomment<?php echo $rs['vacancy_id']?>">
-				<?php if($comment):?>
-				<p>- <?php echo substr($comment['content'], 0, 90);?></p>
-				<?php endif;?>
-			</div>
+			<p style="max-width:250px;" class="info-comment" id="viewcomment<?php echo $rs['vacancy_id']?>">
+			<?php if($comment):?>
+				- <?php echo substr($comment['content'], 0, 90);?>
+			<?php endif;?>
+			</p>
 		</div>
 	</div>
 	<?php }?>
