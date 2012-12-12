@@ -14,6 +14,10 @@ function checkLogin(){
 <div class="block-search">
 	<label>Search</label>
 	<input name="txtSearch" id="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/>
+	<select name="opt">
+		<option value="company_name" <?php echo ($this->opt == 'company_name')?"selected":''?>>Company name</option>
+		<option value="assign_cons" <?php echo ($this->opt == 'assign_cons')?"selected":''?>>Consultant</option>
+	</select>
     <input class="button01" name="btSearch" type="submit" value="Search"/>
 </div>
 <div style="height:20px"> </div>

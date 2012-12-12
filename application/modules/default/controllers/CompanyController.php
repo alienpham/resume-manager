@@ -35,11 +35,12 @@ class CompanyController extends Zend_Controller_Action
 		$company = new Default_Model_CompanyMapper();
 		$rowPerPage = $this->_getParam('rowperpage', 20);
 		$txtSearch = $this->_getParam('txtSearch','');
+		$opt = $this->_getParam('opt','company_name');
 		$sort = $this->_getParam('sort','created_date');
 		$order = $this->_getParam('order','DESC');
 		
 		$where = '';
-		if($txtSearch) $where = ' company_name like "%'. $txtSearch .'%"';
+		if($txtSearch) $where = $opt .' like "%'. $txtSearch .'%"';
 		$order1 = ' ORDER BY ' . $sort . ' ' .$order;
 				
 		$currentPage = 1;
@@ -50,6 +51,7 @@ class CompanyController extends Zend_Controller_Action
 
 		$this->view->paginator = $paginator;
 		$this->view->txtSearch = $txtSearch;
+		$this->view->opt = $opt;
 		$this->view->sort = $sort;
 		$this->view->order = $order;
 	}	

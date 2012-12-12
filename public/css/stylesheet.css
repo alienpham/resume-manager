@@ -684,7 +684,7 @@ color:red;
 .list-company .status,
 .list-company .cons,
 .list-company .action{
-	padding:7px 1% 2px;
+	padding:7px 0.5% 2px;
 	float:left;	
 }
 
@@ -723,7 +723,7 @@ color:red;
 	width:2%;
 }
 .list-company .email{
-	width:12%;
+	width:14%;
 }
 .list-company .action{
 	background:none !important;
