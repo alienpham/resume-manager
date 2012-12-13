@@ -42,13 +42,14 @@ function checkLogin(){
     </div>
 </div>
 </form>
-<div style="height:20px;clear:both;"> </div>
+<div style="clear:both;">&nbsp;</div>
+<p class="today-entry" id="report">&nbsp;</p>
 <!-- list company -->
 <div id="box">   
 	<?php echo $this->partial('company/list-company.phtml', array('paginator' => $this->paginator)); ?>
 </div>
 <!-- end list company -->
-<div style="clear:both"></div>
+<div style="clear:both">&nbsp;</div>
 
 <!-- pagging -->
 <div class="footer clearfix">
@@ -87,6 +88,14 @@ $(document).ready(function() {
  });
 
 $(document).ready(function() {
+	//report company
+	$.ajax({
+  	  	url: '/company/company-report',
+  	  	success: function(result) {
+  	    	$('#report').html(result);
+  	  	}
+  	});
+
     //Begin Comment for resume
     $(".addcomment").fancybox();
     $(".addcomment").click(function(){
