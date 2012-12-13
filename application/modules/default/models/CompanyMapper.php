@@ -147,5 +147,14 @@ class Default_Model_CompanyMapper {
 		
         $db->query($sql);
     }
+	
+	public function countCompanyWith($cond)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        if($cond == 'new') $sql = 'SELECT * FROM company WHERE created_date = CURDATE()';
+        if($cond == 'update') $sql = 'SELECT * FROM company WHERE SUBSTR(updated_date, 1, 10) = CURDATE()';
+        if($cond == 'total') $sql = 'SELECT * FROM company ';
+        return $db->query($sql)->rowCount();
+    }
 }
 

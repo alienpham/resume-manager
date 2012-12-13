@@ -178,4 +178,20 @@ class CompanyController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
 	    $this->render('list-company');
 	}
+	
+	public function companyReportAction()
+	{
+		$this->_helper->layout->disableLayout();
+
+		$companyMapper = new Default_Model_CompanyMapper();
+		$countNew = $companyMapper->countCompanyWith('new');
+		$countUpdate = $companyMapper->countCompanyWith('update');
+		$countTotal = $companyMapper->countCompanyWith('total');
+
+		$html = 'Today Entry: <strong>New '. $countNew .'</strong> | ';
+		$html .= 'Updated: <strong>'. $countUpdate .'</strong$countNew> | ';
+		$html .= 'Total: <strong>'. $countTotal .'</strong>';
+		echo $html;
+		exit;
+	}
 }
