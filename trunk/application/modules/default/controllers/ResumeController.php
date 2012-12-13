@@ -59,8 +59,18 @@ class ResumeController extends Zend_Controller_Action
 		$paginator = Zend_Paginator::factory($rows);
 		$paginator->setItemCountPerPage($rowPerPage);
 		$paginator->setCurrentPageNumber($currentPage);
-
 		$this->view->paginator = $paginator;
+		
+		/*$countRow = $pageMapper->getPageAll ( $condition, $orderby );
+		// pagination
+		$paginator = Zend_Paginator::factory ( $countRow );
+		$paginator->setItemCountPerPage ( $rowPerPage );
+		$paginator->setCurrentPageNumber ( $page );
+		$this->view->paginator = $paginator;
+		
+		$offset = ($page - 1) * $paging;
+		$listPage = $pageMapper->getPageAll ( $condition, $orderby,  $paging, $offset);
+		$this->view->listPage = $listPage;*/
 	}
 
 	public function resumeReportAction()
