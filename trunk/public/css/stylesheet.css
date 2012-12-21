@@ -552,6 +552,17 @@ color:red;
 .clear {
 	clear: both;
 }
+
+#userManagement .head {
+    background: none repeat scroll 0 0 #1B7CBD;
+    float: left;
+    width: 100%;
+}
+
+#userManagement .head h4{
+	text-transform:uppercase;
+	color:#fff;	
+}
 #userManagement .head .checkbox,
 #userManagement .head .username,
 #userManagement .head .fullname,
@@ -577,7 +588,7 @@ color:red;
 #userManagement .created-date,
 #userManagement .modified-date
 {
-	padding:2px 1% 2px;
+	padding:7px 1% 2px;
 	float:left;	
 }
 
@@ -838,4 +849,59 @@ color:red;
 	top: 0px;
 	right: 1px;
 	padding-right: 17px;
+}
+
+/* Clients */
+.list-client,
+.info-content{
+	float: left;
+    width: 100%;
+}
+.list-client .head{
+	background:#1b7cbd;	
+	width:100%;
+	float: left;
+}
+
+.list-client .head .checkbox,
+.list-client .head .name,
+.list-client .head .email,
+.list-client .head .birthday,
+.list-client .head .phone,
+.list-client .head .point,
+.list-client .head .consultant,
+.list-client .head .edit,
+.list-client .head .action{	
+	background:url(../images/bg-header.jpg) no-repeat top right;
+}
+
+.list-client  .checkbox,
+.list-client  .name,
+.list-client  .email,
+.list-client  .birthday,
+.list-client  .phone,
+.list-client  .point,
+.list-client  .consultant,
+.list-client  .edit,
+.list-client  .action{
+	padding:7px 1% 2px;
+	float:left;	
+}
+
+.list-client .checkbox{
+	padding:6px 1%;
+	width:1%;
+}
+.list-client .name{	width:14%;}
+.list-client .birthday{	width:6%;}
+.list-client .email{width:13%;}
+.list-client .phone{width:8%;}
+.list-client .point{width:6%;}
+.list-client .consultant{width:11%;}
+.list-client  .edit{	width:3%;}
+.list-client .action{background:none !important;}
+
+.list-client .head h4 {
+	text-transform:uppercase;
+	color:#fff;	
 }

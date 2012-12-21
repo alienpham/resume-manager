@@ -1,0 +1,103 @@
+<?php echo $this->headScript();?>
+<?php echo $this->headLink();?>
+<div class="block-search">
+<form id="frmsearch" action="/clients" method="post">
+	<label>Search</label>
+	<input name="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/>
+    <input class="button01" name="btSearch" type="submit" value="Search"/>
+</form>
+</div>  
+<br />
+	<a href="/clients/add-client" style="text-decoration:none;">
+		<input class="button01" type="button" value="Add Client" />
+	</a>
+	<input class="button01 delete" type="button" value="Delete" />
+<br /><br />
+
+<div id="box">   
+    <?php echo $this->partial('clients/list-clients.phtml', array('paginator' => $this->paginator)); ?>
+</div>
+<?php if(count($this->paginator)) :?>
+<div style="clear:both">&nbsp;</div>
+<!-- pagging -->
+<div class="footer clearfix">
+	<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
+</div>
+<?php endif;?>
+<?php echo $this->partial ( '/clients/comment.phtml' )?> 
+<div id="allcomment" style="width:500px;height:200px; overflow-y:scroll; display: none;">&nbsp;</div>
+<script language="javascript">
+$(document).ready(function() {
+    //Begin Comment for resume
+    $(".addcomment").fancybox();
+    $(".addcomment").click(function(){
+        $('#contentcomment').val(''); 
+        $('input[name=client_id]').val($(this).attr('id'));
+    });
+
+    $("#insertcomment").click(function(){
+        checkLogin();
+        if(!$('#contentcomment').val()) {
+            $('#msgcomment').html('Content is not null'); 
+            return;
+        }
+        var client_id = $('input[name=client_id]').val();
+        $.ajax({
+            url: '/clients/save-comment',
+            type: "POST",
+            data: { 
+            	client_id: client_id, 
+                consultant_id: $('input[name=consultant_id]').val(), 
+                content: $('#contentcomment').val()
+            },
+            success: function(result) {
+                $('#viewcomment' + client_id).html(result);
+                $.fancybox.close();
+            }
+        });
+    });
+    
+    $(".allcomment").fancybox();
+    $(".allcomment").click(function(){
+        checkLogin();
+        var id = $(this).attr('id');
+        $.ajax({
+            url: '/clients/all-comment',
+            type: "POST",
+            data: { 
+            	id: id, 
+            },
+            success: function(result) {
+                $('#allcomment').html(result);
+            }
+        });
+    });
+	
+	$('.delete').click(function(){
+        if($('input[name="client_chk[]"]').is(':checked')) {
+            var answer = confirm('Are you sure you want to delete');
+            if (answer) {
+            	var listClient = '';
+                var checkboxes = $('input[name="client_chk[]"]:checkbox:checked');
+                checkboxes.each(function() {
+                	if(listClient) listClient = listClient + ',' + $(this).val();
+                	else listClient = $(this).val();
+                });
+            	$.ajax({
+              	  	url: '/clients/delete-clients',
+                	type: "POST",
+        			data: { 
+                       listid: listClient
+                    },
+              	  	success: function(result) {
+                  	  	$('#box').html(result);
+              	  	}
+              	});
+            }
+        } else {
+            alert('Please select Clients to delete');
+            return false;
+        }
+  	});  
+});
+</script>

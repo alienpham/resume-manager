@@ -1,0 +1,56 @@
+<div class="list-client clearfix" >
+	<div class="head">
+		<div class="checkbox">&nbsp;</div>
+		<div class="name"><h4>Name</h4></div>
+		<div class="birthday" ><h4>Bithday</h4></div>
+		<div class="email"><h4>Email</h4></div>
+		<div class="phone"><h4>Phone</h4></div>
+		<div class="point"><h4>Point</h4></div> 
+		<div class="consultant"><h4>Consultant</h4></div>
+		<div class="edit"><h4>Edit</h4></div>			
+		<div class="action"><h4>Action</h4></div>
+	</div>
+	
+	<?php 
+	$clientsMapper = new Default_Model_ClientsMapper();
+	foreach ($this->paginator as $rs) {
+		$comment = $clientsMapper->getComments($rs['id'], 1);
+	?>
+	<div class="info-content">
+		<div class="checkbox">
+			<input type="checkbox" name="client_chk[]" value="<?php echo $rs['id'];?>">
+		</div>
+		<div class="name">
+			<strong><?php echo $rs['name'] ;?> </strong>&nbsp;
+		</div>
+		<div class="birthday">
+			<?php echo $rs['birthday'];?>&nbsp;
+		</div>
+		<div class="email">
+		   <?php echo $rs['email'] ?>&nbsp;
+		</div>
+		<div class="phone">
+			<?php echo $rs['phone'] ?>&nbsp;
+		</div>
+		<div class="point">
+			<?php echo $rs['point'] ?>&nbsp;
+		</div>
+		<div class="consultant">
+			<?php echo $rs['consultant'] ?>&nbsp;
+		</div>
+		<div class="edit">
+			<a href="/clients/add-client/id/<?php echo $rs['id'];?>">Edit</a>
+		</div>
+		<div class="action">
+			<a href="#comment" class="addcomment" id="<?php echo $rs['id']?>">Add Comment</a> &nbsp; &nbsp;
+			<a href="#allcomment"  class="allcomment" id="<?php echo $rs['id']?>">View all</a>
+			<p style="max-width:250px;" class="info-comment" id="viewcomment<?php echo $rs['id']?>">
+			<?php if($comment):?>
+				- <?php echo substr($comment['content'], 0, 90);?>
+			<?php endif;?>
+			</p>
+		</div>
+	</div>
+	<?php }?>
+	
+</div>

@@ -7,70 +7,68 @@
 </a>
 </div>
 <br />
-<div id="userManagement">
-	<div id="box">
-	    <div class="list-company clearfix">
-	        <div class="head">
-	            <div class="username">
-	                <h4>Username</h4>
-	            </div>
-	            <div class="fullname">
-	                <h4>Fullname</h4>
-	            </div>
-	            <div class="email">
-	                <h4>Email</h4>
-	            </div>
-                <div class="phone">
-                    <h4>Phone</h4>
-                </div>
-	            <div class="job-title">
-	                <h4>Job Title</h4>
-	            </div>
-	            <div class="status">
-	                <h4>Status</h4>
-	            </div>
-	            <div class="modified-date">
-	                <h4>Modified Date</h4>
-	            </div>
-                <div class="action">
-                    <h4>Action</h4>
-                </div>
-	        </div>
-	        <div class="info-content">
-	        <?php if($this->rows):?>
-	        <?php foreach ($this->rows as $row):?>
-	        <div class="username">
-	        	<?php echo $row['username']?>
-	        </div>
-	        <div class="fullname"><?php echo $row['full_name']?> (<?php echo $row['title']?>)&nbsp;</div>
-	        <div class="email">
-	        	<?php echo $row['email']?>&nbsp;
-	        </div>
-            <div class="phone">
-                <?php echo $row['phone']?>&nbsp;
-            </div>
-	        <div class="job-title">
-	        	<?php echo $row['job_title']?>&nbsp;
-	        </div>
-	        <div class="status">
-	        	<?php echo $row['status']?>&nbsp;
-	        </div>
-            <div class="modified-date">
-                <?php echo $row['updated_date']?>&nbsp;
-            </div>
-             <div class="action">
-                <a href="/profile/add-user/id/<?php echo $row['consultant_id'] ?>" title="Edit <?php echo $row['username']?>">Edit</a> | 
-                <?php if($row['status'] == 'Active'):?>
-                    <a href="/profile/inactive-user/id/<?php echo $row['consultant_id'] ?>" title="Inactive <?php echo $row['username']?>">Inactive</a> | 
-                <?php else :?>
-                    <a href="/profile/active-user/id/<?php echo $row['consultant_id'] ?>" title="Active <?php echo $row['username']?>">Active</a> |
-                <?php endif;?>
-                <a href="/profile/delete-user/id/<?php echo $row['consultant_id']?>" title="Delete <?php echo $row['username']?>">Delete</a>
-            </div>
-            <br class="clear"/>
-	        <?php endforeach;?>
-	        <?php endif;?>
-	        </div>
-	    </div>
+<div id="box">
+	<div id="userManagement" class="clearfix">
+		<div class="head">
+			<div class="username">
+				<h4>Username</h4>
+			</div>
+			<div class="fullname">
+				<h4>Fullname</h4>
+			</div>
+			<div class="email">
+				<h4>Email</h4>
+			</div>
+			<div class="phone">
+				<h4>Phone</h4>
+			</div>
+			<div class="job-title">
+				<h4>Job Title</h4>
+			</div>
+			<div class="status">
+				<h4>Status</h4>
+			</div>
+			<div class="modified-date">
+				<h4>Modified Date</h4>
+			</div>
+			<div class="action">
+				<h4>Action</h4>
+			</div>
+		</div>
+		<?php if($this->rows):?>
+		<?php foreach ($this->rows as $row):?>
+		<div class="info-content">
+			<div class="username">
+				<?php echo $row['username']?>
+			</div>
+			<div class="fullname"><?php echo $row['full_name']?> (<?php echo $row['title']?>)&nbsp;</div>
+			<div class="email">
+				<?php echo $row['email']?>&nbsp;
+			</div>
+			<div class="phone">
+				<?php echo $row['phone']?>&nbsp;
+			</div>
+			<div class="job-title">
+				<?php echo $row['job_title']?>&nbsp;
+			</div>
+			<div class="status">
+				<?php echo $row['status']?>&nbsp;
+			</div>
+			<div class="modified-date">
+				<?php echo $row['updated_date']?>&nbsp;
+			</div>
+			 <div class="action">
+				<a href="/profile/add-user/id/<?php echo $row['consultant_id'] ?>" title="Edit <?php echo $row['username']?>">Edit</a> | 
+				<?php if($row['status'] == 'Active'):?>
+					<a href="/profile/inactive-user/id/<?php echo $row['consultant_id'] ?>" title="Inactive <?php echo $row['username']?>">Inactive</a> | 
+				<?php else :?>
+					<a href="/profile/active-user/id/<?php echo $row['consultant_id'] ?>" title="Active <?php echo $row['username']?>">Active</a> |
+				<?php endif;?>
+				<a href="/profile/delete-user/id/<?php echo $row['consultant_id']?>" title="Delete <?php echo $row['username']?>">Delete</a>
+			</div>
+			<br class="clear"/>
+		</div>
+		<?php endforeach;?>
+		<?php endif;?>
 	</div>
 </div>
