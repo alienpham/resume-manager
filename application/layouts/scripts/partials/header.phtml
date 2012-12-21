@@ -31,6 +31,7 @@ function checkLogin(){
 			<li <?php echo ($controllerName == 'resume')? 'class="active"': '' ?>><a href="/resume">Resume</a></li>
 			<li <?php echo ($controllerName == 'company')? 'class="active"': '' ?>><a href="/company">Company</a></li>
 			<li <?php echo ($controllerName == 'vacancy')? 'class="active"': '' ?>><a href="/vacancy">Vacancy</a></li>
+			<li <?php echo ($controllerName == 'clients')? 'class="active"': '' ?>><a href="/clients">Clients</a></li>
 			<?php if($sess->isAdmin):?>
 			<li <?php echo ($controllerName == 'profile')? 'class="active"': '' ?>><a href="/profile">User Management</a></li>
 			<?php endif;?>

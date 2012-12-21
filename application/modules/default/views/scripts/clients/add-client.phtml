@@ -1,0 +1,60 @@
+<?php echo $this->headScript();?>
+<?php echo $this->headLink();?>
+<div class="from-add-01">
+<form name="frmAddClients" action="/clients/save-client" method="post" onsubmit="return checkValid()">
+<input type="hidden" name="id" id="id" value="<?php echo $this->clients->getId();?>"> 
+	<h2 style="color:#848484;margin-left:20px;"><?php echo $this->title; ?></h2>
+		<ul>
+			<li>
+				<label></label>
+				<em class="error"></em>
+			</li>
+			<li>
+				<label>Name:<em>*</em></label>
+				<input type="text" name="name" id="name" value="<?php echo $this->clients->getName();  ?>">
+			</li>
+			<li>
+				<label>Birthday:</label>
+				<input type="text" name="birthday" id="birthday" value="<?php echo $this->clients->getBirthday(); ?>">
+			</li>
+			<li>
+				<label>Email:</label>
+				<input name="email" type="text" id="email" value="<?php echo $this->clients->getEmail(); ?>">
+			</li>
+			
+			<li>
+				<label>Phone:</label>
+		        <input type="text" name="phone" id="phone" value="<?php echo $this->clients->getPhone(); ?>">
+			</li>
+			<li>
+				<label>Point:</label>
+		        <input type="text" name="point" id="point" value="<?php echo $this->clients->getPoint(); ?>">
+			</li>
+			<li>
+				<label>Consultant:</label>
+				<input type="text" name="consultant" id="consultant" value="<?php echo $this->clients->getConsultant(); ?>">
+			</li>
+			<li>
+				<label></label>
+	 			<a href="/clients" style="text-decoration:none;">
+					<input type="button" name="button3" id="button3" value="Cancel" class="button02">
+				</a>
+				<input type="submit" name="btSave" id="btSave" value="Save" class="button01">&nbsp;&nbsp;&nbsp;
+        	</li>
+       </ul>
+</form>
+</div>
+<script>
+function checkValid()
+{
+	var name = $('#name').val();
+	if(name == '')
+	{
+		$('.error').html('Please input into field required (*)');
+		return false
+	}
+	
+	return true;
+}
+</script>
+
