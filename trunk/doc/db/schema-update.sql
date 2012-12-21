@@ -71,3 +71,27 @@ ALTER TABLE `company` CHANGE `updated_date` `updated_date` DATE NOT NULL
 ALTER TABLE `company` CHANGE `created_date` `created_date` DATE NOT NULL 
 
 ALTER TABLE `company` ADD `assign_cons` VARCHAR( 100 ) NULL AFTER `information` 
+
+
+CREATE TABLE IF NOT EXISTS `clients_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `client_id` int(10) NOT NULL,
+  `consultant_id` int(11) NOT NULL,
+  `content` text,
+  `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `client_id` (`client_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE IF NOT EXISTS `clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `birthday` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `email` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `phone` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `point` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `consultant` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
