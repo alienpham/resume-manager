@@ -34,6 +34,12 @@ class CompanyController extends Zend_Controller_Action
 		
 		$company = new Default_Model_CompanyMapper();
 		$rowPerPage = $this->_getParam('rowperpage', 20);
+		$currentPage = 1;
+		$page = $this->_getParam('page', 1);
+		if(!empty($page)) {
+			$currentPage = $page;
+		}
+		
 		$txtSearch = $this->_getParam('txtSearch','');
 		$opt = $this->_getParam('opt','company_name');
 		$sort = $this->_getParam('sort','created_date');
@@ -43,7 +49,6 @@ class CompanyController extends Zend_Controller_Action
 		if($txtSearch) $where = $opt .' like "%'. $txtSearch .'%"';
 		$order1 = ' ORDER BY ' . $sort . ' ' .$order;
 				
-		$currentPage = 1;
 		$rows = $company->getListCompany($where, $order1);	
 		$paginator = Zend_Paginator::factory($rows);
 		$paginator->setItemCountPerPage($rowPerPage);
