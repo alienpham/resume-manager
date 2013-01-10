@@ -32,7 +32,7 @@ class Default_Model_FileMapper {
 		$db = $this->getDbTable()->getAdapter();
 		$resumeId = $data['resume_id'];
 		unset($data['resume_id']);
-		$this->getDbTable()->update($data, array('resume_id' => $resumeId));
+		$this->getDbTable()->update($data, 'resume_id = ' . $resumeId);
 		return true;
 	}
 	

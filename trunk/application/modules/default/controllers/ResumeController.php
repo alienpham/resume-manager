@@ -879,7 +879,7 @@ class ResumeController extends Zend_Controller_Action
 			{
 				header('Content-Description: File Transfer');
 				header('Content-Type: ' . $row["filetype"]);
-				header('Content-Disposition: attachment; filename=' . basename($file));
+				header('Content-Disposition: attachment; filename="' . basename($file) . '"');
 				header('Content-Transfer-Encoding: chunked'); //changed to chunked
 				header('Expires: 0');
 				header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
