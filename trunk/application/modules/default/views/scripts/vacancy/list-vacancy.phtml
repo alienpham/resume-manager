@@ -5,7 +5,7 @@
 		<div class="job_title" ><h4>Job title</h4></div>
 		<div class="work_level"><h4>Work Level</h4></div>
 		<div class="salary"><h4>Salary</h4></div>
-		<div class="posted"><h4>Date</h4></div> 
+		<div class="posted"><h4>Created By</h4></div> 
 		<div class="edit"><h4>Edit</h4></div>			
 		<div class="action"><h4>Action</h4></div>
 	</div>
@@ -37,16 +37,10 @@
 			<?php if($rs['min_salary']) echo '$'.$rs['min_salary']; ?><?php if($rs['max_salary']) echo ' - '.'$'.$rs['max_salary']; ?></p>
 		</div>
 		<div class="posted">
-			Post: <?php echo $createdDate;?><br />
-			<p style="color:#535353">
-				<?php if($updatedDate != $createdDate): ?>
-					Update: <?php echo $updatedDate;?><br />
-				<?php endif;?>
-				<?php if($consultantUpdated['username'] != $consultantCreated['username']): ?>
-					Updated By: <?php echo $consultantUpdated['username']; ?><br />
-				<?php endif;?>
-				Created By: <?php echo $consultantCreated['username']; ?><br />
-			</p>
+			<?php if($consultantUpdated['username'] != $consultantCreated['username']): ?>
+				Updated By: <?php echo $consultantUpdated['username']; ?><br />
+			<?php endif;?>
+			<?php echo $consultantCreated['username']; ?><br />
 		</div>
 		<div class="edit">
 			<a href="/vacancy/add-vacancy/vacancy_id/<?php echo $rs['vacancy_id'];?>">Edit</a>

@@ -24,8 +24,11 @@ class VacancyController extends Zend_Controller_Action
 	public function indexAction()
 	{
 	    $txtSearch = $this->_getParam('txtSearch','');
+		$choose = $this->_getParam('choose', 1);
 		$where = '';
 		if($txtSearch) $where = ' job_title like "%'. $txtSearch .'%"';
+		if($choose == 1) $where = ' company_name like "%'. $txtSearch .'%"';
+		else if($choose == 2) $where = ' username like "%'. $txtSearch .'%"';
 		
 		$rowPerPage = $this->_getParam('rowperpage', 20);
 	    $currentPage = 1;
@@ -34,13 +37,14 @@ class VacancyController extends Zend_Controller_Action
 			$currentPage = $page;
 		}
 	    $vacancy = new Default_Model_VacancyMapper();
-	    $listVacancy = $vacancy->getListVacancy($where);	
+	    $listVacancy = $vacancy->getListVacancy($where, $choose);	
 		$paginator = Zend_Paginator::factory($listVacancy);
 		$paginator->setItemCountPerPage($rowPerPage);
 		$paginator->setCurrentPageNumber($currentPage);
 	    
 	    $this->view->paginator = $paginator;
-	    $this->view->txtSearch =$txtSearch;
+	    $this->view->txtSearch = $txtSearch;
+		$this->view->choose = $choose;
 	}
 	
 	public function addVacancyAction()
