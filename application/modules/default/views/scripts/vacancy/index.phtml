@@ -4,6 +4,10 @@
 <form id="frmsearch" action="/vacancy" method="post">
 	<label>Search</label>
 	<input name="txtSearch" type="text" value="<?php echo $this->txtSearch; ?>"/>
+	<select name="choose">
+		<option value="1" <?php echo ($this->choose == 1)? "selected":"" ?> >Company Name</option>
+		<option value="2" <?php echo ($this->choose == 2)? "selected":"" ?> >Consultant Name</option>
+	</select>
     <input class="button01" name="btSearch" type="submit" value="Search"/>
 </form>
 </div>  

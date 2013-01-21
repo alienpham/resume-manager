@@ -104,12 +104,17 @@ class Default_Model_VacancyMapper {
         return $entries;
     }
     
-    public function getListVacancy($where='')
+    public function getListVacancy($where='', $choose=0)
     {
     	$db = $this->getDbTable()->getAdapter();
-    	$sql = "SELECT * FROM vacancy ";
-    	if($where!='') $sql .= "WHERE " . $where;
+    	$sql = "SELECT * FROM vacancy as v ";
+		if($choose == 2) {
+			$sql .= "INNER JOIN consultant AS c ON c.consultant_id = v.created_consultant_id ";
+		}
+    	if($where!='') $sql .= " WHERE " . $where;
+//echo $sql;exit;
 
+		$sql .= " ORDER BY vacancy_id DESC";
     	$rows =  $db->fetchAll($sql);
     	return $rows;
     }
