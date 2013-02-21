@@ -17,6 +17,7 @@ function checkLogin(){
 	<select name="opt">
 		<option value="company_name" <?php echo ($this->opt == 'company_name')?"selected":''?>>Company name</option>
 		<option value="assign_cons" <?php echo ($this->opt == 'assign_cons')?"selected":''?>>Consultant</option>
+        <option value="busines_type" <?php echo ($this->opt == 'busines_type')?"selected":''?>>Business type</option>
 	</select>
     <input class="button01" name="btSearch" type="submit" value="Search"/>
 </div>
@@ -124,7 +125,13 @@ $(document).ready(function() {
             }
         });
     });
+
+    $(".deletecomment").click(function(){
+        alert(222);
+    	//$this.parent().hidden();
+    });
     
+
     $(".allcomment").fancybox();
     $(".allcomment").click(function(){
         checkLogin();

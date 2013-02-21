@@ -363,6 +363,13 @@ class ResumeController extends Zend_Controller_Action
 		//$this->_redirect('resume/expectation/id/' . $post['resume_id']);
 	}
 
+    public function deleteCommentAction(){
+	    $commentId = $this->_getParam('comment_id','');
+	    $resume = new Default_Model_ResumeMapper();
+		$resume->deleteComment($commentId);
+		exit;
+	}
+	
 	public function saveCommentAction()
 	{
 		$post = $this->getRequest()->getPost();
@@ -396,12 +403,32 @@ class ResumeController extends Zend_Controller_Action
 
 			$html .= '<div>';
 			$html .= substr($comment['content'], 0, 90);
+			$html .= '<img class="deletecomment" id="'. $comment['res_comment_id'] .'" src="images/cross.png" alt="delete comment" style="float:right;cursor:pointer;">';
 			$html .= '<div align="right"><span>Comment '. $createdComment .'</span> ';
 			$html .= '<span style="color: #70B4E2;">by ' . $comment['username'] . '</span></div>';
-			$html .= '</div>';
 			$html .= '<div style="border-top: 1px solid #BCBCBC; margin-top:10px">&nbsp;</div>';
+			$html .= '</div>';
 		}
-
+        
+		$html .= '<script language="javascript">
+            $(document).ready(function() {
+            	$(".deletecomment").click(function(){
+            		$(this).parent().hide();
+					var comment_id = $(this).attr("id");
+                    $.ajax({
+                        url: "/resume/delete-comment",
+                        type: "POST",
+                        data: { 
+                        	comment_id: comment_id
+                        },
+                        success: function() {
+                            
+                        }
+                    });
+                });   
+            });  
+        </script>';
+		
 		echo $html;
 		exit;
 		//$this->_helper->layout->disableLayout();
