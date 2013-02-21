@@ -148,6 +148,13 @@ class Default_Model_CompanyMapper {
         $db->query($sql);
     }
 	
+    public function deleteComment($commentId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'DELETE FROM company_comment WHERE id = ' . $commentId;
+        $db->query($sql);
+    }
+    
 	public function countCompanyWith($cond)
     {
         $db = $this->getDbTable()->getAdapter();

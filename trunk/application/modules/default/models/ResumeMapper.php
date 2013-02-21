@@ -202,6 +202,13 @@ class Default_Model_ResumeMapper {
         $db->query($sql);
     }
     
+    public function deleteComment($commentId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'DELETE FROM res_comment WHERE res_comment_id = ' . $commentId;
+        $db->query($sql);
+    }
+    
     public function getComments($resumeId, $limit=null)
     {
         $db = $this->getDbTable()->getAdapter();

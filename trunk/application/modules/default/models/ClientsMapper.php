@@ -123,4 +123,12 @@ class Default_Model_ClientsMapper {
 	
         $db->query($sql);
     }
+    
+    public function deleteComment($commentId)
+    {
+        $db = $this->getDbTable()->getAdapter();
+        $sql = 'DELETE FROM clients_comment WHERE id = ' . $commentId;
+        $db->query($sql);
+    }
+    
 }

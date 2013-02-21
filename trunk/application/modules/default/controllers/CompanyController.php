@@ -142,6 +142,13 @@ class CompanyController extends Zend_Controller_Action
 		exit;
 	}
 
+	public function deleteCommentAction(){
+	    $commentId = $this->_getParam('comment_id','');
+	    $companyMapper = new Default_Model_CompanyMapper();
+		$companyMapper->deleteComment($commentId);
+		exit;
+	}
+	
 	public function allCommentAction()
 	{
 	    $post = $this->getRequest()->getPost();
@@ -158,12 +165,31 @@ class CompanyController extends Zend_Controller_Action
 
 			$html .= '<div>';
 			$html .= substr($comment['content'], 0, 90);
+			$html .= '<img class="deletecomment" id="'. $comment['id'] .'" src="images/cross.png" alt="delete comment" style="float:right;cursor:pointer;">';
 			$html .= '<div align="right"><span>Comment '. $createdComment .'</span> ';
 			$html .= '<span style="color: #70B4E2;">by ' . $comment['username'] . '</span></div>';
-			$html .= '</div>';
 			$html .= '<div style="border-top: 1px solid #BCBCBC; margin-top:10px">&nbsp;</div>';
+			$html .= '</div>';
+			
 		}
-
+		$html .= '<script language="javascript">
+            $(document).ready(function() {
+            	$(".deletecomment").click(function(){
+            		$(this).parent().hide();
+					var comment_id = $(this).attr("id");
+                    $.ajax({
+                        url: "/company/delete-comment",
+                        type: "POST",
+                        data: { 
+                        	comment_id: comment_id
+                        },
+                        success: function() {
+                            
+                        }
+                    });
+                });   
+            });  
+        </script>';
 		echo $html;
 		exit;
 	}
