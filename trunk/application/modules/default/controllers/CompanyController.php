@@ -152,7 +152,8 @@ class CompanyController extends Zend_Controller_Action
 	public function allCommentAction()
 	{
 	    $post = $this->getRequest()->getPost();
-
+		$baseUrl = $this->getFrontController ()->getBaseUrl ();
+		
 		$companyMapper = new Default_Model_CompanyMapper();
 		$comments = $companyMapper->getComments($post['company_id']);
 
@@ -165,7 +166,7 @@ class CompanyController extends Zend_Controller_Action
 
 			$html .= '<div>';
 			$html .= substr($comment['content'], 0, 90);
-			$html .= '<img class="deletecomment" id="'. $comment['id'] .'" src="images/cross.png" alt="delete comment" style="float:right;cursor:pointer;">';
+			$html .= '<img class="deletecomment" id="'. $comment['id'] .'" src="'. $baseUrl .'/images/cross.png" alt="delete comment" style="float:right;cursor:pointer;">';
 			$html .= '<div align="right"><span>Comment '. $createdComment .'</span> ';
 			$html .= '<span style="color: #70B4E2;">by ' . $comment['username'] . '</span></div>';
 			$html .= '<div style="border-top: 1px solid #BCBCBC; margin-top:10px">&nbsp;</div>';
